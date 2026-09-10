@@ -1,0 +1,72 @@
+CAHIER DES CHARGES - CONCEPT & IDEES DU PROJET
+===============================================
+Projet : Plateforme de Pré-Dépistage, Écoute IA et Entraide en Santé Mentale à Madagascar
+Formats visés : Application Mobile & Plateforme Web
+
+1. CONTEXTE ET ENJEUX LOCAUX
+---------------------------
+- Tabou sociétal majeur autour des troubles psychologiques et de la santé mentale à Madagascar (dépression, anxiété, traumatismes, relations toxiques).
+- Pénurie sévère de professionnels de santé mentale (psychologues, psychiatres) et tarifs très élevés inaccessibles pour la majorité de la population malgache.
+- Peur du jugement social, du rejet familial et stigmatisation des personnes souffrant de troubles psychiques.
+- Besoins prioritaires : anonymat absolu, accessibilité (mobile & web), alternative économique/gratuite d'écoute, sensibilisation progressive et libération de la parole.
+
+2. VISION ET OBJECTIFS
+---------------------
+- Offrir un premier niveau d'écoute active, de pré-dépistage et d'orientation accessible à tous sans barrière financière ou sociale.
+- Déstigmatiser les maladies mentales à travers l'éducation, la communauté et l'accompagnement virtuel.
+- Utiliser l'IA comme assistant d'écoute empathique et outil d'analyse préventive (non comme un substitut médical officiel).
+- Créer un espace sécurisé de soutien entre pairs.
+
+3. FONCTIONNALITES CLES DU PROJET
+---------------------------------
+
+A. CHATBOT PSY IA (ASSISTANT D'ECOUTE VIRTUEL 24/7)
+- Écoute active et bienveillante : disponible à tout moment pour discuter, ventiler ses émotions ou trouver du réconfort.
+- Entraîné pour l'accompagnement psychologique : utilisation de techniques de thérapie comportementale et cognitive (TCC), reformulations empathiques, conseils de gestion du stress.
+- Réponse au problème financier/d'accès : service gratuit ou très accessible palliant le manque et le coût élevé des psychologues à Madagascar.
+- Support bilingue/local : capacité de converser en Français et en Malagasy (ou en dialectes locaux si possible).
+- Sécurité & Détection de crise : identification immédiate des propos à risque (ex: idéations suicidaires) déclenchant une redirection prioritaire vers les lignes d'urgence ou professionnels locaux.
+
+B. MODULE DE PRE-DEPISTAGE PAR IA (QUESTIONNAIRE DYNAMIQUE)
+- Questionnaire adaptatif selon les réponses de l'utilisateur (évaluation progressive).
+- Spectre large d'évaluation :
+  * Dépression, anxiété sociale, burn-out, stress post-traumatique.
+  * Identification des dynamiques relationnelles toxiques (perversion narcissique, emprise, abus émotionnel).
+  * Signes d'isolement ou de détresse psychologique aigüe.
+- Analyse par IA :
+  * Traitement du langage naturel (NLP) pour analyser les réponses textuelles libres de l'utilisateur.
+  * Génération d'un bilan visuel clair (ex: graphe en radar ou jauge de niveau de risque/bien-être).
+  * Explications pédagogiques et bienveillantes sans jargon stigmatisant.
+  * Avertissement éthique systématique : l'IA fournit un accompagnement et un pré-dépistage, mais invite à consulter un spécialiste si nécessaire.
+
+C. FORUM COMMUNAUTAIRE ET ESPACE DE PAROLE ANONYME
+- Anonymat garanti : génération automatique de pseudonymes neutres et d'avatars virtuels.
+- Thématiques de discussion segmentées : dépression, relations toxiques, anxiété, gestion du stress, vie familiale, etc.
+- Système d'expression libre : espace journal personnel ("Journal Intime") ou publications publiques sur le forum.
+- Réactions bienveillantes : système d'encouragements et de soutien ("Tu n'es pas seul(e)", "Plein de force").
+- Modération automatique & IA de sécurité : détection automatique des propos haineux, du harcèlement et des signes de crise grave.
+
+D. CARTOGRAPHIE ET ORIENTATION VERS DES PROFESSIONNELS ET ASSOCIATIONS
+- Annuaire géolocalisé des rares psychologues, psychiatres, centres de santé et associations d'écoute à Madagascar.
+- Fiches de contact claires (numéros d'urgence, adresses, modalités de consultation).
+- Prise de contact ou demande de rendez-vous directe via la plateforme (optionnel).
+
+E. BIBLIOTHEQUE DE RESSOURCES ET PSYCHO-EDUCATION
+- Articles, conseils pratiques et guides de sensibilisation rédigés dans un langage accessible.
+- Contenus bilingues ou adaptés au contexte malgache (Français / Malagasy).
+- Exercices pratiques d'auto-assistance : exercices de respiration guidée, méditation, gestion des crises d'angoisse.
+
+4. EXPERIENCE UTILISATEUR (UX/UI) & ACCESSIBILITE
+--------------------------------------------------
+- Multiplateforme :
+  * Application mobile (Android / iOS) pour un accès discret et rapide au quotidien.
+  * Interface Web responsive pour un accès sur ordinateur ou navigateur mobile sans installation nécessaire.
+- Design apaisant, épuré et rassurant (couleurs douces, typographie lisible).
+- Option de sécurité "Quitter rapidement" (bouton d'urgence pour fermer l'application discrètement en cas de besoin de confidentialité).
+- Mode hors-ligne partiel pour accéder aux exercices de soutien et numéros d'urgence sans connexion internet stable.
+
+5. REGLES D'ETHIQUE ET DE CONFIDENTIALITE
+------------------------------------------
+- Protection renforcée des données personnelles et médicales.
+- Aucune obligation d'indiquer sa véritable identité.
+- Disclaimer médical permanent rappelant que l'application est un outil d'accompagnement et de prévention, pas un substitut à un médecin ou psychologue.
