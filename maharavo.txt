@@ -1,5 +1,3 @@
-CAHIER DES CHARGES - CONCEPT & IDEES DU PROJET
-===============================================
 Projet : Plateforme de Pré-Dépistage, Écoute IA et Entraide en Santé Mentale à Madagascar
 Formats visés : Application Mobile & Plateforme Web
 
@@ -70,3 +68,5 @@ E. BIBLIOTHEQUE DE RESSOURCES ET PSYCHO-EDUCATION
 - Protection renforcée des données personnelles et médicales.
 - Aucune obligation d'indiquer sa véritable identité.
 - Disclaimer médical permanent rappelant que l'application est un outil d'accompagnement et de prévention, pas un substitut à un médecin ou psychologue.
+
+za no mitady api IA gratuit anaovana anle izy
