@@ -70,3 +70,68 @@ E. BIBLIOTHEQUE DE RESSOURCES ET PSYCHO-EDUCATION
 - Disclaimer médical permanent rappelant que l'application est un outil d'accompagnement et de prévention, pas un substitut à un médecin ou psychologue.
 
 za no mitady api IA gratuit anaovana anle izy
+
+
+
+
+Étape 1 — Le socle : EDT statique
+
+Objectif : afficher et gérer un EDT personnel
+
+Modèle de données : Utilisateur, Créneau (titre, jour, heure début/fin, type: cours/travail/sport/etc., récurrence)
+CRUD basique : créer/modifier/supprimer un créneau
+Vue calendrier simple (semaine)
+Livrable : une app où tu peux entrer ton EDT complet et le visualiser
+Étape 2 — Le suivi (check-in)
+
+Objectif : savoir si le créneau a été respecté
+
+Ajout d'un statut par créneau passé : fait / manqué / en retard
+Bouton "check-in" simple (1 tap) quand le créneau est en cours
+Historique basique : liste des créneaux passés avec leur statut
+Livrable : tu peux dire "oui j'ai fait ça" ou "non j'ai raté ça" après chaque créneau
+Étape 3 — Les notifications
+
+Objectif : relancer automatiquement
+
+Notification 10-15 min avant un créneau
+Si pas de check-in X min après le début → notification de relance
+Notification récap en fin de journée ("tu as suivi 5/7 créneaux aujourd'hui")
+Livrable : le système te rappelle activement, tu n'as plus à y penser
+Étape 4 — Le volet santé (première version)
+
+Objectif : ajouter des données de bien-être simples
+
+Champ quotidien : heures de sommeil (saisie manuelle)
+Champ quotidien : niveau de stress/énergie ressenti (3 émojis : 😊😐😣)
+Alerte simple si sommeil < seuil plusieurs jours de suite
+Livrable : un mini-journal santé, indépendant de l'EDT pour l'instant
+Étape 5 — Croisement EDT × santé (le cœur innovant)
+
+Objectif : faire parler les deux ensembles
+
+Calcul simple : "les jours où sommeil < 6h, taux de suivi EDT = X%"
+Affichage sous forme de graphique corrélation (semaine par semaine)
+Alerte contextualisée : "3 créneaux ratés + sommeil faible cette semaine → risque de surcharge"
+Livrable : des insights personnalisés, pas juste deux stats séparées
+Étape 6 — Réajustement intelligent
+
+Objectif : replanifier automatiquement
+
+Si un créneau est manqué (ex : révision), proposer un nouveau créneau libre dans les jours suivants
+Priorisation simple (ex : les créneaux "examen proche" passent avant "loisir")
+Livrable : l'EDT se réorganise seul quand tu rates quelque chose, au lieu de juste te culpabiliser
+Étape 7 — Le social (cercle de soutien)
+
+Objectif : partage optionnel avec un tiers
+
+Un tuteur/parent/ami peut suivre en lecture seule (avec ton accord)
+Possibilité d'envoyer un encouragement rapide (pas juste une alerte de surveillance)
+Livrable : une dimension sociale positive, pas juste du contrôle
+Étape 8 — Assistant conversationnel
+
+Objectif : interaction naturelle
+
+Chat simple : "j'ai pas dormi, aide-moi à replanifier ma journée" → le système ajuste l'EDT du jour
+Peut être basé sur une API IA (comme celle qu'on a vue) pour interpréter la demande et renvoyer un EDT réorganisé
+Livrable : le côté "coach intelligent" prend vie
