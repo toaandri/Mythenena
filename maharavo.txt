@@ -74,64 +74,121 @@ za no mitady api IA gratuit anaovana anle izy
 
 
 
-Étape 1 — Le socle : EDT statique
+Étape 1 — Le socle : accès confidentiel et mini-sondage de 5 questions
 
-Objectif : afficher et gérer un EDT personnel
+Objectif : proposer une première entrée simple vers la santé mentale, adaptée à Madagascar.
 
-Modèle de données : Utilisateur, Créneau (titre, jour, heure début/fin, type: cours/travail/sport/etc., récurrence)
-CRUD basique : créer/modifier/supprimer un créneau
-Vue calendrier simple (semaine)
-Livrable : une app où tu peux entrer ton EDT complet et le visualiser
-Étape 2 — Le suivi (check-in)
+- Interface web responsive/mobile, en français et en malagasy, avec une navigation légère pour les connexions limitées.
+- Accès sans identité réelle obligatoire ; pseudonyme pour les espaces communautaires.
+- Présentation du rôle de l'IA, des données utilisées et du choix de conserver ou non son historique.
+- Mini-sondage initial de 5 questions à choix sur l'humeur, le sommeil, le stress, les relations/isolement et la motivation.
+- Bouton « Passer » disponible pour chaque question : une réponse passée reste une information inconnue, jamais une preuve de souffrance ou un symptôme.
+- Possibilité d'arrêter le parcours et d'accéder directement aux ressources ou aux professionnels.
+- Modèles de base : session, préférences de langue et de conservation, question, choix, réponse ou non-réponse.
 
-Objectif : savoir si le créneau a été respecté
+Livrable : un utilisateur peut répondre aux 5 questions ou les passer ; ses réponses constituent le contexte initial des modules suivants.
 
-Ajout d'un statut par créneau passé : fait / manqué / en retard
-Bouton "check-in" simple (1 tap) quand le créneau est en cours
-Historique basique : liste des créneaux passés avec leur statut
-Livrable : tu peux dire "oui j'ai fait ça" ou "non j'ai raté ça" après chaque créneau
-Étape 3 — Les notifications
+Étape 2 — Le questionnaire à choix multiples génératif et adaptatif par IA
 
-Objectif : relancer automatiquement
+Objectif : approfondir plusieurs dimensions selon les réponses, avec de nouvelles questions et de nouveaux choix générés par l'IA.
 
-Notification 10-15 min avant un créneau
-Si pas de check-in X min après le début → notification de relance
-Notification récap en fin de journée ("tu as suivi 5/7 créneaux aujourd'hui")
-Livrable : le système te rappelle activement, tu n'as plus à y penser
-Étape 4 — Le volet santé (première version)
+- Ce module complète le mini-sondage ; il ne se limite ni à un formulaire prédéfini ni à une discussion libre.
+- Après chaque réponse, le moteur examine les domaines déjà explorés, les informations manquantes et les points à clarifier.
+- Il détermine l'objectif de la prochaine question : approfondir, changer de domaine, clarifier ou terminer.
+- L'IA génère la question et ses choix en fonction de cet objectif et de l'historique, dans un cadre à définir et à revoir avec des professionnels.
+- Dimensions possibles : humeur, stress, anxiété ressentie, sommeil, énergie, motivation, isolement, estime de soi et difficultés relationnelles.
+- Choix adaptés au type de question, avec « Autre / difficile à déterminer » et « Passer » ; préciser si plusieurs réponses sont possibles.
+- Validation du format généré avant affichage : question compréhensible, choix cohérents, absence de formulation culpabilisante ou de diagnostic suggéré.
+- Une question passée n'est pas reposée de manière insistante ; l'utilisateur garde le contrôle des sujets abordés.
+- Nombre de questions plafonné et arrêt possible à tout moment ; une erreur de génération permet de réessayer ou de poursuivre sans cette question.
+- Enregistrer la version exacte de la question et des choix affichés avec la réponse pour conserver un historique interprétable.
 
-Objectif : ajouter des données de bien-être simples
+Livrable : deux parcours de démonstration aboutissent à des questions et des choix différents selon les réponses précédentes.
 
-Champ quotidien : heures de sommeil (saisie manuelle)
-Champ quotidien : niveau de stress/énergie ressenti (3 émojis : 😊😐😣)
-Alerte simple si sommeil < seuil plusieurs jours de suite
-Livrable : un mini-journal santé, indépendant de l'EDT pour l'instant
-Étape 5 — Croisement EDT × santé (le cœur innovant)
+Étape 3 — Discussion personnalisée avec l'IA
 
-Objectif : faire parler les deux ensembles
+Objectif : permettre à l'utilisateur de s'exprimer librement en complément des questionnaires.
 
-Calcul simple : "les jours où sommeil < 6h, taux de suivi EDT = X%"
-Affichage sous forme de graphique corrélation (semaine par semaine)
-Alerte contextualisée : "3 créneaux ratés + sommeil faible cette semaine → risque de surcharge"
-Livrable : des insights personnalisés, pas juste deux stats séparées
-Étape 6 — Réajustement intelligent
+- La discussion reprend les réponses du mini-sondage et du questionnaire adaptatif, sans tout redemander.
+- L'IA écoute, reformule et propose des questions de clarification avec des formulations accessibles en français ou en malagasy.
+- L'utilisateur peut refuser un sujet, corriger une interprétation ou terminer la discussion.
+- Le contexte distingue ce qui a été explicitement déclaré, ce qui reste à clarifier et ce qui est inconnu.
+- L'IA ne pose pas de diagnostic, ne prescrit pas de traitement et n'attribue pas d'étiquette psychologique à l'utilisateur ou à un proche.
+- L'historique entre plusieurs visites est facultatif ; sa conservation et sa suppression restent sous le contrôle de l'utilisateur.
 
-Objectif : replanifier automatiquement
+Livrable : une conversation contextualisée qui complète les réponses à choix multiples et nourrit une synthèse des difficultés exprimées.
 
-Si un créneau est manqué (ex : révision), proposer un nouveau créneau libre dans les jours suivants
-Priorisation simple (ex : les créneaux "examen proche" passent avant "loisir")
-Livrable : l'EDT se réorganise seul quand tu rates quelque chose, au lieu de juste te culpabiliser
-Étape 7 — Le social (cercle de soutien)
+Étape 4 — Sécurité continue des questionnaires et de la discussion
 
-Objectif : partage optionnel avec un tiers
+Objectif : réduire les réponses inappropriées et organiser l'orientation lorsqu'une situation préoccupante est exprimée.
 
-Un tuteur/parent/ami peut suivre en lecture seule (avec ton accord)
-Possibilité d'envoyer un encouragement rapide (pas juste une alerte de surveillance)
-Livrable : une dimension sociale positive, pas juste du contrôle
-Étape 8 — Assistant conversationnel
+Cette couche est intégrée dès les premières fonctionnalités IA, avant toute mise à disposition du prototype ; elle n'est pas ajoutée uniquement à la fin.
 
-Objectif : interaction naturelle
+- Examiner chaque réponse au questionnaire et chaque message entrant pour repérer d'éventuels signaux de détresse ou de danger.
+- Contrôler également les questions, choix et réponses générés avant leur affichage.
+- Ne pas se limiter à une liste de mots interdits : prendre en compte le contexte, les ambiguïtés et les limites de la détection automatique.
+- Ne pas censurer la parole d'une personne simplement parce qu'elle exprime de la souffrance.
+- En cas de signal préoccupant, adapter la réponse et proposer une aide humaine ; en cas de danger potentiellement immédiat, interrompre le parcours ordinaire pour une orientation prioritaire.
+- Utiliser uniquement des coordonnées locales vérifiées ; ne jamais inventer un numéro d'urgence ni laisser croire qu'un professionnel a été alerté si aucun dispositif réel ne le permet.
+- Prévoir un message de repli et un accès aux ressources si le contrôle de sécurité ou le service IA échoue.
+- La détection ne garantit pas l'absence de risque ; ne pas présenter l'application comme un service de secours ou une surveillance humaine permanente.
 
-Chat simple : "j'ai pas dormi, aide-moi à replanifier ma journée" → le système ajuste l'EDT du jour
-Peut être basé sur une API IA (comme celle qu'on a vue) pour interpréter la demande et renvoyer un EDT réorganisé
-Livrable : le côté "coach intelligent" prend vie
+Livrable : scénarios fictifs montrant le contrôle des entrées et sorties, l'orientation appropriée et le comportement en cas d'indisponibilité technique.
+
+Étape 5 — Synthèse évolutive et orientation
+
+Objectif : réunir les informations des questionnaires et de la conversation pour aider l'utilisateur à comprendre ce qu'il a exprimé.
+
+- Produire une synthèse claire des difficultés rapportées et des domaines restant à explorer.
+- Rattacher chaque observation aux réponses ou messages concernés ; distinguer observation et interprétation incertaine.
+- Conserver les non-réponses comme inconnues, sans augmenter artificiellement un niveau de risque.
+- Éviter les probabilités de maladie, scores cliniques improvisés et classements de pathologies à partir de questions générées.
+- Un questionnaire génératif n'est pas, par sa seule conception, un instrument de dépistage cliniquement validé ; présenter la synthèse du prototype comme exploratoire.
+- Permettre à l'utilisateur de corriger la synthèse et de choisir la suite : ressources, professionnels, communauté ou arrêt.
+- Pour un suivi facultatif, afficher les difficultés rapportées au fil du temps sans prétendre comparer des scores issus de questions différentes.
+
+Livrable : une synthèse pédagogique, sans diagnostic, accompagnée de propositions concrètes d'aide.
+
+Étape 6 — Annuaire des psychologues et autres ressources à Madagascar
+
+Objectif : transformer l'orientation en possibilité réelle de contacter une personne ou une structure.
+
+- Fiches de psychologues, psychiatres, centres et associations : nom, qualification vérifiée, ville, langues, domaines d'accompagnement, présentiel/en ligne et coordonnées professionnelles.
+- Tarifs et horaires seulement lorsqu'ils sont communiqués, avec date de dernière vérification.
+- Référencement avec accord des professionnels et contrôle des informations avant publication.
+- Recherche par ville, langue et modalité de consultation ; localisation manuelle possible sans géolocalisation obligatoire.
+- Suggestions selon les besoins exprimés et les domaines d'accompagnement déclarés, sans diagnostic automatique.
+- Bouton de contact ; prise de rendez-vous optionnelle selon le périmètre du hackathon.
+- Aucun transfert du questionnaire, de la conversation ou de la synthèse à un professionnel sans accord explicite de l'utilisateur.
+- Pour la démonstration, identifier clairement les fiches fictives et désactiver leurs actions de contact.
+
+Livrable : l'utilisateur peut trouver un professionnel adapté à ses critères et consulter ses coordonnées vérifiées.
+
+Étape 7 — Forum communautaire anonyme et modéré
+
+Objectif : offrir un espace de parole et de soutien entre pairs, complémentaire au parcours individuel.
+
+- Publications et réponses sous pseudonyme, classées par thèmes : stress, isolement, vie familiale, difficultés relationnelles, etc.
+- Réactions de soutien, signalement des contenus et blocage d'utilisateurs.
+- Modération assistée par IA et traitement humain des signalements ; règles visibles contre le harcèlement, la divulgation d'informations personnelles et les contenus dangereux.
+- Distinguer un témoignage de détresse d'un contenu incitant à se faire du mal ; proposer une orientation sans punir l'expression de la souffrance.
+- Séparer les publications communautaires des questionnaires et conversations privés : aucune publication automatique de ces données.
+- Expliquer les limites de l'anonymat : un pseudonyme masque l'identité aux autres membres, mais ne garantit pas un anonymat technique absolu.
+
+Livrable : un forum avec publication, réponse, signalement et espace de traitement des signalements pour les modérateurs.
+
+Étape 8 — Intégration et démonstration du parcours complet
+
+Objectif : relier les modules dans un parcours cohérent pour le hackathon.
+
+Parcours principal : accueil → mini-sondage de 5 questions → questionnaire IA génératif à choix multiples → discussion personnalisée → synthèse et orientation → annuaire.
+
+Le forum et les ressources restent accessibles indépendamment ; l'utilisateur n'est pas obligé de terminer l'évaluation pour chercher de l'aide.
+
+- Bibliothèque de contenus de sensibilisation et de ressources adaptés au contexte malgache, avec certains contenus accessibles hors ligne.
+- Si l'IA nécessite une connexion, l'indiquer clairement ; ne pas simuler une analyse active en mode hors ligne.
+- Vérifier la continuité du contexte entre les modules, la confidentialité et la suppression de l'historique.
+- Démontrer deux profils fictifs produisant des parcours différents, une question passée sans interprétation pathologique, un scénario de sécurité et une orientation vers l'annuaire.
+- Vérifier les formulations françaises et malagasy avec des personnes compétentes ; présenter comme restant à valider les aspects non évalués avec des professionnels.
+
+Livrable : un prototype cohérent de première écoute, d'exploration et d'orientation en santé mentale pour Madagascar, associant IA, aide humaine et soutien communautaire.
