@@ -1,0 +1,3599 @@
+
+PROTOCOLE D'ENTRETIEN ANALYTIQUE ET DE RECONSTRUCTION DE L'HISTOIRE PERSONNELLE
+Nouvelle modification à intégrer au cahier des charges
+
+======================================================================
+1. CORRECTION DE L'IDEE
+======================================================================
+
+Les profils de Kolb et la carte d'identité personnelle ne doivent pas devenir deux
+petits tests indépendants donnant immédiatement un résultat à l'utilisateur.
+
+Ils doivent servir de METHODES DE QUESTIONNEMENT à l'IA pour comprendre la personne
+en profondeur : son histoire, ses choix, ses relations, ses valeurs, ses réactions,
+ses contradictions, sa manière d'apprendre et la personne qu'elle souhaite devenir.
+
+Mythenena ne doit donc pas fonctionner ainsi :
+
+Questionnaire court -> score -> étiquette -> conseil automatique.
+
+Le fonctionnement souhaité est :
+
+Récit libre -> questions progressives -> exemples concrets -> chronologie ->
+recoupement des réponses -> hypothèses provisoires -> vérification avec la personne ->
+synthèse évolutive -> nouvelles questions lors des conversations suivantes.
+
+L'IA devient un AGENT D'ENTRETIEN ANALYTIQUE. Elle n'essaie pas de deviner la personne
+à partir d'une seule réponse. Elle apprend à conduire un entretien structuré et à
+construire une compréhension argumentée dans le temps.
+
+Principe central :
+
+« Une réponse n'est pas une conclusion. C'est un indice à replacer dans une histoire. »
+
+======================================================================
+2. OBJECTIF DE L'IA
+======================================================================
+
+L'IA doit aider à répondre progressivement aux questions suivantes :
+
+- Qu'est-ce que cette personne a vécu ?
+- Quels événements ont influencé sa manière de penser et d'agir ?
+- Quelles interprétations a-t-elle construites à partir de ces événements ?
+- Quels comportements se répètent dans plusieurs situations ?
+- Dans quels contextes ces comportements apparaissent-ils ou disparaissent-ils ?
+- Quelles sont ses valeurs réelles, observées aussi dans ses choix ?
+- Quelles contradictions existent entre ses paroles, ses objectifs et ses actions ?
+- Comment apprend-elle, décide-t-elle et résout-elle les problèmes ?
+- Quelles forces utilise-t-elle déjà ?
+- Qu'est-ce qu'elle souhaite conserver, changer ou devenir ?
+
+Le résultat n'est pas une étiquette figée. Il s'agit d'une CARTE EVOLUTIVE DE LA
+PERSONNE, corrigée au fur et à mesure que de nouvelles informations apparaissent.
+
+======================================================================
+3. LES METHODES UTILISEES PAR L'IA
+======================================================================
+
+---------------------------------------------------------------------
+3.1 ENTRETIEN NARRATIF : RECONSTRUIRE L'HISTOIRE DE VIE
+---------------------------------------------------------------------
+
+L'IA utilise une méthode inspirée de l'entretien d'histoire de vie. Elle ne commence
+pas par une liste de symptômes. Elle demande d'abord à la personne de raconter ce qui
+l'amène, puis elle l'aide à organiser son récit.
+
+Eléments à explorer progressivement :
+
+- les grands chapitres de la vie ;
+- les périodes heureuses ou difficiles ;
+- les changements importants ;
+- les réussites, pertes, échecs et nouveaux départs ;
+- les personnes qui ont eu une influence ;
+- les décisions qui ont changé une trajectoire ;
+- les moments où l'image de soi a changé ;
+- les rêves abandonnés, actuels ou futurs ;
+- les thèmes qui reviennent dans plusieurs chapitres.
+
+Exemples de questions :
+
+- « Si ta vie était un livre, quels seraient les principaux chapitres ? »
+- « Quel événement t'a le plus changé pendant cette période ? »
+- « Qu'est-ce que tu pensais de toi avant, puis après cet événement ? »
+- « Qui était présent et quel rôle cette personne a-t-elle joué ? »
+- « Est-ce que cette expérience influence encore tes décisions aujourd'hui ? »
+- « Quel serait le titre du chapitre que tu vis actuellement ? »
+- « Quel chapitre aimerais-tu écrire ensuite ? »
+
+L'IA n'explore pas toute la vie en une séance. Elle choisit un chapitre utile au
+problème actuel, puis complète la chronologie lors des échanges suivants.
+
+---------------------------------------------------------------------
+3.2 ENTRETIEN MOTIVATIONNEL : OARS
+---------------------------------------------------------------------
+
+Pour éviter l'interrogatoire froid, l'IA utilise quatre opérations conversationnelles :
+
+O — Questions ouvertes
+Permettre une réponse développée : « Comment cela a commencé ? » plutôt que
+« Est-ce que cela va mal ? »
+
+A — Reconnaissance des efforts et des ressources
+Identifier un effort réel : « Malgré ta peur, tu as essayé d'en parler. » Il ne s'agit
+pas de flatter, mais de repérer une capacité démontrée dans le récit.
+
+R — Ecoute réflexive
+Reformuler le sens supposé pour le vérifier : « Tu sembles dire que le plus difficile
+n'était pas l'échec, mais le sentiment d'avoir déçu ta famille. Est-ce bien cela ? »
+
+S — Synthèse
+Relier plusieurs éléments : « Jusqu'ici, je comprends que... Qu'est-ce qui est juste,
+incomplet ou faux dans cette synthèse ? »
+
+Règle : après une réponse émotionnelle ou importante, l'IA reformule avant de poser
+une nouvelle question.
+
+---------------------------------------------------------------------
+3.3 QUESTIONNEMENT SOCRATIQUE ET DECOUVERTE GUIDEE
+---------------------------------------------------------------------
+
+L'IA ne contredit pas brutalement et ne donne pas immédiatement son interprétation.
+Elle aide la personne à examiner une idée avec des questions précises.
+
+Pour une affirmation comme « Je rate toujours tout », elle recherche :
+
+- l'exemple le plus récent ;
+- d'autres situations comparables ;
+- les faits observables ;
+- ce que la personne a interprété ;
+- les exceptions ;
+- une explication alternative ;
+- les conséquences de cette croyance ;
+- ce qui changerait si la croyance était moins absolue.
+
+Questions possibles :
+
+- « Que s'est-il passé exactement la dernière fois ? »
+- « Qu'est-ce qui te fait utiliser le mot toujours ? »
+- « Existe-t-il une situation où cela s'est passé différemment ? »
+- « Quelle autre explication serait possible, même si tu n'y crois pas encore ? »
+- « Que dirais-tu à un ami ayant vécu exactement la même chose ? »
+- « Quelle information nous manque pour comprendre cette situation ? »
+
+L'objectif n'est pas de conduire la personne vers la réponse voulue par l'IA, mais de
+tester les interprétations et de faire apparaître des nuances.
+
+---------------------------------------------------------------------
+3.4 CLARIFICATION DES VALEURS
+---------------------------------------------------------------------
+
+L'IA ne se contente pas de demander « Quelles sont tes valeurs ? ». Elle compare :
+
+- ce que la personne dit important ;
+- les décisions réellement prises ;
+- ce qu'elle protège lorsqu'elle est sous pression ;
+- ce qu'elle regrette lorsqu'elle agit contre elle-même ;
+- ce qu'elle souhaite transmettre ;
+- la direction qu'elle veut donner à sa vie.
+
+Exemple : une personne déclare que la famille est sa première valeur, mais évite tout
+contact depuis plusieurs mois. L'IA ne conclut pas qu'elle ment. Elle demande si cet
+écart vient d'un conflit, d'une protection nécessaire, d'une peur, d'un manque de
+temps ou d'une autre cause.
+
+La valeur est enregistrée avec des exemples qui la confirment, des situations qui la
+mettent en conflit et les actions que la personne souhaite essayer.
+
+---------------------------------------------------------------------
+3.5 CARTE D'IDENTITE PERSONNELLE COMME GRILLE D'EXPLORATION
+---------------------------------------------------------------------
+
+Les dimensions suivantes servent de grille interne à l'IA. Elles ne sont pas toutes
+posées sous forme d'un formulaire obligatoire.
+
+1. Identité personnelle
+Caractère perçu, qualités, défauts, besoins, peurs, goûts, valeurs et objectifs.
+
+2. Identité familiale
+Origines, éducation, langue, traditions, rôles dans la famille et événements marquants.
+
+3. Identité sociale
+Amis, école, communauté, religion, associations, appartenance et sentiment d'exclusion.
+
+4. Identité culturelle
+Culture malgache, coutumes, langue, croyances, rapport au Fihavanana et éventuels
+conflits entre tradition et aspirations personnelles.
+
+5. Identité scolaire ou professionnelle
+Etudes, compétences, expériences, réussites, échecs et ambitions.
+
+6. Identité numérique
+Image présentée en ligne, différence entre vie numérique et vie vécue, influences et
+comparaisons sociales.
+
+7. Identité projetée
+Personne que l'utilisateur souhaite devenir, rôles futurs, limites et engagements.
+
+8. Histoire personnelle
+Enfance, événements, relations, décisions, blessures, ressources et tournants.
+
+L'IA cherche les relations entre les dimensions. Exemple : une ambition professionnelle
+peut entrer en conflit avec un rôle familial ou avec la peur du jugement social.
+
+---------------------------------------------------------------------
+3.6 KOLB COMME TECHNIQUE D'ADAPTATION DES QUESTIONS
+---------------------------------------------------------------------
+
+Kolb n'est pas utilisé pour enfermer l'utilisateur dans un profil. L'IA observe quelle
+forme de question l'aide le mieux à raconter, comprendre et agir.
+
+Tendance accommodatrice — comprendre par l'action et l'expérience
+- demander ce que la personne a concrètement fait ;
+- utiliser des situations vécues plutôt que des théories ;
+- proposer un petit essai observable ;
+- revenir ensuite sur le résultat de l'expérience.
+
+Tendance divergente — comprendre par l'observation et les points de vue
+- explorer les émotions et plusieurs perspectives ;
+- demander comment d'autres personnes pourraient voir la scène ;
+- laisser un temps de réflexion ;
+- faire émerger plusieurs interprétations avant de choisir.
+
+Tendance assimilatrice — comprendre par la logique et la structure
+- construire une chronologie ;
+- expliquer les liens entre événement, pensée, émotion et action ;
+- présenter une synthèse organisée ;
+- demander si le modèle correspond à l'expérience vécue.
+
+Tendance convergente — comprendre par la résolution de problèmes
+- définir un problème précis ;
+- comparer les options ;
+- rechercher une solution applicable ;
+- mesurer le résultat et ajuster.
+
+Une même personne peut utiliser les quatre modes selon le contexte. L'IA enregistre
+donc des préférences provisoires, par domaine, et non une identité définitive.
+
+======================================================================
+4. PROTOCOLE D'ENTRETIEN EN NEUF PHASES
+======================================================================
+
+PHASE 0 — DEFINIR L'INTENTION
+
+L'IA demande ce que la personne souhaite comprendre aujourd'hui et jusqu'où elle veut
+aller. Elle choisit ensuite un axe : émotion, relation, décision, apprentissage,
+identité, histoire ou projet futur.
+
+PHASE 1 — RECIT LIBRE
+
+Question de départ courte :
+« Qu'est-ce qui t'amène à vouloir parler de cela aujourd'hui ? »
+
+L'IA laisse la personne raconter avant de structurer. Elle repère les événements,
+personnes, émotions, croyances, besoins et zones encore floues.
+
+PHASE 2 — CLARIFIER LA SITUATION ACTUELLE
+
+L'IA utilise OARS pour préciser :
+- le problème tel qu'il est vécu ;
+- depuis quand il existe ;
+- ce qui l'aggrave ou l'apaise ;
+- ce qui a déjà été tenté ;
+- ce que la personne espère obtenir.
+
+PHASE 3 — REMONTER LA CHRONOLOGIE
+
+L'IA recherche le premier souvenir associé, les répétitions et les tournants. Chaque
+événement important est placé sur une ligne de vie : période, événement, personnes,
+émotion, interprétation, décision, conséquence et sens actuel.
+
+PHASE 4 — EXPLORER LES DIMENSIONS D'IDENTITE
+
+L'IA sélectionne seulement les dimensions utiles. Pour un conflit professionnel, elle
+peut explorer les attentes familiales, les valeurs et l'identité projetée sans demander
+toute la vie numérique ou religieuse.
+
+PHASE 5 — RECHERCHER LES SCHEMAS RECURRENTS
+
+L'IA compare au moins deux ou trois situations avant de proposer un schéma :
+
+Déclencheur -> interprétation -> émotion -> action -> résultat immédiat ->
+conséquence à long terme.
+
+Elle cherche aussi une exception pour savoir dans quelles conditions le schéma ne se
+produit pas.
+
+PHASE 6 — COMPRENDRE LES VALEURS ET LES ASPIRATIONS
+
+L'IA compare la vie actuelle, les valeurs déclarées et la personne souhaitée. Elle
+identifie les alignements, les conflits de valeurs et les changements désirés.
+
+PHASE 7 — FORMULER UNE SYNTHESE PROVISOIRE
+
+La synthèse sépare clairement :
+- ce que la personne a déclaré ;
+- les faits ou exemples racontés ;
+- les liens observés ;
+- les hypothèses encore incertaines ;
+- les informations manquantes.
+
+PHASE 8 — FAIRE CORRIGER L'IA
+
+L'IA demande :
+« Qu'est-ce qui te ressemble dans cette synthèse ? Qu'est-ce qui ne te ressemble pas ?
+Qu'est-ce que j'ai oublié ou mal compris ? »
+
+La correction de l'utilisateur remplace l'interprétation précédente ou la conserve
+comme désaccord à explorer. L'IA ne défend pas son analyse comme une vérité.
+
+PHASE 9 — METTRE A JOUR LE PROFIL EVOLUTIF
+
+Après validation, l'IA met à jour la carte personnelle et prépare l'objectif de la
+prochaine conversation. Elle rappelle uniquement ce qui est pertinent et demande
+confirmation lorsqu'un ancien élément est réutilisé.
+
+======================================================================
+5. REGLES POUR NE PAS CONCLURE A LA VA-VITE
+======================================================================
+
+1. Une seule réponse ne permet jamais une conclusion générale.
+
+2. Toute hypothèse doit être reliée à des éléments précis du récit.
+
+3. Avant de considérer un schéma comme probable, rechercher au moins deux exemples
+indépendants et une exception ou un contre-exemple.
+
+4. Séparer en permanence :
+- fait raconté ;
+- émotion ressentie ;
+- interprétation de l'utilisateur ;
+- interprétation provisoire de l'IA ;
+- information inconnue.
+
+5. Utiliser des niveaux de confiance :
+- faible : un indice ou récit incomplet ;
+- moyen : plusieurs indices cohérents ;
+- élevé : plusieurs exemples, cohérents dans le temps et confirmés par l'utilisateur.
+
+6. Employer des formulations provisoires :
+- « Une possibilité serait... »
+- « Je remarque un motif qui pourrait... »
+- « Est-ce que cette lecture correspond à ton expérience ? »
+- « Quel exemple pourrait montrer le contraire ? »
+
+7. Ne pas transformer une réaction dans un contexte précis en trait permanent.
+
+8. Ne pas confondre corrélation et cause. Deux événements proches ne signifient pas
+que l'un a forcément provoqué l'autre.
+
+9. Signaler les contradictions sans accusation :
+« Tu m'avais dit X dans cette situation et aujourd'hui Y dans une autre. Est-ce le
+contexte qui change, ou ai-je mal compris quelque chose ? »
+
+10. Faire une synthèse régulière et permettre la correction avant d'aller plus loin.
+
+11. Poser une question principale par message, avec au maximum une ou deux relances
+courtes. L'entretien doit ressembler à une conversation, pas à un interrogatoire.
+
+12. Après un sujet sensible, reconnaître ce qui vient d'être confié et demander si la
+personne souhaite continuer, changer d'angle ou faire une pause.
+
+======================================================================
+6. BOUCLE DE RAISONNEMENT A CHAQUE REPONSE
+======================================================================
+
+Pour chaque message de l'utilisateur, le système suit cette boucle :
+
+ETAPE 1 — EXTRAIRE
+Repérer les événements, périodes, personnes, émotions, croyances, besoins, valeurs,
+objectifs, actions et conséquences.
+
+ETAPE 2 — CLASSER
+Attribuer à chaque élément un type : fait déclaré, souvenir, sentiment, jugement,
+croyance, objectif, hypothèse, contradiction ou information manquante.
+
+ETAPE 3 — RELIER
+Relier le nouvel élément à la chronologie, à une dimension d'identité, à une ancienne
+réponse ou à un schéma possible.
+
+ETAPE 4 — EVALUER
+Mesurer la quantité et la cohérence des indices. Rechercher ce qui pourrait contredire
+l'interprétation actuelle.
+
+ETAPE 5 — CHOISIR L'OBJECTIF DE LA PROCHAINE QUESTION
+La prochaine question doit avoir un objectif unique : préciser un événement, compléter
+la chronologie, comprendre une émotion, tester un schéma, rechercher une exception,
+clarifier une valeur ou vérifier une synthèse.
+
+ETAPE 6 — ADAPTER LA FORME
+Choisir une formulation concrète, imaginative, structurée ou orientée solution selon
+la manière dont l'utilisateur répond le mieux, en s'inspirant des modes de Kolb.
+
+ETAPE 7 — REPONDRE
+Commencer si nécessaire par une reformulation, puis poser une question principale.
+
+ETAPE 8 — METTRE A JOUR LA MEMOIRE
+Enregistrer les nouveaux indices et la raison de toute modification d'hypothèse.
+
+======================================================================
+7. COMMENT L'IA CHOISIT LA PROCHAINE QUESTION
+======================================================================
+
+Ordre de priorité proposé :
+
+1. Comprendre une situation immédiate importante ou urgente.
+2. Clarifier une phrase ambiguë ayant un fort impact sur l'analyse.
+3. Compléter un lien manquant dans la chronologie.
+4. Obtenir un exemple concret d'une affirmation générale.
+5. Comparer avec une deuxième situation similaire.
+6. Rechercher une exception ou un contre-exemple.
+7. Explorer un conflit entre valeur, action et objectif.
+8. Vérifier une hypothèse provisoire.
+9. Ouvrir une nouvelle dimension de l'identité si elle est utile.
+
+Le moteur doit éviter :
+- de changer constamment de sujet ;
+- de poser deux questions sensibles à la suite sans reformulation ;
+- de redemander une information déjà connue ;
+- de privilégier une question simplement parce qu'elle est facile à générer ;
+- de poser toutes les questions prévues lorsqu'une réponse rend certaines inutiles.
+
+======================================================================
+8. EXEMPLE COMPLET DE LA TECHNIQUE
+======================================================================
+
+Utilisateur :
+« Je rate toujours mes projets. »
+
+Mauvaise réponse :
+« Tu manques de discipline et tu es probablement un profil divergent. »
+
+Bonne progression :
+
+1. REFLET
+« Tu as l'impression que ce problème se répète et cela semble affecter l'image que tu
+as de toi. »
+
+2. EXEMPLE CONCRET
+« Parle-moi du dernier projet que tu considères comme raté. Que voulais-tu faire et à
+quel moment cela s'est-il arrêté ? »
+
+3. CHRONOLOGIE
+L'IA identifie le début, le premier obstacle, la décision prise et la conséquence.
+
+4. COMPARAISON
+« Est-ce que le projet précédent s'est arrêté au même moment ou pour une autre raison ? »
+
+5. EXCEPTION
+« Peux-tu penser à un projet, même petit, que tu as terminé ? Qu'est-ce qui était
+différent ? »
+
+6. HYPOTHESE PROVISOIRE
+« Sur ces exemples, je remarque beaucoup d'énergie au début, puis une difficulté quand
+le travail devient répétitif et solitaire. Cela ne suffit pas encore pour conclure.
+Est-ce que tu reconnais ce fonctionnement ou vois-tu une autre explication ? »
+
+7. ADAPTATION
+- mode accommodateur : proposer un essai court et observer le résultat ;
+- mode divergent : comparer les émotions et les points de vue ;
+- mode assimilateur : présenter le cycle observé sous forme structurée ;
+- mode convergent : comparer deux solutions et définir un indicateur de résultat.
+
+8. MEMOIRE
+Le système enregistre l'hypothèse, les exemples favorables, l'exception et la correction
+de l'utilisateur. La prochaine conversation peut tester si le même schéma apparaît
+dans les études, le travail ou seulement dans les projets personnels.
+
+======================================================================
+9. MEMOIRE STRUCTUREE : NE PAS CONSERVER UNIQUEMENT LE TEXTE BRUT
+======================================================================
+
+Les conversations complètes peuvent servir d'historique, mais l'analyse doit être
+enregistrée sous une forme structurée et traçable.
+
+Exemple de structure JSON :
+
+{
+  "person_state": {
+    "current_goal": "comprendre pourquoi mes projets restent inacheves",
+    "life_chapters": [],
+    "events": [
+      {
+        "period": "2025",
+        "event": "abandon d'un projet apres trois semaines",
+        "people": [],
+        "emotions": ["decouragement"],
+        "meaning_given_by_user": "je ne termine jamais rien",
+        "decision": "arreter",
+        "consequences": [],
+        "evidence_ids": ["turn_18"]
+      }
+    ],
+    "identity_domains": {
+      "personal": [],
+      "family": [],
+      "social": [],
+      "cultural": [],
+      "school_or_work": [],
+      "digital": [],
+      "projected": []
+    },
+    "values": [
+      {
+        "name": "autonomie",
+        "importance_claimed": "high",
+        "behavior_examples": [],
+        "conflicts": [],
+        "confidence": "low"
+      }
+    ],
+    "patterns": [
+      {
+        "trigger": "phase repetitive d'un projet",
+        "interpretation": "je n'avance plus",
+        "emotion": "decouragement",
+        "action": "abandon",
+        "short_term_result": "soulagement",
+        "long_term_result": "culpabilite",
+        "evidence_for": ["turn_18", "turn_31"],
+        "evidence_against": ["turn_42"],
+        "confidence": "medium"
+      }
+    ],
+    "learning_preferences": {
+      "action": 0.0,
+      "observation": 0.0,
+      "conceptualization": 0.0,
+      "application": 0.0,
+      "last_updated": null
+    },
+    "hypotheses": [],
+    "contradictions": [],
+    "unknowns": [],
+    "next_question_goal": "rechercher une exception"
+  }
+}
+
+Chaque hypothèse doit garder :
+- les indices favorables ;
+- les indices contraires ;
+- la date de création ;
+- les corrections de l'utilisateur ;
+- le niveau de confiance ;
+- son statut : à explorer, plausible, confirmée par l'utilisateur, corrigée ou rejetée.
+
+======================================================================
+10. ARCHITECTURE TECHNIQUE PROPOSEE
+======================================================================
+
+APPLICATION MOBILE
+- React Native avec Expo / Expo Go pour le prototype ;
+- conversation texte puis vocale ;
+- chronologie visuelle ;
+- synthèses corrigibles ;
+- graphique d'évolution ;
+- espace « Mon histoire » et « Ce que Mythenena comprend de moi ».
+
+BACKEND
+- Node.js avec NestJS ou Express pour avancer rapidement ;
+- moteur d'entretien déterministe ;
+- appels au modèle d'IA ;
+- extraction structurée ;
+- sélection de la prochaine question ;
+- gestion des versions du profil.
+
+BASE DE DONNEES
+- Supabase / PostgreSQL ;
+- authentification ;
+- stockage des sessions, événements, indices et profils ;
+- règles d'accès par utilisateur.
+
+IA
+- un grand modèle de langage formule les questions, reformule et extrait les données ;
+- un moteur de règles contrôle les phases, la profondeur et la prochaine intention ;
+- les sorties structurées utilisent un schéma JSON validé ;
+- une synthèse n'est enregistrée comme profil qu'après vérification ou correction.
+
+Le modèle de langage ne doit pas décider seul de toute la conversation. Le moteur
+d'entretien conserve l'état, impose les règles de prudence analytique et demande au
+modèle une tâche précise à chaque étape.
+
+======================================================================
+11. MOTEUR D'ENTRETIEN : LOGIQUE SIMPLIFIEE
+======================================================================
+
+Entrées :
+- message utilisateur ;
+- objectif de la session ;
+- phase actuelle ;
+- profil structuré existant ;
+- hypothèses et contradictions ;
+- derniers types de questions posées.
+
+Traitement :
+
+1. extraire les nouveaux éléments au format JSON ;
+2. vérifier que chaque extraction cite le passage source ;
+3. fusionner les éléments sans écraser une ancienne version ;
+4. détecter les ambiguïtés, répétitions, contradictions et informations manquantes ;
+5. classer les objectifs possibles de la prochaine question ;
+6. choisir l'objectif prioritaire ;
+7. choisir une méthode : OARS, chronologie, Socratique, valeurs, identité ou Kolb ;
+8. générer une reformulation et une seule question principale ;
+9. vérifier le ton, la longueur et l'absence de conclusion non justifiée ;
+10. sauvegarder la décision du moteur pour pouvoir l'expliquer et la tester.
+
+Sorties :
+- réponse conversationnelle ;
+- nouvelle donnée structurée ;
+- hypothèse créée ou mise à jour ;
+- objectif de la question suivante ;
+- journal technique de la décision.
+
+======================================================================
+12. INSTRUCTIONS SYSTEME POUR L'AGENT IA
+======================================================================
+
+Exemple de consigne principale :
+
+« Tu es l'agent d'entretien analytique de Mythenena. Ton objectif est de comprendre
+progressivement l'histoire de la personne, et non de produire une conclusion rapide.
+
+Pour chaque réponse :
+1. distingue les faits, émotions, croyances, valeurs, objectifs et interprétations ;
+2. relie les nouveaux éléments à la chronologie existante ;
+3. ne généralise jamais à partir d'un seul exemple ;
+4. cherche plusieurs exemples et au moins une exception avant de proposer un schéma ;
+5. présente chaque interprétation comme une hypothèse vérifiable ;
+6. indique les éléments favorables, contraires et manquants ;
+7. utilise une reformulation empathique lorsqu'un élément important est confié ;
+8. pose une seule question principale par réponse ;
+9. choisis la question ayant la meilleure valeur d'information pour l'objectif actuel ;
+10. adapte sa forme aux modes action, observation, conceptualisation ou application ;
+11. résume périodiquement et demande explicitement à l'utilisateur de corriger ;
+12. conserve les corrections et explique pourquoi une hypothèse change.
+
+Tu ne cherches pas à confirmer ta première intuition. Tu recherches aussi les éléments
+qui pourraient la contredire. »
+
+Cette consigne doit être complétée par :
+- le profil structuré actuel ;
+- la phase de l'entretien ;
+- l'objectif précis de la prochaine question ;
+- les méthodes autorisées ;
+- le format JSON attendu pour l'extraction.
+
+======================================================================
+13. APPRENTISSAGE ET AMELIORATION DE L'IA
+======================================================================
+
+Pour le prototype, « l'IA apprend » de deux manières concrètes.
+
+1. APPRENTISSAGE SUR LA PERSONNE
+
+Elle met à jour sa mémoire structurée après chaque conversation : histoire, exemples,
+valeurs, contradictions, corrections et préférences de communication. Elle devient
+plus pertinente pour cette personne sans modifier directement le modèle général.
+
+2. AMELIORATION DU SYSTEME
+
+Les erreurs corrigées peuvent alimenter, avec consentement et anonymisation, un jeu de
+cas d'évaluation :
+- question hors sujet ;
+- conclusion trop rapide ;
+- mauvaise reformulation ;
+- contradiction non détectée ;
+- hypothèse rejetée ;
+- question ayant permis une découverte utile.
+
+L'équipe améliore ensuite les consignes, règles, exemples et critères d'évaluation.
+Une version future pourra entraîner ou ajuster un modèle spécialisé à partir d'un jeu
+de données préparé et validé. Le prototype ne réentraîne pas automatiquement le modèle
+après chaque conversation.
+
+======================================================================
+14. DONNEES ET TABLES A AJOUTER DANS SUPABASE
+======================================================================
+
+interview_sessions
+- id, user_id, objective, current_phase, status, created_at, updated_at
+
+interview_turns
+- id, session_id, role, content, method_used, question_goal, created_at
+
+evidence_items
+- id, user_id, turn_id, type, content, period, confidence, created_at
+
+life_events
+- id, user_id, period, event, emotion, meaning, decision, consequence
+
+identity_domains
+- id, user_id, domain, content, evidence_ids, confidence
+
+values_map
+- id, user_id, value_name, claimed_importance, examples, conflicts, confidence
+
+behavior_patterns
+- id, user_id, trigger, interpretation, emotion, action, outcomes,
+  evidence_for, evidence_against, confidence
+
+hypotheses
+- id, user_id, text, evidence_for, evidence_against, confidence, status
+
+contradictions
+- id, user_id, statement_a, statement_b, context_difference, status
+
+learning_preferences
+- id, user_id, domain, action_score, observation_score,
+  conceptualization_score, application_score, evidence_ids
+
+profile_snapshots
+- id, user_id, structured_profile, user_corrections, created_at
+
+======================================================================
+15. ROUTES BACKEND DU PROTOTYPE
+======================================================================
+
+POST /interview/start
+Créer une session et définir l'objectif du jour.
+
+POST /interview/:id/respond
+Recevoir une réponse, extraire les éléments et générer la prochaine intervention.
+
+GET /interview/:id/state
+Afficher la phase, les thèmes explorés et l'objectif suivant.
+
+GET /profile/story
+Retourner les chapitres et la ligne de vie.
+
+GET /profile/hypotheses
+Retourner les hypothèses avec leurs indices et niveaux de confiance.
+
+POST /profile/hypotheses/:id/correct
+Permettre à l'utilisateur de confirmer, nuancer ou rejeter une interprétation.
+
+GET /profile/identity
+Retourner la carte d'identité personnelle évolutive.
+
+GET /profile/evolution
+Retourner les changements entre plusieurs instantanés du profil.
+
+======================================================================
+16. INTERFACE UTILISATEUR
+======================================================================
+
+ECRAN « PARLER AVEC MYTHENENA »
+- conversation naturelle ;
+- une question à la fois ;
+- possibilité de répondre par texte ou par voix ;
+- bouton pour demander une pause ou changer de sujet.
+
+ECRAN « MON HISTOIRE »
+- chapitres de vie ;
+- ligne du temps ;
+- événements marquants ;
+- possibilité de corriger une date ou une interprétation.
+
+ECRAN « CE QUE MYTHENENA COMPREND »
+- éléments certains ;
+- hypothèses en cours ;
+- contradictions à éclaircir ;
+- informations que l'utilisateur souhaite corriger ou oublier.
+
+ECRAN « MES SCHEMAS »
+- déclencheur ;
+- interprétation ;
+- émotion ;
+- réaction ;
+- conséquence ;
+- exceptions et ressources.
+
+ECRAN « MON EVOLUTION »
+- graphiques par période ;
+- nouveaux éléments compris ;
+- hypothèses corrigées ;
+- valeurs et objectifs suivis ;
+- aucune étiquette définitive.
+
+======================================================================
+17. CE QUI DOIT ETRE MONTRE DANS LE PROTOTYPE
+======================================================================
+
+Le prototype fonctionnel doit démontrer un cycle complet, même avec un nombre limité
+de scénarios.
+
+Scénario conseillé :
+
+1. L'utilisateur dit : « Je commence beaucoup de choses mais je ne termine rien. »
+2. L'IA reformule et demande un exemple concret.
+3. Elle construit une petite chronologie.
+4. Elle demande un second exemple.
+5. Elle recherche une exception.
+6. Elle formule une hypothèse provisoire avec un niveau de confiance.
+7. L'utilisateur corrige une partie de l'hypothèse.
+8. Le profil est mis à jour.
+9. L'écran « Mon histoire » affiche les événements.
+10. L'écran « Mes schémas » affiche le cycle observé et l'exception.
+11. Lors d'une deuxième session, l'IA réutilise un élément pertinent et demande
+    confirmation avant de poursuivre.
+
+Cette démonstration prouve que Mythenena ne se contente pas de produire du texte :
+elle mène un entretien, structure les informations, teste ses hypothèses et accepte
+d'être corrigée.
+
+======================================================================
+18. EVALUATION SCIENTIFIQUE DU PROTOTYPE
+======================================================================
+
+Comparer deux versions sur les mêmes récits simulés :
+
+VERSION A — Chatbot simple
+Répond librement sans moteur d'entretien.
+
+VERSION B — Mythenena analytique
+Suit le protocole décrit dans ce document.
+
+Mesures proposées :
+
+- nombre de conclusions sans exemple justificatif ;
+- nombre de questions doubles ou hors sujet ;
+- proportion d'éléments correctement reliés à leur source ;
+- capacité à détecter une contradiction ;
+- capacité à rechercher un contre-exemple ;
+- nombre de corrections demandées par l'utilisateur ;
+- fidélité de la synthèse au récit ;
+- adaptation de la question au mode d'apprentissage observé ;
+- continuité entre deux sessions ;
+- perception d'écoute et de compréhension par les testeurs.
+
+Critère principal :
+
+La qualité de Mythenena ne se mesure pas au nombre de conclusions produites, mais à la
+qualité des questions, à la traçabilité des interprétations et à la fidélité de la
+synthèse à l'histoire de la personne.
+
+======================================================================
+19. LIMITES TECHNIQUES A ASSUMER POUR LE HACKATHON
+======================================================================
+
+Le prototype peut être ambitieux dans sa vision, tout en démontrant seulement :
+
+- un ou deux scénarios d'entretien bien exécutés ;
+- une mémoire structurée ;
+- une hypothèse avec indices favorables et contraires ;
+- une correction utilisateur ;
+- une adaptation simple du style de question ;
+- une chronologie et un graphique ;
+- une reprise cohérente lors d'une deuxième session.
+
+La reconstruction complète de toute une vie, l'adaptation vocale malgache parfaite et
+l'amélioration générale du modèle constituent la trajectoire après le hackathon.
+
+======================================================================
+20. FORMULATION COURTE POUR LA SOUTENANCE
+======================================================================
+
+« Mythenena ne pose pas dix questions pour coller une étiquette à une personne. Notre
+IA mène un entretien progressif. Elle écoute un récit, reconstruit la chronologie,
+compare plusieurs situations, cherche les exceptions et formule seulement des
+hypothèses que l'utilisateur peut corriger.
+
+Nous utilisons l'entretien narratif pour comprendre l'histoire de vie, les techniques
+OARS pour écouter et reformuler, le questionnement socratique pour vérifier les
+interprétations, la clarification des valeurs pour comprendre les choix et les modes
+de Kolb pour adapter la manière de poser les questions.
+
+L'innovation n'est donc pas seulement le modèle d'IA. C'est le protocole qui lui
+apprend comment écouter, comment douter de sa première intuition et comment construire
+une compréhension fidèle de la personne dans le temps. »
+
+======================================================================
+21. RESUME FINAL DE LA MODIFICATION
+======================================================================
+
+Cette nouvelle fonctionnalité ne doit pas être présentée comme :
+
+« Faites un test pour connaître votre profil. »
+
+Elle doit être présentée comme :
+
+« Racontez ce que vous vivez. Mythenena vous aide à reconstruire votre histoire,
+comprendre les schémas qui se répètent, clarifier vos valeurs et vérifier avec vous
+chaque interprétation avant de construire votre miroir personnel. »
+
+Le coeur technique du projet devient l'association de quatre éléments :
+
+1. une conversation humaine et progressive ;
+2. une méthode d'entretien explicite ;
+3. une mémoire structurée et traçable ;
+4. un moteur qui choisit la prochaine question selon ce qu'il reste réellement à
+   comprendre.
+
+   1. VISION DE LA FONCTIONNALITE
+======================================================================
+
+Mythenena ne doit pas seulement discuter avec l'utilisateur ou lui envoyer de longs
+textes. Après avoir compris son histoire et son état actuel, l'IA doit pouvoir lui
+proposer une expérience courte, interactive et adaptée directement dans le chat.
+
+Exemples :
+
+- une bulle de respiration animée ;
+- un exercice d'ancrage présenté comme une exploration visuelle ;
+- des cartes à déplacer entre « fait » et « interprétation » ;
+- une jauge d'énergie ou d'émotion ;
+- un mini-défi de trente secondes ;
+- un choix guidé entre plusieurs petites actions ;
+- un exercice audio en malgache ou en français ;
+- une activité pour identifier une valeur importante ;
+- une répétition de message avant de parler à une personne réelle ;
+- un plan très court pour traverser un moment difficile.
+
+Le principe central est :
+
+« Quand parler demande trop d'énergie, Mythenena transforme l'accompagnement en une
+petite action guidée, vivante et réalisable dans l'instant. »
+
+L'utilisateur ne reçoit pas seulement :
+
+« Respire lentement pendant une minute. »
+
+Il voit une activité réelle : un cercle grandit pendant l'inspiration, reste stable,
+puis diminue pendant l'expiration. Le téléphone peut vibrer doucement, le temps avance,
+et l'utilisateur indique ensuite si l'exercice l'a aidé.
+
+======================================================================
+2. CORRECTION IMPORTANTE : PLUSIEURS AXES, PAS UNE SEULE ETIQUETTE
+======================================================================
+
+Le moteur ne doit jamais appliquer une règle simpliste comme :
+
+« Profil divergent = exercice de respiration. »
+
+Le terme « divergent » décrit ici une préférence possible dans la manière d'explorer
+et d'apprendre. La bipolarité désigne une condition de santé mentale. La fatigue est
+un état actuel. L'anxiété est un ensemble possible de signaux. Ces informations n'ont
+pas le même rôle.
+
+La sélection d'une activité repose sur six axes :
+
+AXE 1 — ETAT DU MOMENT
+- calme ;
+- tension ;
+- agitation ;
+- tristesse ;
+- fatigue ;
+- confusion ;
+- colère ;
+- solitude ;
+- rumination ;
+- envie d'agir ;
+- difficulté à se concentrer.
+
+AXE 2 — NIVEAU D'ENERGIE ET CHARGE COGNITIVE
+- très faible : une action, presque aucun texte, 15 à 30 secondes ;
+- faible : un choix simple et une activité de moins de deux minutes ;
+- moyen : quelques étapes interactives ;
+- élevé : réflexion, planification ou exercice plus complet.
+
+AXE 3 — OBJECTIF IMMEDIAT
+- apaiser le corps ;
+- revenir au moment présent ;
+- exprimer une émotion ;
+- clarifier une pensée ;
+- interrompre une rumination ;
+- retrouver un peu d'énergie ;
+- prendre une décision ;
+- préparer une conversation ;
+- organiser une petite action ;
+- rechercher une présence humaine.
+
+AXE 4 — PREFERENCE D'INTERACTION INSPIREE DE KOLB
+- accommodateur : agir, toucher, essayer et constater ;
+- divergent : imaginer, observer, ressentir et comparer plusieurs perspectives ;
+- assimilateur : comprendre une structure et organiser les informations ;
+- convergent : résoudre un problème et mesurer un résultat.
+
+AXE 5 — CONTEXTE DE SANTE MENTALE
+- information déclarée par l'utilisateur ;
+- difficulté déjà suivie par un professionnel ;
+- signaux apparus dans plusieurs conversations ;
+- traitement ou stratégie déjà indiquée par l'utilisateur ;
+- activité déconseillée ou refusée auparavant.
+
+AXE 6 — PREFERENCES ET ACCESSIBILITE
+- langue : malgache, français ou combinaison des deux ;
+- texte, voix, animation ou vibration ;
+- environnement discret ou privé ;
+- déficience visuelle ou auditive ;
+- durée disponible ;
+- connexion faible ;
+- activité appréciée, neutre ou détestée auparavant.
+
+La recommandation finale est donc une combinaison :
+
+Etat actuel + énergie + objectif + préférence d'interaction + contexte + accessibilité.
+
+======================================================================
+3. ROLE EXACT DE L'IA
+======================================================================
+
+L'IA gère le parcours, mais elle ne doit pas inventer librement une technique à chaque
+message. Elle agit comme un ORCHESTRATEUR.
+
+Elle doit :
+
+1. comprendre ce que vit la personne maintenant ;
+2. estimer l'énergie disponible ;
+3. choisir l'objectif immédiat le plus utile ;
+4. filtrer les exercices incompatibles avec le contexte ;
+5. sélectionner une activité dans une bibliothèque contrôlée ;
+6. adapter la langue, l'univers visuel, la durée et la présentation ;
+7. lancer le composant interactif dans le chat ;
+8. observer si l'utilisateur termine, arrête ou modifie l'exercice ;
+9. demander un retour très court ;
+10. apprendre quelles activités conviennent à cette personne ;
+11. proposer ensuite de continuer, changer ou parler à un humain.
+
+L'IA peut personnaliser :
+
+- la formulation ;
+- la langue ;
+- le choix entre plusieurs exercices autorisés ;
+- la durée dans les limites prévues ;
+- le rythme ;
+- les couleurs ou métaphores ;
+- l'ordre des étapes ;
+- le niveau de texte ;
+- la voix et les encouragements.
+
+L'IA ne peut pas personnaliser librement :
+
+- les contre-indications ;
+- les règles d'urgence ;
+- la durée maximale d'un exercice sensible ;
+- une exposition à un traumatisme ;
+- un conseil médicamenteux ;
+- une technique clinique non présente dans la bibliothèque validée.
+
+======================================================================
+4. CLASSIFICATION DES SITUATIONS COUVERTES
+======================================================================
+
+Il est impossible de coder « tous les troubles possibles » comme une liste figée.
+Mythenena doit utiliser une architecture extensible à trois niveaux.
+
+---------------------------------------------------------------------
+4.1 NIVEAU A — BIEN-ETRE ET DEVELOPPEMENT PERSONNEL
+---------------------------------------------------------------------
+
+Cas sans trouble particulier déclaré :
+
+- découverte de soi ;
+- valeurs ;
+- motivation ;
+- objectifs ;
+- confiance ;
+- prise de décision ;
+- apprentissage ;
+- créativité ;
+- organisation ;
+- relations ;
+- communication ;
+- gratitude ;
+- sentiment de progression ;
+- identité personnelle et culturelle.
+
+---------------------------------------------------------------------
+4.2 NIVEAU B — ETATS TRANSDIAGNOSTIQUES
+---------------------------------------------------------------------
+
+Ce sont des expériences pouvant apparaître dans de nombreuses situations différentes :
+
+- stress ;
+- anxiété ;
+- fatigue mentale ;
+- tristesse ;
+- perte d'intérêt ;
+- agitation ;
+- irritabilité ;
+- colère ;
+- peur ;
+- honte ;
+- culpabilité ;
+- solitude ;
+- deuil ;
+- rumination ;
+- pensées intrusives ;
+- manque de concentration ;
+- problèmes de sommeil ;
+- évitement ;
+- surcharge sensorielle ;
+- difficulté à commencer une tâche ;
+- difficulté à exprimer un besoin.
+
+L'activité est d'abord choisie selon l'état vécu, pas selon une étiquette.
+
+---------------------------------------------------------------------
+4.3 NIVEAU C — CONTEXTES DEMANDANT DES REGLES PARTICULIERES
+---------------------------------------------------------------------
+
+Le registre peut contenir des règles spécifiques pour :
+
+- dépression ;
+- troubles anxieux ;
+- trouble panique ;
+- trouble obsessionnel-compulsif ;
+- traumatisme et stress post-traumatique ;
+- trouble bipolaire ;
+- psychose ou expériences inhabituelles de la réalité ;
+- troubles liés à l'usage de substances ;
+- troubles des conduites alimentaires et image corporelle ;
+- difficultés de régulation émotionnelle ;
+- deuil compliqué ;
+- TDAH ;
+- autisme et surcharge sensorielle ;
+- difficultés relationnelles ou violence subie ;
+- automutilation ou risque suicidaire ;
+- autres situations ajoutées après validation.
+
+Ces catégories servent à AJOUTER DES PRECAUTIONS et à mieux orienter. Elles ne doivent
+pas déclencher automatiquement une activité sur la base d'un seul message.
+
+======================================================================
+5. BIBLIOTHEQUE D'ACTIVITES INTERACTIVES
+======================================================================
+
+---------------------------------------------------------------------
+5.1 BULLE DE RESPIRATION
+---------------------------------------------------------------------
+
+Affichage dans le chat :
+- cercle animé ;
+- inspiration, pause optionnelle, expiration ;
+- vibration légère facultative ;
+- mode silencieux ;
+- durée de 30 secondes à 3 minutes ;
+- bouton « arrêter » toujours visible.
+
+Variantes selon le profil :
+- accommodateur : suivre directement le mouvement ;
+- divergent : imaginer une vague qui monte et redescend ;
+- assimilateur : afficher clairement les phases et le compteur ;
+- convergent : objectif court et comparaison avant/après.
+
+Retour :
+« Maintenant : moins tendu, pareil ou plus inconfortable ? »
+
+---------------------------------------------------------------------
+5.2 ANCRAGE SENSORIEL 5-4-3-2-1
+---------------------------------------------------------------------
+
+L'écran révèle une étape à la fois :
+- cinq choses visibles ;
+- quatre sensations tactiles ;
+- trois sons ;
+- deux odeurs ;
+- une saveur ou une respiration consciente.
+
+L'utilisateur peut répondre par icône, voix ou mot court. Il n'a pas besoin de rédiger
+un paragraphe.
+
+---------------------------------------------------------------------
+5.3 METEO INTERIEURE
+---------------------------------------------------------------------
+
+Mini-jeu d'expression émotionnelle :
+- choisir soleil, nuage, pluie, vent, brouillard ou orage ;
+- régler l'intensité ;
+- indiquer où cela se ressent dans le corps ;
+- choisir « je veux en parler » ou « je veux juste traverser ce moment ».
+
+Cette activité permet de communiquer même lorsque les mots manquent.
+
+---------------------------------------------------------------------
+5.4 BATTERIE MENTALE
+---------------------------------------------------------------------
+
+L'utilisateur déplace une batterie de 0 à 100 %, puis sélectionne ce qui consomme le
+plus d'énergie. L'IA adapte immédiatement la longueur du chat.
+
+Si la batterie est très faible :
+- pas de long questionnaire ;
+- une activité maximum ;
+- boutons simples ;
+- option audio ;
+- retour en un toucher.
+
+---------------------------------------------------------------------
+5.5 TRI « FAIT OU INTERPRETATION »
+---------------------------------------------------------------------
+
+Des cartes issues du récit apparaissent. L'utilisateur les glisse dans :
+- fait observé ;
+- pensée ou interprétation ;
+- émotion ;
+- information inconnue.
+
+Exemple :
+- « Il n'a pas répondu depuis deux heures » -> fait ;
+- « Il ne m'aime plus » -> interprétation ;
+- « J'ai peur » -> émotion.
+
+L'objectif est de clarifier, pas de dire automatiquement que l'interprétation est fausse.
+
+---------------------------------------------------------------------
+5.6 FEUILLES SUR LA RIVIERE
+---------------------------------------------------------------------
+
+Une pensée difficile est placée sur une feuille animée qui passe sur une rivière.
+L'utilisateur observe la pensée sans devoir la supprimer. Il peut créer une deuxième
+feuille ou revenir à son environnement.
+
+Cette activité représente le fait de se détacher momentanément d'une pensée, pas de
+nier son contenu.
+
+---------------------------------------------------------------------
+5.7 MICRO-MISSION D'ACTIVATION
+---------------------------------------------------------------------
+
+Pour une énergie faible, l'IA propose trois actions minuscules :
+- boire un peu d'eau ;
+- ouvrir la fenêtre ;
+- s'asseoir ailleurs ;
+- se laver le visage ;
+- marcher trente secondes ;
+- envoyer un symbole à une personne de confiance ;
+- ranger un seul objet.
+
+L'utilisateur choisit. Une animation accompagne l'action et célèbre sobrement le fait
+d'avoir essayé, sans culpabiliser si elle n'est pas terminée.
+
+---------------------------------------------------------------------
+5.8 BOUSSOLE DES VALEURS
+---------------------------------------------------------------------
+
+L'utilisateur choisit une valeur importante aujourd'hui :
+- famille ;
+- paix ;
+- courage ;
+- santé ;
+- apprentissage ;
+- respect ;
+- Fihavanana ;
+- autonomie ;
+- créativité ;
+- autre.
+
+L'IA propose ensuite une action de moins de cinq minutes cohérente avec cette valeur.
+
+---------------------------------------------------------------------
+5.9 ROUE DES PERSPECTIVES
+---------------------------------------------------------------------
+
+Particulièrement adaptée à une tendance divergente :
+- mon point de vue ;
+- le point de vue possible de l'autre ;
+- le point de vue d'un ami neutre ;
+- ce que je ne sais pas encore ;
+- ce que je voudrais vraiment exprimer.
+
+Les réponses peuvent être vocales. Une synthèse visuelle est construite à la fin.
+
+---------------------------------------------------------------------
+5.10 LABORATOIRE DE SOLUTIONS
+---------------------------------------------------------------------
+
+Adapté à une tendance convergente :
+- définir un problème en une phrase ;
+- choisir deux solutions ;
+- comparer effort, risque et bénéfice ;
+- sélectionner un premier pas ;
+- décider quand vérifier le résultat.
+
+---------------------------------------------------------------------
+5.11 CARTE DU POURQUOI
+---------------------------------------------------------------------
+
+Adaptée à une tendance assimilatrice :
+- événement ;
+- pensée ;
+- émotion ;
+- action ;
+- conséquence.
+
+L'utilisateur relie les blocs. L'IA montre ensuite le point du cycle sur lequel une
+petite modification semble possible.
+
+---------------------------------------------------------------------
+5.12 DEFIS « ESSAIE ET OBSERVE »
+---------------------------------------------------------------------
+
+Adaptés à une tendance accommodatrice :
+- choisir une action très courte ;
+- la réaliser ;
+- observer ce qui change ;
+- conserver, modifier ou abandonner l'idée.
+
+Le résultat réel compte davantage qu'une longue explication théorique.
+
+---------------------------------------------------------------------
+5.13 REPETITION D'UNE CONVERSATION
+---------------------------------------------------------------------
+
+L'utilisateur choisit une situation : demander de l'aide, poser une limite, expliquer
+une émotion ou prendre un rendez-vous. L'IA joue l'autre personne, puis propose une
+version courte du message. Le niveau de difficulté reste contrôlé par l'utilisateur.
+
+---------------------------------------------------------------------
+5.14 MINUTE DE CONCENTRATION
+---------------------------------------------------------------------
+
+Un élément visuel apparaît. L'utilisateur le suit pendant une courte durée, puis choisit
+une seule tâche à commencer. Le chat se transforme en minuteur discret avec possibilité
+d'arrêter sans perdre sa progression.
+
+---------------------------------------------------------------------
+5.15 COFFRE DES RESSOURCES PERSONNELLES
+---------------------------------------------------------------------
+
+L'utilisateur collectionne progressivement :
+- personnes de confiance ;
+- lieux apaisants ;
+- musiques ;
+- phrases utiles ;
+- activités qui ont déjà aidé ;
+- raisons personnelles de continuer ;
+- moyens de demander de l'aide.
+
+Le coffre sert à personnaliser les futures propositions.
+
+======================================================================
+6. ADAPTATION AUX PRINCIPAUX CONTEXTES
+======================================================================
+
+---------------------------------------------------------------------
+6.1 STRESS ET ANXIETE
+---------------------------------------------------------------------
+
+Activités possibles :
+- bulle de respiration ;
+- ancrage sensoriel ;
+- météo intérieure ;
+- tri fait/interprétation ;
+- tension corporelle avant/après ;
+- micro-action liée à une valeur.
+
+L'IA demande d'abord si l'utilisateur préfère apaiser son corps, clarifier sa pensée
+ou simplement être accompagné.
+
+---------------------------------------------------------------------
+6.2 FATIGUE MENTALE OU HUMEUR BASSE
+---------------------------------------------------------------------
+
+Interface :
+- presque aucun texte ;
+- une question à la fois ;
+- boutons larges ;
+- audio facultatif ;
+- aucune série obligatoire ;
+- activité de 15 secondes à 2 minutes.
+
+Activités possibles :
+- batterie mentale ;
+- météo intérieure ;
+- micro-mission choisie ;
+- coffre des ressources ;
+- petite activité agréable déjà appréciée ;
+- contact préparé avec une personne de confiance.
+
+Le système ne doit pas transformer un exercice non réalisé en échec.
+
+---------------------------------------------------------------------
+6.3 RUMINATION ET PENSEES NEGATIVES
+---------------------------------------------------------------------
+
+Activités possibles :
+- feuilles sur la rivière ;
+- fait ou interprétation ;
+- carte du pourquoi ;
+- minute de concentration ;
+- boussole des valeurs ;
+- planifier un moment ultérieur pour réfléchir au problème.
+
+---------------------------------------------------------------------
+6.4 COLERE OU FORTE ACTIVATION
+---------------------------------------------------------------------
+
+Activités possibles :
+- jauge d'intensité ;
+- pause visuelle ;
+- expiration guidée si confortable ;
+- nommer le besoin menacé ;
+- choisir entre s'éloigner, écrire sans envoyer ou contacter quelqu'un ;
+- répétition d'une conversation après diminution de l'intensité.
+
+Le chat évite les récompenses excitantes, le chronomètre compétitif et les messages
+trop rapides.
+
+---------------------------------------------------------------------
+6.5 TROUBLE BIPOLAIRE OU SIGNAUX D'EPISODE
+---------------------------------------------------------------------
+
+Le profil Kolb ne détermine pas la conduite. Le moteur tient compte séparément de
+l'humeur, du sommeil, de l'énergie, du rythme des pensées et d'un éventuel suivi.
+
+Hors épisode aigu, activités possibles :
+- suivi simple de l'humeur et du sommeil ;
+- stabilité de la routine ;
+- identification des signes personnels précoces ;
+- coffre des personnes et stratégies déjà convenues ;
+- boussole des valeurs ;
+- exercice calme non compétitif.
+
+En présence de signaux de manie ou d'hypomanie :
+- interface calme, sans confettis, séries ou récompenses ;
+- limiter les défis et les décisions importantes ;
+- vérifier le sommeil et l'accélération récente ;
+- rappeler le plan personnel établi auparavant ;
+- faciliter le contact avec une personne de confiance ou le professionnel habituel ;
+- ne pas présenter une respiration comme traitement de l'épisode.
+
+En phase dépressive :
+- réduire fortement l'effort demandé ;
+- proposer des micro-actions choisies ;
+- vérifier la sécurité avant toute gamification ;
+- faciliter une présence humaine.
+
+---------------------------------------------------------------------
+6.6 TROUBLE OBSESSIONNEL-COMPULSIF
+---------------------------------------------------------------------
+
+Le système évite de devenir une machine de réassurance répétitive. Il ne répond pas
+indéfiniment à la même demande de certitude et ne crée pas de rituel numérique.
+
+Activités possibles :
+- distinguer pensée, danger réel et besoin de certitude ;
+- observer l'envie de vérifier avec un minuteur court ;
+- ancrage ;
+- retour à une action choisie selon les valeurs.
+
+Les exercices d'exposition et prévention de la réponse doivent provenir d'un parcours
+spécifiquement validé et, pour le prototype, rester hors du moteur libre de l'IA.
+
+---------------------------------------------------------------------
+6.7 TRAUMATISME OU STRESS POST-TRAUMATIQUE
+---------------------------------------------------------------------
+
+Principes : choix, contrôle, prévisibilité et ancrage dans le présent.
+
+Activités possibles :
+- orientation dans le lieu actuel ;
+- ancrage sensoriel ;
+- coffre des ressources ;
+- respiration seulement si elle est confortable ;
+- préparation d'une demande d'aide ;
+- signal discret de sortie.
+
+L'IA ne force pas le récit détaillé du traumatisme et ne lance pas d'exposition générée
+automatiquement.
+
+---------------------------------------------------------------------
+6.8 PSYCHOSE, PARANOIA OU EXPERIENCE INHABITUELLE
+---------------------------------------------------------------------
+
+L'IA reconnaît l'émotion sans confirmer comme vrai un contenu non vérifié.
+
+Exemple :
+« Cela semble vraiment effrayant pour toi. Regardons d'abord ce qui peut t'aider à te
+sentir plus en sécurité maintenant. »
+
+Activités possibles :
+- ancrage dans l'environnement immédiat ;
+- identifier une personne connue et sûre ;
+- reprendre un plan personnel ;
+- réduire les stimulations ;
+- faciliter une aide humaine.
+
+Le système évite les histoires immersives, les métaphores ambiguës et les validations
+de croyances persécutoires.
+
+---------------------------------------------------------------------
+6.9 USAGE DE SUBSTANCES OU ENVIE FORTE
+---------------------------------------------------------------------
+
+Activités possibles :
+- thermomètre de l'envie ;
+- observer la montée et la baisse de l'envie ;
+- minuteur court ;
+- changer de lieu ;
+- contacter une personne ;
+- rappeler une motivation personnelle ;
+- préparer une alternative immédiate.
+
+---------------------------------------------------------------------
+6.10 TROUBLES ALIMENTAIRES OU IMAGE CORPORELLE
+---------------------------------------------------------------------
+
+Le chat ne transforme pas le poids, les calories ou la restriction en jeu. Il évite
+les classements, les objectifs corporels et les récompenses liées au contrôle alimentaire.
+
+Activités possibles :
+- identifier l'émotion ou le déclencheur ;
+- ancrage ;
+- auto-compassion ;
+- contacter une ressource humaine ;
+- action cohérente avec une valeur autre que l'apparence.
+
+---------------------------------------------------------------------
+6.11 TDAH ET DIFFICULTES EXECUTIVES
+---------------------------------------------------------------------
+
+Activités possibles :
+- découper une tâche en première action visible ;
+- minuteur court ;
+- choix entre trois micro-actions ;
+- animation simple de progression ;
+- reprise sans sanction après interruption ;
+- mode vocal pour limiter la saisie.
+
+---------------------------------------------------------------------
+6.12 AUTISME ET SURCHARGE SENSORIELLE
+---------------------------------------------------------------------
+
+Options :
+- réduire animations, sons et vibrations ;
+- langage direct ;
+- déroulement prévisible ;
+- choix sensoriels ;
+- bouton « trop intense » ;
+- routine personnalisée déjà enregistrée.
+
+---------------------------------------------------------------------
+6.13 DEUIL ET SOLITUDE
+---------------------------------------------------------------------
+
+Activités possibles :
+- présence silencieuse guidée ;
+- météo intérieure ;
+- souvenir choisi, sans obligation ;
+- message à une personne ;
+- coffre de soutien ;
+- petite action de soin ou de continuité.
+
+Le système n'utilise pas de série quotidienne culpabilisante.
+
+---------------------------------------------------------------------
+6.14 RISQUE D'AUTOMUTILATION OU DE SUICIDE
+---------------------------------------------------------------------
+
+Ce contexte déclenche un parcours prioritaire, distinct des mini-jeux ordinaires :
+
+- question courte sur le danger immédiat ;
+- accès en un toucher à un contact de confiance ;
+- appel ou message vers une ressource locale configurée ;
+- plan de sécurité personnel ;
+- éloignement des moyens dangereux lorsque cela peut être fait sans danger ;
+- présence conversationnelle simple pendant la recherche d'aide ;
+- transfert vers un humain dès que possible.
+
+Pas de points, badges, compte à rebours dramatique ou défi dans ce parcours.
+
+======================================================================
+7. MATRICE DE PERSONNALISATION PAR KOLB
+======================================================================
+
+Le même objectif peut avoir quatre formes.
+
+OBJECTIF : diminuer une tension légère
+
+Accommodateur
+- lancer directement une bulle de respiration ;
+- vibration facultative ;
+- comparer avant et après.
+
+Divergent
+- choisir une métaphore : vague, vent, feuille ou lumière ;
+- observer les sensations et l'émotion sous plusieurs angles ;
+- laisser la possibilité de dessiner ou parler.
+
+Assimilateur
+- montrer le déroulement et la durée ;
+- expliquer en une phrase le lien entre respiration et rythme corporel ;
+- afficher une petite courbe avant/après.
+
+Convergent
+- définir l'objectif : passer par exemple de 7/10 à 5/10 ;
+- essayer une technique pendant une minute ;
+- conserver ou changer selon le résultat.
+
+OBJECTIF : résoudre un conflit relationnel
+
+Accommodateur
+- répétition immédiate d'une phrase et essai simulé.
+
+Divergent
+- roue des perspectives et expression des émotions.
+
+Assimilateur
+- carte structurée : événement, besoin, interprétation, conséquence.
+
+Convergent
+- comparer deux formulations et choisir la plus efficace.
+
+Kolb change la FORME de l'expérience. L'état du moment et le contexte déterminent
+d'abord si l'activité elle-même est appropriée.
+
+======================================================================
+8. ALGORITHME DE SELECTION DE L'ACTIVITE
+======================================================================
+
+ETAPE 1 — PORTE DE SECURITE
+Détecter les signaux nécessitant le parcours prioritaire. Si la porte est activée,
+le moteur suspend les recommandations ordinaires.
+
+ETAPE 2 — DEMANDE DE L'UTILISATEUR
+Identifier s'il souhaite parler, comprendre, se calmer, agir, se distraire sainement
+ou obtenir une présence.
+
+ETAPE 3 — ETAT ET ENERGIE
+Estimer l'état actuel et demander une confirmation très légère : icône, jauge ou choix.
+
+ETAPE 4 — OBJECTIF UNIQUE
+Choisir un seul objectif pour les prochaines minutes.
+
+ETAPE 5 — FILTRE
+Retirer les activités :
+- refusées auparavant ;
+- incompatibles avec l'accessibilité ;
+- trop exigeantes pour l'énergie ;
+- déconseillées par une règle de contexte ;
+- déjà répétées sans bénéfice ;
+- inadaptées à l'environnement de l'utilisateur.
+
+ETAPE 6 — CLASSEMENT
+Attribuer un score aux activités restantes :
+
+score = adéquation à l'objectif
+      + préférence d'interaction
+      + bénéfice observé auparavant
+      + compatibilité avec l'énergie
+      + compatibilité culturelle et linguistique
+      - effort demandé
+      - répétition récente
+      - signaux d'inconfort précédents.
+
+ETAPE 7 — CHOIX CONTROLE
+L'IA propose au maximum deux options :
+« Tu préfères une activité de respiration de 45 secondes ou un ancrage avec les objets
+autour de toi ? »
+
+ETAPE 8 — EXECUTION
+Le frontend affiche le composant interactif. Le modèle de langage ne simule pas le
+minuteur avec du texte.
+
+ETAPE 9 — MESURE LEGERE
+Demander : mieux, pareil, moins bien, arrêté ou autre besoin.
+
+ETAPE 10 — APPRENTISSAGE
+Mettre à jour la préférence personnelle sans conclure qu'une activité fonctionnera
+toujours.
+
+======================================================================
+9. FORMAT TECHNIQUE D'UN MESSAGE INTERACTIF
+======================================================================
+
+Le backend renvoie un message JSON interprété par Expo.
+
+Exemple :
+
+{
+  "message_id": "msg_204",
+  "type": "interactive_activity",
+  "text_intro": "On peut essayer quelque chose de très court.",
+  "activity": {
+    "activity_id": "paced_breathing_basic",
+    "component": "BreathingOrb",
+    "version": "1.0",
+    "goal": "reduce_arousal",
+    "duration_seconds": 60,
+    "parameters": {
+      "inhale_seconds": 4,
+      "exhale_seconds": 6,
+      "hold_enabled": false,
+      "haptics": true,
+      "audio_language": "mg",
+      "visual_theme": "ocean"
+    },
+    "controls": {
+      "pause": true,
+      "stop": true,
+      "mute": true
+    }
+  },
+  "reason_code": "high_tension_low_text_energy",
+  "follow_up": {
+    "type": "single_tap_scale",
+    "options": ["mieux", "pareil", "moins_bien", "arrete"]
+  }
+}
+
+Le champ reason_code est conservé pour tester le système, mais il n'est pas forcément
+affiché à l'utilisateur.
+
+======================================================================
+10. REGISTRE CONTROLE DES ACTIVITES
+======================================================================
+
+Chaque activité possède une fiche :
+
+- identifiant et version ;
+- objectif ;
+- états compatibles ;
+- niveau d'énergie minimal ;
+- durée minimale et maximale ;
+- composants Expo nécessaires ;
+- langues disponibles ;
+- paramètres modifiables par l'IA ;
+- paramètres verrouillés ;
+- situations dans lesquelles ne pas la proposer ;
+- signaux d'arrêt ;
+- question de suivi ;
+- source ou méthode d'origine ;
+- personne ayant validé la fiche ;
+- date de dernière révision.
+
+Exemple simplifié :
+
+{
+  "id": "grounding_54321",
+  "goals": ["grounding", "reduce_overwhelm"],
+  "energy_required": "low",
+  "allowed_contexts": ["stress", "anxiety", "trauma_informed"],
+  "blocked_when": ["user_reports_activity_worsens_state"],
+  "ai_editable": ["language", "visual_theme", "prompt_length"],
+  "locked": ["step_order", "stop_control", "maximum_duration"],
+  "review_status": "approved_for_prototype"
+}
+
+======================================================================
+11. COMPOSANTS EXPO A CREER
+======================================================================
+
+Composants prioritaires pour le prototype :
+
+1. BreathingOrb
+Cercle animé, minuteur, vibration et retour avant/après.
+
+2. EmotionWeather
+Choix de météo, intensité et zone du corps.
+
+3. EnergyBattery
+Jauge d'énergie influençant immédiatement le parcours.
+
+4. GroundingSteps
+Cartes sensorielles révélées une à une.
+
+5. CardSorter
+Glisser-déposer entre fait, pensée, émotion et inconnu.
+
+6. MicroQuest
+Choix de trois petites actions et animation discrète.
+
+7. ValueCompass
+Valeur choisie puis action courte.
+
+8. PerspectiveWheel
+Plusieurs points de vue autour d'une situation.
+
+9. FocusTimer
+Minuteur non compétitif avec reprise simple.
+
+10. SupportShortcut
+Contacter rapidement une personne ou ouvrir le plan personnel.
+
+Tous les composants doivent proposer :
+- bouton arrêter ;
+- mode silencieux ;
+- réduction des animations ;
+- retour arrière lorsque possible ;
+- fonctionnement hors connexion pour les activités de base ;
+- texte français et malgache ;
+- journal d'événement sans enregistrer inutilement le contenu sensible.
+
+======================================================================
+12. ARCHITECTURE BACKEND
+======================================================================
+
+Stack proposée :
+- application mobile : React Native avec Expo ;
+- backend : Node.js avec NestJS ;
+- base de données : Supabase PostgreSQL ;
+- IA : modèle de langage pour comprendre et formuler ;
+- moteur de règles : TypeScript ;
+- activités : registre versionné en JSON ou en base ;
+- temps réel : Supabase Realtime si nécessaire ;
+- audio : couche de transcription et synthèse vocale remplaçable.
+
+Modules backend :
+
+ProfileEngine
+- récupère l'histoire, les préférences Kolb et les choix précédents.
+
+StateEstimator
+- extrait état actuel, énergie et objectif possible.
+
+SafetyRouter
+- applique les règles prioritaires avant tout exercice.
+
+ActivityRegistry
+- expose uniquement les activités validées et leurs contraintes.
+
+RecommendationEngine
+- filtre, classe et sélectionne une ou deux activités.
+
+ConversationOrchestrator
+- génère l'introduction et la transition avec l'IA.
+
+ActivityTelemetry
+- enregistre lancement, arrêt, fin et retour utilisateur.
+
+LearningEngine
+- met à jour les préférences individuelles à partir des résultats.
+
+======================================================================
+13. DONNEES A AJOUTER DANS SUPABASE
+======================================================================
+
+activity_definitions
+- id, version, component, goal, parameters_schema, locked_rules,
+  contraindications, review_status, created_at
+
+activity_translations
+- activity_id, language, instructions, audio_url, cultural_variant
+
+activity_sessions
+- id, user_id, conversation_id, activity_id, started_at, completed_at,
+  stopped_at, state_before, state_after, stop_reason
+
+user_activity_preferences
+- user_id, activity_id, times_offered, times_completed, average_effect,
+  last_reaction, do_not_offer, updated_at
+
+current_state_snapshots
+- id, user_id, mood, energy, arousal, concentration, social_need,
+  source_turn_id, confidence, created_at
+
+support_plans
+- id, user_id, early_signs, helpful_actions, unhelpful_actions,
+  trusted_contacts, professional_contacts, updated_at
+
+safety_events
+- id, user_id, level, reason_codes, route_taken, human_contact_status,
+  created_at
+
+Les coordonnées sensibles et événements de sécurité utilisent des politiques d'accès
+strictes, une journalisation limitée et un chiffrement approprié.
+
+======================================================================
+14. ROUTES API
+======================================================================
+
+POST /state/check-in
+Recevoir une jauge rapide ou un message et produire un état provisoire.
+
+POST /activities/recommend
+Retourner une ou deux activités après passage dans SafetyRouter.
+
+POST /activities/:id/start
+Créer une session d'activité.
+
+POST /activity-sessions/:id/event
+Enregistrer pause, arrêt, étape terminée ou difficulté.
+
+POST /activity-sessions/:id/complete
+Enregistrer le résultat et demander un retour léger.
+
+POST /activity-sessions/:id/feedback
+Enregistrer mieux, pareil, moins bien ou commentaire libre.
+
+GET /activities/:id/config
+Retourner le composant et les paramètres autorisés.
+
+GET /support-plan
+Afficher les stratégies et contacts définis par l'utilisateur.
+
+POST /support-plan/update
+Modifier le plan personnel.
+
+POST /safety/route
+Déclencher le parcours prioritaire et les options humaines configurées.
+
+======================================================================
+15. APPRENTISSAGE PERSONNEL DU MOTEUR
+======================================================================
+
+Le moteur apprend progressivement :
+
+- quelles activités sont choisies ;
+- lesquelles sont terminées ;
+- lesquelles sont arrêtées ;
+- lesquelles améliorent légèrement l'état déclaré ;
+- quel format demande le moins d'effort ;
+- quelle langue ou voix est préférée ;
+- quelles métaphores sont appréciées ;
+- à quel moment une personne préfère parler plutôt que jouer ;
+- quelles activités sont devenues répétitives.
+
+Exemple :
+
+Après trois essais :
+- respiration visuelle : deux arrêts, un résultat neutre ;
+- ancrage sensoriel : deux améliorations légères ;
+- micro-mission : souvent choisie le matin.
+
+Le moteur diminue le score de la respiration, favorise l'ancrage en cas de tension et
+la micro-mission le matin. Il ne conclut pas que la respiration est mauvaise pour tout
+le monde ni définitivement inutile pour cette personne.
+
+======================================================================
+16. EXPERIENCE « ENTERTAINED », MAIS PAS ADDICTIVE
+======================================================================
+
+L'application doit être vivante sans exploiter la vulnérabilité.
+
+A utiliser :
+- animations douces ;
+- progression visible ;
+- petites interactions tactiles ;
+- univers visuel malgache discret ;
+- sons naturels facultatifs ;
+- choix et surprises limitées ;
+- encouragements sobres ;
+- mini-histoires ou métaphores ;
+- personnalisation du compagnon culturel.
+
+A éviter :
+- obligation de série quotidienne ;
+- perte de points en cas d'absence ;
+- classement entre utilisateurs ;
+- notifications culpabilisantes ;
+- confettis pendant une situation grave ;
+- récompense pour rester longtemps dans l'application ;
+- faux message disant que l'IA souffre si l'utilisateur part ;
+- suspense artificiel avant une réponse importante ;
+- publicités pendant un moment sensible ou un exercice.
+
+Le succès n'est pas le temps passé dans l'application. Le succès est d'avoir aidé la
+personne à franchir une petite étape utile avec le moins d'effort possible.
+
+======================================================================
+17. PUBLICITE ET ACTIVITES SENSIBLES
+======================================================================
+
+Le plan gratuit peut conserver un espace publicitaire discret dans les zones générales,
+mais aucune publicité ne doit apparaître :
+
+- pendant un exercice ;
+- juste après une confidence sensible ;
+- dans un parcours de crise ;
+- sur le plan de sécurité ;
+- pendant la recherche d'un professionnel ;
+- sous une forme utilisant les données de santé pour cibler l'annonce.
+
+L'état mental, les réponses, les hypothèses et les exercices réalisés ne servent pas au
+ciblage publicitaire.
+
+======================================================================
+18. PROTOTYPE FONCTIONNEL POUR LE HACKATHON
+======================================================================
+
+Le prototype ne doit pas prétendre implémenter tous les contextes. Il doit prouver que
+l'architecture peut s'étendre.
+
+Périmètre recommandé :
+
+Etats pris en charge :
+- tension ;
+- fatigue mentale ;
+- rumination ;
+- difficulté de concentration ;
+- besoin de parler ;
+- parcours prioritaire simulé.
+
+Profils d'interaction :
+- accommodateur ;
+- divergent ;
+- assimilateur ;
+- convergent ;
+- profil mixte.
+
+Composants réalisés :
+- BreathingOrb ;
+- EmotionWeather ;
+- EnergyBattery ;
+- CardSorter ;
+- MicroQuest ;
+- PerspectiveWheel ;
+- SupportShortcut.
+
+Démonstration :
+
+1. Un utilisateur fatigué indique une énergie de 15 %.
+2. Le chat remplace le questionnaire par deux boutons et une activité de 30 secondes.
+3. Un profil divergent reçoit une météo intérieure puis une roue des perspectives.
+4. Un profil convergent vivant la même situation reçoit un laboratoire de solutions.
+5. Un signal sensible déclenche le parcours prioritaire au lieu d'un mini-jeu.
+6. Le tableau final montre pourquoi chaque activité a été choisie.
+
+======================================================================
+19. SCENARIO DE DEMONSTRATION PRINCIPAL
+======================================================================
+
+Utilisateur :
+« Je suis épuisé, je n'ai même pas la force d'écrire. »
+
+Mythenena :
+« Tu n'as pas besoin d'écrire. Touche seulement ce qui ressemble le plus à maintenant. »
+
+[Batterie 0–100 %]
+
+Utilisateur : 15 %
+
+Mythenena :
+« On fait quelque chose de très court, ou je reste simplement avec toi ? »
+
+[Une activité de 30 secondes] [Rester ici]
+
+L'utilisateur choisit l'activité.
+
+[MicroQuest affiche : boire une gorgée / ouvrir la fenêtre / poser les pieds au sol]
+
+Après l'action :
+
+[Un peu mieux] [Pareil] [Moins bien] [Je veux parler]
+
+Si le profil est divergent, la suite peut être visuelle : météo intérieure ou image
+d'une vague. Si le profil est assimilateur, la suite peut montrer clairement le lien
+entre fatigue, pensée et action. Le moteur conserve surtout le résultat réel.
+
+======================================================================
+20. TESTS ET EVALUATION
+======================================================================
+
+Mesures fonctionnelles :
+- temps nécessaire pour lancer une activité ;
+- nombre de caractères demandés à une personne fatiguée ;
+- taux d'activités commencées et terminées ;
+- taux d'arrêt ;
+- accessibilité hors connexion ;
+- absence de proposition bloquée par les règles.
+
+Mesures d'expérience :
+- effort perçu ;
+- sentiment d'être compris ;
+- caractère vivant mais non infantilisant ;
+- utilité immédiate ;
+- préférence entre texte, voix et interaction ;
+- adéquation culturelle et linguistique.
+
+Mesures de sécurité :
+- détection correcte des scénarios prioritaires ;
+- aucune gamification lors d'une crise ;
+- aucune activité contre-indiquée dans les cas de test ;
+- aucune confirmation d'une croyance délirante ;
+- aucune réassurance répétitive dans les scénarios obsessionnels ;
+- aucune publicité dans un parcours sensible.
+
+Test scientifique possible :
+
+Comparer trois versions sur les mêmes profils fictifs :
+
+A. message textuel long ;
+B. exercice interactif identique pour tous ;
+C. activité choisie par le moteur adaptatif.
+
+Comparer l'effort, l'engagement, l'abandon, l'amélioration déclarée et la pertinence
+perçue.
+
+======================================================================
+21. SOURCES METHODOLOGIQUES POUR LA CONCEPTION
+======================================================================
+
+- Organisation mondiale de la Santé, Doing What Matters in Times of Stress :
+  ancrage, détachement des pensées difficiles, action selon les valeurs, accueil des
+  émotions et bienveillance.
+
+- Organisation mondiale de la Santé, mhGAP :
+  catégories prioritaires et principes d'orientation pour la dépression, la psychose,
+  les troubles bipolaires, les troubles liés aux substances et l'automutilation.
+
+- NIMH, Bipolar Disorder :
+  informations sur les épisodes maniaques, hypomaniaques et dépressifs ainsi que la
+  nécessité d'une prise en charge adaptée.
+
+- NICE, Bipolar disorder: assessment and management :
+  interventions structurées, prévention des rechutes et prise en charge des crises.
+
+- NICE, OCD and body dysmorphic disorder :
+  principes de prise en charge du trouble obsessionnel-compulsif.
+
+- NICE, Post-traumatic stress disorder :
+  accompagnement informé par le traumatisme et traitements structurés.
+
+Les exercices ajoutés au registre doivent être documentés, versionnés et relus avant
+d'être rendus sélectionnables par l'IA.
+
+======================================================================
+22. PHRASE POUR LA SOUTENANCE
+======================================================================
+
+« Une personne mentalement épuisée n'a pas toujours la force d'écrire un long message.
+Mythenena peut alors transformer le chat en expérience : une respiration animée, une
+jauge d'énergie, des cartes à déplacer ou une micro-action de trente secondes.
+
+Mais l'IA ne propose pas la même chose à tout le monde. Elle combine l'état du moment,
+le niveau d'énergie, l'histoire, le contexte et la manière préférée d'apprendre. Kolb
+adapte la forme de l'exercice ; les besoins actuels déterminent son objectif ; les
+règles de sécurité filtrent ce qui peut être proposé.
+
+L'innovation est donc un chat qui ne demande pas seulement de parler. Il sait quand
+les mots sont trop lourds, transforme l'accompagnement en action et apprend quelles
+expériences aident réellement chaque personne. »
+
+======================================================================
+23. RESUME FINAL
+======================================================================
+
+Le nouveau moteur repose sur quatre blocs :
+
+1. COMPRENDRE
+L'IA estime l'état, l'énergie, l'objectif et le contexte.
+
+2. FILTRER
+Le système applique les règles et retire les activités incompatibles.
+
+3. FAIRE VIVRE
+Expo affiche un vrai composant interactif dans le chat, pas une simple consigne textuelle.
+
+4. APPRENDRE
+Mythenena observe le résultat et personnalise progressivement les propositions.
+
+La promesse devient :
+
+« Mythenena ne vous demande pas toujours d'expliquer ce que vous n'avez plus la force
+d'écrire. Il peut vous accompagner par une petite expérience adaptée, ici et maintenant. »
+
+
+MYTHENENA
+CATALOGUE DES EXERCICES INTERACTIFS ET SYSTEME DE NOTIFICATIONS SANTE / BIEN-ETRE
+Nouveau document complémentaire au cahier des charges
+
+======================================================================
+1. OBJECTIF DU DOCUMENT
+======================================================================
+
+Ce document définit deux grandes fonctionnalités de Mythenena :
+
+1. Une bibliothèque très large d'exercices, d'activités et de mini-expériences que
+   l'IA peut afficher directement à l'intérieur d'un message.
+
+2. Un système intelligent de notifications de santé et de bien-être : hydratation,
+   sommeil, mouvement, pauses, humeur, habitudes, rendez-vous et autres rappels utiles.
+
+Le but n'est pas de transformer toutes les interactions en texte. Selon l'état et
+l'énergie de l'utilisateur, un message peut devenir :
+
+- une animation ;
+- un minuteur ;
+- une jauge ;
+- un mini-jeu ;
+- un exercice audio ;
+- des cartes à déplacer ;
+- une roue ;
+- un dessin ;
+- une histoire interactive ;
+- un choix en un toucher ;
+- une activité utilisant les vibrations du téléphone ;
+- une notification contenant une action immédiate.
+
+Il est impossible de lister littéralement toutes les activités qui pourront exister
+un jour. L'objectif est donc de créer un CATALOGUE EXTENSIBLE : chaque exercice est un
+module versionné que l'IA peut sélectionner, paramétrer et afficher sans modifier
+l'application entière.
+
+======================================================================
+2. CE QU'EST UN EXERCICE « DANS LE MESSAGE »
+======================================================================
+
+Un message interactif n'est pas un simple texte accompagné d'un bouton.
+
+Il contient :
+
+- une courte introduction ;
+- un composant React Native ;
+- une ou plusieurs actions tactiles, vocales ou visuelles ;
+- un état de progression ;
+- un bouton pause ou arrêt ;
+- une fin clairement définie ;
+- un retour très court de l'utilisateur ;
+- un résultat transmis au moteur d'adaptation.
+
+Exemple :
+
+Mythenena :
+« Tu sembles très fatigué. Pas besoin d'écrire. Choisis seulement une couleur. »
+
+[Composant EmotionColorPicker]
+
+Après le choix :
+
+« On essaie une petite action de trente secondes ? »
+
+[Boire une gorgée] [Regarder dehors] [Poser les pieds au sol]
+
+L'utilisateur reste dans le fil de discussion. L'activité fait partie du chat comme
+une image, une note vocale ou un message ordinaire.
+
+======================================================================
+3. COMPOSANTS DE BASE REUTILISABLES
+======================================================================
+
+Une grande bibliothèque ne nécessite pas un composant différent pour chaque exercice.
+Des briques communes permettent de construire des centaines de variantes.
+
+---------------------------------------------------------------------
+3.1 COMPOSANTS VISUELS
+---------------------------------------------------------------------
+
+- AnimatedOrb : cercle qui grandit, diminue ou change de couleur ;
+- ProgressRing : anneau de progression ;
+- EmotionWeather : météo émotionnelle ;
+- BodyMap : silhouette où toucher une zone ;
+- Timeline : chronologie interactive ;
+- ValueCompass : boussole des valeurs ;
+- PerspectiveWheel : roue des points de vue ;
+- EnergyBattery : batterie mentale ;
+- MoodSlider : jauge d'humeur ;
+- IntensityThermometer : thermomètre d'intensité ;
+- ConstellationMap : relier des idées ou personnes ;
+- RiverAnimation : pensées passant sur une rivière ;
+- CalmScene : scène naturelle animée ;
+- ChoicePath : chemin à embranchements ;
+- BeforeAfterGraph : comparaison avant/après.
+
+---------------------------------------------------------------------
+3.2 COMPOSANTS D'ACTION
+---------------------------------------------------------------------
+
+- TapRhythm : toucher selon un rythme ;
+- HoldAndRelease : maintenir puis relâcher ;
+- CardSorter : déplacer des cartes ;
+- SwipeCards : choisir ou écarter ;
+- StepChecklist : petites étapes ;
+- FocusTimer : minuteur ;
+- MicroQuest : mini-mission ;
+- HabitButton : action réalisée en un toucher ;
+- ActionWheel : roue d'actions ;
+- ReorderSteps : remettre des étapes dans l'ordre ;
+- MatchPairs : associer deux éléments ;
+- BalanceScale : comparer deux options ;
+- DecisionMatrix : effort, bénéfice, risque ;
+- DrawingCanvas : dessiner librement ;
+- ColorPicker : choisir une couleur ;
+- WordCloudBuilder : créer un nuage de mots.
+
+---------------------------------------------------------------------
+3.3 COMPOSANTS AUDIO ET VOIX
+---------------------------------------------------------------------
+
+- VoiceAnswer : répondre sans écrire ;
+- GuidedAudio : consigne audio ;
+- RepeatPhrase : répéter une phrase ;
+- AmbientSound : pluie, vent, oiseaux ou mer ;
+- VoiceMoodCheck : reconnaître l'énergie déclarée par la voix ;
+- AudioStory : histoire courte à choix ;
+- HummingGuide : fredonnement guidé facultatif ;
+- SoundFocus : écouter et identifier un son ;
+- MalagasyVoiceGuide : guide vocal en malgache ;
+- BilingualVoiceGuide : alternance malgache/français.
+
+---------------------------------------------------------------------
+3.4 COMPOSANTS SENSORIELS
+---------------------------------------------------------------------
+
+- HapticBreathing : vibration suivant la respiration ;
+- HapticRhythm : rythme tactile sans son ;
+- ScreenDimmer : réduction progressive de la lumière ;
+- GentleFlash : variation lumineuse lente, désactivée par défaut ;
+- OrientationPrompt : regarder autour de soi ;
+- MovementCounter : compter quelques mouvements ;
+- StepCounterLink : récupérer les pas avec autorisation ;
+- CameraColorHunt : repérer une couleur sans conserver les images ;
+- MicrophoneSoundHunt : identifier des sons sans conserver l'enregistrement.
+
+---------------------------------------------------------------------
+3.5 COMPOSANTS DE CONVERSATION
+---------------------------------------------------------------------
+
+- OneTapReply : une réponse en un toucher ;
+- TwoChoice : deux choix maximum ;
+- ScenarioRoleplay : répétition d'une conversation ;
+- SentenceBuilder : construire une phrase avec des blocs ;
+- NeedSelector : choisir un besoin ;
+- SupportContactCard : contacter une personne ;
+- ReflectionMirror : synthèse à confirmer ou corriger ;
+- StoryChapter : raconter par chapitres ;
+- EmptyChairDialogue : dialogue guidé symbolique ;
+- AskForHelpBuilder : préparer une demande d'aide.
+
+======================================================================
+4. CATALOGUE A — RESPIRATION ET APAISEMENT PHYSIQUE
+======================================================================
+
+Ces activités sont proposées seulement si l'utilisateur les accepte et les trouve
+confortables.
+
+1. Bulle d'inspiration et d'expiration
+Le cercle grandit et diminue selon un rythme doux.
+
+2. Vague respiratoire
+Une vague monte à l'inspiration et redescend à l'expiration.
+
+3. Respiration guidée par vibration
+Le téléphone indique les phases sans son ni regard sur l'écran.
+
+4. Expiration légèrement prolongée
+L'animation invite à expirer un peu plus longtemps, sans apnée imposée.
+
+5. Respiration avec comptage visuel
+Des chiffres apparaissent progressivement.
+
+6. Respiration avec paysage malgache
+Une scène de mer, rizière, montagne ou forêt suit le rythme.
+
+7. Respiration avec couleur
+La couleur choisie s'étend puis se retire.
+
+8. Respiration audio en malgache
+Une voix guide sans demander de lire.
+
+9. Respiration silencieuse discrète
+Petit point et vibration, utilisables en public.
+
+10. Respiration avant/après
+L'utilisateur positionne sa tension sur une jauge avant et après.
+
+11. Souffle sur une plume virtuelle
+La plume avance au rythme de l'expiration.
+
+12. Bougie virtuelle
+La flamme bouge doucement lors de l'expiration, sans microphone obligatoire.
+
+======================================================================
+5. CATALOGUE B — ANCRAGE ET RETOUR AU PRESENT
+======================================================================
+
+13. Ancrage 5-4-3-2-1
+Identifier progressivement ce qui est vu, touché, entendu, senti et goûté.
+
+14. Chasse aux couleurs
+Trouver trois objets d'une couleur choisie.
+
+15. Chasse aux formes
+Repérer un cercle, un carré et une ligne dans l'environnement.
+
+16. Carte des sons
+Placer les sons perçus à gauche, à droite, près ou loin.
+
+17. Pieds au sol
+Animation invitant à sentir les points de contact.
+
+18. Orientation dans le temps
+Choisir le jour, le moment et l'endroit actuels.
+
+19. Objet d'ancrage
+Choisir un objet proche et décrire une texture par boutons.
+
+20. Température et contact
+Identifier chaud, frais, dur, souple, rugueux ou lisse.
+
+21. Photographie mentale
+Observer la pièce dix secondes puis retrouver trois détails.
+
+22. Compter les objets
+Compter un type d'objet visible sans saisir de texte.
+
+23. Ma zone sûre maintenant
+Identifier ce qui est stable ou rassurant dans l'environnement actuel.
+
+24. Retour par le nom
+Nommer cinq objets ordinaires à voix haute ou par sélection.
+
+======================================================================
+6. CATALOGUE C — RELAXATION CORPORELLE
+======================================================================
+
+25. Relâchement des épaules
+Animation lever, tenir brièvement puis relâcher.
+
+26. Détente des mains
+Serrer doucement puis ouvrir les doigts.
+
+27. Scan corporel court
+Parcourir trois zones seulement : visage, épaules, mains.
+
+28. Scan corporel complet
+Version audio plus longue, uniquement si l'énergie le permet.
+
+29. Etirement assis
+Deux ou trois mouvements simples illustrés.
+
+30. Déverrouillage de la mâchoire
+Rappel visuel pour desserrer la mâchoire et la langue.
+
+31. Posture confortable
+Choisir entre plusieurs positions accessibles.
+
+32. Secouer la tension
+Animation courte des mains ou bras si le contexte le permet.
+
+33. Auto-contact rassurant
+Main sur le cœur, bras ou autre option choisie.
+
+34. Pause des yeux
+Regarder un point éloigné puis revenir doucement.
+
+35. Marche consciente
+Quelques pas en observant les appuis.
+
+36. Relaxation musculaire progressive
+Par groupes musculaires, avec arrêt immédiat disponible.
+
+======================================================================
+7. CATALOGUE D — IDENTIFICATION ET EXPRESSION DES EMOTIONS
+======================================================================
+
+37. Météo intérieure
+Soleil, nuage, vent, pluie, brouillard ou orage.
+
+38. Roue des émotions
+Partir d'une famille générale puis préciser.
+
+39. Couleur de l'émotion
+Choisir couleur, luminosité et mouvement.
+
+40. Thermomètre émotionnel
+Déplacer une jauge de faible à très intense.
+
+41. Carte du corps
+Toucher l'endroit où l'émotion est ressentie.
+
+42. Mélange d'émotions
+Combiner plusieurs couleurs et régler leur proportion.
+
+43. Si mon émotion parlait
+Compléter une phrase avec des blocs courts.
+
+44. Besoin derrière l'émotion
+Associer émotion et besoin possible.
+
+45. Déclencheur–émotion–réaction
+Relier trois cartes dans l'ordre.
+
+46. Emoji nuancé
+Modifier bouche, yeux et intensité au lieu d'un simple emoji.
+
+47. Son de l'émotion
+Choisir un son ou enregistrer une courte vocalisation.
+
+48. Dessine sans expliquer
+Dessin libre de trente secondes.
+
+49. Nommer puis choisir
+Nommer l'émotion, puis choisir parler, agir, attendre ou s'apaiser.
+
+50. Evolution de la journée
+Placer plusieurs émotions sur une petite ligne du temps.
+
+======================================================================
+8. CATALOGUE E — PENSEES, RUMINATION ET CLARIFICATION
+======================================================================
+
+51. Fait ou interprétation
+Trier des cartes issues de la conversation.
+
+52. Pensée sur une feuille
+Regarder une pensée passer sur une rivière animée.
+
+53. Nuage qui passe
+Placer une pensée dans un nuage sans devoir la supprimer.
+
+54. Radio mentale
+Donner un nom humoristique et respectueux à une pensée répétitive.
+
+55. Preuves pour et contre
+Deux colonnes interactives.
+
+56. Exception
+Rechercher une situation où l'affirmation générale était moins vraie.
+
+57. Plusieurs explications
+Créer trois interprétations possibles d'un même événement.
+
+58. Point de vue d'un ami
+Choisir ce qu'un ami bienveillant pourrait remarquer.
+
+59. Probabilité contre possibilité
+Positionner une inquiétude sur deux jauges distinctes.
+
+60. Contrôle ou influence
+Trier ce qui est contrôlable, influençable ou hors de contrôle.
+
+61. Temps de rumination différé
+Placer la pensée dans une boîte pour y revenir à un moment choisi.
+
+62. Question utile maintenant
+Transformer une pensée fermée en question pouvant guider une action.
+
+63. Carte événement–pensée–émotion–action
+Construire visuellement le cycle.
+
+64. Pensée ancienne ou fait actuel
+Repérer si la réaction vient surtout d'une expérience passée.
+
+65. Continuer l'histoire autrement
+Imaginer deux suites possibles sans décider immédiatement.
+
+66. Niveau de certitude
+Indiquer « je sais », « je suppose », « je crains » ou « j'ignore ».
+
+======================================================================
+9. CATALOGUE F — ENERGIE, MOTIVATION ET ACTIVATION
+======================================================================
+
+67. Batterie mentale
+Régler le niveau d'énergie disponible.
+
+68. Une seule petite action
+Choisir la plus petite étape faisable.
+
+69. Mission trente secondes
+Boire, ouvrir la fenêtre, se lever ou ranger un objet.
+
+70. Roue de démarrage
+Lancer aléatoirement une action parmi celles acceptées.
+
+71. Deux minutes seulement
+Commencer une tâche avec permission d'arrêter ensuite.
+
+72. Choix plaisir, utilité ou repos
+Sélectionner ce dont la personne a le plus besoin.
+
+73. Escalier de difficulté
+Classer les étapes du plus facile au plus difficile.
+
+74. Récompense naturelle
+Choisir une conséquence agréable et saine après l'action.
+
+75. Avant–pendant–après
+Comparer l'énergie à trois moments.
+
+76. Compagnon silencieux
+Minuteur où Mythenena reste présent pendant la tâche.
+
+77. Action avec une valeur
+Relier le petit geste à une valeur importante.
+
+78. Recommencer sans perdre
+Reprendre une activité interrompue sans remise à zéro punitive.
+
+79. Liste « assez bien »
+Transformer une tâche parfaite en version minimale acceptable.
+
+80. Choisir le prochain mouvement
+Se concentrer sur l'action physique suivante plutôt que tout le projet.
+
+======================================================================
+10. CATALOGUE G — ATTENTION, ORGANISATION ET FONCTIONS EXECUTIVES
+======================================================================
+
+81. Minuteur de concentration
+Session de 1, 5, 10 ou 25 minutes.
+
+82. Une tâche à l'écran
+Masquer toutes les autres actions.
+
+83. Découpage automatique
+Transformer un objectif en petites étapes modifiables.
+
+84. Remettre les étapes en ordre
+Glisser-déposer le déroulement d'une tâche.
+
+85. Priorité unique
+Choisir maintenant, plus tard ou abandonner.
+
+86. Parking à idées
+Déposer les pensées hors sujet pour les retrouver après.
+
+87. Recherche de distraction
+Identifier bruit, téléphone, fatigue ou inquiétude.
+
+88. Focus visuel
+Suivre un mouvement lent pendant quelques secondes.
+
+89. Rythme tactile
+Reproduire une suite de tapotements courte.
+
+90. Mémoire légère
+Observer trois symboles puis les retrouver.
+
+91. Plan de reprise
+Définir où recommencer après une interruption.
+
+92. Estimation contre durée réelle
+Comparer le temps imaginé et le temps observé.
+
+93. Mode corps double
+Minuteur donnant une impression de présence pendant le travail.
+
+94. Nettoyage visuel
+Faire disparaître les cartes terminées une par une.
+
+======================================================================
+11. CATALOGUE H — CONFIANCE, AUTO-COMPASSION ET FORCES
+======================================================================
+
+95. Parler à un ami
+Réécrire pour soi une phrase que l'on dirait à un proche.
+
+96. Lettre très courte à soi
+Choisir des blocs pour construire trois phrases bienveillantes.
+
+97. Preuve d'effort
+Identifier ce qui a été essayé, même sans réussite complète.
+
+98. Mur des petites victoires
+Ajouter une réussite sans comparaison sociale.
+
+99. Force utilisée aujourd'hui
+Choisir patience, courage, créativité, persévérance ou autre.
+
+100. Critique et réponse équilibrée
+Faire dialoguer une critique intérieure et une réponse plus juste.
+
+101. Permission de pause
+Choisir une durée de repos sans culpabilité.
+
+102. Ce qui dépendait de moi
+Séparer effort, résultat et circonstances.
+
+103. Souvenir de capacité
+Retrouver un moment où une difficulté a été traversée.
+
+104. Phrase d'ancrage personnelle
+Créer une phrase courte enregistrée dans le coffre des ressources.
+
+105. Miroir réaliste
+Choisir une qualité et l'exemple concret qui la soutient.
+
+106. Imperfection volontaire légère
+Accepter une petite tâche « suffisamment bonne ».
+
+======================================================================
+12. CATALOGUE I — VALEURS, IDENTITE ET DEVELOPPEMENT PERSONNEL
+======================================================================
+
+107. Boussole des valeurs
+Choisir la direction importante maintenant.
+
+108. Classement des valeurs
+Comparer deux valeurs à la fois plutôt qu'une longue liste.
+
+109. Valeur et action
+Associer chaque valeur à un comportement observable.
+
+110. Valeurs en conflit
+Placer deux valeurs sur une balance.
+
+111. Chapitres de vie
+Créer une histoire sous forme de livre.
+
+112. Ligne de vie
+Placer les événements importants sur une chronologie.
+
+113. Moments de changement
+Identifier ce qui a modifié l'image de soi.
+
+114. Mes rôles
+Explorer étudiant, enfant, ami, partenaire, professionnel ou autre.
+
+115. Moi actuel et moi souhaité
+Comparer deux cartes sans jugement.
+
+116. Ce que je refuse de devenir
+Formuler une limite et la valeur associée.
+
+117. Héritage familial et choix personnel
+Distinguer ce qui a été transmis et ce qui est choisi.
+
+118. Carte culturelle
+Langue, traditions, croyances, communauté et Fihavanana.
+
+119. Personnes qui m'influencent
+Créer une constellation relationnelle.
+
+120. Lettre du futur
+Message audio ou texte venant d'une version future de soi.
+
+121. Prochain chapitre
+Choisir un titre et une première action.
+
+122. Identité numérique contre identité vécue
+Comparer l'image en ligne et l'expérience personnelle.
+
+======================================================================
+13. CATALOGUE J — RELATIONS ET COMMUNICATION
+======================================================================
+
+123. Roue des perspectives
+Explorer plusieurs points de vue.
+
+124. Fait–impact–besoin–demande
+Construire une phrase avec des cartes.
+
+125. Répétition d'une conversation
+Jouer une situation avant de parler réellement.
+
+126. Demander de l'aide
+Créer un message court à envoyer.
+
+127. Poser une limite
+Choisir une formulation ferme et respectueuse.
+
+128. Dire non
+Tester plusieurs versions selon le contexte.
+
+129. Réparer après un conflit
+Reconnaître, expliquer, écouter et proposer.
+
+130. Ecoute active
+Choisir la meilleure reformulation dans un mini-scénario.
+
+131. Besoins de chacun
+Placer les besoins de deux personnes sans chercher immédiatement un coupable.
+
+132. Cercle de confiance
+Classer les personnes selon le type de soutien disponible.
+
+133. Drapeaux relationnels
+Identifier respect, peur, contrôle, liberté, écoute ou isolement.
+
+134. Message non envoyé
+Ecrire ou dicter sans obligation d'envoi.
+
+135. Préparer un rendez-vous avec un psychologue
+Sélectionner les trois points importants à aborder.
+
+136. Choisir le bon moment
+Comparer urgence, disponibilité et sécurité.
+
+======================================================================
+14. CATALOGUE K — SOMMEIL ET RETOUR AU CALME
+======================================================================
+
+137. Routine du soir
+Cocher quelques étapes personnalisées.
+
+138. Réduction progressive de lumière
+Interface sombre et animation lente.
+
+139. Déposer les pensées de demain
+Mettre les tâches dans une boîte jusqu'au matin.
+
+140. Histoire audio calme
+Courte narration sans choix excitant.
+
+141. Sons naturels
+Pluie, vent, mer ou forêt, désactivables.
+
+142. Relaxation corporelle du soir
+Version lente et audio.
+
+143. Bilan doux de la journée
+Une chose difficile, une chose faite, une chose laissée pour demain.
+
+144. Heure de réveil et fenêtre de repos
+Planifier sans surveillance punitive.
+
+145. Réveil mental nocturne
+Ancrage très sombre et minimal si la personne se réveille.
+
+146. Mode sans écran
+Le téléphone se verrouille pendant que l'audio continue.
+
+147. Observation des habitudes
+Noter heure, énergie et facteurs sans produire une conclusion hâtive.
+
+148. Retour au lit
+Suite personnalisée d'actions calmes déjà appréciées.
+
+======================================================================
+15. CATALOGUE L — SANTE PHYSIQUE ET HABITUDES DE BIEN-ETRE
+======================================================================
+
+149. Verre d'eau interactif
+Remplir visuellement un verre après avoir bu.
+
+150. Choix de boisson
+Rappel simple privilégiant l'eau selon les préférences.
+
+151. Pause de mouvement
+Choisir marche, étirement ou changement de posture.
+
+152. Défi quelques pas
+Petit objectif choisi, sans compétition.
+
+153. Pause des yeux
+Regarder au loin et cligner doucement.
+
+154. Vérification de posture
+Choisir une position plus confortable.
+
+155. Repas oublié
+Rappel neutre, sans calorie ni culpabilité.
+
+156. Hygiène personnelle minimale
+Choisir se laver le visage, se brosser les dents ou changer de vêtement.
+
+157. Lumière naturelle
+Invitation à regarder dehors ou aller à la lumière si possible.
+
+158. Air et environnement
+Ouvrir une fenêtre ou changer de pièce lorsque c'est approprié.
+
+159. Pause écran
+Minuteur de quelques minutes hors écran.
+
+160. Suivi d'un symptôme déclaré
+Jauge simple configurée avec l'utilisateur.
+
+161. Rendez-vous santé
+Préparer questions et informations utiles.
+
+162. Médicament configuré
+Rappel de l'horaire indiqué par l'utilisateur ou le professionnel, sans modifier la dose.
+
+======================================================================
+16. CATALOGUE M — CREATIVITE, PLAISIR ET DISTRACTION SAINE
+======================================================================
+
+163. Dessin libre
+Canvas de trente secondes à cinq minutes.
+
+164. Mandala simple
+Colorier quelques formes.
+
+165. Relier les points
+Faire apparaître une forme calme.
+
+166. Palette émotionnelle
+Créer une image avec les couleurs du moment.
+
+167. Histoire à choix
+Mini-récit calme et court.
+
+168. Construire un paysage
+Ajouter ciel, arbre, eau, maison ou montagne.
+
+169. Jardin virtuel
+Faire pousser une plante liée à une action de soin, sans série punitive.
+
+170. Puzzle très court
+Assembler quatre à neuf pièces.
+
+171. Cherche l'objet
+Trouver un élément dans une illustration.
+
+172. Mémoire d'images
+Retourner quelques cartes selon le niveau d'énergie.
+
+173. Association son–image
+Choisir l'image correspondant au son.
+
+174. Rythme tactile
+Reproduire une séquence douce.
+
+175. Nuage de mots positif réaliste
+Construire des mots venant de faits vécus.
+
+176. Playlist d'état
+Choisir calme, énergie, concentration ou réconfort.
+
+177. Photo du quotidien
+Capturer un détail apprécié, avec enregistrement facultatif.
+
+178. Devinette culturelle légère
+Petite énigme en malgache ou français, désactivée dans les moments graves.
+
+======================================================================
+17. CATALOGUE N — APPRENTISSAGE ET PROFILS DE KOLB
+======================================================================
+
+179. Apprendre en faisant
+Mini-expérience immédiate pour tendance accommodatrice.
+
+180. Observer plusieurs exemples
+Galerie comparative pour tendance divergente.
+
+181. Construire une carte conceptuelle
+Relier des notions pour tendance assimilatrice.
+
+182. Résoudre un cas concret
+Scénario avec objectif pour tendance convergente.
+
+183. Transformer une leçon en défi pratique
+Petite application réelle.
+
+184. Expliquer avec ses propres mots
+Réponse vocale puis résumé.
+
+185. Comparer deux méthodes
+Choisir selon résultat et préférence.
+
+186. Révision par cartes
+Flashcards sans pression.
+
+187. Plan de projet visuel
+Etapes déplaçables.
+
+188. Journal d'expérience
+Action, résultat, surprise et prochain essai.
+
+189. Changer de méthode
+Essayer une autre approche lorsque la première fatigue.
+
+190. Profil mixte
+Combiner action, observation, théorie et application.
+
+======================================================================
+18. CATALOGUE O — ACTIVITES CULTURELLES MALGACHES
+======================================================================
+
+191. Ohabolana à choisir
+Sélectionner un proverbe correspondant au vécu, avec explication facultative.
+
+192. Ohabolana à compléter
+Activité légère de mémoire et de sens.
+
+193. Fihavanana en action
+Choisir une petite action de lien, d'entraide ou de respect.
+
+194. Carte des personnes ressources
+Famille, ami, voisin, enseignant, responsable communautaire ou professionnel.
+
+195. Paysage de Madagascar
+Respiration ou ancrage dans une scène locale choisie.
+
+196. Histoire orale
+Ecouter ou enregistrer un souvenir en malgache.
+
+197. Mot difficile dans ma langue
+Choisir le mot malgache, français ou mélange qui exprime le mieux l'émotion.
+
+198. Valeur héritée et valeur choisie
+Comparer tradition, famille et aspiration personnelle.
+
+199. Cercle de solidarité
+Identifier une personne à qui parler sans exposer toute son histoire.
+
+200. Voix familière
+Guide audio avec accent malgache développé pour Mythenena.
+
+======================================================================
+19. CATALOGUE P — SECURITE ET RECHERCHE DE SOUTIEN
+======================================================================
+
+Ces éléments ne sont pas présentés comme des jeux.
+
+201. Bouton « J'ai besoin de quelqu'un »
+Afficher immédiatement les contacts configurés.
+
+202. Plan personnel de sécurité
+Signes, actions, personnes, lieux et ressources.
+
+203. Message d'urgence préparé
+« Je ne vais pas bien et j'ai besoin que tu restes avec moi. »
+
+204. Choisir un lieu plus sûr
+Liste personnelle créée auparavant.
+
+205. Eloigner un moyen dangereux
+Etape guidée seulement si cela peut être fait sans augmenter le danger.
+
+206. Rester connecté pendant l'appel
+Interface minimale pendant la recherche d'aide.
+
+207. Carte de contacts hors ligne
+Disponible sans Internet.
+
+208. Vérification courte du danger immédiat
+Questions simples, sans animation ludique.
+
+209. Retour après contact
+Confirmer si une personne a répondu et déterminer la prochaine étape.
+
+210. Sortie discrète
+Transformer immédiatement l'écran en interface neutre lorsque nécessaire.
+
+======================================================================
+20. ACTIVITES VERROUILLEES OU SUPERVISEES
+======================================================================
+
+Certaines activités peuvent exister dans la vision future, mais ne doivent pas être
+générées librement par l'IA :
+
+- exposition avec prévention de la réponse pour le TOC ;
+- exposition à des souvenirs traumatiques ;
+- travail intensif sur un trouble alimentaire ;
+- conseil de modification d'un médicament ;
+- interprétation clinique d'un épisode maniaque ou psychotique ;
+- exercices impliquant un risque physique ;
+- techniques destinées aux enfants sans adaptation et consentement appropriés ;
+- protocole de crise complexe sans ressource humaine.
+
+Ces activités nécessitent une fiche validée, un contexte précis et, selon le cas, la
+supervision d'un professionnel.
+
+======================================================================
+21. SYSTEME DE NOTIFICATIONS SANTE ET BIEN-ETRE
+======================================================================
+
+Le système ne doit pas envoyer seulement des alarmes fixes. Il doit choisir :
+
+- quoi rappeler ;
+- quand le rappeler ;
+- à quelle fréquence ;
+- avec quel niveau de discrétion ;
+- sous quelle langue ;
+- avec quelle action immédiate ;
+- quand ne rien envoyer.
+
+Chaque catégorie est activée volontairement par l'utilisateur.
+
+---------------------------------------------------------------------
+21.1 NOTIFICATIONS D'HYDRATATION
+---------------------------------------------------------------------
+
+Exemples :
+
+- « Petite pause : as-tu envie de boire un peu d'eau ? »
+- « Ton verre est-il à portée de main ? »
+- « Il fait chaud aujourd'hui. Pense à garder de l'eau près de toi. »
+- « Tu viens de terminer une session de concentration : quelques gorgées ? »
+
+Actions :
+
+[C'est fait] [Dans 20 min] [Pas maintenant]
+
+Le système n'impose pas automatiquement un nombre universel de litres. Les besoins
+varient selon la personne, l'activité, la chaleur et d'autres facteurs. Un objectif
+précis est configuré par l'utilisateur ou selon un conseil professionnel.
+
+---------------------------------------------------------------------
+21.2 NOTIFICATIONS DE MOUVEMENT
+---------------------------------------------------------------------
+
+- « Tu es assis depuis un moment. On change de position ? »
+- « Une minute de mouvement, même doucement ? »
+- « Marche quelques pas si ton environnement le permet. »
+- « Tes épaules ont peut-être besoin d'une pause. »
+
+Actions :
+
+[Etirement 30 s] [Quelques pas] [Ignorer]
+
+---------------------------------------------------------------------
+21.3 PAUSES ECRAN ET YEUX
+---------------------------------------------------------------------
+
+- « Regarde quelques instants plus loin que l'écran. »
+- « Petite pause visuelle ? »
+- « Tu peux poser le téléphone deux minutes ; je serai là après. »
+
+La notification peut lancer directement PauseEyes ou ScreenBreakTimer.
+
+---------------------------------------------------------------------
+21.4 SOMMEIL ET ROUTINE DU SOIR
+---------------------------------------------------------------------
+
+- « Ton heure de repos approche. On ralentit doucement ? »
+- « Tu veux déposer les pensées de demain avant de dormir ? »
+- « Mode calme : lumière réduite et audio court. »
+- « Préparons seulement la prochaine étape de ta routine. »
+
+Le moteur évite les notifications stimulantes, défis et récompenses tard le soir.
+
+---------------------------------------------------------------------
+21.5 REPAS ET SOINS DE BASE
+---------------------------------------------------------------------
+
+- « As-tu eu l'occasion de manger quelque chose aujourd'hui ? »
+- « Petit soin de base : eau, nourriture, douche ou repos ? »
+- « Choisis une seule chose utile maintenant. »
+
+Les formulations restent neutres. Elles ne commentent ni le poids ni les calories.
+
+---------------------------------------------------------------------
+21.6 MEDICAMENTS
+---------------------------------------------------------------------
+
+Uniquement si l'utilisateur crée le rappel :
+
+- nom choisi ;
+- horaire ;
+- instructions saisies ou provenant du professionnel ;
+- confirmation de prise ;
+- rappel différé ;
+- stock restant facultatif.
+
+Exemple discret sur écran verrouillé :
+« Vous avez un rappel personnel. »
+
+Après déverrouillage :
+« Rappel configuré : [nom], [instruction enregistrée]. »
+
+Mythenena ne change jamais la dose, ne conseille pas d'arrêter et ne compense pas une
+prise oubliée par sa propre décision.
+
+---------------------------------------------------------------------
+21.7 RENDEZ-VOUS ET TELECONSULTATIONS
+---------------------------------------------------------------------
+
+- confirmation lors de la réservation ;
+- rappel la veille ;
+- rappel configurable avant l'heure ;
+- test du microphone ;
+- préparation des trois sujets importants ;
+- ouverture directe de la salle vocale ;
+- possibilité d'annuler ou déplacer.
+
+---------------------------------------------------------------------
+21.8 CHECK-IN EMOTIONNEL
+---------------------------------------------------------------------
+
+- « Un mot ou une couleur pour aujourd'hui ? »
+- « Comment est ta batterie mentale ? »
+- « Tu préfères parler, faire une activité ou ne rien faire maintenant ? »
+- « Est-ce un moment où tu veux être accompagné ? »
+
+Un toucher suffit. La notification ne révèle jamais une hypothèse mentale sur l'écran
+verrouillé.
+
+---------------------------------------------------------------------
+21.9 STRESS ET RESPIRATION
+---------------------------------------------------------------------
+
+- « Besoin d'une pause de 45 secondes ? »
+- « Une activité discrète est disponible. »
+- « On revient un instant au présent ? »
+
+Le rappel n'affirme pas « tu es anxieux » simplement parce qu'une donnée passée existe.
+
+---------------------------------------------------------------------
+21.10 LIEN SOCIAL
+---------------------------------------------------------------------
+
+- « Y a-t-il quelqu'un à qui tu aimerais envoyer un signe ? »
+- « Un simple emoji peut suffire pour reprendre contact. »
+- « Veux-tu préparer un message sans l'envoyer tout de suite ? »
+
+---------------------------------------------------------------------
+21.11 VALEURS ET OBJECTIFS
+---------------------------------------------------------------------
+
+- « Quelle petite action correspond à ce qui compte pour toi aujourd'hui ? »
+- « Tu avais choisi l'apprentissage comme valeur cette semaine. Une action de deux
+  minutes ? »
+- « Ton objectif est toujours important ou souhaites-tu le modifier ? »
+
+---------------------------------------------------------------------
+21.12 HABITUDES PERSONNALISEES
+---------------------------------------------------------------------
+
+L'utilisateur peut créer :
+
+- hygiène ;
+- étude ;
+- travail ;
+- prière ou méditation ;
+- journal ;
+- exercice physique ;
+- promenade ;
+- appel familial ;
+- activité créative ;
+- traitement prescrit ;
+- autre habitude libre.
+
+======================================================================
+22. NOTIFICATION ACTIONNABLE
+======================================================================
+
+Chaque notification doit permettre une action sans ouvrir un long parcours.
+
+Actions communes :
+
+- Fait ;
+- Plus tard ;
+- Pas maintenant ;
+- Lancer l'exercice ;
+- Répondre par une humeur ;
+- Appeler ;
+- Désactiver ce rappel ;
+- Réduire la fréquence.
+
+Exemple :
+
+Titre : « Petite pause bien-être »
+Message : « Ton verre est-il à portée de main ? »
+Actions : [J'ai bu] [20 min] [Désactiver]
+
+Après « J'ai bu », l'application enregistre uniquement l'action nécessaire et évite
+d'ouvrir obligatoirement l'application.
+
+======================================================================
+23. MOTEUR INTELLIGENT DE PLANIFICATION
+======================================================================
+
+Le moteur combine :
+
+- préférences de l'utilisateur ;
+- heure locale ;
+- jours de cours ou travail ;
+- habitudes observées ;
+- énergie déclarée ;
+- dernière interaction ;
+- rappels ignorés récemment ;
+- heures silencieuses ;
+- météo ou chaleur si l'utilisateur active cette donnée ;
+- activité physique autorisée ;
+- calendrier autorisé ;
+- état de connexion ;
+- sensibilité du contenu.
+
+Algorithme :
+
+1. Charger les rappels autorisés.
+2. Supprimer ceux qui tombent pendant les heures silencieuses.
+3. Supprimer les rappels déjà satisfaits par une action récente.
+4. Appliquer la limite quotidienne.
+5. Eviter deux notifications proches.
+6. Choisir le meilleur créneau dans une fenêtre autorisée.
+7. Choisir une formulation neutre ou privée.
+8. Ajouter au maximum une action principale.
+9. Envoyer localement ou par push.
+10. Observer fait, reporté, ignoré, désactivé ou ouvert.
+11. Ajuster progressivement l'horaire et la fréquence.
+
+======================================================================
+24. BUDGET DE NOTIFICATIONS ET ANTI-SPAM
+======================================================================
+
+Valeurs configurables :
+
+- maximum général par jour ;
+- maximum par catégorie ;
+- intervalle minimal entre deux notifications ;
+- heures silencieuses ;
+- jours sans notification ;
+- priorité des rappels ;
+- mode discret ;
+- pause complète pendant une durée choisie.
+
+Règles proposées :
+
+- si trois rappels identiques sont ignorés, demander si la fréquence doit diminuer ;
+- si l'utilisateur choisit souvent « plus tard », proposer un nouvel horaire ;
+- si une notification augmente l'inconfort, la suspendre ;
+- ne jamais utiliser la culpabilité ;
+- ne jamais dire « tu as échoué » ;
+- ne pas créer artificiellement une urgence ;
+- ne pas multiplier les rappels parce que l'utilisateur ne répond pas ;
+- laisser un bouton global « Pause notifications ».
+
+======================================================================
+25. CONFIDENTIALITE SUR L'ECRAN VERROUILLE
+======================================================================
+
+Trois niveaux :
+
+PUBLIC
+« Mythenena — Un rappel vous attend. »
+
+NEUTRE
+« Petite pause bien-être disponible. »
+
+DETAILLE
+« Il est l'heure de votre exercice de respiration. »
+
+Le niveau détaillé est activé seulement par l'utilisateur.
+
+Ne jamais afficher par défaut :
+
+- « Votre dépression semble revenir » ;
+- « Rappel trouble bipolaire » ;
+- une hypothèse psychologique ;
+- le nom d'un traumatisme ;
+- le contenu d'une confidence ;
+- le nom d'un médicament sensible ;
+- le nom du psychologue ou la raison du rendez-vous.
+
+======================================================================
+26. ARCHITECTURE EXPO POUR LES NOTIFICATIONS
+======================================================================
+
+Expo Notifications gère :
+
+- permission ;
+- notifications locales ;
+- notifications programmées ;
+- actions depuis la notification ;
+- réception des notifications distantes ;
+- canaux Android ;
+- badges facultatifs ;
+- ouverture de l'activité correspondante.
+
+Deux modes :
+
+MODE LOCAL
+- hydratation ;
+- routine ;
+- médicament configuré ;
+- pause ;
+- rappel hors connexion.
+
+MODE SERVEUR
+- téléconsultation ;
+- message d'un professionnel ;
+- changement de rendez-vous ;
+- recommandation calculée ;
+- campagne générale validée.
+
+Les rappels critiques créés par l'utilisateur doivent rester disponibles localement
+même si Internet ne fonctionne pas.
+
+======================================================================
+27. FORMAT JSON D'UNE NOTIFICATION
+======================================================================
+
+{
+  "notification_id": "notif_8201",
+  "category": "hydration",
+  "privacy_level": "neutral",
+  "title": "Petite pause bien-être",
+  "body": "Ton verre est-il à portée de main ?",
+  "scheduled_for": "2026-09-26T10:30:00+03:00",
+  "timezone": "Europe/Istanbul",
+  "delivery": "local",
+  "actions": [
+    {"id": "done", "label": "J'ai bu"},
+    {"id": "snooze_20", "label": "20 min"},
+    {"id": "disable", "label": "Désactiver"}
+  ],
+  "open_component": "HydrationQuickCheck",
+  "rule_id": "rule_hydration_user_18",
+  "expires_after_minutes": 90
+}
+
+======================================================================
+28. TABLES SUPABASE A AJOUTER
+======================================================================
+
+activity_catalog
+- id, category, component, title, description, min_energy, max_duration,
+  allowed_contexts, blocked_contexts, version, review_status
+
+activity_parameters
+- activity_id, parameter_name, type, min_value, max_value, default_value,
+  ai_editable
+
+activity_content
+- activity_id, language, text_content, audio_url, cultural_variant
+
+notification_preferences
+- user_id, enabled, privacy_level, daily_limit, quiet_start, quiet_end,
+  timezone, paused_until
+
+notification_rules
+- id, user_id, category, enabled, schedule_type, time_window,
+  frequency, priority, conditions, created_at
+
+notification_templates
+- id, category, language, privacy_level, title, body, actions, version
+
+notification_events
+- id, user_id, rule_id, scheduled_at, delivered_at, opened_at,
+  action_taken, ignored, created_at
+
+device_push_tokens
+- id, user_id, expo_push_token, device_name, active, updated_at
+
+medication_reminders
+- id, user_id, private_label, public_label, schedule, instructions,
+  enabled, created_at
+
+appointment_reminders
+- id, user_id, appointment_id, reminder_offset, delivery_status
+
+wellness_checkins
+- id, user_id, source, mood, energy, response, created_at
+
+======================================================================
+29. ROUTES BACKEND
+======================================================================
+
+GET /activities/catalog
+Retourner les activités compatibles avec la version de l'application.
+
+POST /activities/select
+Demander au moteur une activité adaptée.
+
+POST /activities/:id/launch
+Créer une session et retourner le composant JSON.
+
+POST /activities/session/:id/result
+Enregistrer fin, arrêt et retour utilisateur.
+
+GET /notifications/preferences
+Retourner les préférences.
+
+PUT /notifications/preferences
+Modifier confidentialité, limites et heures silencieuses.
+
+POST /notifications/rules
+Créer un rappel.
+
+PUT /notifications/rules/:id
+Modifier horaire, fréquence ou contenu.
+
+DELETE /notifications/rules/:id
+Désactiver le rappel.
+
+POST /notifications/:id/action
+Enregistrer fait, reporté, ignoré ou désactivé.
+
+POST /devices/push-token
+Enregistrer le jeton Expo du téléphone.
+
+POST /notifications/test
+Envoyer une notification de test.
+
+======================================================================
+30. APPRENTISSAGE DU SYSTEME DE NOTIFICATIONS
+======================================================================
+
+Le système peut apprendre :
+
+- les heures où l'utilisateur répond ;
+- les catégories souvent ignorées ;
+- la durée de report préférée ;
+- les formulations appréciées ;
+- la langue préférée selon le moment ;
+- les activités ouvertes depuis une notification ;
+- les jours où aucun rappel n'est souhaité.
+
+Il ne doit pas déduire automatiquement qu'une absence de réponse signifie une rechute
+ou un danger. L'absence peut simplement signifier que la personne est occupée, dort,
+n'a plus de batterie ou ne veut pas interagir.
+
+======================================================================
+31. PROTOTYPE POUR LE HACKATHON
+======================================================================
+
+Il n'est pas nécessaire de développer les 210 activités pendant le hackathon.
+
+Prototype recommandé :
+
+Composants interactifs :
+- bulle de respiration ;
+- météo intérieure ;
+- batterie mentale ;
+- ancrage 5-4-3-2-1 ;
+- fait ou interprétation ;
+- micro-mission ;
+- roue des perspectives ;
+- minuteur de concentration ;
+- boussole des valeurs ;
+- verre d'eau interactif.
+
+Notifications :
+- hydratation ;
+- pause de mouvement ;
+- check-in émotionnel ;
+- routine du soir ;
+- téléconsultation ;
+- rappel personnel configurable.
+
+La démonstration doit prouver que :
+
+1. l'IA choisit une activité selon l'état et l'énergie ;
+2. l'activité s'affiche réellement dans le message ;
+3. une notification peut lancer directement cette activité ;
+4. l'utilisateur peut répondre depuis la notification ;
+5. le système adapte ensuite l'horaire ou la proposition ;
+6. les notifications sensibles restent discrètes.
+
+======================================================================
+32. SCENARIO DE DEMONSTRATION
+======================================================================
+
+09 h 30 — Notification :
+« Petite pause bien-être — Ton verre est-il à portée de main ? »
+
+[J'ai bu] [20 min] [Pas aujourd'hui]
+
+14 h 00 — L'utilisateur ouvre le chat :
+« Je suis fatigué, je n'ai pas envie d'écrire. »
+
+Mythenena affiche EnergyBattery.
+
+L'utilisateur indique 20 %.
+
+Le moteur évite un questionnaire et propose :
+
+[Météo intérieure] [Micro-mission 30 s]
+
+L'utilisateur choisit la micro-mission et ouvre la fenêtre.
+
+Après l'activité :
+
+[Un peu mieux] [Pareil] [Moins bien]
+
+21 h 30 — Notification discrète :
+« Ton heure calme approche. Veux-tu déposer les pensées de demain ? »
+
+[Ouvrir la boîte à pensées] [Plus tard] [Ignorer]
+
+La démonstration montre une continuité entre notification, chat, activité et mémoire.
+
+======================================================================
+33. REFERENCES DE CONCEPTION
+======================================================================
+
+- OMS — Doing What Matters in Times of Stress : ancrage, détachement des pensées,
+  accueil des émotions, action selon les valeurs et bienveillance.
+
+- OMS — Guidelines on Physical Activity and Sedentary Behaviour : activité physique
+  et réduction de la sédentarité adaptées aux capacités.
+
+- OMS — Digital Health Interventions : alertes et rappels ciblés comme catégorie
+  d'intervention numérique.
+
+- CDC — Water and Healthier Drinks : les besoins hydriques dépendent notamment de
+  l'âge, du sexe, de l'activité et d'autres situations individuelles.
+
+- CDC — Sleep : recommandations et habitudes favorisant un repos suffisant.
+
+Les contenus précis de santé doivent être versionnés, reliés à leur source et révisés
+avant leur intégration au catalogue de production.
+
+======================================================================
+34. PHRASE POUR LA SOUTENANCE
+======================================================================
+
+« Dans Mythenena, un message n'est pas forcément du texte. Il peut devenir une bulle
+de respiration, une météo émotionnelle, des cartes à déplacer, une micro-mission, un
+dessin, un audio malgache ou un mini-jeu de concentration.
+
+Nous avons conçu un catalogue extensible de plus de deux cents activités. L'IA ne les
+choisit pas au hasard : elle tient compte de l'état actuel, de l'énergie, de l'histoire,
+du profil d'interaction et des activités qui ont déjà aidé cette personne.
+
+Mythenena accompagne aussi en dehors du chat grâce à des notifications intelligentes :
+boire de l'eau, bouger, se reposer, préparer un rendez-vous ou faire un check-in
+émotionnel. Elles sont personnalisables, discrètes et actionnables en un toucher.
+
+L'objectif n'est pas de retenir l'utilisateur dans l'application. C'est de lui proposer
+la plus petite action utile au meilleur moment. »
+
+======================================================================
+35. RESUME FINAL
+======================================================================
+
+Le système complet associe :
+
+- plus de 200 idées d'activités ;
+- des composants Expo réutilisables ;
+- une sélection contrôlée par l'IA ;
+- une adaptation au profil et au niveau d'énergie ;
+- des notifications santé et bien-être ;
+- des actions réalisables sans écrire ;
+- un fonctionnement partiellement hors ligne ;
+- une protection du contenu sur l'écran verrouillé ;
+- une limite anti-spam ;
+- un apprentissage à partir des préférences réelles.
+
+Promesse :
+
+« Même quand l'utilisateur n'a pas la force de parler, Mythenena peut encore l'aider
+à faire une petite chose concrète pour lui-même. »

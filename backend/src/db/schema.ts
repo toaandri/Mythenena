@@ -401,6 +401,334 @@ export const synthesisCorrections = pgTable(
   })
 );
 
+// ---------------------------------------------------------------------------
+// Module Entretien Analytique — profil évolutif et entretien structuré
+// ---------------------------------------------------------------------------
+
+/**
+ * Sessions d'entretien analytique.
+ * Une session = un objectif de conversation, suivie sur plusieurs visites.
+ * userId est le sessionId anonyme de la table sessions.
+ */
+export const interviewSessions = pgTable(
+  "interview_sessions",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    objective: text("objective").notNull(),
+    /** Phase actuelle du protocole (0 = intention, 1 = récit libre ... 9 = mise à jour profil) */
+    currentPhase: integer("current_phase").notNull().default(0),
+    status: text("status").notNull().default("active"), // "active" | "completed" | "paused"
+    /** Préférences Kolb observées au fil des turns (jsonb) */
+    kolbProfile: jsonb("kolb_profile").default({}),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("interview_sessions_user_idx").on(t.userId, t.createdAt),
+    statusIdx: index("interview_sessions_status_idx").on(t.status),
+  })
+);
+
+/** Un tour de parole dans une session d'entretien. */
+export const interviewTurns = pgTable(
+  "interview_turns",
+  {
+    id: text("id").primaryKey(),
+    interviewSessionId: text("interview_session_id")
+      .notNull()
+      .references(() => interviewSessions.id, { onDelete: "cascade" }),
+    role: text("role").notNull(), // "user" | "assistant"
+    content: text("content").notNull(),
+    /** Méthode appliquée par l'IA pour ce tour */
+    methodUsed: text("method_used"), // "narrative" | "oars" | "socratic" | "values" | "kolb" | "identity" | "synthesis"
+    /** Objectif de la question posée */
+    questionGoal: text("question_goal"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    sessionIdx: index("interview_turns_session_idx").on(t.interviewSessionId, t.createdAt),
+  })
+);
+
+/**
+ * Éléments structurés extraits des tours de parole.
+ * Chaque élément est rattaché à son turn source pour traçabilité.
+ */
+export const evidenceItems = pgTable(
+  "evidence_items",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    turnId: text("turn_id"),
+    /** Type d'élément extrait */
+    type: text("type").notNull(), // "event" | "emotion" | "belief" | "value" | "goal" | "action" | "contradiction" | "unknown"
+    content: text("content").notNull(),
+    period: text("period"),
+    confidence: text("confidence").notNull().default("low"), // "low" | "medium" | "high"
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("evidence_items_user_idx").on(t.userId, t.createdAt),
+    typeIdx: index("evidence_items_type_idx").on(t.userId, t.type),
+  })
+);
+
+/** Événements de vie placés sur la chronologie personnelle. */
+export const lifeEvents = pgTable(
+  "life_events",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    period: text("period"),
+    event: text("event").notNull(),
+    emotion: text("emotion"),
+    meaningGiven: text("meaning_given"),
+    decision: text("decision"),
+    consequence: text("consequence"),
+    /** IDs des turns source */
+    evidenceIds: text("evidence_ids").array(),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("life_events_user_idx").on(t.userId, t.createdAt),
+  })
+);
+
+/**
+ * Dimensions d'identité personnelle (carte d'identité évolutive).
+ * Une ligne par (userId, domain) — upsert à chaque mise à jour.
+ */
+export const identityDomains = pgTable(
+  "identity_domains",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    /** personal | family | social | cultural | school_work | digital | projected | history */
+    domain: text("domain").notNull(),
+    content: jsonb("content").notNull().default({}),
+    evidenceIds: text("evidence_ids").array(),
+    confidence: text("confidence").notNull().default("low"),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userDomainUq: uniqueIndex("identity_domains_user_domain_uq").on(t.userId, t.domain),
+  })
+);
+
+/** Carte des valeurs : ce que la personne déclare important vs. ce qu'elle fait. */
+export const valuesMap = pgTable(
+  "values_map",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    valueName: text("value_name").notNull(),
+    claimedImportance: text("claimed_importance").notNull().default("medium"), // "high" | "medium" | "low"
+    behaviorExamples: jsonb("behavior_examples").notNull().default([]),
+    conflicts: jsonb("conflicts").notNull().default([]),
+    confidence: text("confidence").notNull().default("low"),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userValueUq: uniqueIndex("values_map_user_value_uq").on(t.userId, t.valueName),
+    userIdx: index("values_map_user_idx").on(t.userId),
+  })
+);
+
+/**
+ * Schémas comportementaux récurrents identifiés sur au moins 2 exemples.
+ * trigger → interprétation → émotion → action → résultat court terme → résultat long terme
+ */
+export const behaviorPatterns = pgTable(
+  "behavior_patterns",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    trigger: text("trigger").notNull(),
+    interpretation: text("interpretation"),
+    emotion: text("emotion"),
+    action: text("action"),
+    shortTermResult: text("short_term_result"),
+    longTermResult: text("long_term_result"),
+    evidenceFor: text("evidence_for").array(),
+    evidenceAgainst: text("evidence_against").array(),
+    confidence: text("confidence").notNull().default("low"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("behavior_patterns_user_idx").on(t.userId),
+  })
+);
+
+/**
+ * Hypothèses provisoires de l'IA sur la personne.
+ * Toujours formulées comme hypothèses vérifiables, jamais comme vérités.
+ */
+export const hypotheses = pgTable(
+  "hypotheses",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    text: text("text").notNull(),
+    evidenceFor: text("evidence_for").array(),
+    evidenceAgainst: text("evidence_against").array(),
+    confidence: text("confidence").notNull().default("low"),
+    /** exploring | plausible | confirmed | corrected | rejected */
+    status: text("status").notNull().default("exploring"),
+    /** Correction libre de l'utilisateur */
+    userCorrection: text("user_correction"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userStatusIdx: index("hypotheses_user_status_idx").on(t.userId, t.status),
+  })
+);
+
+/** Contradictions détectées entre deux affirmations de l'utilisateur. */
+export const contradictions = pgTable(
+  "contradictions",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    statementA: text("statement_a").notNull(),
+    statementB: text("statement_b").notNull(),
+    contextDifference: text("context_difference"),
+    /** open | explained | resolved */
+    status: text("status").notNull().default("open"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("contradictions_user_idx").on(t.userId, t.status),
+  })
+);
+
+/**
+ * Préférences d'apprentissage Kolb observées.
+ * Une seule ligne par userId — upsert à chaque observation.
+ * Scores de 0.0 à 1.0 normalisés sur l'ensemble des interactions.
+ */
+export const learningPreferences = pgTable(
+  "learning_preferences",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    domain: text("domain"),
+    actionScore: doublePrecision("action_score").notNull().default(0),
+    observationScore: doublePrecision("observation_score").notNull().default(0),
+    conceptualizationScore: doublePrecision("conceptualization_score").notNull().default(0),
+    applicationScore: doublePrecision("application_score").notNull().default(0),
+    evidenceIds: text("evidence_ids").array(),
+    lastUpdated: timestamp("last_updated").defaultNow().notNull(),
+  },
+  (t) => ({
+    userUq: uniqueIndex("learning_preferences_user_uq").on(t.userId),
+  })
+);
+
+/**
+ * Deltas de profil — seuls les changements du turn sont sauvegardés.
+ * Le profil complet est reconstruit en agrégeant les deltas dans l'ordre.
+ */
+export const profileSnapshots = pgTable(
+  "profile_snapshots",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    /** Contient uniquement les changements : { newEvents, updatedHypotheses, newPatterns, ... } */
+    delta: jsonb("delta").notNull().default({}),
+    /** Turn source de ce delta */
+    turnId: text("turn_id"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+  },
+  (t) => ({
+    userIdx: index("profile_snapshots_user_idx").on(t.userId, t.createdAt),
+  })
+);
+
+// ---------------------------------------------------------------------------
+// Module Activités Interactives — bibliothèque et sessions
+// ---------------------------------------------------------------------------
+
+/**
+ * Bibliothèque des activités interactives validées.
+ * Le moteur choisit UNIQUEMENT dans cette bibliothèque — jamais librement.
+ */
+export const activityLibrary = pgTable(
+  "activity_library",
+  {
+    id: text("id").primaryKey(),
+    slug: text("slug").notNull(),
+    name: text("name").notNull(),
+    /** breathing | grounding | emotion | cognitive | behavioral | values | relational */
+    category: text("category").notNull(),
+    durationMinSeconds: integer("duration_min_seconds").notNull().default(30),
+    durationMaxSeconds: integer("duration_max_seconds").notNull().default(180),
+    /** Modes Kolb compatibles : accommodating, diverging, assimilating, converging */
+    kolbModes: text("kolb_modes").array(),
+    /** États cibles : tension, tristesse, rumination, fatigue, agitation, colère, solitude */
+    stateTargets: text("state_targets").array(),
+    /** Niveaux d'énergie compatibles : very_low | low | medium | high */
+    energyLevels: text("energy_levels").array(),
+    /** Contextes où cette activité est contre-indiquée */
+    contraindications: text("contraindications").array(),
+    descriptionFr: text("description_fr").notNull(),
+    descriptionMg: text("description_mg"),
+    isActive: boolean("is_active").notNull().default(true),
+  },
+  (t) => ({
+    slugUq: uniqueIndex("activity_library_slug_uq").on(t.slug),
+    categoryIdx: index("activity_library_category_idx").on(t.category, t.isActive),
+  })
+);
+
+/** Une session d'activité interactive menée par un utilisateur. */
+export const activitySessions = pgTable(
+  "activity_sessions",
+  {
+    id: text("id").primaryKey(),
+    userId: text("user_id")
+      .notNull()
+      .references(() => sessions.id, { onDelete: "cascade" }),
+    activitySlug: text("activity_slug").notNull(),
+    /** Les 6 axes envoyés lors de la sélection (jsonb) */
+    stateAxes: jsonb("state_axes").notNull().default({}),
+    startedAt: timestamp("started_at").defaultNow().notNull(),
+    completedAt: timestamp("completed_at"),
+    /** Retour de l'utilisateur : better | same | worse */
+    feedback: text("feedback"),
+    feedbackNote: text("feedback_note"),
+    wasAbandoned: boolean("was_abandoned").notNull().default(false),
+  },
+  (t) => ({
+    userIdx: index("activity_sessions_user_idx").on(t.userId, t.startedAt),
+    slugIdx: index("activity_sessions_slug_idx").on(t.activitySlug),
+  })
+);
+
+
+
 export type SessionRow = typeof sessions.$inferSelect;
 export type SurveyQuestionRow = typeof surveyQuestions.$inferSelect;
 export type SurveyAnswerRow = typeof surveyAnswers.$inferSelect;
@@ -416,3 +744,18 @@ export type ContactRequestRow = typeof contactRequests.$inferSelect;
 export type ResourceRow = typeof resources.$inferSelect;
 export type SynthesisRow = typeof syntheses.$inferSelect;
 export type SynthesisCorrectionRow = typeof synthesisCorrections.$inferSelect;
+// Interview & Profile module types
+export type InterviewSessionRow = typeof interviewSessions.$inferSelect;
+export type InterviewTurnRow = typeof interviewTurns.$inferSelect;
+export type EvidenceItemRow = typeof evidenceItems.$inferSelect;
+export type LifeEventRow = typeof lifeEvents.$inferSelect;
+export type IdentityDomainRow = typeof identityDomains.$inferSelect;
+export type ValuesMapRow = typeof valuesMap.$inferSelect;
+export type BehaviorPatternRow = typeof behaviorPatterns.$inferSelect;
+export type HypothesisRow = typeof hypotheses.$inferSelect;
+export type ContradictionRow = typeof contradictions.$inferSelect;
+export type LearningPreferencesRow = typeof learningPreferences.$inferSelect;
+export type ProfileSnapshotRow = typeof profileSnapshots.$inferSelect;
+// Activity module types
+export type ActivityLibraryRow = typeof activityLibrary.$inferSelect;
+export type ActivitySessionRow = typeof activitySessions.$inferSelect;

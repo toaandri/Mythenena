@@ -1,3 +1,5 @@
+> **Mis à jour** — Toutes les sous-tâches ci-dessous ont été implémentées lors de la session précédente. Voir [`mythenena-final-plan.md`](mythenena-final-plan.md) pour les tâches restantes (ST1–ST5).
+
 # Mythenena — Plan de continuation : Backend + Backend IA + Supabase
 
 ## Vue d'ensemble
@@ -25,7 +27,7 @@
 
 ### Sous-tâche 1 — Créer le fichier `.env` et connecter Supabase
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Sans `.env`, le serveur refuse de démarrer et `drizzle-kit push` échoue à l'authentification. C'est le débloquant absolu de tout le reste.
@@ -74,7 +76,7 @@ GROQ_STT_MODEL=whisper-large-v3-turbo
 
 ### Sous-tâche 2 — Étendre `env.ts` pour les nouvelles variables IA
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Le schéma Zod actuel dans [`backend/src/config/env.ts`](backend/src/config/env.ts) ne connaît pas `GEMINI_API_KEY`, `GEMINI_TEXT_MODEL`, `GROQ_API_KEY`, etc. Sans cette extension, le service IA ne peut pas lire ses clés de manière fiable et typée.
@@ -105,7 +107,7 @@ Le schéma Zod actuel dans [`backend/src/config/env.ts`](backend/src/config/env.
 
 ### Sous-tâche 3 — Corriger le bug de fuite de pool (BUG 2) et le `/health` mensonger (BUG 3)
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Ces deux bugs sont rapides à corriger et impactent directement la fiabilité de la démo. Un pool non fermé fait crasher le process proprement, et un `/health` qui ment rend tout monitoring impossible.
@@ -135,7 +137,7 @@ Ces deux bugs sont rapides à corriger et impactent directement la fiabilité de
 
 ### Sous-tâche 4 — Implémenter le service IA : chat Gemini + questionnaire adaptatif
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Remplacer les trois stubs dans [`backend/src/services/aiService.ts`](backend/src/services/aiService.ts) par des implémentations réelles utilisant Gemini (Free Tier). C'est le cœur du module IA.
@@ -172,7 +174,7 @@ Le service doit :
 
 ### Sous-tâche 5 — Implémenter les routes IA (chat, synthèse, questionnaire adaptatif)
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Brancher les routes qui retournent 501 sur les implémentations réelles du service IA. Chaque route doit lire/écrire dans la base Supabase via les repositories Drizzle existants et appeler `aiService`.
@@ -212,7 +214,7 @@ Brancher les routes qui retournent 501 sur les implémentations réelles du serv
 
 ### Sous-tâche 6 — Implémenter la transcription vocale (Groq Whisper)
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Ajouter un endpoint de transcription pour que l'application Expo puisse envoyer un fichier audio et recevoir le texte transcrit. C'est un endpoint indépendant, sans impact sur le reste.
@@ -243,7 +245,7 @@ Ajouter un endpoint de transcription pour que l'application Expo puisse envoyer 
 
 ### Sous-tâche 7 — Vérification finale : tests, `/health` réel et démarrage complet
 
-**Statut :** `[ ] pending`
+**Statut :** `[x] done`
 
 **Intent**
 Valider que tout s'assemble : le backend non-IA répond correctement sur Supabase, les routes IA fonctionnent en mode connecté, et les 108 tests existants passent toujours (ils utilisent des fakes, ils ne doivent pas être cassés).

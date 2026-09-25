@@ -7,31 +7,39 @@ export type SafetyLevel = "ok" | "info" | "warning" | "critical";
  * Analyse un texte entrant (message utilisateur ou réponse IA)
  * et retourne un niveau de sécurité + une alerte si nécessaire.
  *
- * ⚠️ Ne pas se limiter aux mots-clés : prendre en compte le contexte.
+ * Détection par mots-clés : rapide, sans appel IA, fail-safe.
+ * Le niveau "critical" interrompt le parcours normal dans toutes les routes
+ * et retourne les ressources d'urgence sans passer par Gemini.
+ *
  * ⚠️ Ne pas censurer l'expression de souffrance — seulement le danger immédiat.
+ * ⚠️ SAFETY_KEYWORDS_MG doit être validé par des locuteurs natifs avant production.
  */
 export async function checkText(
   text: string,
   _language: "fr" | "mg"
 ): Promise<{ level: SafetyLevel; alert?: SafetyAlert }> {
-  // TODO: 
-  // 1. Vérifier les mots-clés (SAFETY_KEYWORDS_FR / MG) — détection rapide
-  // 2. Si mot-clé trouvé → appeler GPT pour confirmer le contexte (pas de faux positif)
-  // 3. Retourner le niveau approprié et les ressources d'urgence si critical
-  // 4. Prévoir un message de repli si le service IA échoue
-  
   const lowerText = text.toLowerCase();
-  const keywords = _language === "mg" ? SAFETY_KEYWORDS_MG : SAFETY_KEYWORDS_FR;
-  const hasKeyword = keywords.some((kw) => lowerText.includes(kw));
+
+  // Vérifier les deux listes : FR pour tous les textes (mélange FR/MG fréquent),
+  // MG ajouté selon la langue déclarée.
+  const keywordsFr = SAFETY_KEYWORDS_FR;
+  const keywordsMg = SAFETY_KEYWORDS_MG;
+  const allKeywords = _language === "mg"
+    ? [...keywordsFr, ...keywordsMg]
+    : keywordsFr;
+
+  const hasKeyword = allKeywords.some((kw) => lowerText.includes(kw.toLowerCase()));
 
   if (hasKeyword) {
-    // TODO: confirmer avec GPT avant de retourner critical
+    const message = _language === "mg"
+      ? "Tsy irery ianao. Misy olona vonona hanampy anao."
+      : "Tu n'es pas seul(e). Des personnes sont là pour t'aider.";
+
     return {
-      level: "warning",
+      level: "critical",
       alert: {
-        level: "warning",
-        message:
-          "Tu n'es pas seul(e). Des personnes sont là pour t'aider.",
+        level: "critical",
+        message,
         resources: EMERGENCY_RESOURCES,
       },
     };

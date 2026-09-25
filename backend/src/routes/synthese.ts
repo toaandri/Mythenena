@@ -26,7 +26,7 @@ const correctBody = z.object({
   userNote: z.string().min(1).max(2000),
 });
 
-export function createSyntheseRoutes(deps: { repos: Repos }): Hono<AppBindings> {
+export function createSyntheseRoutes(deps: { repos: Repos; config?: { geminiApiKey?: string } }): Hono<AppBindings> {
   const app = new Hono<AppBindings>();
 
   /**
@@ -34,7 +34,7 @@ export function createSyntheseRoutes(deps: { repos: Repos }): Hono<AppBindings> 
    * Génère une synthèse à partir des réponses de la session.
    */
   app.post("/generate", zValidator("json", generateBody), async (c) => {
-    if (!process.env.GEMINI_API_KEY) {
+    if (!deps.config?.geminiApiKey) {
       throw new ApiError(503, "service_unavailable", "GEMINI_API_KEY non configurée — le module IA est indisponible.");
     }
     const sessionId = c.get("sessionId");

@@ -16,6 +16,9 @@ import { createSyntheseRoutes } from "./routes/synthese";
 import { createResourceRoutes } from "./routes/ressources";
 import { createModerationRoutes } from "./routes/moderation";
 import { createTranscriptionRoutes } from "./routes/transcription";
+import { createInterviewRoutes } from "./routes/interview";
+import { createProfileRoutes } from "./routes/profile";
+import { createActivitiesRoutes } from "./routes/activities";
 import { getDb } from "./db";
 
 /**
@@ -55,7 +58,7 @@ export function createApp(deps: { repos: Repos; config: AppConfig }): Hono<AppBi
         await Promise.race([
           getDb().execute(sql`SELECT 1`),
           new Promise<never>((_, reject) =>
-            setTimeout(() => reject(new Error("db timeout")), 2000)
+            setTimeout(() => reject(new Error("db timeout")), 5000)
           ),
         ]);
       } catch {
@@ -107,11 +110,23 @@ export function createApp(deps: { repos: Repos; config: AppConfig }): Hono<AppBi
 
   // --- Parcours individuel : session obligatoire -----------------------------
   app.use("/api/survey/*", auth);
-  app.route("/api/survey", createSurveyRoutes(deps));
+  app.route("/api/survey", createSurveyRoutes({ repos: deps.repos, config: deps.config }));
   app.use("/api/chat/*", auth);
-  app.route("/api/chat", createChatRoutes(deps));
+  app.route("/api/chat", createChatRoutes({ repos: deps.repos, config: deps.config }));
   app.use("/api/synthese/*", auth);
-  app.route("/api/synthese", createSyntheseRoutes(deps));
+  app.route("/api/synthese", createSyntheseRoutes({ repos: deps.repos, config: deps.config }));
+
+  // --- Module Entretien Analytique : session obligatoire -------------------
+  app.use("/api/interview/*", auth);
+  app.route("/api/interview", createInterviewRoutes({ repos: deps.repos, config: deps.config }));
+
+  // --- Module Profil évolutif : session obligatoire ------------------------
+  app.use("/api/profile/*", auth);
+  app.route("/api/profile", createProfileRoutes(deps));
+
+  // --- Module Activités Interactives : session obligatoire -----------------
+  app.use("/api/activities/*", auth);
+  app.route("/api/activities", createActivitiesRoutes(deps));
 
   return app;
 }

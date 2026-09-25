@@ -35,7 +35,29 @@ export const SAFETY_KEYWORDS_FR = [
 ];
 
 export const SAFETY_KEYWORDS_MG = [
-  // TODO: Ajouter mots-clés en Malagasy avec validation par locuteurs natifs
+  // Idées suicidaires / ne plus vouloir vivre
+  "hamono tena",
+  "tsy te ho velona",
+  "ho faty",
+  "faty tsara",
+  "tsy misy antony hiainana",
+  "vonoy aho",
+  "ho vonoin",
+  // Automutilation / blessures
+  "mitsabo tena",
+  "marary tena",
+  "mandratra tena",
+  // Désespoir / ne plus supporter
+  "tsy mahazaka",
+  "tsy zaka intsony",
+  "tsy hahazaka",
+  "lany hery",
+  "reraka tanteraka",
+  // Mort souhaitée
+  "te ho maty",
+  "maty vao tsara",
+  "aleo maty",
+  // TODO: Valider et compléter avec des locuteurs natifs malagasy avant mise en production
 ];
 
 export const MAX_ADAPTIVE_QUESTIONS = 15;

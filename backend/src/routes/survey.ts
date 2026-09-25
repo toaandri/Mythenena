@@ -22,7 +22,7 @@ const batchBody = z.object({
   answers: z.array(answerBody).min(1).max(10),
 });
 
-export function createSurveyRoutes(deps: { repos: Repos }): Hono<AppBindings> {
+export function createSurveyRoutes(deps: { repos: Repos; config?: { geminiApiKey?: string } }): Hono<AppBindings> {
   const app = new Hono<AppBindings>();
   // L'authentification est appliquée par le routeur parent (cf. app.ts).
 
@@ -107,7 +107,7 @@ export function createSurveyRoutes(deps: { repos: Repos }): Hono<AppBindings> {
   // --- Questionnaire adaptatif (étape 2) — alimenté par Gemini -------------
 
   app.post("/adaptive/next", async (c) => {
-    if (!process.env.GEMINI_API_KEY) {
+    if (!deps.config?.geminiApiKey) {
       throw new ApiError(503, "service_unavailable", "GEMINI_API_KEY non configurée — le module IA est indisponible.");
     }
     const sessionId = c.get("sessionId");

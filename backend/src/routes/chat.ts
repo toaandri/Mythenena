@@ -25,7 +25,7 @@ const messageBody = z.object({
   language: z.enum(["fr", "mg"]).default("fr"),
 });
 
-export function createChatRoutes(_deps: { repos: Repos }): Hono<AppBindings> {
+export function createChatRoutes(_deps: { repos: Repos; config?: { geminiApiKey?: string } }): Hono<AppBindings> {
   const app = new Hono<AppBindings>();
 
   /**
@@ -34,7 +34,7 @@ export function createChatRoutes(_deps: { repos: Repos }): Hono<AppBindings> {
    */
   app.post("/message", zValidator("json", messageBody), async (c) => {
     // Vérifier la clé Gemini en premier — avant tout appel DB
-    if (!process.env.GEMINI_API_KEY) {
+    if (!_deps.config?.geminiApiKey) {
       throw new ApiError(503, "service_unavailable", "GEMINI_API_KEY non configurée — le module IA est indisponible.");
     }
 

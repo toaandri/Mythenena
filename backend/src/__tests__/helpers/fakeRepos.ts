@@ -21,6 +21,21 @@ import type {
   SurveyQuestionRow,
   SynthesisCorrectionRow,
   SynthesisRow,
+  // Interview & Profile module
+  InterviewSessionRow,
+  InterviewTurnRow,
+  EvidenceItemRow,
+  ProfileSnapshotRow,
+  LifeEventRow,
+  IdentityDomainRow,
+  ValuesMapRow,
+  BehaviorPatternRow,
+  HypothesisRow,
+  ContradictionRow,
+  LearningPreferencesRow,
+  // Activities module
+  ActivityLibraryRow,
+  ActivitySessionRow,
 } from "../../db/schema";
 import type { Repos } from "../../repositories";
 import type { NewSurveyAnswer } from "../../repositories/survey.repo";
@@ -114,6 +129,21 @@ export interface FakeData {
   syntheses: SynthesisRow[];
   corrections: SynthesisCorrectionRow[];
   chatMessages: ChatMessageRow[];
+  // Interview & Profile
+  interviewSessions: InterviewSessionRow[];
+  interviewTurns: InterviewTurnRow[];
+  evidenceItems: EvidenceItemRow[];
+  profileSnapshots: ProfileSnapshotRow[];
+  lifeEvents: LifeEventRow[];
+  identityDomains: IdentityDomainRow[];
+  valuesMap: ValuesMapRow[];
+  behaviorPatterns: BehaviorPatternRow[];
+  hypotheses: HypothesisRow[];
+  contradictions: ContradictionRow[];
+  learningPreferences: LearningPreferencesRow[];
+  // Activities
+  activityLibrary: ActivityLibraryRow[];
+  activitySessions: ActivitySessionRow[];
 }
 
 export function createFakeData(): FakeData {
@@ -134,6 +164,21 @@ export function createFakeData(): FakeData {
     syntheses: [],
     corrections: [],
     chatMessages: [],
+    // Interview & Profile
+    interviewSessions: [],
+    interviewTurns: [],
+    evidenceItems: [],
+    profileSnapshots: [],
+    lifeEvents: [],
+    identityDomains: [],
+    valuesMap: [],
+    behaviorPatterns: [],
+    hypotheses: [],
+    contradictions: [],
+    learningPreferences: [],
+    // Activities
+    activityLibrary: [],
+    activitySessions: [],
   };
 }
 
@@ -522,6 +567,269 @@ export function createFakeRepos(data: FakeData): Repos {
         return data.syntheses
           .filter((row) => row.sessionId === sessionId)
           .sort((a, b) => a.generatedAt.getTime() - b.generatedAt.getTime());
+      },
+    },
+
+    interview: {
+      async createSession(input) {
+        const row: InterviewSessionRow = {
+          ...input,
+          currentPhase: 0,
+          status: "active",
+          kolbProfile: {},
+          createdAt: now(),
+          updatedAt: now(),
+        };
+        data.interviewSessions.push(row);
+        return row;
+      },
+      async findSessionById(id) {
+        return data.interviewSessions.find((s) => s.id === id);
+      },
+      async findActiveSessionByUser(userId) {
+        return data.interviewSessions
+          .filter((s) => s.userId === userId && s.status === "active")
+          .sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime())[0];
+      },
+      async updateSession(id, patch) {
+        const row = data.interviewSessions.find((s) => s.id === id);
+        if (!row) return undefined;
+        Object.assign(row, patch, { updatedAt: now() });
+        return row;
+      },
+      async addTurn(turn) {
+        const row: InterviewTurnRow = {
+          ...turn,
+          methodUsed: turn.methodUsed ?? null,
+          questionGoal: turn.questionGoal ?? null,
+          createdAt: now(),
+        };
+        data.interviewTurns.push(row);
+        return row;
+      },
+      async listTurns(interviewSessionId) {
+        return data.interviewTurns
+          .filter((t) => t.interviewSessionId === interviewSessionId)
+          .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+      },
+      async addEvidence(item) {
+        const row: EvidenceItemRow = {
+          ...item,
+          turnId: item.turnId ?? null,
+          period: item.period ?? null,
+          confidence: item.confidence ?? "low",
+          createdAt: now(),
+        };
+        data.evidenceItems.push(row);
+        return row;
+      },
+      async saveProfileDelta(snap) {
+        const row: ProfileSnapshotRow = { ...snap, turnId: snap.turnId ?? null, createdAt: now() };
+        data.profileSnapshots.push(row);
+        return row;
+      },
+      async listProfileDeltas(userId) {
+        return data.profileSnapshots
+          .filter((s) => s.userId === userId)
+          .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+      },
+    },
+
+    profile: {
+      async addLifeEvent(event) {
+        const row: LifeEventRow = {
+          ...event,
+          period: event.period ?? null,
+          emotion: event.emotion ?? null,
+          meaningGiven: event.meaningGiven ?? null,
+          decision: event.decision ?? null,
+          consequence: event.consequence ?? null,
+          evidenceIds: event.evidenceIds ?? null,
+          createdAt: now(),
+        };
+        data.lifeEvents.push(row);
+        return row;
+      },
+      async listLifeEvents(userId) {
+        return data.lifeEvents
+          .filter((e) => e.userId === userId)
+          .sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
+      },
+      async upsertIdentityDomain(input) {
+        const existing = data.identityDomains.find(
+          (d) => d.userId === input.userId && d.domain === input.domain
+        );
+        if (existing) {
+          Object.assign(existing, { content: input.content, evidenceIds: input.evidenceIds ?? null, confidence: input.confidence ?? "low", updatedAt: now() });
+          return existing;
+        }
+        const row: IdentityDomainRow = { ...input, confidence: input.confidence ?? "low", evidenceIds: input.evidenceIds ?? null, updatedAt: now() };
+        data.identityDomains.push(row);
+        return row;
+      },
+      async listIdentityDomains(userId) {
+        return data.identityDomains.filter((d) => d.userId === userId);
+      },
+      async upsertValue(input) {
+        const existing = data.valuesMap.find(
+          (v) => v.userId === input.userId && v.valueName === input.valueName
+        );
+        if (existing) {
+          Object.assign(existing, {
+            claimedImportance: input.claimedImportance ?? "medium",
+            behaviorExamples: input.behaviorExamples ?? [],
+            conflicts: input.conflicts ?? [],
+            confidence: input.confidence ?? "low",
+            updatedAt: now(),
+          });
+          return existing;
+        }
+        const row: ValuesMapRow = {
+          ...input,
+          claimedImportance: input.claimedImportance ?? "medium",
+          behaviorExamples: input.behaviorExamples ?? [],
+          conflicts: input.conflicts ?? [],
+          confidence: input.confidence ?? "low",
+          updatedAt: now(),
+        };
+        data.valuesMap.push(row);
+        return row;
+      },
+      async listValues(userId) {
+        return data.valuesMap.filter((v) => v.userId === userId);
+      },
+      async addBehaviorPattern(input) {
+        const row: BehaviorPatternRow = {
+          ...input,
+          interpretation: input.interpretation ?? null,
+          emotion: input.emotion ?? null,
+          action: input.action ?? null,
+          shortTermResult: input.shortTermResult ?? null,
+          longTermResult: input.longTermResult ?? null,
+          evidenceFor: input.evidenceFor ?? null,
+          evidenceAgainst: input.evidenceAgainst ?? null,
+          confidence: input.confidence ?? "low",
+          createdAt: now(),
+          updatedAt: now(),
+        };
+        data.behaviorPatterns.push(row);
+        return row;
+      },
+      async listBehaviorPatterns(userId) {
+        return data.behaviorPatterns.filter((p) => p.userId === userId);
+      },
+      async addHypothesis(input) {
+        const row: HypothesisRow = {
+          ...input,
+          evidenceFor: input.evidenceFor ?? null,
+          evidenceAgainst: input.evidenceAgainst ?? null,
+          confidence: input.confidence ?? "low",
+          status: input.status ?? "exploring",
+          userCorrection: null,
+          createdAt: now(),
+          updatedAt: now(),
+        };
+        data.hypotheses.push(row);
+        return row;
+      },
+      async updateHypothesis(id, patch) {
+        const row = data.hypotheses.find((h) => h.id === id);
+        if (!row) return undefined;
+        Object.assign(row, patch, { updatedAt: now() });
+        return row;
+      },
+      async listHypotheses(userId) {
+        return data.hypotheses.filter((h) => h.userId === userId);
+      },
+      async addContradiction(input) {
+        const row: ContradictionRow = {
+          ...input,
+          contextDifference: input.contextDifference ?? null,
+          status: input.status ?? "open",
+          createdAt: now(),
+        };
+        data.contradictions.push(row);
+        return row;
+      },
+      async listContradictions(userId) {
+        return data.contradictions.filter((c) => c.userId === userId);
+      },
+      async upsertLearningPreferences(input) {
+        const existing = data.learningPreferences.find((l) => l.userId === input.userId);
+        if (existing) {
+          Object.assign(existing, {
+            domain: input.domain ?? null,
+            actionScore: input.actionScore ?? 0,
+            observationScore: input.observationScore ?? 0,
+            conceptualizationScore: input.conceptualizationScore ?? 0,
+            applicationScore: input.applicationScore ?? 0,
+            evidenceIds: input.evidenceIds ?? null,
+            lastUpdated: now(),
+          });
+          return existing;
+        }
+        const row: LearningPreferencesRow = {
+          ...input,
+          domain: input.domain ?? null,
+          evidenceIds: input.evidenceIds ?? null,
+          actionScore: input.actionScore ?? 0,
+          observationScore: input.observationScore ?? 0,
+          conceptualizationScore: input.conceptualizationScore ?? 0,
+          applicationScore: input.applicationScore ?? 0,
+          lastUpdated: now(),
+        };
+        data.learningPreferences.push(row);
+        return row;
+      },
+      async getLearningPreferences(userId) {
+        return data.learningPreferences.find((l) => l.userId === userId);
+      },
+    },
+
+    activities: {
+      async findBySlug(slug) {
+        return data.activityLibrary.find((a) => a.slug === slug);
+      },
+      async listAll() {
+        return [...data.activityLibrary].sort((a, b) => a.category.localeCompare(b.category));
+      },
+      async listActive() {
+        return data.activityLibrary
+          .filter((a) => a.isActive)
+          .sort((a, b) => a.category.localeCompare(b.category));
+      },
+      async createSession(input) {
+        const row: ActivitySessionRow = {
+          ...input,
+          startedAt: now(),
+          completedAt: null,
+          feedback: null,
+          feedbackNote: null,
+          wasAbandoned: false,
+        };
+        data.activitySessions.push(row);
+        return row;
+      },
+      async completeSession(id, feedback, feedbackNote) {
+        const row = data.activitySessions.find((s) => s.id === id);
+        if (!row) return undefined;
+        row.completedAt = now();
+        row.feedback = feedback ?? null;
+        row.feedbackNote = feedbackNote ?? null;
+        return row;
+      },
+      async abandonSession(id) {
+        const row = data.activitySessions.find((s) => s.id === id);
+        if (row) {
+          row.wasAbandoned = true;
+          row.completedAt = now();
+        }
+      },
+      async listUserSessions(userId, limit = 20) {
+        return data.activitySessions
+          .filter((s) => s.userId === userId)
+          .sort((a, b) => b.startedAt.getTime() - a.startedAt.getTime())
+          .slice(0, limit);
       },
     },
   };
