@@ -3,8 +3,9 @@ import { z } from "zod";
 import type { AppConfig } from "./config";
 
 /**
- * OPENAI_API_KEY n'est volontairement pas exigé : le module IA est traité
- * séparément et ne doit pas empêcher le backend classique de démarrer.
+ * Les clés IA (Gemini, Groq) sont optionnelles au démarrage.
+ * Le backend non-IA démarre sans elles ; leur absence est détectée
+ * à l'exécution par chaque service IA.
  */
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
@@ -17,7 +18,14 @@ const envSchema = z.object({
   WEB_URL: z.string().default("http://localhost:3000"),
   CORS_ORIGINS: z.string().optional(),
   MODERATOR_TOKENS: z.string().default(""),
-  OPENAI_API_KEY: z.string().optional(),
+  // --- IA : Gemini ---
+  GEMINI_API_KEY: z.string().optional(),
+  GEMINI_TEXT_MODEL: z.string().default("gemini-1.5-flash"),
+  GEMINI_TTS_MODEL: z.string().default("gemini-2.5-flash-preview-tts"),
+  GEMINI_TTS_LANGUAGE: z.string().default("mg-MG"),
+  // --- IA : Groq Whisper ---
+  GROQ_API_KEY: z.string().optional(),
+  GROQ_STT_MODEL: z.string().default("whisper-large-v3-turbo"),
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -53,6 +61,12 @@ export function buildConfig(env: Env): AppConfig {
         : [env.WEB_URL, "http://localhost:8081", "http://localhost:19006"],
     moderatorTokens: splitList(env.MODERATOR_TOKENS),
     apiBaseUrl: `http://localhost:${env.PORT}`,
+    geminiApiKey: env.GEMINI_API_KEY,
+    geminiTextModel: env.GEMINI_TEXT_MODEL,
+    geminiTtsModel: env.GEMINI_TTS_MODEL,
+    geminiTtsLanguage: env.GEMINI_TTS_LANGUAGE,
+    groqApiKey: env.GROQ_API_KEY,
+    groqSttModel: env.GROQ_STT_MODEL,
   };
 }
 

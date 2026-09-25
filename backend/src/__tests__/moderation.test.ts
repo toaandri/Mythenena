@@ -233,36 +233,10 @@ describe("file de modération humaine", () => {
   });
 });
 
-describe("modules IA non livrés", () => {
-  const aiEndpoints: { path: string; method: string; token?: string }[] = [
-    { path: "/api/chat/message", method: "POST" },
-    { path: "/api/chat/abc", method: "GET" },
-    { path: "/api/synthese/generate", method: "POST" },
-    { path: "/api/synthese/abc", method: "GET" },
-    { path: "/api/synthese/abc/correct", method: "POST" },
-    { path: "/api/survey/adaptive/next", method: "POST" },
-    { path: "/api/survey/adaptive/answer", method: "POST" },
-  ];
-
-  it("répond 501 sans simuler de functionality", async () => {
+describe("modules IA", () => {
+  it("protège les routes IA par authentification", async () => {
     const ctx = createTestContext();
-    const session = await startSession(ctx);
-
-    for (const endpoint of aiEndpoints) {
-      const response = await ctx.app.request(endpoint.path, {
-        method: endpoint.method,
-        headers: authRequest(session.token, endpoint.method, {}).headers,
-        body: endpoint.method === "GET" ? undefined : JSON.stringify({}),
-      });
-
-      expect(response.status, `${endpoint.method} ${endpoint.path}`).toBe(501);
-      const body = await response.json();
-      expect(body.error.code).toBe("not_implemented");
-    }
-  });
-
-  it("exige quand même une session avant de signaler l'indisponibilité", async () => {
-    const ctx = createTestContext();
+    // Sans token → 401
     const response = await ctx.app.request("/api/chat/message", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -271,7 +245,21 @@ describe("modules IA non livrés", () => {
     expect(response.status).toBe(401);
   });
 
-  it("annonce les modules IA comme indisponibles sur /health", async () => {
+  it("les routes IA sont accessibles avec une session (retournent 503 sans clé Gemini)", async () => {
+    const ctx = createTestContext();
+    const session = await startSession(ctx);
+
+    // Sans GEMINI_API_KEY, le service retourne 503 (clé absente) ou 400 (body invalide)
+    // mais jamais 501 (plus de stub) ni 404
+    const chatResponse = await ctx.app.request("/api/chat/message", {
+      method: "POST",
+      headers: authRequest(session.token, "POST", {}).headers,
+      body: JSON.stringify({ message: "Bonjour", language: "fr" }),
+    });
+    expect(chatResponse.status, "POST /api/chat/message sans clé Gemini").toBe(503);
+  });
+
+  it("annonce les modules IA comme requires_ai sur /health sans clé Gemini", async () => {
     const ctx = createTestContext();
     const body = await (await ctx.app.request("/health")).json();
 

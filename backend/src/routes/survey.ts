@@ -6,6 +6,8 @@ import type { AppBindings } from "../types/context";
 import type { SurveyQuestionRow } from "../db/schema";
 import * as surveyService from "../services/surveyService";
 import { ApiError } from "../utils/errors";
+import { newId } from "../utils/id";
+import * as aiService from "../services/aiService";
 
 const answerBody = z.object({
   questionId: z.string().min(1).max(64),
@@ -102,17 +104,80 @@ export function createSurveyRoutes(deps: { repos: Repos }): Hono<AppBindings> {
     );
   });
 
-  // --- Modules relevant de la phase IA -------------------------------------
-  // Conservés pour documenter le contrat d'API, mais inactifs tant que le
-  // moteur de questionnaire adaptatif n'est pas livré.
+  // --- Questionnaire adaptatif (étape 2) — alimenté par Gemini -------------
 
-  app.post("/adaptive/next", (c) => {
-    throw ApiError.notImplemented("questionnaire adaptatif généré par IA");
+  app.post("/adaptive/next", async (c) => {
+    if (!process.env.GEMINI_API_KEY) {
+      throw new ApiError(503, "service_unavailable", "GEMINI_API_KEY non configurée — le module IA est indisponible.");
+    }
+    const sessionId = c.get("sessionId");
+
+    // Récupérer l'historique adaptatif de la session
+    const history = await deps.repos.surveys.listAnswers(sessionId, "adaptive");
+
+    let question: aiService.AdaptiveQuestion | null;
+    try {
+      // Lire la langue depuis les préférences de session
+      const session = await deps.repos.sessions.findById(sessionId);
+      const language = (session?.language as "fr" | "mg") ?? "fr";
+      question = await aiService.generateNextQuestion(history, language);
+    } catch (err) {
+      if (err instanceof aiService.ServiceUnavailableError) {
+        throw new ApiError(503, "service_unavailable", err.message);
+      }
+      throw err;
+    }
+
+    if (!question) {
+      return c.json({ done: true, question: null });
+    }
+
+    // Construire une question IA avec le format attendu par le client
+    const questionId = `adaptive-${newId()}`;
+    return c.json({
+      done: false,
+      question: {
+        id: questionId,
+        domain: question.domain,
+        reason: question.reason,
+        text: question.question,
+        choices: question.choices.map((label, i) => ({
+          id: `${questionId}-c${i}`,
+          label,
+        })),
+        type: "single",
+        allowSkip: true,
+        surveyType: "adaptive",
+      },
+    });
   });
 
-  app.post("/adaptive/answer", (c) => {
-    throw ApiError.notImplemented("questionnaire adaptatif généré par IA");
-  });
+  app.post(
+    "/adaptive/answer",
+    zValidator("json", answerBody),
+    async (c) => {
+      const sessionId = c.get("sessionId");
+      const body = c.req.valid("json");
+
+      // Pour les questions adaptatives, on persiste directement sans validation
+      // stricte des choiceIds (les choix sont générés dynamiquement par l'IA)
+      await deps.repos.surveys.upsertAnswer({
+        id: newId(),
+        sessionId,
+        surveyType: "adaptive",
+        questionId: body.questionId,
+        questionText: body.questionId, // on n'a que l'id ici, le texte est dans le client
+        choicesSnapshot: body.choiceIds ?? [],
+        choiceIds: body.skipped ? null : (body.choiceIds ?? null),
+        textAnswer: body.textAnswer ?? null,
+        skipped: body.skipped,
+        domain: "unknown", // le domaine sera enrichi via l'historique Gemini
+        answeredAt: new Date(),
+      });
+
+      return c.json({ saved: true }, 201);
+    }
+  );
 
   return app;
 }

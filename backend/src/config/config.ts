@@ -10,4 +10,12 @@ export interface AppConfig {
   moderatorTokens: string[];
   /** Adresse publique de l'API, utilisée dans les messages de repli. */
   apiBaseUrl: string;
+  // --- IA : Gemini ---
+  geminiApiKey?: string;
+  geminiTextModel: string;
+  geminiTtsModel: string;
+  geminiTtsLanguage: string;
+  // --- IA : Groq Whisper ---
+  groqApiKey?: string;
+  groqSttModel: string;
 }

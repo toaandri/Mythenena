@@ -6,6 +6,8 @@ import { loadEnv } from "../config/env";
 import type { DB } from "./types";
 
 let cached: DB | null = null;
+/** Client postgres conservé pour pouvoir appeler client.end() à l'arrêt. */
+let pgClient: ReturnType<typeof postgres> | null = null;
 
 /**
  * Connexion à Supabase via la connection string PostgreSQL.
@@ -15,13 +17,20 @@ let cached: DB | null = null;
 export function getDb(): DB {
   if (cached) return cached;
   const { DATABASE_URL } = loadEnv();
-  const client = postgres(DATABASE_URL, { max: 10, prepare: false });
-  cached = drizzle(client, { schema });
+  pgClient = postgres(DATABASE_URL, { max: 10, prepare: false });
+  cached = drizzle(pgClient, { schema });
   return cached;
 }
 
+/**
+ * Ferme proprement le pool de connexions.
+ * À câbler sur SIGINT/SIGTERM dans index.ts.
+ */
 export async function closeDb(): Promise<void> {
-  // La connexion est gc-friendly : postgres-js se ferme avec le processus.
+  if (pgClient) {
+    await pgClient.end();
+    pgClient = null;
+  }
   cached = null;
 }
 
