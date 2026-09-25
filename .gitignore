@@ -1,0 +1,47 @@
+﻿# === Secrets — NE JAMAIS VERSIONNER ===
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# === Dependances ===
+node_modules/
+.pnp
+.pnp.js
+
+# === Builds ===
+dist/
+build/
+.next/
+out/
+.expo/
+.expo-shared/
+
+# === Logs ===
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+*.log
+
+# === Couverture de tests ===
+coverage/
+.nyc_output/
+
+# === Editeurs ===
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# === TypeScript ===
+*.tsbuildinfo
+
+# === Captures d'ecran temporaires ===
+screenshot*.png
+
+# === Fichiers sensibles du projet ===
+api.txt
+balt.txt
+maharavo.txt
