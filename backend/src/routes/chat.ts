@@ -1,26 +1,26 @@
+/**
+ * Discussion personnalisée avec l'IA (étape 3) — PHASE IA, non livrée.
+ *
+ * Le contrat d'API est réservé pour que le module puisse se brancher sans
+ * refonte du client. Les endpoints répondent explicitement 501 plutôt que de
+ * renvoyer une erreur générique : ce n'est pas un bug, c'est un périmètre.
+ */
+
 import { Hono } from "hono";
+import type { Repos } from "../repositories";
+import type { AppBindings } from "../types/context";
+import { ApiError } from "../utils/errors";
 
-// POST /api/chat/message   — envoyer un message, recevoir réponse IA
-// GET  /api/chat/:sessionId — récupérer l'historique de la conversation
+export function createChatRoutes(_deps: { repos: Repos }): Hono<AppBindings> {
+  const app = new Hono<AppBindings>();
 
-const chat = new Hono();
+  app.post("/message", (c) => {
+    throw ApiError.notImplemented("conversation d'écoute avec l'IA");
+  });
 
-chat.post("/message", async (c) => {
-  // TODO: 
-  // 1. Extraire le message depuis le body (ChatRequest)
-  // 2. Passer par safetyService.checkInput(message)
-  //    → si critical : retourner SafetyAlert sans appeler l'IA
-  // 3. Construire le contexte depuis l'historique + résumé du questionnaire
-  // 4. Appeler aiService.chat(context, message, language)
-  // 5. Passer la réponse par safetyService.checkOutput(response)
-  // 6. Enregistrer les deux messages en base
-  // 7. Retourner ChatResponse
-  return c.json({ message: "TODO" }, 501);
-});
+  app.get("/:sessionId", (c) => {
+    throw ApiError.notImplemented("historique de la conversation avec l'IA");
+  });
 
-chat.get("/:sessionId", async (c) => {
-  // TODO: retourner l'historique de la conversation (si retainHistory = true)
-  return c.json({ message: "TODO" }, 501);
-});
-
-export default chat;
+  return app;
+}

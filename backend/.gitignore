@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+
+# Variables d'environnement : ne jamais versionner les secrets.
+.env
+.env.local
+.env.*.local
+
+# Journal d'erreurs
+npm-debug.log*
+yarn-error.log*
+*.log

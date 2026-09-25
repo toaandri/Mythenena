@@ -1,0 +1,301 @@
+================================================================================
+MYTHENENA / MAHARAVO — CE QUI RESTE À FAIRE
+Backend classique (hors module IA, livré par une autre personne)
+État au : 25/09/2026 — commit de référence : ef0e904
+================================================================================
+
+Vérifications passées à la dernière session :
+  - typecheck (tsc --noEmit) ......... 0 erreur
+  - build (tsc) ...................... OK
+  - tests (vitest) ................... 108 / 108 verts
+  - tests d'intégration réels ......... AUCUN (voir BLOQUANT 1)
+
+
+================================================================================
+1. BLOQUANTS — rien ne peut être déployé tant que ce n'est pas fait
+================================================================================
+
+BLOQUANT 1 — Il n'y a pas de base de données.
+  Le fichier backend/.env n'existe pas et le DATABASE_URL n'a jamais été
+  communiqué. Conséquence directe : le schéma n'a JAMAIS été appliqué sur
+  Supabase, et aucune donnée n'existe.
+  Ce qui a été vérifié : `drizzle-kit push` et `npm run db:seed` lisent bien la
+  configuration, résolvent le driver postgres et atteignent le serveur. Ils
+  échouent uniquement sur l'authentification, avec de faux identifiants.
+  À faire :
+    - récupérer la connection string : Supabase > Settings > Database >
+      Connection string > URI
+    - créer backend/.env avec :
+        DATABASE_URL=postgresql://postgres:[PASSWORD]@[HOST]:5432/postgres
+        JWT_SECRET=<48 octets aléatoires>
+        MODERATOR_TOKENS=<32 octets aléatoires>
+      Générer un secret :
+        node -e "console.log(require('crypto').randomBytes(48).toString('base64url'))"
+    - npm run db:push
+    - npm run db:seed
+    - npm run dev puis vérifier /health et la création de session
+
+BLOQUANT 2 — Aucune donnée de départ.
+  Tant que le seed n'est pas lancé, l'application répond correctement mais est vide :
+  0 catégorie de forum, 0 question, 0 fiche, 0 ressource. Les parcours sont
+  fonctionnellement cassés côté contenu, même si le code est correct.
+
+BLOQUANT 3 — Les repositories Drizzle ne sont jamais testés contre une vraie base.
+  Les 108 tests utilisent des fakes en mémoire (src/__tests__/helpers/fakeRepos.ts).
+  Le SQL réel n'a jamais été exécuté : une erreur de colonne, de nom de champ ou
+  de contrainte ne peut pas encore être détectée. C'est le risque n°1 du projet.
+  À faire : écrire au moins un test d'intégration qui appelle le seed puis les
+  routes contre Supabase, dans un environnement séparé.
+
+BLOQUANT 4 — Pas de migrations versionnées.
+  On utilise `drizzle-kit push`, qui écrit directement dans la base sans laisser
+  d'historique. Au premier déploiement sur un environnement partagé, il n'y a aucun
+  moyen de savoir ce qui a été appliqué, ni de revenir en arrière proprement.
+  À faire : basculer sur `drizzle-kit generate` + `drizzle-kit migrate` et versionner
+  le dossier backend/drizzle/ dans git.
+
+
+================================================================================
+2. BUGS RÉELS — identifiés, à corriger
+================================================================================
+
+BUG 1 — Les réponses de forum survivent à la suppression de session.
+  DELETE /api/session supprime la session et, en option, les publications
+  (forum_posts). Mais les RÉPLIES de cet auteur (forum_replies.authorSessionId)
+  ne sont jamais supprimées : il n'y a pas de clé étrangère, donc pas de cascade.
+  Conséquence : des réponses subsistent avec un authorSessionId pointant vers une
+  session morte, et l'auteur disparaît de la conversation sans que son texte
+  disparaisse. Le paramètre `deleteForumPosts` ne couvre que les publications.
+  À faire : décider explicitement de la règle (garder le texte en pseudonymisé
+  « membre parti », ou supprimer), puis l'implémenter et le documenter.
+
+BUG 2 — closeDb() ne ferme rien et fuit un pool de connexions.
+  backend/src/db/index.ts : le client `postgres` n'est pas conservé, donc
+  `client.end()` est impossible. `closeDb()` se contente de remettre `cached` à
+  null. Au prochain `getDb()`, un NOUVEAU pool est créé et l'ancien n'est jamais
+  fermé. À chaque appel, on perd jusqu'à 10 connexions.
+  À faire : conserver le client dans une variable module et appeler `await
+  client.end()` ; câbler l'appel sur l'arrêt du serveur (SIGINT/SIGTERM).
+
+BUG 3 — /health ment sur la disponibilité.
+  GET /health renvoie toujours `status: "ok"`, même si la base est injoignable ou
+  si la configuration est invalide. Un orchestrateur ou un moniteur ne peut pas
+  détecter une panne de la base.
+  À faire : ajouter un `SELECT 1` avec un délai maximal, et renvoyer 503 si la
+  base ne répond pas.
+
+BUG 4 — Le test double et la production n'ont pas la même règle de pseudonyme.
+  `findByPseudonym` (session.repo.ts) compare avec `lower()` : insensible à la
+  casse mais PAS aux accents. Le fake (fakeRepos.ts) utilise `foldForSearch`, qui
+  ignore les accents. Les tests valident donc un comportement que PostgreSQL
+  n'applique pas : « Pierre » et « Pière » sont en conflit selon les tests,
+  acceptés en production.
+  À faire : trancher la règle (les accents comptent-ils comme différence ?) et
+  aligner le fake sur le repository réel, ou l'inverse.
+
+BUG 5 — DELETE avec corps JSON.
+  DELETE /api/session, DELETE /api/session/history et DELETE /api/forum/blocks/:id
+  attendent un corps JSON. Or plusieurs clients HTTP (et des proxys) n'envoient
+  pas de corps sur un DELETE : la requête part alors en 400 pour une raison
+  invisible côté client.
+  À faire : accepter les paramètres en query string, ou basculer sur POST, ou
+  documenter explicitement le contrat pour le client mobile.
+
+
+================================================================================
+3. ÉTHIQUE ET DONNÉES DE SANTÉ — à trancher avant toute mise en ligne
+================================================================================
+
+ÉTHIQUE 1 — Les numéros d'urgence ne sont pas vérifiés et il n'y a aucune ligne
+  d'écoute psychologique.
+  shared/constants/urgency.ts contient 15 / 17 / 18, avec un TODO explicite :
+  « Ajouter lignes d'écoute psychologique locales vérifiées ». Le tableau
+  SAFETY_KEYWORDS_MG est VIDE (TODO : validation par des locuteurs natifs).
+  Concrètement, une personne en détresse écrit en malagasy, aucun mot-clé n'est
+  détecté, et aucune ligne d'écoute n'est proposée.
+  C'est le point le plus sérieux de cette liste : l'application parle de
+  détresse alors qu'elle n'a ni filet de sécurité ni couverture linguistique.
+  À faire : faire vérifier les numéros par une source officielle malgache, ajouter
+  au minimum une ligne d'écoute psychologique, et faire valider les mots-clés MG
+  par des locuteurs natifs avant ouverture.
+
+ÉTHIQUE 2 — Les fiches de l'annuaire livrées sont toutes fictives.
+  Le seed ne crée que des professionnels `isFictional: true`, et l'API exclut par
+  défaut les fiches fictives. Conséquence : sur une base fraîche,
+  GET /api/annuaire/professionals renvoie une liste VIDE, alors que la page
+  « Trouver de l'aide » est le cœur du produit.
+  À faire : soit des fiches réelles vérifiées, soit un état explicite et honnête
+  « l'annuaire est en cours de constitution », visible par l'utilisateur.
+
+ÉTHIQUE 3 — Le consentement n'est pas tracé.
+  `sessions.consentAt` est posé, mais rien ne conserve quelle version du texte a
+  été présentée, et il n'existe aucun moyen de prouver ce qu'un utilisateur a
+  accepté. Il n'y a pas non plus d'export des données personnelles (RGPD) : un
+  utilisateur peut tout supprimer, mais ne peut pas tout récupérer.
+  À faire : versionner le consentement, et ajouter un export des données.
+
+ÉTHIQUE 4 — Le transfert vers un professionnel n'a aucune traçabilité côté
+  professionnel.
+  C'est volontaire et correct (aucune donnée de santé n'est transmise, c'est
+  testé), mais cela veut dire qu'une demande de contact ne peut pas être traitée :
+  personne ne reçoit de notification. Le parcours s'arrête silencieusement.
+  À faire : définir ce qui se passe après la demande, et l'afficher à
+  l'utilisateur plutôt que de laisser croire à une prise de contact.
+
+ÉTHIQUE 5 — Aucun signalement d'urgence dans un espace public.
+  Le forum et le mini-sondage n'ont aucun mécanisme de remontée d'urgence, la
+  détection de crise étant dans le module IA non livré. C'est acceptable à
+  condition que ce soit dit à l'utilisateur ; ce n'est actuellement dit nulle part
+  dans l'interface que le produit ne peut pas détecter une détresse.
+
+
+================================================================================
+4. SÉCURITÉ ET EXPLOITATION
+================================================================================
+
+SECU 1 — Aucun rate limiting, nulle part.
+  Zéro limitation de débit (grep confirmé : 0 occurrence de rateLimit/throttle).
+  n'importe qui peut créer des sessions infinies, poster sans limite et s'envoyer des
+  signalements en boucle sur le forum. Le forum est le point d'abus le plus
+  probable.
+  À faire : limiter au minimum POST /api/session/start, la création de
+  publications, de réponses, de signalements et les demandes de contact.
+
+SECU 2 — Pas de protection contre le spam de réactions.
+  Le toggle de réaction est illimité : un seul compte peut gonfler artificiellement
+  n'importe quel compteur. Sans impact clinique, mais les modérateurs n'ont
+  aucun moyen de le repérer. À limiter comme SECU 1.
+
+SECU 3 — MODERATOR_TOKENS est vide par défaut.
+  Tant qu'il n'est pas renseigné, personne ne peut se connecter à
+  /api/moderation/login : les signalements s'accumulent sans traitement possible.
+  Le comportement par défaut est sûr (fail-closed), mais il faut le savoir.
+
+SECU 4 — Les jetons de modération ne sont pas révoquables individuellement.
+  Ils sont statiques, comparés en temps constant, et listés en clair dans
+  MODERATOR_TOKENS. Un jeton volé est valable jusqu'à ce que l'env soit modifié et
+  le service redémarré.
+  À faire : des jetons nommés et révocables, ou une table de modérateurs.
+
+SECU 5 — Pas d'observabilité.
+  Le middleware `logger()` est la seule instrumentation : pas de logs structurés, pas
+  d'identifiant de corrélation, pas de métriques, pas de reporting d'erreur. Une
+  panne en production sera difficile à diagnostiquer.
+
+SECU 6 — Pas de CI.
+  Aucun workflow n'exécute typecheck + tests. La non-régression n'est garantie par
+  personne : le jour où quelqu'un d'autre touche ce code, rien ne le vérifie.
+
+SECU 7 — Vulnérabilités de dépendances.
+  `npm audit` remonte 10 vulnérabilités (7 modérées, 2 hautes, 1 critique) dans les
+  outils de développement, principalement via esbuild. Ne pas lancer
+  `npm audit fix --force` sans vérifier : cela forcerait des versions
+  incompatibles.
+
+
+================================================================================
+5. FONCTIONNALITÉS INCOMPLÈTES
+================================================================================
+
+INCOMPLET 1 — Pas d'administration des contenus.
+  Les professionnels, associations, ressources, catégories de forum et questions ne
+  se gèrent QUE par le seed. En production, il faut éditer la base à la main pour
+  corriger une faute ou retirer une fiche périmée. Pour un annuaire de santé, c'est
+  rédhibitoire.
+  À faire : une interface ou un CLI d'administration, au minimum pour l'annuaire et
+  les ressources.
+
+INCOMPLET 2 — Pas de vérification des fiches.
+  `professionals.lastVerified` existe mais rien ne le met à jour et rien ne
+  signale une fiche périmée à l'utilisateur. Une fiche de 2018 est affichée
+  exactement comme une fiche vérifiée la semaine dernière.
+
+INCOMPLET 3 — Le chat et la synthèse sont des stubs.
+  7 endpoints répondent 501 : /api/chat/message, /api/chat/:sessionId,
+  /api/synthese/generate, /api/synthese/:sessionId,
+  /api/synthese/:sessionId/correct, /api/survey/adaptive/next,
+  /api/survey/adaptive/answer. C'est voulu (le module IA est traité à part), mais
+  le client ne doit pas les appeler en production.
+
+INCOMPLET 4 — Trois fichiers de service sont morts.
+  aiService.ts, safetyService.ts et moderationService.ts ne sont importés nulle
+  part. Ils compilent mais ne font rien. À supprimer ou à rattacher au module IA,
+  pour ne pas laisser croire à une fonctionnalité existante.
+
+INCOMPLET 5 — Le questionnaire adaptatif n'existe pas.
+  Le mini-sondage (5 questions, statique) est complet. Le parcours adaptatif, lui,
+  n'est que deux stubs 501. Le cahier des charges prévoit 8 étapes : seules les
+  étapes sans IA sont livrées.
+
+INCOMPLET 6 — Pas de README backend.
+  Impossible à démarrer sans connaître les commandes, l'ordre des étapes et le
+  rôle de chaque variable d'environnement. Le .env.example est bon, mais la
+  documentation d'ensemble manque.
+
+INCOMPLET 7 — Pas de mode multi-utilisateur pour la modération.
+  La file de modération fonctionne (testée : 14 tests) mais un seul jeton admin
+  statique, sans historique qui dit qui a traité quoi ni pourquoi.
+
+
+================================================================================
+6. QUALITÉ
+================================================================================
+
+QUAL 1 — Aucune couverture mesurée.
+  Les tests existent (108) et couvrent bien les règles métier, mais il n'y a pas
+  de seuil de couverture ni de rapport. `vitest run --coverage` n'a jamais été
+  exécuté : on ignore quelles branches restent testées.
+
+QUAL 2 — Les tests ne couvrent que la couche HTTP.
+  Les services et repositories Drizzle réels ne sont testés qu'indirectement, via
+  des fakes. Voir BLOQUANT 3.
+
+QUAL 3 — Cohérence à resserrer entre le fake et la production.
+  Cf BUG 4. Plus généralement, un faux « vert » est pire qu'un test absent : le
+  fake a déjà divergé sur le contrat de pagination (`items`) et sur la forme des
+  réactions (tableau d'objets). À revérifier à chaque évolution.
+
+QUAL 4 — Pas de tests de charge.
+  On ignore comment se comporte `POST /api/survey/mini/answer` quand le mini-
+  sondage est traversé des centaines de milliers de fois, ni la liste du forum à
+  fort volume.
+
+QUAL 5 — Le README et le dossier de migrations manquent, ce qui bloque aussi
+  toute reprise par quelqu'un d'autre.
+
+
+================================================================================
+7. ORDRE DE TRAITEMENT CONSEILLÉ
+================================================================================
+
+  1. BLOQUANT 1  → créer .env, db:push, db:seed          (débloque tout)
+  2. ÉTHIQUE 1   → numéros d'urgence + ligne d'écoute MG   (NON NÉGOCIABLE)
+  3. BLOQUANT 3  → un test d'intégration réel              (révèle les bugs SQL)
+  4. BUG 2, BUG 3 → fuite de pool, /health honnête         (2h de travail)
+  5. BUG 1       → règle sur les réponses de forum
+  6. SECU 1, 2   → rate limiting sur les écritures
+  7. ÉTHIQUE 2   → situation réelle de l'annuaire
+  8. BLOQUANT 4  → migrations versionnées
+  9. SECU 6      → CI typecheck + tests
+ 10. Le reste
+
+
+================================================================================
+8. À NE PAS OUBLIER
+================================================================================
+
+  - Aucun fichier hors de backend/ n'a été modifié. shared/ est importé en
+    lecture seule, conformément à la consigne. Toute évolution de shared/ doit
+    être validée avant.
+  - Les ressources d'urgence de shared/constants/urgency.ts portent un avertissement
+    « vérifier avant mise en production » : il n'a pas été levé, il ne peut pas
+    l'être sans vérification externe.
+  - Le module IA n'est pas livré. Les 7 endpoints renvoient 501 par design, et
+    /health les annonce comme "requires_ai". Ne pas les présenter comme
+    fonctionnels.
+  - Les règles métier fondatrices sont verrouillées par les tests : une question
+    passée n'est jamais comptée comme une réponse, authorSessionId ne sort jamais,
+    les données de santé ne sont jamais transmises à un professionnel, les fiches
+    fictives ne sont pas contactables. Ne pas casser ces tests pour faire passer
+    autre chose.
+================================================================================

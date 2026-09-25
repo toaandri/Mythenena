@@ -1,30 +1,30 @@
+/**
+ * Synthèse pédagogique et orientation (étape 5) — PHASE IA, non livrée.
+ *
+ * La table `syntheses` et la structure de stockage existent déjà ; seule la
+ * génération par IA manque. Aucun score, aucune probabilité de maladie et aucun
+ * classement de pathologies ne doivent être produits par ce module.
+ */
+
 import { Hono } from "hono";
+import type { Repos } from "../repositories";
+import type { AppBindings } from "../types/context";
+import { ApiError } from "../utils/errors";
 
-// POST /api/synthese/generate        — générer la synthèse depuis le questionnaire
-// GET  /api/synthese/:sessionId       — récupérer la synthèse
-// POST /api/synthese/:sessionId/correct — l'utilisateur corrige une observation
+export function createSyntheseRoutes(_deps: { repos: Repos }): Hono<AppBindings> {
+  const app = new Hono<AppBindings>();
 
-const synthese = new Hono();
+  app.post("/generate", (c) => {
+    throw ApiError.notImplemented("synthèse générée par IA");
+  });
 
-synthese.post("/generate", async (c) => {
-  // TODO:
-  // 1. Récupérer toutes les réponses du questionnaire (mini + adaptatif + chat)
-  // 2. Appeler aiService.generateSynthesis(answers)
-  // 3. Valider : pas de probabilités de maladie, pas de score clinique
-  // 4. Enregistrer et retourner la Synthesis
-  // Body: { sessionId }
-  return c.json({ message: "TODO" }, 501);
-});
+  app.get("/:sessionId", (c) => {
+    throw ApiError.notImplemented("synthèse générée par IA");
+  });
 
-synthese.get("/:sessionId", async (c) => {
-  // TODO: retourner la synthèse existante d'une session
-  return c.json({ message: "TODO" }, 501);
-});
+  app.post("/:sessionId/correct", (c) => {
+    throw ApiError.notImplemented("synthèse générée par IA");
+  });
 
-synthese.post("/:sessionId/correct", async (c) => {
-  // TODO: enregistrer la correction de l'utilisateur sur un domaine
-  // Body: SynthesisCorrection
-  return c.json({ message: "TODO" }, 501);
-});
-
-export default synthese;
+  return app;
+}

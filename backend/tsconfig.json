@@ -4,15 +4,12 @@
     "module": "CommonJS",
     "moduleResolution": "node",
     "outDir": "dist",
-    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "paths": {
-      "@shared/*": ["../shared/*"]
-    }
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*", "../shared/**/*"],
+  "exclude": ["node_modules", "dist", "../shared/node_modules"]
 }
