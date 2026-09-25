@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Mythenena",
+    "subtitle": "Un espace d'écoute pour toi",
+    "startButton": "Commencer",
+    "skipToResources": "Accéder directement aux ressources"
+  },
+  "survey": {
+    "skip": "Passer",
+    "next": "Suivant",
+    "finish": "Terminer"
+  },
+  "chat": {
+    "placeholder": "Écris ce que tu ressens...",
+    "send": "Envoyer",
+    "disclaimer": "L'IA ne remplace pas un professionnel de santé."
+  },
+  "safety": {
+    "warningTitle": "Tu n'es pas seul(e)",
+    "warningMessage": "Des personnes sont disponibles pour t'aider."
+  }
+}

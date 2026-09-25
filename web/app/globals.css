@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* TODO: définir la palette de couleurs apaisantes */
+:root {
+  --color-primary: #6BAF8D;
+  --color-background: #F0F7F4;
+  --color-text: #2D3748;
+  --color-muted: #718096;
+}

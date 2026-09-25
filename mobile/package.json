@@ -1,0 +1,42 @@
+{
+  "name": "mythenena-mobile",
+  "version": "0.1.0",
+  "main": "expo-router/entry",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "expo": "~51.0.0",
+    "expo-router": "~3.5.0",
+    "expo-status-bar": "~1.12.1",
+    "expo-location": "~17.0.1",
+    "expo-secure-store": "~13.0.2",
+    "expo-haptics": "~13.0.1",
+    "expo-localization": "~15.0.3",
+    "expo-screen-capture": "~5.0.7",
+    "@react-native-async-storage/async-storage": "1.23.1",
+    "react": "18.2.0",
+    "react-native": "0.74.0",
+    "react-native-reanimated": "~3.10.1",
+    "react-native-gesture-handler": "~2.16.1",
+    "react-native-maps": "1.14.0",
+    "react-native-gifted-chat": "^2.4.0",
+    "nativewind": "^4.0.1",
+    "tailwindcss": "^3.4.0",
+    "@shopify/flash-list": "1.6.3",
+    "zustand": "^4.5.2",
+    "@tanstack/react-query": "^5.40.0",
+    "i18next": "^23.11.5",
+    "react-i18next": "^14.1.2",
+    "victory-native": "^41.6.0",
+    "axios": "^1.7.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@types/react": "~18.2.0",
+    "typescript": "^5.3.0"
+  }
+}

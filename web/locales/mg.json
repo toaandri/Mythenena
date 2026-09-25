@@ -1,0 +1,22 @@
+{
+  "home": {
+    "title": "Mythenena",
+    "subtitle": "Fitoerana hihaino anao",
+    "startButton": "Manomboka",
+    "skipToResources": "Mankany amin'ny loharanom-baovao mivantana"
+  },
+  "survey": {
+    "skip": "Mandalo",
+    "next": "Manaraka",
+    "finish": "Vita"
+  },
+  "chat": {
+    "placeholder": "Soraty izay tsapanao...",
+    "send": "Alefa",
+    "disclaimer": "Tsy mamerina ny dokotera ny AI."
+  },
+  "safety": {
+    "warningTitle": "Tsy irery ianao",
+    "warningMessage": "Misy olona vonona hanampy anao."
+  }
+}
