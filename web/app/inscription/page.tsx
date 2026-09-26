@@ -7,6 +7,8 @@ import {
   ArrowLeft,
   UserPlus,
   User,
+  Mail,
+  Phone,
   Lock,
   Eye,
   EyeOff,
@@ -31,6 +33,7 @@ export default function InscriptionPage() {
   const [form, setForm] = useState({
     pseudo: "",
     gender: "",
+    identifier: "",
     password: "",
     confirmPassword: "",
   });
@@ -38,6 +41,9 @@ export default function InscriptionPage() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const isEmail = form.identifier.includes("@");
+  const isPhone = /^[\d\s+\-]{8,}$/.test(form.identifier);
 
   const handleChange = (field: keyof typeof form, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -49,21 +55,28 @@ export default function InscriptionPage() {
     setError("");
     setSuccess(false);
 
-    const name = form.pseudo.trim();
-    if (!name || name.length < 3) {
-      setError(t.inscription?.errors?.nameTooShort || "Le pseudonyme doit contenir au moins 3 caractères.");
+    if (!form.pseudo.trim() || !form.gender || !form.identifier.trim() || !form.password || !form.confirmPassword) {
+      setError(t.inscription?.errors?.required || "Veuillez remplir tous les champs");
       return;
     }
-    if (!form.gender) {
-      setError(t.inscription?.errors?.genderRequired || "Veuillez sélectionner votre genre.");
+
+    if (form.pseudo.trim().length < 2) {
+      setError(t.inscription?.errors?.nameTooShort || "Le pseudo doit contenir au moins 2 caractères");
       return;
     }
+
+    if (!isEmail && !isPhone) {
+      setError(t.inscription?.errors?.invalidIdentifier || "Entrez un email ou un numéro de téléphone valide");
+      return;
+    }
+
     if (form.password.length < 6) {
-      setError(t.inscription?.errors?.passwordTooShort || "Le mot de passe doit contenir au moins 6 caractères.");
+      setError(t.inscription?.errors?.passwordTooShort || "Le mot de passe doit contenir au moins 6 caractères");
       return;
     }
+
     if (form.password !== form.confirmPassword) {
-      setError(t.inscription?.errors?.passwordMismatch || "Les mots de passe ne correspondent pas.");
+      setError(t.inscription?.errors?.passwordMismatch || "Les mots de passe ne correspondent pas");
       return;
     }
 
@@ -71,7 +84,7 @@ export default function InscriptionPage() {
     try {
       await ensureSession(lang === "mg" ? "mg" : "fr");
       setSuccess(true);
-      setTimeout(() => router.push("/connexion"), 1500);
+      setTimeout(() => router.push("/connexion"), 2000);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Inscription impossible. Vérifiez votre connexion.");
     } finally {
@@ -135,16 +148,12 @@ export default function InscriptionPage() {
                       type="text"
                       value={form.pseudo}
                       onChange={(e) => handleChange("pseudo", e.target.value)}
-                      placeholder={t.inscription?.pseudoPlaceholder || "Ex: Lotus, Nuage, Horizon..."}
+                      placeholder={t.inscription?.pseudoPlaceholder || "Votre pseudo"}
                       className="pl-11"
                       autoComplete="username"
-                      maxLength={32}
                       disabled={success}
                     />
                   </div>
-                  <p className="mt-1.5 text-xs text-ink-subtle">
-                    {t.inscription?.pseudoHelper || "3 à 32 caractères. Aucune information personnelle requise."}
-                  </p>
                 </Field>
 
                 <Field label={t.inscription?.genderLabel || "Genre"}>
@@ -166,6 +175,26 @@ export default function InscriptionPage() {
                           (value === "male" ? "Homme" : "Femme")}
                       </button>
                     ))}
+                  </div>
+                </Field>
+
+                <Field label={t.inscription?.identifierLabel || "Email ou numéro de téléphone"} htmlFor="identifier">
+                  <div className="relative">
+                    {isEmail ? (
+                      <Mail size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    ) : (
+                      <Phone size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    )}
+                    <Input
+                      id="identifier"
+                      type={isEmail ? "email" : "tel"}
+                      value={form.identifier}
+                      onChange={(e) => handleChange("identifier", e.target.value)}
+                      placeholder={isEmail ? "vous@exemple.com" : "+261 3X XX XX XX"}
+                      className="pl-11"
+                      autoComplete="email"
+                      disabled={success}
+                    />
                   </div>
                 </Field>
 

@@ -12,27 +12,35 @@ export default function LoginScreen() {
   const { t, language } = useI18n();
   const { ensureSession } = useSession();
 
-  const [pseudonym, setPseudonym] = useState('');
-  const [showHint, setShowHint] = useState(false);
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const isEmail = identifier.includes('@');
+  const isPhone = /^[\d\s+\-]{8,}$/.test(identifier);
 
   const handleSubmit = async () => {
     setError('');
     setSuccess(false);
 
-    const name = pseudonym.trim();
-    if (!name || name.length < 3) {
+    if (!identifier.trim() || !password) {
       setError(t('login.error.required'));
+      return;
+    }
+
+    if (!isEmail && !isPhone) {
+      setError(t('login.error.invalidIdentifier'));
       return;
     }
 
     setLoading(true);
     try {
-      await ensureSession(language === 'mg' ? 'mg' : 'fr', name);
+      await ensureSession(language === 'mg' ? 'mg' : 'fr', identifier.trim());
       setSuccess(true);
-      setTimeout(() => router.replace('/(tabs)'), 800);
+      setTimeout(() => router.replace('/(tabs)'), 1500);
     } catch (e) {
       setError(e instanceof Error ? e.message : t('common.networkError'));
     } finally {
@@ -81,30 +89,51 @@ export default function LoginScreen() {
 
           <Text style={styles.sectionLabel}>{t('login.identifierLabel')}</Text>
           <View style={styles.inputWrap}>
-            <Ionicons name="person-outline" size={18} color="#7a8a85" />
+            <Ionicons name={isEmail ? 'mail-outline' : 'call-outline'} size={18} color="#7a8a85" />
             <TextInput
-              value={pseudonym}
+              value={identifier}
               onChangeText={(value) => {
-                setPseudonym(value);
+                setIdentifier(value);
                 if (error) setError('');
               }}
-              placeholder={t('login.identifierPlaceholder')}
+              placeholder={isEmail ? 'vous@exemple.com' : '+261 3X XX XX XX'}
               placeholderTextColor="#7a8a85"
               autoCapitalize="none"
               autoCorrect={false}
+              keyboardType={isEmail ? 'email-address' : 'phone-pad'}
               style={styles.input}
               editable={!success}
-              maxLength={32}
             />
-            <TouchableOpacity onPress={() => setShowHint((v) => !v)} activeOpacity={0.8}>
+          </View>
+
+          <Text style={styles.sectionLabel}>{t('login.passwordLabel')}</Text>
+          <View style={styles.inputWrap}>
+            <Ionicons name="lock-closed-outline" size={18} color="#7a8a85" />
+            <TextInput
+              value={password}
+              onChangeText={(value) => {
+                setPassword(value);
+                if (error) setError('');
+              }}
+              placeholder={t('login.passwordPlaceholder')}
+              placeholderTextColor="#7a8a85"
+              secureTextEntry={!showPassword}
+              autoCapitalize="none"
+              style={[styles.input, styles.inputWithAction]}
+              editable={!success}
+            />
+            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
               <Ionicons
-                name={showHint ? 'eye-off-outline' : 'eye-outline'}
+                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={18}
                 color="#6b7a76"
               />
             </TouchableOpacity>
           </View>
-          <Text style={styles.helperText}>{t('login.identifierHelper')}</Text>
+
+          <TouchableOpacity style={styles.linkButton} activeOpacity={0.85} onPress={() => router.push('/settings/security')}>
+            <Text style={styles.linkText}>{t('login.forgot')}</Text>
+          </TouchableOpacity>
         </View>
 
         <TouchableOpacity
@@ -259,11 +288,17 @@ const styles = StyleSheet.create({
     color: '#1a2320',
     fontWeight: '600',
   },
-  helperText: {
-    marginTop: 8,
-    fontSize: 11,
-    color: '#7a8a85',
-    lineHeight: 16,
+  inputWithAction: {
+    paddingRight: 4,
+  },
+  linkButton: {
+    marginTop: 14,
+    alignSelf: 'flex-end',
+  },
+  linkText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#2d9c86',
   },
   primaryButton: {
     flexDirection: 'row',
