@@ -72,6 +72,11 @@
       "esteem": "Manampy ny fitokisana tena",
       "sobriety": "Lalana mankany amin'ny fahadiovana (fitandroana)"
     },
+    "topicDescriptions": {
+      "depression": "Toerana mahitsy mba hifanakalozana ny karazanao, hitady fiarahamonina, ary tsy ho foana intsony amin'ny faharerahan-tsaina.",
+      "esteem": "Mifanarakalaza amin'ny olona hafa mitambatra amin'ny fitokisana tena. Mahazatra ny menaranao sy ny adidy.",
+      "sobriety": "Vondrona mifanohana hiaraha amin'ny fahadiovana, na ahoana no lalanao."
+    },
     "members": "mpikambana",
     "cta": "Mamorona lohahevitra vaovao",
     "categories": [
@@ -112,7 +117,9 @@
     "send": "Handefa",
     "groupRules": "Lalàna ny vondrona",
     "membersList": "Jereo ny mpikambana",
-    "leaveGroup": "Miala amin'ny vondrona"
+    "leaveGroup": "Miala amin'ny vondrona",
+    "joinGroup": "Mikambana",
+    "joinGroupDesc": "Mikambana amin'ity vondrona ity hampiarahaba miresaka"
   },
   "chat": {
     "title": "Fanampiana Avy Hatrany amin'ny IA",
@@ -486,10 +493,19 @@
   },
   "settings": {
     "title": "Fikirakirana",
-    "privacy": "Lalam-bavaiky fiaraha-miasa",
-    "login": "Fidirana",
-    "signup": "Fanoratana anaran",
-    "help": "Fanohana amin ny fampiasana"
+    "privacy": "Fiaraha-miasa",
+    "profile": "Profil",
+    "security": "Fiaviana",
+    "help": "Fanohana amin'ny fampiasana",
+    "modalDesc": "Maneja ny kaontanao, ny fiaraha-miasa sy ny fitoerananao",
+    "privacyDesc": "Jereo ny lalam-bavaiky fiaraha-miasa",
+    "profileDesc": "Maneja ny fidirana sy ny kaontanao",
+    "securityDesc": "Fiaviana, fivoahana sy fitaovana",
+    "helpDesc": "Torolalana, FAQ sy fanohana",
+    "logout": "Fivoahana",
+    "logoutDesc": "Mivoaka amin'ny fitaovana rehetra",
+    "loggedInAs": "Eo fidirana tamin'ny",
+    "notLoggedIn": "Tsy eo fidirana"
   },
   "confidentialite": {
     "title": "Lalam-bavaiky fiaraha-miasa",
@@ -567,6 +583,13 @@
       "invalidIdentifier": "Ampidio email na nisa telefaona mety",
       "passwordTooShort": "Ilaina 6 litera amin'ny tenim-pitsipika",
       "passwordMismatch": "Tsy mitovy ny tenim-pitsipika roa"
+    },
+    "pseudoLabel": "Pseudonym",
+    "pseudoPlaceholder": "Pseudonymanao (2 litera amin'ny fotoana kely)",
+    "genderLabel": "Lahyvavy",
+    "genderOptions": {
+      "male": "Lahy",
+      "female": "Vavy"
     }
   },
   "aide": {
@@ -636,6 +659,15 @@
       "a17": "Ao amin'ny pejy Fidirana, kliky \"Nanadino tenim-pitsipika\" (ho avy). Hanteraka link hamerina ho any email na SMS.",
       "q18": "Afaka novaina email/telefaona aho?",
       "a18": "Eny, ao amin'ny fikirakirana (ikona engrenage ambony ankavanana > Fidirana > hanova)."
-    }
+    },
+    "quickLinksDesc": {
+      "evaluation": "Manao fanombanana 5 fanontaniana mba hahatakarana ny toetranao",
+      "forum": "Miditra amin'ny vondrona miresaka tsy fantatra (faharerahan-tsaina, fitokisana tena, fahadiovana)",
+      "chat": "Miresaka 24/24 amin'ny IA amin'ny frantsay, malagasy, na anglisy",
+      "resources": "Fanaovana aina, scan vatana, lahatsoratra ary torolalana mahomby",
+      "annuaire": "Hitady psikolojia na psykiatri voamarina akaiky anao",
+      "premium": "Maka fanaraha-maso matihanina: 1 na 2 fanompoana 2 ora isan-kerinandro"
+    },
+    "modalIntro": "Fidirana vitsivitsy amin'ny fampiasa fototra sy fanohana"
   }
 }
