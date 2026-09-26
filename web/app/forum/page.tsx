@@ -1,145 +1,71 @@
 "use client";
 
-import { useState } from "react";
-import { Plus, MessageCircle, Users, Heart, ArrowRight } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Heart, MessageCircle, Plus, Send, Users } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
+import { apiFetch } from "@/lib/api";
+import { useSession } from "@/lib/context/SessionContext";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
-import { Button, ButtonLink } from "@/components/ui/Button";
-import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/Field";
 
-type Topic = {
-  id: string;
-  name: string;
-  participants: number;
-  icon: "depression" | "esteem" | "sobriety";
-  href: string;
-};
-
-const TOPICS: Topic[] = [
-  {
-    id: "depression",
-    name: "forum.topics.depression",
-    participants: 15,
-    icon: "depression",
-    href: "/forum/depression",
-  },
-  {
-    id: "esteem",
-    name: "forum.topics.esteem",
-    participants: 15,
-    icon: "esteem",
-    href: "/forum/esteem",
-  },
-  {
-    id: "sobriety",
-    name: "forum.topics.sobriety",
-    participants: 15,
-    icon: "sobriety",
-    href: "/forum/sobriety",
-  },
-];
-
-function TopicIcon({ type, className }: { type: Topic["icon"]; className?: string }) {
-  const icons = {
-    depression: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M17 18a5 5 0 0 0-10 0" />
-        <path d="M12 2a10 10 0 1 0 10 10" />
-        <path d="M12 6v6l4 2" />
-      </svg>
-    ),
-    esteem: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-        <path d="M12 5 9.04 7.96a2.17 2.17 0 0 0 0 3.08v0c.82.82 2.13.85 3 .07l2.07-1.9a2.82 2.82 0 0 1 3.79 0l2.96 2.66" />
-        <path d="m18 15-2-2" />
-        <path d="m15 18-2-2" />
-      </svg>
-    ),
-    sobriety: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-        <path d="M12 2a10 10 0 1 0 10 10" />
-        <path d="M12 6v6l4 2" />
-        <path d="M14 14a4 4 0 1 1-8 0" />
-        <path d="M12 14v4" />
-        <path d="M10 18h4" />
-      </svg>
-    ),
-  };
-
-  return (
-    <span className={cn("inline-flex h-10 w-10 items-center justify-center rounded-xl text-emerald-600 bg-emerald-50", className)}>
-      {icons[type]}
-    </span>
-  );
-}
+type Category = { id: string; slug: string; labelFr: string; labelMg: string; description: string };
+type Reaction = { type: string; count: number; active: boolean };
+type Post = { id: string; pseudonym: string; content: string; categoryId: string; repliesCount: number; reactions: Reaction[]; createdAt: string; isMine: boolean };
+type CategoriesResponse = { categories: Category[] };
+type PostsResponse = { items: Post[] };
 
 export default function ForumPage() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const { ensureSession } = useSession();
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selected, setSelected] = useState<Category | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [content, setContent] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
 
-  return (
-    <Container size="wide" className="animate-fade-rise flex flex-col gap-8 py-10 sm:py-12">
-      <PageHeader
-        title={t.forum.pageTitle}
-        subtitle={t.forum.pageSubtitle}
-        actions={
-          <Button variant="ghost" size="sm" className="text-ink-muted hover:text-ink">
-            <Plus size={16} aria-hidden />
-            {t.forum.newTopic}
-          </Button>
-        }
-      />
+  useEffect(() => { void apiFetch<CategoriesResponse>("/api/forum/categories", { auth: false }).then((data) => { setCategories(data.categories); setSelected(data.categories[0] ?? null); }).catch((cause) => setError(cause instanceof Error ? cause.message : "Forum indisponible.")).finally(() => setLoading(false)); }, []);
+  useEffect(() => {
+    if (!selected) return;
+    void apiFetch<PostsResponse>(`/api/forum/posts?category=${encodeURIComponent(selected.slug)}&limit=50`, { auth: false })
+      .then((data) => { setPosts(data.items); setError(""); })
+      .catch((cause) => setError(cause instanceof Error ? cause.message : "Publications indisponibles."));
+  }, [selected]);
 
-      <section aria-labelledby="topics-heading" className="flex flex-col gap-6">
-        <h2 id="topics-heading" className="sr-only">
-          {t.forum.topicsTitle}
-        </h2>
+  const publish = async () => {
+    if (!selected || !content.trim()) return;
+    setSending(true); setError("");
+    try {
+      await ensureSession(lang === "mg" ? "mg" : "fr");
+      const result = await apiFetch<{ post: Post }>("/api/forum/posts", { method: "POST", body: JSON.stringify({ categoryId: selected.id, content: content.trim() }) });
+      setPosts((current) => [result.post, ...current]); setContent("");
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "La publication n'a pas pu être envoyée."); }
+    finally { setSending(false); }
+  };
+  const react = async (post: Post) => {
+    try {
+      await ensureSession(lang === "mg" ? "mg" : "fr");
+      await apiFetch(`/api/forum/posts/${post.id}/react`, { method: "POST", body: JSON.stringify({ type: "support" }) });
+      const refreshed = await apiFetch<PostsResponse>(`/api/forum/posts?category=${encodeURIComponent(selected?.slug ?? "")}&limit=50`, { auth: false });
+      setPosts(refreshed.items);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : "La réaction n'a pas été enregistrée."); }
+  };
 
-        <ul className="flex flex-col gap-4" role="list">
-          {TOPICS.map((topic) => (
-            <li key={topic.id}>
-              <a
-                href={topic.href}
-                className={cn(
-                  "group flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 transition-all duration-200",
-                  "hover:border-emerald-200 hover:bg-emerald-50/50 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                )}
-              >
-                <TopicIcon type={topic.icon} className="flex-shrink-0 group-hover:scale-105 transition-transform duration-200" />
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base font-semibold text-ink group-hover:text-emerald-700 transition-colors">
-                    {t.forum.topics[topic.name as keyof typeof t.forum.topics]}
-                  </h3>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
-                    <Users size={14} aria-hidden />
-                    <span>{topic.participants} {t.forum.participants}</span>
-                  </div>
-                </div>
-                <ArrowRight
-                  size={20}
-                  className="flex-shrink-0 text-ink-subtle group-hover:text-emerald-600 transition-colors"
-                  aria-hidden
-                />
-              </a>
-            </li>
-          ))}
-        </ul>
-
-        <div className="pt-4">
-          <ButtonLink
-            href="/forum/nouveau"
-            className={cn(
-              "w-full sm:w-auto gap-2 bg-emerald-600 hover:bg-emerald-700 text-white shadow-[0_4px_14px_rgb(16,185,129)/0.3]",
-              "h-12 px-6 text-base font-semibold"
-            )}
-          >
-            <Plus size={18} aria-hidden />
-            {t.forum.createTopic}
-          </ButtonLink>
-        </div>
-      </section>
-    </Container>
-  );
+  return <Container size="wide" className="animate-fade-rise flex flex-col gap-7 py-10 sm:py-12">
+    <PageHeader title={t.forum.pageTitle} subtitle={t.forum.pageSubtitle} />
+    {error && <p role="alert" className="rounded-xl bg-danger-soft p-4 text-sm text-danger">{error}</p>}
+    <div className="grid gap-4 lg:grid-cols-[290px_1fr]">
+      <Card className="gap-2 p-3"><p className="px-2 pb-1 text-sm font-semibold text-ink">{t.forum.topicsTitle}</p>{loading ? <p className="p-2 text-sm text-ink-muted">Chargement…</p> : categories.map((category) => <button key={category.id} type="button" onClick={() => setSelected(category)} className={`rounded-xl p-3 text-left transition-colors ${selected?.id === category.id ? "bg-brand-softer text-brand" : "text-ink-muted hover:bg-surface-2"}`}><span className="block text-sm font-semibold">{lang === "mg" ? category.labelMg : category.labelFr}</span><span className="mt-1 block text-xs leading-relaxed">{category.description}</span></button>)}</Card>
+      <div className="flex flex-col gap-4">
+        {selected && <Card className="gap-3 p-5"><div className="flex items-center gap-2"><Users size={17} className="text-brand" /><h2 className="font-semibold text-ink">{lang === "mg" ? selected.labelMg : selected.labelFr}</h2><Badge tone="brand">{posts.length}</Badge></div><Textarea value={content} onChange={(event) => setContent(event.target.value)} rows={3} maxLength={2000} placeholder={t.forum.messagePlaceholder} /><div className="flex justify-end"><Button onClick={() => void publish()} disabled={!content.trim() || sending} loading={sending}><Plus size={16} />Publier anonymement</Button></div></Card>}
+        {posts.length === 0 && selected && <Card className="p-6 text-sm text-ink-muted">Aucune publication pour le moment. Tu peux ouvrir la discussion de façon anonyme.</Card>}
+        {posts.map((post) => { const support = post.reactions.find((reaction) => reaction.type === "support"); return <Card key={post.id} className="gap-3 p-5"><div className="flex items-center gap-2"><span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-soft text-xs font-bold text-brand">{post.pseudonym.charAt(0)}</span><div><p className="text-sm font-semibold text-ink">{post.pseudonym}</p><p className="text-xs text-ink-muted">{new Date(post.createdAt).toLocaleString(lang === "mg" ? "fr-FR" : lang)}</p></div></div><p className="whitespace-pre-wrap text-sm leading-relaxed text-ink">{post.content}</p><div className="flex gap-3"><button type="button" onClick={() => void react(post)} className={`inline-flex items-center gap-1.5 text-xs font-medium ${support?.active ? "text-brand" : "text-ink-muted"}`}><Heart size={15} fill={support?.active ? "currentColor" : "none"} />{support?.count ?? 0}</button><span className="inline-flex items-center gap-1.5 text-xs text-ink-muted"><MessageCircle size={15} />{post.repliesCount}</span></div></Card>; })}
+      </div>
+    </div>
+  </Container>;
 }

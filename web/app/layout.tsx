@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { LangProvider } from "@/lib/context/LangContext";
 import { ThemeProvider } from "@/lib/context/ThemeContext";
+import { SessionProvider } from "@/lib/context/SessionContext";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { AppFooter } from "@/components/layout/AppFooter";
 
@@ -30,14 +31,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="flex min-h-dvh flex-col">
         <ThemeProvider>
           <LangProvider>
-            <a href="#contenu" className="skip-link">
-              Aller au contenu principal
-            </a>
-            <AppHeader />
-            <main id="contenu" className="flex flex-1 flex-col">
-              {children}
-            </main>
-            <AppFooter />
+            <SessionProvider>
+              <a href="#contenu" className="skip-link">
+                Aller au contenu principal
+              </a>
+              <AppHeader />
+              <main id="contenu" className="flex flex-1 flex-col">
+                {children}
+              </main>
+              <AppFooter />
+            </SessionProvider>
           </LangProvider>
         </ThemeProvider>
       </body>
