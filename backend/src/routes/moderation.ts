@@ -81,7 +81,8 @@ export function createModerationRoutes(deps: { repos: Repos; config: AppConfig }
       if (report.targetType === "post") {
         await deps.repos.forum.updatePost(report.targetId, patch);
       } else {
-        // Les réponses sont masquées via leur publication parente.
+        // Masquer la réponse elle-même et signaler la publication parente.
+        await deps.repos.forum.updateReply(report.targetId, patch);
         const reply = await deps.repos.forum.findReply(report.targetId);
         if (reply) {
           await deps.repos.forum.updatePost(reply.postId, { isFlagged: true });

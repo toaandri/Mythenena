@@ -64,7 +64,7 @@ export default function InscriptionPage() {
 
     setLoading(true);
     try {
-      await ensureSession(lang === "mg" ? "mg" : "fr");
+      await ensureSession(lang === "mg" ? "mg" : "fr", form.pseudo.trim());
       setSuccess(true);
       setTimeout(() => router.push("/"), 800);
     } catch (err) {

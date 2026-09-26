@@ -12,9 +12,5 @@
     "dev:backend": "npm run dev --workspace=backend",
     "dev:web": "npm run dev --workspace=web",
     "dev:mobile": "npm run start --workspace=mobile"
-  },
-  "dependencies": {
-    "expo-device": "~57.0.2",
-    "expo-notifications": "~57.0.21"
   }
 }

@@ -283,6 +283,12 @@ export function createFakeRepos(data: FakeData): Repos {
         Object.assign(row, patch, { updatedAt: now() });
         return row;
       },
+      async updateReply(id, patch) {
+        const row = data.replies.find((entry) => entry.id === id);
+        if (!row) return undefined;
+        Object.assign(row, patch);
+        return row;
+      },
       async deletePost(id) {
         const before = data.posts.length;
         data.posts = data.posts.filter((row) => row.id !== id);

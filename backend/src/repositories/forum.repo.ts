@@ -65,6 +65,7 @@ export interface ForumRepo {
   createPost(data: NewForumPost): Promise<ForumPostRow>;
   findPost(id: string): Promise<ForumPostRow | undefined>;
   updatePost(id: string, patch: ModerationPatch): Promise<ForumPostRow | undefined>;
+  updateReply(id: string, patch: ModerationPatch): Promise<ForumReplyRow | undefined>;
   deletePost(id: string): Promise<boolean>;
   listPosts(params: PostListParams): Promise<{ items: PostWithMeta[]; total: number }>;
   listPostsByAuthor(sessionId: string, limit: number, offset: number): Promise<ForumPostRow[]>;
@@ -143,6 +144,15 @@ export function createForumRepo(db: DB): ForumRepo {
         .update(forumPosts)
         .set({ ...patch, updatedAt: new Date() })
         .where(eq(forumPosts.id, id))
+        .returning();
+      return row;
+    },
+
+    async updateReply(id, patch) {
+      const [row] = await db
+        .update(forumReplies)
+        .set(patch)
+        .where(eq(forumReplies.id, id))
         .returning();
       return row;
     },

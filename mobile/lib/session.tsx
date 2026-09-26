@@ -13,14 +13,14 @@ type SessionContextValue = {
   session: AnonymousSession | null;
   loading: boolean;
   ensureSession: (language?: 'fr' | 'mg', pseudonym?: string) => Promise<AnonymousSession>;
-  clearSession: () => void;
+  clearSession: () => Promise<void>;
 };
 
 const SessionContext = createContext<SessionContextValue>({
   session: null,
   loading: true,
   ensureSession: async () => { throw new Error('SessionProvider absent'); },
-  clearSession: () => {},
+  clearSession: async () => {},
 });
 
 export function SessionProvider({ children }: { children: ReactNode }) {

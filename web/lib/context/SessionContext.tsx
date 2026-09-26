@@ -14,7 +14,7 @@ export type AnonymousSession = {
 type SessionContextValue = {
   session: AnonymousSession | null;
   loading: boolean;
-  ensureSession: (language?: "fr" | "mg") => Promise<AnonymousSession>;
+  ensureSession: (language?: "fr" | "mg", pseudonym?: string) => Promise<AnonymousSession>;
   clearSession: () => void;
 };
 
@@ -41,12 +41,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       .finally(() => setLoading(false));
   }, []);
 
-  const ensureSession = useCallback(async (language: "fr" | "mg" = "fr") => {
+  const ensureSession = useCallback(async (language: "fr" | "mg" = "fr", pseudonym?: string) => {
     if (session && getSessionToken()) return session;
     const created = await apiFetch<{ token: string; session: AnonymousSession }>("/api/session/start", {
       method: "POST",
       auth: false,
-      body: JSON.stringify({ language, retainHistory: true }),
+      body: JSON.stringify({ language, retainHistory: true, ...(pseudonym ? { pseudonym } : {}) }),
     });
     setSessionToken(created.token);
     setSession(created.session);

@@ -52,7 +52,7 @@ export default function ConnexionPage() {
 
     setLoading(true);
     try {
-      await ensureSession(lang === "mg" ? "mg" : "fr");
+      await ensureSession(lang === "mg" ? "mg" : "fr", identifier.trim().slice(0, 32));
       setSuccess(true);
       setTimeout(() => router.push("/"), 800);
     } catch (err) {
