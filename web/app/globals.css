@@ -10,23 +10,23 @@
     --font-display: "Fraunces", "Inter", ui-serif, Georgia, serif;
 
     /* Surfaces */
-    --bg: 240 247 245;
+    --bg: 248 246 240;
     --surface: 255 255 255;
-    --surface-2: 246 250 249;
-    --surface-3: 235 243 241;
+    --surface-2: 242 242 233;
+    --surface-3: 230 237 229;
 
     /* Lignes */
     --line: 224 234 232;
     --line-strong: 205 220 216;
 
     /* Texte */
-    --ink: 21 42 38;
-    --ink-muted: 92 118 113;
-    --ink-subtle: 128 152 147;
+    --ink: 24 62 54;
+    --ink-muted: 81 105 95;
+    --ink-subtle: 99 117 108;
 
     /* Marque */
-    --brand: 74 155 142;
-    --brand-hover: 48 122 111;
+    --brand: 39 102 83;
+    --brand-hover: 24 62 54;
     --brand-soft: 225 241 237;
     --brand-softer: 240 248 246;
     --brand-line: 194 221 217;
@@ -125,6 +125,7 @@
   h1, h2, h3, h4 {
     text-wrap: balance;
   }
+  h1, h2 { font-family: var(--font-display); }
 
   p {
     text-wrap: pretty;

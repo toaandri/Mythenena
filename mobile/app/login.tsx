@@ -4,48 +4,39 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/lib/i18n';
+import { useSession } from '@/lib/session';
 
 export default function LoginScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const { ensureSession } = useSession();
 
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [pseudonym, setPseudonym] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const isEmail = identifier.includes('@');
-  const isPhone = /^[\d\s+\-]{8,}$/.test(identifier);
 
   const handleSubmit = async () => {
     setError('');
     setSuccess(false);
 
-    if (!identifier.trim() || !password) {
-      setError(t('login.error.required'));
-      return;
-    }
-
-    if (!isEmail && !isPhone) {
-      setError(t('login.error.invalidIdentifier'));
+    const name = pseudonym.trim();
+    if (!name || name.length < 3) {
+      setError('Le pseudonyme doit contenir au moins 3 caractères.');
       return;
     }
 
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-
-    if (identifier.trim() && password) {
+    try {
+      await ensureSession(language === 'mg' ? 'mg' : 'fr', name);
       setSuccess(true);
+      setTimeout(() => router.replace('/(tabs)'), 800);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Connexion impossible. Vérifiez votre connexion.');
+    } finally {
       setLoading(false);
-      setTimeout(() => router.replace('/(tabs)'), 1500);
-      return;
     }
-
-    setError(t('login.error.invalidCredentials'));
-    setLoading(false);
   };
 
   return (
@@ -68,72 +59,46 @@ export default function LoginScreen() {
       >
         <View style={styles.heroCard}>
           <View style={styles.iconWrap}>
-            <Ionicons name="log-in-outline" size={20} color="#2d9c86" />
+            <Ionicons name="leaf-outline" size={22} color="#2d9c86" />
           </View>
           <Text style={styles.title}>{t('login.title')}</Text>
-          <Text style={styles.subtitle}>{t('login.subtitle')}</Text>
+          <Text style={styles.subtitle}>Choisissez un pseudonyme pour accéder à votre espace. Votre identité reste anonyme.</Text>
 
           {success && (
             <View style={styles.successBanner}>
               <Ionicons name="checkmark-circle" size={18} color="#2d9c86" />
-              <Text style={styles.successText}>{t('login.success')}</Text>
+              <Text style={styles.successText}>Bienvenue ! Redirection en cours...</Text>
             </View>
           )}
 
-          {error && (
+          {error !== '' && (
             <View style={styles.errorBanner}>
               <Ionicons name="alert-circle" size={18} color="#d65b5b" />
               <Text style={styles.errorText}>{error}</Text>
             </View>
           )}
 
-          <Text style={styles.sectionLabel}>{t('login.identifierLabel')}</Text>
+          <Text style={styles.sectionLabel}>Votre pseudonyme</Text>
           <View style={styles.inputWrap}>
-            <Ionicons name={isEmail ? 'mail-outline' : 'call-outline'} size={18} color="#7a8a85" />
+            <Ionicons name="person-outline" size={18} color="#7a8a85" />
             <TextInput
-              value={identifier}
+              value={pseudonym}
               onChangeText={(value) => {
-                setIdentifier(value);
+                setPseudonym(value);
                 if (error) setError('');
               }}
-              placeholder={isEmail ? 'vous@exemple.com' : '+261 3X XX XX XX'}
+              placeholder="Ex: Lotus, Nuage, Horizon..."
               placeholderTextColor="#7a8a85"
               autoCapitalize="none"
               autoCorrect={false}
-              keyboardType={isEmail ? 'email-address' : 'phone-pad'}
               style={styles.input}
               editable={!success}
+              maxLength={32}
             />
           </View>
-
-          <Text style={styles.sectionLabel}>{t('login.passwordLabel')}</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name="lock-closed-outline" size={18} color="#7a8a85" />
-            <TextInput
-              value={password}
-              onChangeText={(value) => {
-                setPassword(value);
-                if (error) setError('');
-              }}
-              placeholder={t('login.passwordPlaceholder')}
-              placeholderTextColor="#7a8a85"
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
-              style={[styles.input, styles.inputWithAction]}
-              editable={!success}
-            />
-            <TouchableOpacity onPress={() => setShowPassword((value) => !value)} activeOpacity={0.8}>
-              <Ionicons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={18}
-                color="#6b7a76"
-              />
-            </TouchableOpacity>
-          </View>
-
-          <TouchableOpacity style={styles.linkButton} activeOpacity={0.85} onPress={() => router.push('/settings/security')}>
-            <Text style={styles.linkText}>{t('login.forgot')}</Text>
-          </TouchableOpacity>
+          <Text style={styles.helperText}>
+            3 à 32 caractères. Aucune information personnelle requise.
+          </Text>
         </View>
 
         <TouchableOpacity
@@ -143,7 +108,7 @@ export default function LoginScreen() {
           disabled={loading || success}
         >
           <Text style={styles.primaryButtonText}>
-            {loading ? t('common.loading') : t('login.submit')}
+            {loading ? 'Connexion...' : "Accéder à l'application"}
           </Text>
           {!loading && <Ionicons name="arrow-forward" size={18} color="#ffffff" />}
         </TouchableOpacity>
@@ -154,8 +119,6 @@ export default function LoginScreen() {
             <Text style={styles.footerLink}>{t('login.signupLink')}</Text>
           </TouchableOpacity>
         </View>
-
-        <Text style={styles.demoNote}>{t('login.demoNote')}</Text>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -195,7 +158,8 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
+    letterSpacing: -0.4,
   },
   content: {
     paddingHorizontal: 18,
@@ -214,19 +178,19 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   iconWrap: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
+    width: 44,
+    height: 44,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#e7f6f0',
-    marginBottom: 12,
+    marginBottom: 14,
   },
   title: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#1a2320',
-    letterSpacing: -0.3,
+    color: '#183e36',
+    letterSpacing: -0.5,
   },
   subtitle: {
     marginTop: 6,
@@ -268,7 +232,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '800',
     color: '#2d9c86',
-    marginTop: 16,
+    marginTop: 18,
     marginBottom: 8,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
@@ -287,35 +251,29 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 15,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '600',
   },
-  inputWithAction: {
-    paddingRight: 4,
-  },
-  linkButton: {
-    marginTop: 14,
-    alignSelf: 'flex-end',
-  },
-  linkText: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#2d9c86',
+  helperText: {
+    marginTop: 8,
+    fontSize: 11,
+    color: '#7a8a85',
+    lineHeight: 16,
   },
   primaryButton: {
     flexDirection: 'row',
-    marginTop: 18,
-    backgroundColor: '#2d9c86',
+    marginTop: 20,
+    backgroundColor: '#276653',
     borderRadius: 16,
     paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
-    shadowColor: '#2d9c86',
+    shadowColor: '#276653',
     shadowOffset: { width: 0, height: 7 },
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    elevation: 3,
+    shadowOpacity: 0.22,
+    shadowRadius: 14,
+    elevation: 4,
   },
   primaryButtonDisabled: {
     opacity: 0.6,
@@ -326,7 +284,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   footerRow: {
-    marginTop: 18,
+    marginTop: 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -339,12 +297,6 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#2d9c86',
-  },
-  demoNote: {
-    marginTop: 14,
-    textAlign: 'center',
-    fontSize: 11,
-    color: '#7a8a85',
+    color: '#276653',
   },
 });

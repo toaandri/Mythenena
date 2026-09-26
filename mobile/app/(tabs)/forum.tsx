@@ -1,85 +1,109 @@
-import React, { useMemo, useState } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, TextInput } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
 import { useI18n } from '@/lib/i18n';
+import { useSession } from '@/lib/session';
+import { apiFetch } from '@/lib/api';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
+type Category = { id: string; slug: string; labelFr: string; labelMg: string; description: string; icon?: string };
+type Post = {
+  id: string;
+  pseudonym: string;
+  content: string;
+  repliesCount: number;
+  reactions: Array<{ type: string; count: number; active: boolean }>;
+  createdAt: string;
+};
+
 export default function ForumTab() {
-  const router = useRouter();
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const { ensureSession } = useSession();
   const insets = useSafeAreaInsets();
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [subjectName, setSubjectName] = useState('');
-  const [subjectBio, setSubjectBio] = useState('');
-  const [subjectType, setSubjectType] = useState<'share' | 'students' | 'motivation'>('motivation');
-  const [customPosts, setCustomPosts] = useState<Array<{ id: string; title: string; excerpt: string; people: string; updates: string; tag: string }>>([]);
 
-  const posts = [
-    {
-      id: 'default-1',
-      title: t('forum.post1.title'),
-      excerpt: t('forum.post1.excerpt'),
-      people: t('forum.people.12'),
-      updates: t('forum.updates.4'),
-      tag: t('forum.tag.share'),
-    },
-    {
-      id: 'default-2',
-      title: t('forum.post2.title'),
-      excerpt: t('forum.post2.excerpt'),
-      people: t('forum.people.8'),
-      updates: t('forum.updates.2'),
-      tag: t('forum.tag.students'),
-    },
-    {
-      id: 'default-3',
-      title: t('forum.post3.title'),
-      excerpt: t('forum.post3.excerpt'),
-      people: t('forum.people.15'),
-      updates: t('forum.updates.6'),
-      tag: t('forum.tag.motivation'),
-    },
-  ];
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selected, setSelected] = useState<Category | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [content, setContent] = useState('');
+  const [showForm, setShowForm] = useState(false);
+  const [error, setError] = useState('');
+  const [loadingCats, setLoadingCats] = useState(true);
+  const [loadingPosts, setLoadingPosts] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const typeOptions = useMemo(
-    () => [
-      { value: 'share' as const, label: t('forum.tag.share') },
-      { value: 'students' as const, label: t('forum.tag.students') },
-      { value: 'motivation' as const, label: t('forum.tag.motivation') },
-    ],
-    [t]
-  );
+  // Charger catégories
+  useEffect(() => {
+    void apiFetch<{ categories: Category[] }>('/api/forum/categories', { auth: false })
+      .then(({ categories: cats }) => {
+        setCategories(cats);
+        setSelected(cats[0] ?? null);
+      })
+      .catch(() => setError('Forum temporairement indisponible.'))
+      .finally(() => setLoadingCats(false));
+  }, []);
 
-  const allPosts = [...customPosts, ...posts];
-
-  const createSubject = () => {
-    const title = subjectName.trim();
-    const bio = subjectBio.trim();
-
-    if (!title || !bio) {
-      return;
+  // Charger posts quand la catégorie change
+  const loadPosts = useCallback(async (cat: Category | null) => {
+    if (!cat) return;
+    setLoadingPosts(true);
+    try {
+      const data = await apiFetch<{ items: Post[] }>(
+        `/api/forum/posts?category=${encodeURIComponent(cat.slug)}&limit=50`,
+        { auth: false }
+      );
+      setPosts(data.items);
+    } catch {
+      setError('Publications indisponibles.');
+    } finally {
+      setLoadingPosts(false);
     }
+  }, []);
 
-    const optionLabel = typeOptions.find((option) => option.value === subjectType)?.label ?? t('forum.tag.motivation');
+  useEffect(() => {
+    void loadPosts(selected);
+  }, [selected, loadPosts]);
 
-    setCustomPosts((current) => [
-      {
-        id: `custom-${Date.now()}`,
-        title,
-        excerpt: bio,
-        people: t('forum.people.1'),
-        updates: t('forum.updates.0'),
-        tag: optionLabel,
-      },
-      ...current,
-    ]);
-
-    setSubjectName('');
-    setSubjectBio('');
-    setSubjectType('motivation');
-    setShowCreateForm(false);
+  const publish = async () => {
+    if (!selected || !content.trim()) return;
+    setSending(true);
+    setError('');
+    try {
+      await ensureSession(language === 'mg' ? 'mg' : 'fr');
+      const { post } = await apiFetch<{ post: Post }>('/api/forum/posts', {
+        method: 'POST',
+        body: JSON.stringify({ categoryId: selected.id, content: content.trim() }),
+      });
+      setPosts((prev) => [post, ...prev]);
+      setContent('');
+      setShowForm(false);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Publication impossible.');
+    } finally {
+      setSending(false);
+    }
   };
+
+  const react = async (post: Post) => {
+    try {
+      await ensureSession(language === 'mg' ? 'mg' : 'fr');
+      await apiFetch(`/api/forum/posts/${post.id}/react`, {
+        method: 'POST',
+        body: JSON.stringify({ type: 'support' }),
+      });
+      void loadPosts(selected);
+    } catch {
+      // silencieux
+    }
+  };
+
+  const getCategoryLabel = (cat: Category) =>
+    language === 'mg' ? cat.labelMg : cat.labelFr;
+
+  const supportCount = (post: Post) =>
+    post.reactions.find((r) => r.type === 'support')?.count ?? 0;
+
+  const hasReacted = (post: Post) =>
+    post.reactions.find((r) => r.type === 'support')?.active ?? false;
 
   return (
     <View style={[styles.screen, { paddingTop: Math.max(insets.top + 8, 18) }]}>
@@ -89,246 +113,208 @@ export default function ForumTab() {
         <Text style={styles.headerSubtitle}>{t('forum.subtitle')}</Text>
       </View>
 
+      {/* Catégories */}
+      {!loadingCats && categories.length > 0 && (
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.catRow}>
+          {categories.map((cat) => (
+            <TouchableOpacity
+              key={cat.id}
+              style={[styles.catPill, selected?.id === cat.id && styles.catPillActive]}
+              onPress={() => setSelected(cat)}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.catPillText, selected?.id === cat.id && styles.catPillTextActive]}>
+                {getCategoryLabel(cat)}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      )}
+
+      {error !== '' && (
+        <View style={styles.errorBanner}>
+          <Ionicons name="alert-circle-outline" size={16} color="#c53030" />
+          <Text style={styles.errorText}>{error}</Text>
+        </View>
+      )}
+
       <ScrollView contentContainerStyle={styles.listContainer} showsVerticalScrollIndicator={false}>
+        {/* Bouton publier */}
         <TouchableOpacity
           style={styles.createButton}
           activeOpacity={0.85}
-          onPress={() => setShowCreateForm((current) => !current)}
+          onPress={() => setShowForm((v) => !v)}
         >
-          <Ionicons name="add-circle-outline" size={18} color="#ffffff" />
-          <Text style={styles.createButtonText}>{t('forum.createButton')}</Text>
+          <Ionicons name={showForm ? 'close-circle-outline' : 'add-circle-outline'} size={18} color="#ffffff" />
+          <Text style={styles.createButtonText}>
+            {showForm ? 'Annuler' : t('forum.createButton')}
+          </Text>
         </TouchableOpacity>
 
-        {showCreateForm && (
+        {/* Formulaire */}
+        {showForm && (
           <View style={styles.createCard}>
-            <Text style={styles.createTitle}>{t('forum.form.title')}</Text>
-
-            <Text style={styles.inputLabel}>{t('forum.form.name')}</Text>
-            <TextInput
-              style={styles.input}
-              value={subjectName}
-              onChangeText={setSubjectName}
-              placeholder={t('forum.form.namePlaceholder')}
-              placeholderTextColor="#95a09b"
-            />
-
-            <Text style={styles.inputLabel}>{t('forum.form.type')}</Text>
-            <View style={styles.typeRow}>
-              {typeOptions.map((option) => (
-                <TouchableOpacity
-                  key={option.value}
-                  style={[styles.typePill, subjectType === option.value && styles.typePillActive]}
-                  onPress={() => setSubjectType(option.value)}
-                  activeOpacity={0.85}
-                >
-                  <Text style={[styles.typePillText, subjectType === option.value && styles.typePillTextActive]}>{option.label}</Text>
-                </TouchableOpacity>
-              ))}
-            </View>
-
-            <Text style={styles.inputLabel}>{t('forum.form.bio')}</Text>
+            <Text style={styles.createTitle}>Partager avec la communauté</Text>
             <TextInput
               style={[styles.input, styles.textarea]}
-              value={subjectBio}
-              onChangeText={setSubjectBio}
-              placeholder={t('forum.form.bioPlaceholder')}
+              value={content}
+              onChangeText={setContent}
+              placeholder="Exprimez-vous librement, dans le respect et la bienveillance..."
               placeholderTextColor="#95a09b"
               multiline
               textAlignVertical="top"
+              maxLength={2000}
             />
-
-            <TouchableOpacity style={styles.submitButton} onPress={createSubject} activeOpacity={0.86}>
-              <Text style={styles.submitButtonText}>{t('forum.form.submit')}</Text>
+            <TouchableOpacity
+              style={[styles.submitButton, (sending || !content.trim()) && styles.submitButtonDisabled]}
+              onPress={publish}
+              activeOpacity={0.86}
+              disabled={sending || !content.trim()}
+            >
+              {sending
+                ? <ActivityIndicator size="small" color="#fff" />
+                : <Text style={styles.submitButtonText}>{t('forum.form.submit')}</Text>
+              }
             </TouchableOpacity>
           </View>
         )}
 
-        {allPosts.map((post) => (
-          <TouchableOpacity
-            key={post.id}
-            style={styles.threadButton}
-            activeOpacity={0.8}
-            onPress={() => router.push('/annuaire?newForum=1')}
-          >
-            <View style={styles.previewTopRow}>
-              <View style={styles.tagBadge}>
-                <Text style={styles.tagText}>{post.tag}</Text>
+        {/* Loading */}
+        {loadingPosts && (
+          <View style={styles.loadingCard}>
+            <ActivityIndicator size="small" color="#276653" />
+          </View>
+        )}
+
+        {/* Posts */}
+        {!loadingPosts && posts.map((post) => (
+          <View key={post.id} style={styles.threadCard}>
+            <View style={styles.postMeta}>
+              <View style={styles.avatar}>
+                <Text style={styles.avatarText}>{post.pseudonym.charAt(0).toUpperCase()}</Text>
               </View>
-              <Ionicons name="chevron-forward" size={16} color="#97a19d" />
-            </View>
-            <Text style={styles.postTitle}>{post.title}</Text>
-            <Text style={styles.postExcerpt}>{post.excerpt}</Text>
-            <View style={styles.previewBottomRow}>
-              <View style={styles.previewMetaRow}>
-                <View style={styles.metaItem}>
-                  <Ionicons name="people-outline" size={13} color="#6c7672" />
-                  <Text style={styles.metaText}>{post.people}</Text>
-                </View>
-                <View style={styles.metaItem}>
-                  <Ionicons name="chatbubble-ellipses-outline" size={13} color="#6c7672" />
-                  <Text style={styles.metaText}>{post.updates}</Text>
-                </View>
-              </View>
-              <View style={styles.openPill}>
-                <Text style={styles.openPillText}>{t('forum.open')}</Text>
+              <View style={styles.metaInfo}>
+                <Text style={styles.pseudonym}>{post.pseudonym}</Text>
+                <Text style={styles.postTime}>
+                  {new Date(post.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
+                </Text>
               </View>
             </View>
-          </TouchableOpacity>
+
+            <Text style={styles.postContent}>{post.content}</Text>
+
+            <View style={styles.postActions}>
+              <TouchableOpacity
+                style={[styles.actionBtn, hasReacted(post) && styles.actionBtnActive]}
+                onPress={() => react(post)}
+                activeOpacity={0.8}
+              >
+                <Ionicons name={hasReacted(post) ? 'heart' : 'heart-outline'} size={15} color={hasReacted(post) ? '#d65b5b' : '#6b7571'} />
+                <Text style={[styles.actionText, hasReacted(post) && styles.actionTextActive]}>
+                  {supportCount(post) > 0 ? supportCount(post).toString() : 'Soutenir'}
+                </Text>
+              </TouchableOpacity>
+
+              <View style={styles.actionBtn}>
+                <Ionicons name="chatbubble-ellipses-outline" size={15} color="#6b7571" />
+                <Text style={styles.actionText}>{post.repliesCount > 0 ? `${post.repliesCount} réponse${post.repliesCount > 1 ? 's' : ''}` : 'Répondre'}</Text>
+              </View>
+            </View>
+          </View>
         ))}
+
+        {!loadingPosts && posts.length === 0 && !error && (
+          <View style={styles.emptyCard}>
+            <Ionicons name="chatbubbles-outline" size={28} color="#8a9490" />
+            <Text style={styles.emptyTitle}>Soyez le premier à partager</Text>
+            <Text style={styles.emptySubtitle}>Cette communauté vous attend. Votre témoignage peut aider quelqu'un.</Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  screen: {
-    flex: 1,
-    backgroundColor: '#eef2ef',
-  },
+  screen: { flex: 1, backgroundColor: '#f8f6f0' },
   backgroundBlobTop: {
-    position: 'absolute',
-    top: -80,
-    right: -50,
-    width: 220,
-    height: 220,
-    borderRadius: 110,
+    position: 'absolute', top: -80, right: -50,
+    width: 220, height: 220, borderRadius: 110,
     backgroundColor: 'rgba(45, 156, 134, 0.13)',
   },
-  screenHeader: { paddingHorizontal: 18, marginBottom: 12 },
+  screenHeader: { paddingHorizontal: 18, marginBottom: 10 },
   headerTitle: { fontSize: 36, fontWeight: '800', color: '#18211f', letterSpacing: -0.5 },
   headerSubtitle: { fontSize: 14, color: '#6b7571', marginTop: 2, fontWeight: '500' },
-  listContainer: {
-    marginHorizontal: 18,
-    marginBottom: 84,
-    paddingVertical: 4,
-    gap: 12,
+  catRow: { paddingHorizontal: 18, paddingBottom: 10, gap: 8, flexDirection: 'row' },
+  catPill: {
+    paddingHorizontal: 14, paddingVertical: 7, borderRadius: 999,
+    backgroundColor: '#f0f5f3', borderWidth: 1, borderColor: '#dbe7e2',
   },
+  catPillActive: { backgroundColor: '#276653', borderColor: '#276653' },
+  catPillText: { fontSize: 13, fontWeight: '700', color: '#51695f' },
+  catPillTextActive: { color: '#ffffff' },
+  errorBanner: {
+    flexDirection: 'row', alignItems: 'center', gap: 8,
+    backgroundColor: '#fdecec', marginHorizontal: 18, marginBottom: 8,
+    borderRadius: 12, padding: 10,
+  },
+  errorText: { flex: 1, fontSize: 12, color: '#c53030' },
+  listContainer: { marginHorizontal: 18, marginBottom: 84, paddingVertical: 4, gap: 12 },
   createButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 8,
-    backgroundColor: '#2d9c86',
-    borderRadius: 14,
-    paddingVertical: 12,
-    shadowColor: '#2d9c86',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.16,
-    shadowRadius: 10,
-    elevation: 2,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
+    backgroundColor: '#276653', borderRadius: 14, paddingVertical: 13,
+    shadowColor: '#276653', shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.18, shadowRadius: 10, elevation: 3,
   },
-  createButtonText: {
-    color: '#ffffff',
-    fontSize: 13,
-    fontWeight: '800',
-  },
+  createButtonText: { color: '#ffffff', fontSize: 14, fontWeight: '800' },
   createCard: {
-    backgroundColor: '#ffffff',
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(223, 230, 227, 0.95)',
-    padding: 14,
-    gap: 8,
+    backgroundColor: '#ffffff', borderRadius: 16, borderWidth: 1,
+    borderColor: 'rgba(223, 230, 227, 0.95)', padding: 14, gap: 10,
   },
-  createTitle: {
-    fontSize: 15,
-    fontWeight: '800',
-    color: '#18211f',
-    marginBottom: 4,
-  },
-  inputLabel: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#55635f',
-  },
+  createTitle: { fontSize: 15, fontWeight: '800', color: '#18211f' },
   input: {
-    backgroundColor: '#f4f7f6',
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: '#dbe7e2',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    fontSize: 13,
-    color: '#1b2421',
+    backgroundColor: '#f4f7f6', borderRadius: 12, borderWidth: 1,
+    borderColor: '#dbe7e2', paddingHorizontal: 12, paddingVertical: 10,
+    fontSize: 13, color: '#1b2421',
   },
-  textarea: {
-    minHeight: 84,
-  },
-  typeRow: {
-    flexDirection: 'row',
-    gap: 8,
-    flexWrap: 'wrap',
-  },
-  typePill: {
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: '#eff5f2',
-    borderWidth: 1,
-    borderColor: '#dbe7e2',
-  },
-  typePillActive: {
-    backgroundColor: '#dff2ec',
-    borderColor: '#8ecfbe',
-  },
-  typePillText: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#60706b',
-  },
-  typePillTextActive: {
-    color: '#1f7f6a',
-  },
+  textarea: { minHeight: 100 },
   submitButton: {
-    marginTop: 4,
-    borderRadius: 12,
-    backgroundColor: '#2d9c86',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 11,
+    borderRadius: 12, backgroundColor: '#276653',
+    alignItems: 'center', justifyContent: 'center', paddingVertical: 12,
   },
-  submitButtonText: {
-    color: '#ffffff',
-    fontSize: 13,
-    fontWeight: '800',
+  submitButtonDisabled: { opacity: 0.55 },
+  submitButtonText: { color: '#ffffff', fontSize: 13, fontWeight: '800' },
+  loadingCard: { alignItems: 'center', paddingVertical: 20 },
+  threadCard: {
+    backgroundColor: '#ffffff', borderRadius: 18, padding: 14,
+    borderWidth: 1, borderColor: 'rgba(223, 230, 227, 0.95)',
+    shadowColor: '#1c2b27', shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.05, shadowRadius: 8, elevation: 1, gap: 10,
   },
-  threadButton: {
-    backgroundColor: '#ffffff',
-    borderRadius: 18,
-    padding: 14,
-    borderBottomWidth: 1,
-    borderBottomColor: 'transparent',
-    borderWidth: 1,
-    borderColor: 'rgba(223, 230, 227, 0.95)',
-    shadowColor: '#1c2b27',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
-    elevation: 1,
-    gap: 8,
+  postMeta: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  avatar: {
+    width: 34, height: 34, borderRadius: 17,
+    backgroundColor: '#e6f4ef', alignItems: 'center', justifyContent: 'center',
   },
-  previewTopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  avatarText: { fontSize: 15, fontWeight: '800', color: '#276653' },
+  metaInfo: { flex: 1 },
+  pseudonym: { fontSize: 14, fontWeight: '700', color: '#183e36' },
+  postTime: { fontSize: 11, color: '#8a9490', marginTop: 1 },
+  postContent: { fontSize: 14, color: '#2a3d36', lineHeight: 22 },
+  postActions: { flexDirection: 'row', gap: 12, paddingTop: 4 },
+  actionBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    paddingHorizontal: 12, paddingVertical: 7, borderRadius: 999,
+    backgroundColor: '#f4f8f6',
   },
-  tagBadge: { backgroundColor: '#ecf7f2', alignSelf: 'flex-start', paddingHorizontal: 8, paddingVertical: 3, borderRadius: 8 },
-  tagText: { color: '#2a7567', fontSize: 10, fontWeight: '700' },
-  postTitle: { fontSize: 17, fontWeight: '700', color: '#1b2421', lineHeight: 24 },
-  postExcerpt: { fontSize: 13, color: '#64706b', lineHeight: 19 },
-  previewBottomRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 8 },
-  previewMetaRow: { flexDirection: 'row', alignItems: 'center', gap: 12, flex: 1, flexWrap: 'wrap' },
-  metaItem: { flexDirection: 'row', alignItems: 'center', gap: 4 },
-  metaText: { fontSize: 12, color: '#6c7672', fontWeight: '600' },
-  openPill: {
-    backgroundColor: '#ecf7f2',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
+  actionBtnActive: { backgroundColor: '#fdecec' },
+  actionText: { fontSize: 12, color: '#6b7571', fontWeight: '600' },
+  actionTextActive: { color: '#d65b5b' },
+  emptyCard: {
+    backgroundColor: '#ffffff', borderRadius: 18, padding: 28,
+    alignItems: 'center', gap: 10,
+    borderWidth: 1, borderColor: 'rgba(223, 230, 227, 0.95)',
   },
-  openPillText: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#2a7567',
-  },
+  emptyTitle: { fontSize: 16, fontWeight: '700', color: '#183e36', textAlign: 'center' },
+  emptySubtitle: { fontSize: 13, color: '#6b7571', lineHeight: 20, textAlign: 'center' },
 });

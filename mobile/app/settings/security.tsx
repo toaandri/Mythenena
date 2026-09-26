@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const securityItems = [
-  { label: 'Changer le mot de passe', icon: 'key-outline', color: '#2d9c86' },
+  { label: 'Changer le mot de passe', icon: 'key-outline', color: '#276653' },
   { label: 'Vérification en deux étapes', icon: 'shield-outline', color: '#3b5bda' },
   { label: 'Signalements', icon: 'warning-outline', color: '#bf7a18' },
   { label: 'Historique de connexion', icon: 'time-outline', color: '#d65b5b' },
@@ -45,7 +45,7 @@ export default function SecuritySettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
+    letterSpacing: -0.4,
   },
   card: {
     backgroundColor: '#ffffff',
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eef2ef',
+    borderBottomColor: '#f8f6f0',
   },
   iconWrap: {
     width: 34,
@@ -114,6 +115,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
 });

@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const settingsItems = [
-  { label: 'Profil', icon: 'person-circle-outline', color: '#2d9c86', route: '/settings/profile' },
+  { label: 'Profil', icon: 'person-circle-outline', color: '#276653', route: '/settings/profile' },
   { label: 'Règle de confidentialité', icon: 'shield-checkmark-outline', color: '#3b5bda', route: '/settings/privacy' },
   { label: 'Déconnexion', icon: 'log-out-outline', color: '#d65b5b', route: '/settings/security' },
   { label: 'Sécurité', icon: 'lock-closed-outline', color: '#bf7a18', route: '/settings/security' },
@@ -50,7 +50,7 @@ export default function SettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
+    letterSpacing: -0.4,
   },
   card: {
     backgroundColor: '#ffffff',
@@ -105,7 +106,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eef2ef',
+    borderBottomColor: '#f8f6f0',
     backgroundColor: '#ffffff',
   },
   iconWrap: {
@@ -120,6 +121,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
 });

@@ -45,7 +45,7 @@ export default function ProfileSettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
+    letterSpacing: -0.4,
   },
   card: {
     backgroundColor: '#ffffff',
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#2d9c86',
+    color: '#276653',
     marginBottom: 10,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 15,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '600',
   },
   helperText: {
@@ -119,7 +120,7 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     marginTop: 18,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

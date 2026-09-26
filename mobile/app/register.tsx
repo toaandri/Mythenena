@@ -54,10 +54,23 @@ export default function RegisterScreen() {
     }
 
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1200));
-    setSuccess(true);
-    setLoading(false);
-    setTimeout(() => router.replace('/login'), 1500);
+    try {
+      // Le register crée directement une session anonyme avec le pseudonyme comme nom
+      const { apiFetch: fetch } = await import('@/lib/api');
+      const { setSessionToken } = await import('@/lib/api');
+      const resp = await fetch<{ token: string; session: { id: string } }>('/api/session/start', {
+        method: 'POST',
+        auth: false,
+        body: JSON.stringify({ language: 'fr', retainHistory: true, pseudonym: form.name.trim() }),
+      });
+      await setSessionToken(resp.token);
+      setSuccess(true);
+      setTimeout(() => router.replace('/(tabs)'), 800);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Inscription impossible. Réessayez.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -196,8 +209,6 @@ export default function RegisterScreen() {
         <TouchableOpacity style={styles.termsNote} activeOpacity={0.85} onPress={() => router.push('/settings/privacy')}>
           <Text style={styles.termsText}>{t('register.termsNote')}</Text>
         </TouchableOpacity>
-
-        <Text style={styles.demoNote}>{t('register.demoNote')}</Text>
       </ScrollView>
     </KeyboardAvoidingView>
   );

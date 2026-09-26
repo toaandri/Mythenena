@@ -113,20 +113,42 @@ module.exports = {
           "0%, 70%, 100%": { transform: "translateY(0)" },
           "35%": { transform: "translateY(-4px)" },
         },
-        /* Halo de la zone scannée (scan corporel) */
         "zone-pulse": {
           "0%, 100%": { opacity: "0.12", transform: "scale(1)" },
           "50%": { opacity: "0.26", transform: "scale(1.07)" },
         },
-        /* Bascule de la tête d'un côté puis de l'autre */
         "head-roll": {
           "0%, 100%": { transform: "rotate(-7deg)" },
           "50%": { transform: "rotate(7deg)" },
         },
-        /* Montée / descente sur la pointe des pieds */
         "body-bob": {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-1.8px)" },
+        },
+        /* Marquee défilant */
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+        /* Float doux pour les éléments décoratifs */
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        /* Slide depuis le bas */
+        "slide-up": {
+          from: { opacity: "0", transform: "translateY(20px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        /* Pulse glow marque */
+        "glow-brand": {
+          "0%, 100%": { boxShadow: "0 0 0 0 rgb(39 102 83 / 0)" },
+          "50%": { boxShadow: "0 0 0 8px rgb(39 102 83 / 0.12)" },
+        },
+        /* Rotation lente */
+        "spin-slow": {
+          from: { transform: "rotate(0deg)" },
+          to: { transform: "rotate(360deg)" },
         },
       },
       animation: {
@@ -139,6 +161,11 @@ module.exports = {
         "zone-pulse": "zone-pulse 2.6s ease-in-out infinite",
         "head-roll": "head-roll 3.4s ease-in-out infinite",
         "body-bob": "body-bob 2.2s ease-in-out infinite",
+        marquee: "marquee 28s linear infinite",
+        float: "float 4s ease-in-out infinite",
+        "slide-up": "slide-up .5s cubic-bezier(0.22, 1, 0.36, 1) both",
+        "glow-brand": "glow-brand 2.5s ease-in-out infinite",
+        "spin-slow": "spin-slow 12s linear infinite",
       },
     },
   },

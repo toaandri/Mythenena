@@ -54,7 +54,7 @@ export default function PrivacySettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -89,7 +89,8 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
+    letterSpacing: -0.4,
   },
   card: {
     backgroundColor: '#ffffff',
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
     marginBottom: 6,
   },
   sectionBody: {

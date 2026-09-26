@@ -77,7 +77,7 @@ export default function PsyTab() {
 
             <View style={styles.ctaRow}>
               <Text style={styles.ctaText}>{t('psy.cta')}</Text>
-              <Ionicons name="arrow-forward" size={14} color="#2d9c86" />
+              <Ionicons name="arrow-forward" size={14} color="#276653" />
             </View>
           </TouchableOpacity>
         ))}
@@ -89,7 +89,7 @@ export default function PsyTab() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     paddingHorizontal: 9,
     paddingVertical: 5,
-    backgroundColor: '#f3f6f4',
+    backgroundColor: '#f2f2e9',
   },
   badgeSecondaryText: {
     color: '#64706b',
@@ -180,12 +180,12 @@ const styles = StyleSheet.create({
   name: {
     fontSize: 17,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
   },
   role: {
     marginTop: 4,
     fontSize: 13,
-    color: '#2d9c86',
+    color: '#276653',
     fontWeight: '700',
   },
   specialty: {
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   ctaText: {
-    color: '#2d9c86',
+    color: '#276653',
     fontSize: 13,
     fontWeight: '700',
   },
