@@ -57,7 +57,12 @@
   "evaluation": {
     "title": "Votre Évaluation Personnelle",
     "question": "Comment vous sentez-vous aujourd'hui ?",
-    "symptoms": ["Dépression", "Pensées suicidaires", "Manque de confiance en soi", "Addiction (alcool, drogues)"],
+    "symptoms": [
+      "Dépression",
+      "Pensées suicidaires",
+      "Manque de confiance en soi",
+      "Addiction (alcool, drogues)"
+    ],
     "cta": "Continuer mon évaluation"
   },
   "forum": {
@@ -69,7 +74,14 @@
     },
     "members": "membres",
     "cta": "Créer un nouveau sujet",
-    "categories": ["Tous", "Dépression", "Anxiété", "Estime de soi", "Relations", "Sobriété"],
+    "categories": [
+      "Tous",
+      "Dépression",
+      "Anxiété",
+      "Estime de soi",
+      "Relations",
+      "Sobriété"
+    ],
     "newTopic": "Nouveau sujet",
     "titlePlaceholder": "Titre de votre sujet",
     "bodyPlaceholder": "Décrivez votre situation...",
@@ -95,7 +107,12 @@
     "category": "Groupe",
     "postedBy": "Créé par",
     "resultsCount": "groupes",
-    "noResults": "Aucun groupe ne correspond à votre recherche."
+    "noResults": "Aucun groupe ne correspond à votre recherche.",
+    "messagePlaceholder": "Écrivez un message...",
+    "send": "Envoyer",
+    "groupRules": "Règles du groupe",
+    "membersList": "Voir les membres",
+    "leaveGroup": "Quitter le groupe"
   },
   "chat": {
     "title": "Aide Instantanée par IA",
@@ -151,11 +168,51 @@
     "of": "sur",
     "stepOf": "Question {current} sur {total}",
     "questions": [
-      { "q": "Comment décririez-vous votre humeur ces derniers jours ?", "choices": ["Plutôt bien", "Neutre", "Triste ou vide", "Très difficile"] },
-      { "q": "Comment dormez-vous en ce moment ?", "choices": ["Bien", "Quelques difficultés", "Mal, souvent réveillé(e)", "Très peu ou trop"] },
-      { "q": "Quel est votre niveau de stress au quotidien ?", "choices": ["Faible", "Modéré", "Élevé", "Très élevé"] },
-      { "q": "Comment vous sentez-vous dans vos relations avec les autres ?", "choices": ["Bien entouré(e)", "Parfois seul(e)", "Souvent isolé(e)", "En conflit"] },
-      { "q": "Avez-vous de la motivation pour vos activités habituelles ?", "choices": ["Oui, comme avant", "Un peu moins", "Beaucoup moins", "Plus du tout"] }
+      {
+        "q": "Comment décririez-vous votre humeur ces derniers jours ?",
+        "choices": [
+          "Plutôt bien",
+          "Neutre",
+          "Triste ou vide",
+          "Très difficile"
+        ]
+      },
+      {
+        "q": "Comment dormez-vous en ce moment ?",
+        "choices": [
+          "Bien",
+          "Quelques difficultés",
+          "Mal, souvent réveillé(e)",
+          "Très peu ou trop"
+        ]
+      },
+      {
+        "q": "Quel est votre niveau de stress au quotidien ?",
+        "choices": [
+          "Faible",
+          "Modéré",
+          "Élevé",
+          "Très élevé"
+        ]
+      },
+      {
+        "q": "Comment vous sentez-vous dans vos relations avec les autres ?",
+        "choices": [
+          "Bien entouré(e)",
+          "Parfois seul(e)",
+          "Souvent isolé(e)",
+          "En conflit"
+        ]
+      },
+      {
+        "q": "Avez-vous de la motivation pour vos activités habituelles ?",
+        "choices": [
+          "Oui, comme avant",
+          "Un peu moins",
+          "Beaucoup moins",
+          "Plus du tout"
+        ]
+      }
     ]
   },
   "questionnaire": {
@@ -177,7 +234,13 @@
     "title": "Votre résumé",
     "subtitle": "Ceci est un aperçu exploratoire, pas un diagnostic médical.",
     "disclaimer": "Cet outil ne remplace pas un professionnel de santé mentale. Si vous souffrez, consultez un spécialiste.",
-    "dimensions": ["Humeur", "Sommeil", "Stress", "Relations", "Motivation"],
+    "dimensions": [
+      "Humeur",
+      "Sommeil",
+      "Stress",
+      "Relations",
+      "Motivation"
+    ],
     "wellbeing": "Bien-être global",
     "seeProf": "Consulter un professionnel",
     "retry": "Refaire l'évaluation",
@@ -428,5 +491,152 @@
     "crisis": "Urgence",
     "rights": "Tous droits réservés.",
     "emergency": "En cas d'urgence, appelez le +261 20 22 XXX XX."
+  },
+  "confidentialite": {
+    "title": "Conditions de confidentialité",
+    "intro": "Dernière mise à jour : Septembre 2026. Mythenena s'engage à protéger votre vie privée. Cette politique explique quelles données nous collectons, comment nous les utilisons et vos droits.",
+    "importantTitle": "Point important",
+    "importantContent": "Mythenena est un outil d'écoute et d'information, pas un service médical. En cas d'urgence, contactez les services d'urgence (+261 20 22 XXX XX) ou rendez-vous aux urgences.",
+    "sections": {
+      "dataProtection": {
+        "title": "Protection de vos données",
+        "content": "Nous ne collectons que les données strictement nécessaires : nom d'affichage, email/téléphone (pour la connexion), et vos réponses aux évaluations (anonymisées). Aucune donnée sensible n'est stockée sans votre consentement explicite."
+      },
+      "anonymity": {
+        "title": "Anonymat garanti",
+        "content": "Sur le forum, le chat IA et les groupes de parole, vous êtes identifié uniquement par un pseudonyme. Votre identité réelle n'est jamais visible par les autres utilisateurs. Les professionnels de l'annuaire ne voient que ce que vous choisissez de partager lors d'une demande de rendez-vous."
+      },
+      "dataUsage": {
+        "title": "Utilisation des données",
+        "content": "Vos données servent uniquement à : vous authentifier, personnaliser votre expérience, améliorer nos services (statistiques anonymes), et vous contacter si vous le demandez (rendez-vous). Nous ne vendons jamais vos données."
+      },
+      "sharing": {
+        "title": "Partage avec des tiers",
+        "content": "Aucun partage commercial. Seuls cas de partage : 1) Vous demandez un rendez-vous (transmis au professionnel choisi), 2) Obligation légale (signalement danger imminent), 3) Prestataires techniques (hébergement, IA) sous contrat de confidentialité strict."
+      },
+      "rights": {
+        "title": "Vos droits",
+        "content": "Conformément au RGPD et à la loi malagasy : droit d'accès, de rectification, d'effacement, de portabilité, de limitation, d'opposition. Pour exercer vos droits : contactez-nous via la page Confidentialité. Suppression du compte possible depuis les paramètres (à venir)."
+      },
+      "limits": {
+        "title": "Limites de responsabilité",
+        "content": "Mythenena n'est pas un service médical d'urgence. L'IA peut se tromper. Les groupes de parole sont modérés mais pas surveillés 24/7. En cas de crise, contactez immédiatement les secours."
+      },
+      "contact": {
+        "title": "Nous contacter",
+        "content": "Pour toute question sur vos données : confidentialite@mythenena.mg ou via le formulaire de contact. Délégué à la protection des données : DPO Mythenena."
+      }
+    }
+  },
+  "connexion": {
+    "title": "Connexion",
+    "subtitle": "Connectez-vous pour accéder à votre espace personnel",
+    "identifierLabel": "Email ou numéro de téléphone",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Se connecter",
+    "noAccount": "Pas encore de compte ?",
+    "signupLink": "S'inscrire",
+    "demoNote": "Mode démo : tout identifiant/mot de passe fonctionne",
+    "successMessage": "Connexion réussie ! Redirection...",
+    "errors": {
+      "required": "Veuillez remplir tous les champs",
+      "invalidIdentifier": "Entrez un email ou un numéro de téléphone valide",
+      "invalidCredentials": "Identifiants incorrects"
+    }
+  },
+  "inscription": {
+    "title": "Créer un compte",
+    "subtitle": "Rejoignez Mythenena pour accéder à votre espace personnel",
+    "nameLabel": "Nom d'affichage",
+    "namePlaceholder": "Votre prénom ou pseudo",
+    "identifierLabel": "Email ou numéro de téléphone",
+    "passwordLabel": "Mot de passe",
+    "passwordPlaceholder": "Au moins 6 caractères",
+    "confirmPasswordLabel": "Confirmer le mot de passe",
+    "confirmPasswordPlaceholder": "Répétez le mot de passe",
+    "submit": "Créer mon compte",
+    "hasAccount": "Déjà un compte ?",
+    "loginLink": "Se connecter",
+    "termsNote": "En créant un compte, vous acceptez nos ",
+    "termsLink": "Conditions de confidentialité",
+    "demoNote": "Mode démo : l'inscription est simulée",
+    "successMessage": "Compte créé avec succès ! Redirection vers la connexion...",
+    "errors": {
+      "required": "Veuillez remplir tous les champs",
+      "nameTooShort": "Le nom doit contenir au moins 2 caractères",
+      "invalidIdentifier": "Entrez un email ou un numéro de téléphone valide",
+      "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
+      "passwordMismatch": "Les mots de passe ne correspondent pas"
+    }
+  },
+  "aide": {
+    "title": "Aide à l'utilisation",
+    "searchPlaceholder": "Rechercher une question...",
+    "quickLinksTitle": "Accès rapide",
+    "faqTitle": "Questions fréquentes",
+    "noResults": "Aucun résultat pour votre recherche",
+    "contactTitle": "Besoin d'aide supplémentaire ?",
+    "contactSubtitle": "Contactez notre équipe support",
+    "contactDesc": "Notre équipe est là pour vous aider. Réponse sous 24h ouvrées.",
+    "contactEmail": "Nous contacter par email",
+    "contactForum": "Poser une question sur le forum",
+    "emergencyTitle": "⚠️ Situation d'urgence",
+    "emergencyDesc": "Si vous êtes en danger immédiat ou si quelqu'un l'est, n'attendez pas : appelez le +261 20 22 XXX XX (ligne d'écoute Madagascar) ou rendez-vous aux urgences les plus proches. Vous n'etes pas seul.",
+    "emergencyLink": "Voir tous les contacts d'urgence",
+    "categories": {
+      "gettingStarted": "Démarrer avec Mythenena",
+      "evaluation": "Votre Évaluation Personnelle",
+      "forum": "Forum d'entraide & Groupes de parole",
+      "chat": "Aide Instantanée par IA",
+      "premium": "Offres Premium & Suivi",
+      "account": "Mon compte & Confidentialité"
+    },
+    "quickLinks": {
+      "evaluation": "Faire mon évaluation",
+      "forum": "Rejoindre le forum",
+      "chat": "Parler à l'assistant IA",
+      "resources": "Exercices & Ressources",
+      "annuaire": "Trouver un professionnel",
+      "premium": "Voir les offres Premium"
+    },
+    "faq": {
+      "q1": "Comment commencer sur Mythenena ?",
+      "a1": "Rien de plus simple : aucune inscription n'est requise pour commencer. Cliquez sur \"Commencer mon évaluation\" sur la page d'accueil, répondez aux 5 questions, et découvrez vos ressources personnalisées. Vous pouvez créer un compte plus tard pour sauvegarder votre historique.",
+      "q2": "L'application est-elle vraiment gratuite ?",
+      "a2": "Oui, l'évaluation, le forum, l'assistant IA, les exercices de respiration et l'annuaire sont 100% gratuits. Les offres Premium (Suivi Essentiel à 115 000 Ar/mois et Suivi Intensif à 207 000 Ar/mois) ajoutent des séances avec des professionnels.",
+      "q3": "Mes données sont-elles en sécurité ?",
+      "a3": "Absolument. Nous utilisons le chiffrement TLS, ne stockons que le strict nécessaire, et ne vendons jamais vos données. Voir nos Conditions de confidentialité pour tous les détails.",
+      "q4": "Puis-je utiliser Mythenena sans créer de compte ?",
+      "a4": "Oui ! Toutes les fonctionnalités principales (évaluation, forum anonyme, chat IA, exercices, annuaire) sont accessibles sans compte. Le compte sert seulement à synchroniser votre historique entre appareils.",
+      "q5": "À quoi sert l'Évaluation Personnelle ?",
+      "a5": "C'est un bilan exploratoire de 5 questions (humeur, sommeil, stress, relations, motivation) qui vous donne un aperçu visuel de votre bien-être et vous oriente vers les ressources adaptées. Ce n'est pas un diagnostic médical.",
+      "q6": "Puis-je refaire l'évaluation ?",
+      "a6": "Autant de fois que vous voulez. Chaque évaluation est datée, vous pouvez suivre votre évolution dans \"Mon bilan\" (page Synthèse).",
+      "q7": "Que faire si mon score est bas ?",
+      "a7": "Un score bas indique une détresse. L'application vous suggère automatiquement : exercices de respiration, chat IA, forum, ou prise de rendez-vous avec un professionnel. En cas d'urgence, appelez le +261 20 22 XXX XX.",
+      "q8": "Comment rejoindre un groupe de parole ?",
+      "a8": "Allez sur \"Forum d'entraide\", choisissez un groupe (Dépression, Estime de soi, Sobriété), cliquez dessus. Vous entrez directement dans le tchat de groupe anonyme. 15 participants par groupe en moyenne.",
+      "q9": "Les groupes sont-ils modérés ?",
+      "a9": "Oui, par une équipe de modération et des filtres automatiques. Mais ce n'est pas une surveillance 24/7. Signalez tout contenu inquiétant. En cas de crise, contactez les secours.",
+      "q10": "Puis-je créer mon propre groupe ?",
+      "a10": "La fonctionnalité \"Créer un nouveau groupe\" arrive bientôt. Pour l'instant, les 3 groupes principaux couvrent les besoins les plus fréquents.",
+      "q11": "L'assistant IA remplace-t-il un psychologue ?",
+      "a11": "Non. C'est un outil d'écoute et d'orientation disponible 24h/24. Il détecte les signes de crise et vous oriente vers les secours ou professionnels. Il ne pose pas de diagnostic.",
+      "q12": "Mes conversations avec l'IA sont-elles privées ?",
+      "a12": "Oui, elles sont chiffrées et anonymisées. Elles ne sont pas lues par des humains sauf signalement de danger imminent (obligation légale de protection).",
+      "q13": "L'IA parle-t-elle malagasy ?",
+      "a13": "Oui ! L'assistant comprend et répond en français, malagasy et anglais. Changez la langue dans le menu (icône globe en haut à droite).",
+      "q14": "Qu'inclut l'offre Suivi Essentiel (115 000 Ar/mois) ?",
+      "a14": "Tout le gratuit + 1 séance de 2h par semaine avec un professionnel de l'écoute (psychologue/psychiatre vérifié), suivi personnalisé confidentiel, résiliable à tout moment.",
+      "q15": "Comment prendre rendez-vous avec un professionnel ?",
+      "a15": "Depuis l'onglet \"Annuaire\" ou après avoir choisi une offre Premium, cliquez sur \"Prendre RDV\", indiquez vos disponibilités et le motif. Le professionnel vous contacte via la plateforme.",
+      "q16": "Comment supprimer mon compte ?",
+      "a16": "La suppression de compte sera disponible prochainement dans les paramètres. En attendant, contactez-nous via la page Confidentialité pour demander la suppression (traité sous 30 jours).",
+      "q17": "J'ai oublié mon mot de passe, comment faire ?",
+      "a17": "Sur la page Connexion, cliquez sur \"Mot de passe oublié\" (à venir). Vous recevrez un lien de réinitialisation par email ou SMS selon votre identifiant.",
+      "q18": "Puis-je changer mon email/téléphone ?",
+      "a18": "Oui, depuis les paramètres de votre compte (icône engrenage en haut à droite > Connexion > modifier)."
+    }
   }
 }
