@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, MessageCircle, Users, Heart, ArrowRight } from "lucide-react";
+import { Plus, MessageCircle, Users, Heart, ArrowRight, Lock } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
 import { Container } from "@/components/layout/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
@@ -20,21 +20,21 @@ type Topic = {
 const TOPICS: Topic[] = [
   {
     id: "depression",
-    name: "forum.topics.depression",
+    name: "depression",
     participants: 15,
     icon: "depression",
     href: "/forum/depression",
   },
   {
     id: "esteem",
-    name: "forum.topics.esteem",
+    name: "esteem",
     participants: 15,
     icon: "esteem",
     href: "/forum/esteem",
   },
   {
     id: "sobriety",
-    name: "forum.topics.sobriety",
+    name: "sobriety",
     participants: 15,
     icon: "sobriety",
     href: "/forum/sobriety",
@@ -70,7 +70,7 @@ function TopicIcon({ type, className }: { type: Topic["icon"]; className?: strin
   };
 
   return (
-    <span className={cn("inline-flex h-10 w-10 items-center justify-center rounded-xl text-emerald-600 bg-emerald-50", className)}>
+    <span className={cn("inline-flex h-12 w-12 items-center justify-center rounded-xl text-emerald-600 bg-emerald-50", className)}>
       {icons[type]}
     </span>
   );
@@ -100,29 +100,43 @@ export default function ForumPage() {
         <ul className="flex flex-col gap-4" role="list">
           {TOPICS.map((topic) => (
             <li key={topic.id}>
-              <a
-                href={topic.href}
-                className={cn(
-                  "group flex items-center gap-4 rounded-2xl border border-line bg-surface p-4 transition-all duration-200",
-                  "hover:border-emerald-200 hover:bg-emerald-50/50 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
-                )}
-              >
-                <TopicIcon type={topic.icon} className="flex-shrink-0 group-hover:scale-105 transition-transform duration-200" />
-                <div className="min-w-0 flex-1">
-                  <h3 className="text-base font-semibold text-ink group-hover:text-emerald-700 transition-colors">
-                    {t.forum.topics[topic.name as keyof typeof t.forum.topics]}
-                  </h3>
-                  <div className="mt-1 flex items-center gap-2 text-sm text-ink-muted">
-                    <Users size={14} aria-hidden />
-                    <span>{topic.participants} {t.forum.participants}</span>
+              <article className="group relative rounded-2xl border border-line bg-surface p-5 transition-all duration-300 hover:border-emerald-200 hover:bg-emerald-50/50 hover:shadow-xl focus-within:ring-2 focus-within:ring-emerald-500">
+                <div className="flex items-start gap-4">
+                  <TopicIcon type={topic.icon} className="flex-shrink-0 group-hover:scale-105 transition-transform duration-300" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-base font-semibold text-ink group-hover:text-emerald-700 transition-colors">
+                      {t.forum.topics[topic.name as keyof typeof t.forum.topics]}
+                    </h3>
+                    <p className="mt-2 text-sm text-ink-muted leading-relaxed line-clamp-2">
+                      {t.forum.topicDescriptions?.[topic.name as keyof typeof t.forum.topicDescriptions]}
+                    </p>
+                    <div className="mt-3 flex items-center gap-3 text-sm text-ink-muted">
+                      <span className="flex items-center gap-1">
+                        <Users size={14} aria-hidden />
+                        <span>{topic.participants} {t.forum.participants}</span>
+                      </span>
+                      <span className="flex items-center gap-1 text-emerald-600">
+                        <Lock size={14} aria-hidden />
+                        <span>{t.forum.anonymous || "Anonyme"}</span>
+                      </span>
+                    </div>
                   </div>
                 </div>
-                <ArrowRight
-                  size={20}
-                  className="flex-shrink-0 text-ink-subtle group-hover:text-emerald-600 transition-colors"
-                  aria-hidden
-                />
-              </a>
+                <div className="mt-4 pt-4 border-t border-line flex items-center justify-end">
+                  <a
+                    href={topic.href}
+                    className={cn(
+                      "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all",
+                      "bg-emerald-600 text-white hover:bg-emerald-700 hover:shadow-[0_4px_14px_rgb(16,185,129)/0.4]",
+                      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500"
+                    )}
+                    aria-label={t.forum.joinGroupDesc}
+                  >
+                    <MessageCircle size={16} aria-hidden />
+                    {t.forum.joinGroup}
+                  </a>
+                </div>
+              </article>
             </li>
           ))}
         </ul>
