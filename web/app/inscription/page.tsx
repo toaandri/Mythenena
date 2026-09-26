@@ -1,16 +1,32 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowLeft, Eye, EyeOff, Mail, Phone, Lock, User, AlertCircle, CheckCircle, UserPlus } from "lucide-react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import {
+  ArrowLeft,
+  UserPlus,
+  User,
+  Mail,
+  Phone,
+  Lock,
+  Eye,
+  EyeOff,
+  ShieldCheck,
+  AlertCircle,
+  CheckCircle,
+} from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
 import { Container } from "@/components/layout/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Input } from "@/components/ui/Field";
+import { Field, Input } from "@/components/ui/Field";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
+
+const GENDERS = ["male", "female"] as const;
 
 export default function InscriptionPage() {
+  const router = useRouter();
   const { t } = useLang();
   const [form, setForm] = useState({
     pseudo: "",
@@ -25,9 +41,9 @@ export default function InscriptionPage() {
   const [loading, setLoading] = useState(false);
 
   const isEmail = form.identifier.includes("@");
-  const isPhone = /^[\d\s\+\-]{8,}$/.test(form.identifier);
+  const isPhone = /^[\d\s+\-]{8,}$/.test(form.identifier);
 
-  const handleChange = (field: string, value: string) => {
+  const handleChange = (field: keyof typeof form, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (error) setError("");
   };
@@ -35,6 +51,7 @@ export default function InscriptionPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess(false);
 
     if (!form.pseudo.trim() || !form.gender || !form.identifier.trim() || !form.password || !form.confirmPassword) {
       setError(t.inscription?.errors?.required || "Veuillez remplir tous les champs");
@@ -63,221 +80,197 @@ export default function InscriptionPage() {
 
     setLoading(true);
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    // Demo: always succeeds
     setSuccess(true);
     setLoading(false);
-    setTimeout(() => {
-      window.location.href = "/connexion";
-    }, 2000);
+    setTimeout(() => router.push("/connexion"), 2000);
   };
 
   return (
-    <div className="min-h-dvh bg-bg flex items-center justify-center px-4 py-12">
-      <Container size="narrow">
-        <div className="w-full max-w-md">
+    <div className="min-h-dvh bg-bg">
+      <header className="sticky top-0 z-40 border-b border-line bg-surface/95 backdrop-blur-xl">
+        <div className="mx-auto flex h-16 max-w-shell items-center gap-3 px-4">
           <button
-            onClick={() => window.history.back()}
-            className="mb-6 inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
+            onClick={() => router.back()}
+            className="flex-shrink-0 inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
             aria-label="Retour"
           >
             <ArrowLeft size={19} />
           </button>
+          <h1 className="text-base font-semibold text-ink">
+            {t.inscription?.title || "Créer un compte"}
+          </h1>
+        </div>
+      </header>
 
-          <Card className="p-6 sm:p-8">
-            <div className="text-center mb-8">
-              <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-emerald-50 text-emerald-600 mb-4">
-                <UserPlus size={24} />
+      <main className="py-8 pb-16">
+        <Container size="narrow">
+          <div className="mx-auto w-full max-w-md">
+            <Card className="p-6 sm:p-8">
+              <div className="mb-7 text-center">
+                <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
+                  <UserPlus size={22} aria-hidden />
+                </span>
+                <h2 className="text-h3 text-ink">{t.inscription?.title || "Créer un compte"}</h2>
+                <p className="mt-2 text-sm text-ink-muted">
+                  {t.inscription?.subtitle || "Rejoignez Mythenena pour accéder à votre espace personnel"}
+                </p>
               </div>
-              <h1 className="text-h3 text-ink">{t.inscription?.title || "Créer un compte"}</h1>
-              <p className="mt-2 text-sm text-ink-muted">
-                {t.inscription?.subtitle || "Rejoignez Mythenena pour accéder à votre espace personnel"}
-              </p>
-            </div>
 
-            {success && (
-              <div className="mb-6 flex items-center gap-3 rounded-xl bg-emerald-50 p-4 text-emerald-700">
-                <CheckCircle size={20} />
-                <span className="text-sm font-medium">{t.inscription?.successMessage || "Compte créé avec succès ! Redirection vers la connexion..."}</span>
-              </div>
-            )}
-
-            {error && (
-              <div className="mb-6 flex items-center gap-3 rounded-xl bg-danger-soft p-4 text-danger">
-                <AlertCircle size={20} />
-                <span className="text-sm">{error}</span>
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <label htmlFor="pseudo" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.pseudoLabel || "Pseudonyme"}
-                </label>
-                <div className="relative">
-                  <User size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                  <Input
-                    id="pseudo"
-                    type="text"
-                    value={form.pseudo}
-                    onChange={(e) => handleChange("pseudo", e.target.value)}
-                    placeholder={t.inscription?.pseudoPlaceholder || "Votre pseudo"}
-                    className="pl-11"
-                    autoComplete="username"
-                    disabled={success}
-                  />
+              {success && (
+                <div className="mb-6 flex items-center gap-3 rounded-xl bg-brand-soft p-4 text-brand">
+                  <CheckCircle size={20} className="flex-shrink-0" />
+                  <span className="text-sm font-medium">
+                    {t.inscription?.successMessage || "Compte créé avec succès ! Redirection vers la connexion..."}
+                  </span>
                 </div>
-              </div>
+              )}
 
-              <div>
-                <label htmlFor="gender" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.genderLabel || "Genre"}
-                </label>
-                <div className="flex gap-3">
-                  {["male", "female"].map((g) => (
-                    <button
-                      key={g}
-                      type="button"
-                      onClick={() => handleChange("gender", g)}
-                      className={cn(
-                        "flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border-2 text-sm font-medium transition-all",
-                        form.gender === g
-                          ? "border-emerald-500 bg-emerald-50 text-emerald-600"
-                          : "border-line text-ink-muted hover:border-brand-line"
-                      )}
-                    >
-                      {g === "male" ? (
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                          <circle cx="12" cy="5" r="3" />
-                          <path d="M12 8v10M5 14h14" />
-                        </svg>
-                      ) : (
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
-                          <circle cx="12" cy="5" r="3" />
-                          <path d="M12 8v10M5 14h14" />
-                          <circle cx="12" cy="18" r="3" />
-                        </svg>
-                      )}
-                      {t.inscription?.genderOptions?.[g as keyof typeof t.inscription.genderOptions] || (g === "male" ? "Homme" : "Femme")}
-                    </button>
-                  ))}
+              {error && (
+                <div className="mb-6 flex items-center gap-3 rounded-xl bg-danger-soft p-4 text-danger">
+                  <AlertCircle size={20} className="flex-shrink-0" />
+                  <span className="text-sm">{error}</span>
                 </div>
-              </div>
+              )}
 
-              <div>
-                <label htmlFor="identifier" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.identifierLabel || "Email ou numéro de téléphone"}
-                </label>
-                <div className="relative">
-                  <div className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle">
-                    {isEmail ? <Mail size={18} /> : <Phone size={18} />}
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <Field label={t.inscription?.pseudoLabel || "Pseudonyme"} htmlFor="pseudo">
+                  <div className="relative">
+                    <User size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    <Input
+                      id="pseudo"
+                      type="text"
+                      value={form.pseudo}
+                      onChange={(e) => handleChange("pseudo", e.target.value)}
+                      placeholder={t.inscription?.pseudoPlaceholder || "Votre pseudo"}
+                      className="pl-11"
+                      autoComplete="username"
+                      disabled={success}
+                    />
                   </div>
-                  <Input
-                    id="identifier"
-                    type={isEmail ? "email" : "tel"}
-                    value={form.identifier}
-                    onChange={(e) => handleChange("identifier", e.target.value)}
-                    placeholder={isEmail ? "vous@exemple.com" : "+261 3X XX XX XX"}
-                    className="pl-11"
-                    autoComplete="email"
-                    disabled={success}
-                  />
-                </div>
-              </div>
+                </Field>
 
-              <div>
-                <label htmlFor="password" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.passwordLabel || "Mot de passe"}
-                </label>
-                <div className="relative">
-                  <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    value={form.password}
-                    onChange={(e) => handleChange("password", e.target.value)}
-                    placeholder={t.inscription?.passwordPlaceholder || "Au moins 6 caractères"}
-                    className="pl-11 pr-11"
-                    autoComplete="new-password"
-                    disabled={success}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink"
-                    aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
+                <Field label={t.inscription?.genderLabel || "Genre"}>
+                  <div className="flex gap-3">
+                    {GENDERS.map((value) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => handleChange("gender", value)}
+                        aria-pressed={form.gender === value}
+                        className={cn(
+                          "flex h-11 flex-1 items-center justify-center gap-2 rounded-xl border-2 text-sm font-medium transition-all",
+                          form.gender === value
+                            ? "border-brand bg-brand-soft text-brand"
+                            : "border-line text-ink-muted hover:border-brand-line"
+                        )}
+                      >
+                        {t.inscription?.genderOptions?.[value] ||
+                          (value === "male" ? "Homme" : "Femme")}
+                      </button>
+                    ))}
+                  </div>
+                </Field>
 
-              <div>
-                <label htmlFor="confirmPassword" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.confirmPasswordLabel || "Confirmer le mot de passe"}
-                </label>
-                <div className="relative">
-                  <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                  <Input
-                    id="confirmPassword"
-                    type={showPassword ? "text" : "password"}
-                    value={form.confirmPassword}
-                    onChange={(e) => handleChange("confirmPassword", e.target.value)}
-                    placeholder={t.inscription?.confirmPasswordPlaceholder || "Répétez le mot de passe"}
-                    className="pl-11 pr-11"
-                    autoComplete="new-password"
-                    disabled={success}
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted hover:text-ink"
-                    aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                  >
-                    {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                  </button>
-                </div>
-              </div>
+                <Field label={t.inscription?.identifierLabel || "Email ou numéro de téléphone"} htmlFor="identifier">
+                  <div className="relative">
+                    {isEmail ? (
+                      <Mail size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    ) : (
+                      <Phone size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    )}
+                    <Input
+                      id="identifier"
+                      type={isEmail ? "email" : "tel"}
+                      value={form.identifier}
+                      onChange={(e) => handleChange("identifier", e.target.value)}
+                      placeholder={isEmail ? "vous@exemple.com" : "+261 3X XX XX XX"}
+                      className="pl-11"
+                      autoComplete="email"
+                      disabled={success}
+                    />
+                  </div>
+                </Field>
 
-              <Button
-                type="submit"
-                className="w-full h-12"
-                disabled={loading || success}
-                loading={loading}
-              >
-                {t.inscription?.submit || "Créer mon compte"}
-              </Button>
-            </form>
+                <Field label={t.inscription?.passwordLabel || "Mot de passe"} htmlFor="password">
+                  <div className="relative">
+                    <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      value={form.password}
+                      onChange={(e) => handleChange("password", e.target.value)}
+                      placeholder={t.inscription?.passwordPlaceholder || "Au moins 6 caractères"}
+                      className="pl-11 pr-11"
+                      autoComplete="new-password"
+                      disabled={success}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted transition-colors hover:text-ink"
+                      aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </Field>
 
-            <div className="mt-6 text-center">
-              <p className="text-sm text-ink-muted">
+                <Field
+                  label={t.inscription?.confirmPasswordLabel || "Confirmer le mot de passe"}
+                  htmlFor="confirmPassword"
+                >
+                  <div className="relative">
+                    <ShieldCheck size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
+                    <Input
+                      id="confirmPassword"
+                      type={showPassword ? "text" : "password"}
+                      value={form.confirmPassword}
+                      onChange={(e) => handleChange("confirmPassword", e.target.value)}
+                      placeholder={t.inscription?.confirmPasswordPlaceholder || "Répétez le mot de passe"}
+                      className="pl-11 pr-11"
+                      autoComplete="new-password"
+                      disabled={success}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted transition-colors hover:text-ink"
+                      aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
+                  </div>
+                </Field>
+
+                <Button type="submit" size="lg" className="w-full" disabled={loading || success} loading={loading}>
+                  {t.inscription?.submit || "Créer mon compte"}
+                </Button>
+              </form>
+
+              <p className="mt-6 text-center text-sm text-ink-muted">
                 {t.inscription?.hasAccount || "Déjà un compte ?"}{" "}
                 <Link
                   href="/connexion"
-                  className="font-semibold text-brand hover:text-brand-hover transition-colors"
+                  className="font-semibold text-brand transition-colors hover:text-brand-hover"
                 >
                   {t.inscription?.loginLink || "Se connecter"}
                 </Link>
               </p>
-            </div>
 
-            <div className="mt-4 text-center">
-              <p className="text-xs text-ink-subtle">
+              <p className="mt-4 text-center text-xs text-ink-subtle">
                 {t.inscription?.termsNote || "En créant un compte, vous acceptez nos "}
-                <Link href="/confidentialite" className="text-brand hover:underline">
+                <Link href="/confidentialite" className="font-semibold text-brand hover:underline">
                   {t.inscription?.termsLink || "Conditions de confidentialité"}
                 </Link>
               </p>
-            </div>
 
-            <div className="mt-6 text-center">
-              <p className="text-xs text-ink-subtle">
+              <p className="mt-4 text-center text-xs text-ink-subtle">
                 {t.inscription?.demoNote || "Mode démo : l'inscription est simulée"}
               </p>
-            </div>
-          </Card>
-        </div>
-      </Container>
+            </Card>
+          </div>
+        </Container>
+      </main>
     </div>
   );
 }
