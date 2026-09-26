@@ -5,111 +5,72 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Sparkles } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
+import { apiFetch } from "@/lib/api";
+import { useSession } from "@/lib/context/SessionContext";
 import { TunnelShell, StepBadge } from "@/components/layout/TunnelShell";
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { ChoiceList } from "@/components/ui/ChoiceList";
 
-export default function SondagePage() {
-  const { t } = useLang();
-  const router = useRouter();
-  const questions = t.sondage.questions;
-  const total = questions.length;
+type Question = { id: string; text: string; textMg?: string; choices: Array<{ id: string; label: string; labelMg?: string }> };
+type MiniSurvey = { questions: Question[]; progress: { answers: Array<{ questionId: string; choiceIds: string[] | null; skipped: boolean }> } };
 
+export default function SondagePage() {
+  const { t, lang } = useLang();
+  const { ensureSession } = useSession();
+  const router = useRouter();
+  const [questions, setQuestions] = useState<Question[]>([]);
   const [step, setStep] = useState(0);
-  const [answers, setAnswers] = useState<(number | null)[]>(Array(total).fill(null));
+  const [answerIds, setAnswerIds] = useState<Record<string, string[]>>({});
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+    void (async () => {
+      try {
+        await ensureSession(lang === "mg" ? "mg" : "fr");
+        const survey = await apiFetch<MiniSurvey>("/api/survey/mini");
+        if (!active) return;
+        setQuestions(survey.questions);
+        setAnswerIds(Object.fromEntries(survey.progress.answers.filter((answer) => !answer.skipped && answer.choiceIds).map((answer) => [answer.questionId, answer.choiceIds!] )));
+      } catch (cause) {
+        if (active) setError(cause instanceof Error ? cause.message : "Le sondage ne peut pas être chargé.");
+      } finally { if (active) setLoading(false); }
+    })();
+    return () => { active = false; };
+  }, [ensureSession, lang]);
 
   const current = questions[step];
-  const isLast = step === total - 1;
-  const hasAnswer = answers[step] !== null;
+  const isLast = step === questions.length - 1;
+  const selected = current ? answerIds[current.id] ?? [] : [];
+  const persist = useCallback(async (skipped: boolean) => {
+    if (!current) return;
+    setSaving(true);
+    setError("");
+    try {
+      await apiFetch("/api/survey/mini/answer", { method: "POST", body: JSON.stringify({ questionId: current.id, choiceIds: skipped ? undefined : selected, skipped }) });
+      if (isLast) router.push("/synthese");
+      else setStep((value) => value + 1);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : "La réponse n'a pas été enregistrée.");
+    } finally { setSaving(false); }
+  }, [current, isLast, router, selected]);
 
-  const select = useCallback((i: number) => {
-    setAnswers((prev) => {
-      const next = [...prev];
-      next[step] = i;
-      return next;
-    });
-  }, [step]);
+  if (loading) return <div className="p-10 text-center text-ink-muted">Chargement du sondage…</div>;
+  if (error && !current) return <div className="p-10 text-center text-danger">{error}</div>;
+  if (!current) return <div className="p-10 text-center text-ink-muted">Aucune question disponible.</div>;
 
-  const next = useCallback(() => {
-    if (isLast) router.push("/synthese");
-    else setStep((s) => s + 1);
-  }, [isLast, router]);
-
-  const back = useCallback(() => setStep((s) => Math.max(0, s - 1)), []);
-
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [step]);
-
-  // Navigation clavier : 1-4 pour choisir, Entrée pour valider.
-  useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.metaKey || e.ctrlKey || e.altKey) return;
-      const target = e.target as HTMLElement | null;
-      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
-
-      const index = Number(e.key) - 1;
-      if (Number.isInteger(index) && index >= 0 && index < current.choices.length) {
-        e.preventDefault();
-        select(index);
-        return;
-      }
-      if (e.key === "Enter" && hasAnswer) {
-        e.preventDefault();
-        next();
-      }
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [current.choices.length, hasAnswer, next, select]);
-
-  return (
-    <TunnelShell
-      step={step}
-      total={total}
-      title={t.sondage.title}
-      subtitle={t.sondage.subtitle}
-      eyebrow={<StepBadge step={step} total={total} />}
-      actions={
-        <>
-          <Button variant="outline" onClick={back} disabled={step === 0} className="sm:w-40">
-            <ArrowLeft size={16} aria-hidden />
-            {t.questionnaire.back}
-          </Button>
-          <Button variant="ghost" onClick={next} className="sm:w-32">
-            {t.sondage.skip}
-          </Button>
-          <Button onClick={next} disabled={!hasAnswer} className="sm:w-52">
-            {isLast ? t.sondage.finish : t.sondage.next}
-            <ArrowRight size={16} aria-hidden />
-          </Button>
-        </>
-      }
-      footnote={
-        <Link href="/ressources" className="link-quiet font-medium">
-          <Sparkles size={14} aria-hidden />
-          {t.home.crisisCta}
-        </Link>
-      }
-    >
-      <Card className="gap-6 p-6 sm:p-8">
-        <h2 className="text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">
-          {current.q}
-        </h2>
-
-        <ChoiceList
-          options={current.choices.map((label) => ({ label }))}
-          selected={answers[step] === null ? [] : [answers[step] as number]}
-          onToggle={select}
-        />
-
-        <p className="text-center text-[0.75rem] text-ink-subtle">
-          Touches <kbd className="rounded border border-line bg-surface-2 px-1.5 py-0.5 font-sans text-[0.7rem]">1</kbd>–
-          <kbd className="rounded border border-line bg-surface-2 px-1.5 py-0.5 font-sans text-[0.7rem]">4</kbd> pour
-          choisir
-        </p>
-      </Card>
-    </TunnelShell>
-  );
+  return <TunnelShell step={step} total={questions.length} title={t.sondage.title} subtitle={t.sondage.subtitle} eyebrow={<StepBadge step={step} total={questions.length} />} actions={<>
+    <Button variant="outline" onClick={() => setStep((value) => Math.max(0, value - 1))} disabled={step === 0 || saving} className="sm:w-40"><ArrowLeft size={16} aria-hidden />{t.questionnaire.back}</Button>
+    <Button variant="ghost" onClick={() => void persist(true)} disabled={saving} className="sm:w-32">{t.sondage.skip}</Button>
+    <Button onClick={() => void persist(false)} disabled={selected.length === 0 || saving} loading={saving} className="sm:w-52">{isLast ? t.sondage.finish : t.sondage.next}<ArrowRight size={16} aria-hidden /></Button>
+  </>} footnote={<Link href="/ressources" className="link-quiet font-medium"><Sparkles size={14} aria-hidden />{t.home.crisisCta}</Link>}>
+    <Card className="gap-6 p-6 sm:p-8">
+      {error && <p role="alert" className="rounded-xl bg-danger-soft p-3 text-sm text-danger">{error}</p>}
+      <h2 className="text-lg font-semibold leading-snug tracking-[-0.01em] text-ink">{lang === "mg" && current.textMg ? current.textMg : current.text}</h2>
+      <ChoiceList options={current.choices.map((choice) => ({ label: lang === "mg" && choice.labelMg ? choice.labelMg : choice.label }))} selected={current.choices.map((choice, index) => selected.includes(choice.id) ? index : -1).filter((index) => index >= 0)} onToggle={(index) => setAnswerIds((previous) => ({ ...previous, [current.id]: [current.choices[index].id] }))} />
+    </Card>
+  </TunnelShell>;
 }

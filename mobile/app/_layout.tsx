@@ -6,6 +6,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 import { I18nProvider } from '@/lib/i18n';
+import { SessionProvider } from '@/lib/session';
 import { initNotifications, sendImmediateNotification, scheduleRepeatingNotification } from '@/lib/notifications';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -78,6 +79,7 @@ function RootLayoutNav() {
 
   return (
     <I18nProvider>
+      <SessionProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
         <View style={{ flex: 1 }}>
           {banner && (
@@ -89,10 +91,13 @@ function RootLayoutNav() {
           <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="premium" options={{ presentation: 'modal', headerShown: false }} />
+          <Stack.Screen name="login" options={{ headerShown: false }} />
+          <Stack.Screen name="register" options={{ headerShown: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
           </Stack>
         </View>
       </ThemeProvider>
+      </SessionProvider>
     </I18nProvider>
   );
 }
@@ -116,7 +121,7 @@ const styles = StyleSheet.create({
   },
   bannerTitle: {
     fontWeight: '700',
-    color: '#2d9c86',
+    color: '#276653',
   },
   bannerBody: {
     fontSize: 12,

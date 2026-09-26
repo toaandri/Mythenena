@@ -73,7 +73,7 @@ const forumConversation: Thread = {
   preview: 'Une nouvelle discussion a été ajoutée depuis le forum.',
   time: 'À l’instant',
   unread: 1,
-  color: '#2d9c86',
+  color: '#276653',
   participants: ['Aina', 'Thomas', 'Lova', 'Vous'],
   messages: [
     { author: 'Aina', text: 'Bienvenue dans le groupe. On partage nos idées ici.' },
@@ -194,7 +194,7 @@ export default function AnnuaireTab() {
               router.setParams({ thread: undefined, newForum: joinedFromForum ? '1' : undefined });
             }}
           >
-            <Feather name="corner-up-left" size={18} color="#2d9c86" />
+            <Feather name="corner-up-left" size={18} color="#276653" />
           </TouchableOpacity>
 
           <View style={[styles.discussionPerson, styles.discussionPersonGrow]}>
@@ -215,7 +215,7 @@ export default function AnnuaireTab() {
             activeOpacity={0.85}
             onPress={() => setAudioMode(audioMode === 'calling' ? 'idle' : 'calling')}
           >
-            <Feather name="phone" size={18} color={audioMode === 'calling' ? '#fff' : '#2d9c86'} />
+            <Feather name="phone" size={18} color={audioMode === 'calling' ? '#fff' : '#276653'} />
           </TouchableOpacity>
         </BlurView>
 
@@ -250,7 +250,7 @@ export default function AnnuaireTab() {
             activeOpacity={0.85}
             onPress={() => setAudioMode(audioMode === 'listening' ? 'idle' : 'listening')}
           >
-            <Feather name="mic" size={18} color={audioMode === 'listening' ? '#fff' : '#2d9c86'} />
+            <Feather name="mic" size={18} color={audioMode === 'listening' ? '#fff' : '#276653'} />
           </TouchableOpacity>
           <TextInput
             value={draft}
@@ -360,7 +360,7 @@ export default function AnnuaireTab() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -418,7 +418,7 @@ const styles = StyleSheet.create({
   conversationCardLongPressed: {
     transform: [{ scale: 0.985 }],
     borderWidth: 1,
-    borderColor: '#2d9c86',
+    borderColor: '#276653',
   },
   convAvatar: {
     width: 38,
@@ -434,7 +434,7 @@ const styles = StyleSheet.create({
   convName: {
     fontSize: 17,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
   convRole: {
     fontSize: 12,
@@ -443,7 +443,7 @@ const styles = StyleSheet.create({
   },
   convMsg: {
     fontSize: 13,
-    color: '#6f7a76',
+    color: '#51695f',
   },
   convMeta: {
     alignItems: 'flex-end',
@@ -455,7 +455,7 @@ const styles = StyleSheet.create({
     color: '#8a9490',
   },
   badge: {
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 10,
     width: 21,
     height: 21,
@@ -500,17 +500,17 @@ const styles = StyleSheet.create({
   stateTitle: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
   stateSubtitle: {
     fontSize: 12,
-    color: '#6f7a76',
+    color: '#51695f',
     textAlign: 'center',
   },
   retryButton: {
     marginTop: 2,
     borderRadius: 10,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     paddingHorizontal: 12,
     paddingVertical: 8,
   },
@@ -547,7 +547,7 @@ const styles = StyleSheet.create({
   profileAvatar: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
   personName: { fontSize: 16, fontWeight: '700', color: '#1b2421' },
   statusRow: { flexDirection: 'row', alignItems: 'center', gap: 6, marginTop: 2 },
-  onlineDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#2d9c86' },
+  onlineDot: { width: 7, height: 7, borderRadius: 4, backgroundColor: '#276653' },
   statusText: { fontSize: 11, color: '#6b7571', fontWeight: '600' },
   audioAction: {
     padding: 9,
@@ -559,7 +559,7 @@ const styles = StyleSheet.create({
     shadowRadius: 6,
     elevation: 1,
   },
-  activeAudio: { backgroundColor: '#2d9c86' },
+  activeAudio: { backgroundColor: '#276653' },
   audioStatus: {
     backgroundColor: '#e2f3ed',
     marginHorizontal: 10,
@@ -599,7 +599,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   userBubble: {
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     alignSelf: 'flex-end',
     borderBottomRightRadius: 8,
   },
@@ -612,7 +612,7 @@ const styles = StyleSheet.create({
   messageText: {
     fontSize: 14,
     lineHeight: 20,
-    color: '#1a2320',
+    color: '#183e36',
   },
   userBubbleText: {
     color: '#ffffff',
@@ -632,12 +632,12 @@ const styles = StyleSheet.create({
   },
   composerInput: {
     flex: 1,
-    backgroundColor: '#f3f6f4',
+    backgroundColor: '#f2f2e9',
     borderRadius: 14,
     paddingHorizontal: 14,
     paddingVertical: 11,
     fontSize: 14,
-    color: '#1a2320',
+    color: '#183e36',
   },
   sendButton: {
     width: 40,
@@ -645,6 +645,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
   },
 });

@@ -20,7 +20,7 @@ const plans: Plan[] = [
     sessionsKey: 'premium.plan.basic.sessions',
     priceKey: 'premium.plan.basic.price',
     detailKey: 'premium.plan.basic.detail',
-    accent: '#2d9c86',
+    accent: '#276653',
     background: '#e7f6f0',
   },
   {
@@ -67,7 +67,7 @@ export default function PremiumScreen() {
           <View style={styles.featureList}>
             {features.map((featureKey) => (
               <View key={featureKey} style={styles.featureRow}>
-                <Ionicons name="checkmark-circle" size={18} color="#2d9c86" />
+                <Ionicons name="checkmark-circle" size={18} color="#276653" />
                 <Text style={styles.featureText}>{t(featureKey)}</Text>
               </View>
             ))}
@@ -97,7 +97,7 @@ export default function PremiumScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundGlowTop: {
     position: 'absolute',

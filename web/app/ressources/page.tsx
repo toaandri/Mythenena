@@ -9,6 +9,7 @@ import { PageHeader } from "@/components/ui/PageHeader";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardHeader } from "@/components/ui/Card";
 import { IconBreath, IconBody, IconSenses, IconMuscle, IconVisu } from "@/components/ExerciseIcons";
+import { apiFetch } from "@/lib/api";
 
 /* ─── Composant cercle timer ─── */
 
@@ -177,6 +178,7 @@ const TAG_TONE: Record<string, "brand"> = {
 };
 
 type Article = { title: string; desc: string; tag: string; content?: string };
+type ResourceList = { items: Array<{ slug: string; title: string; summary: string; tags: string[] }> };
 
 function ArticleModal({ article, onClose }: { article: Article; onClose: () => void }) {
   useEffect(() => {
@@ -224,6 +226,17 @@ function ArticleModal({ article, onClose }: { article: Article; onClose: () => v
 export default function RessourcesPage() {
   const { t } = useLang();
   const [activeArticle, setActiveArticle] = useState<Article | null>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
+
+  useEffect(() => {
+    void apiFetch<ResourceList>("/api/ressources?limit=30", { auth: false })
+      .then((data) => setArticles(data.items.map((item) => ({
+        title: item.title,
+        desc: item.summary,
+        tag: item.tags[0] ?? "Ressource",
+      }))))
+      .catch(() => setArticles(t.ressources.articleList));
+  }, [t.ressources.articleList]);
 
   return (
     <>
@@ -236,7 +249,7 @@ export default function RessourcesPage() {
         <div className="flex flex-col gap-8">
           <CardHeader title={t.ressources.articles} />
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {t.ressources.articleList.map((article) => (
+            {(articles.length ? articles : t.ressources.articleList).map((article) => (
               <li key={article.title}>
                 <Card className="group h-full gap-3.5 p-6">
                   <div className="flex items-center justify-between gap-3">

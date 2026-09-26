@@ -12,20 +12,14 @@ export default function ProfileSettingsScreen() {
   return (
     <View style={styles.screen}>
       <View style={styles.backgroundBlobTop} />
-      <ScrollView
-        style={{ paddingTop: Math.max(insets.top + 8, 18) }}
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.glassHeader}>
-          <TouchableOpacity style={styles.closeButton} onPress={() => router.back()} activeOpacity={0.85}>
-            <Ionicons name="close" size={20} color="#23443c" />
-          </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.title}>Profil</Text>
-          </View>
-        </View>
+      <View style={[styles.topBar, { paddingTop: Math.max(insets.top + 8, 18) }]}>
+        <TouchableOpacity style={styles.closeButton} onPress={() => router.back()} activeOpacity={0.85}>
+          <Ionicons name="close" size={20} color="#23443c" />
+        </TouchableOpacity>
+        <Text style={styles.topBarTitle}>Profil</Text>
+      </View>
 
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           <Text style={styles.sectionLabel}>Pseudonyme</Text>
           <TextInput
@@ -51,7 +45,7 @@ export default function ProfileSettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -63,24 +57,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(45, 156, 134, 0.13)',
   },
   content: {
-    paddingBottom: 118,
+    paddingHorizontal: 18,
+    paddingBottom: 32,
   },
-  glassHeader: {
-    marginHorizontal: 18,
-    marginBottom: 14,
-    paddingHorizontal: 14,
-    paddingTop: 8,
-    paddingBottom: 12,
-    borderRadius: 24,
-    backgroundColor: 'rgba(255,255,255,0.28)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.55)',
-    shadowColor: '#1b2e2a',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.12,
-    shadowRadius: 20,
-    elevation: 3,
-    alignItems: 'flex-end',
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 18,
+    paddingBottom: 10,
   },
   closeButton: {
     width: 38,
@@ -92,19 +77,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#d8e3de',
   },
-  headerContent: {
-    width: '100%',
-    marginTop: 10,
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontSize: 34,
+  topBarTitle: {
+    fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
     letterSpacing: -0.4,
   },
   card: {
-    marginHorizontal: 18,
     backgroundColor: '#ffffff',
     borderRadius: 20,
     padding: 18,
@@ -117,7 +96,7 @@ const styles = StyleSheet.create({
   sectionLabel: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#2d9c86',
+    color: '#276653',
     marginBottom: 10,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
@@ -130,7 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 14,
     paddingVertical: 12,
     fontSize: 15,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '600',
   },
   helperText: {
@@ -141,7 +120,7 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     marginTop: 18,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

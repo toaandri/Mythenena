@@ -349,7 +349,7 @@ export default function RessourcesTab() {
         <View style={styles.backgroundBlobBottom} />
         <View style={styles.screenHeader}>
           <TouchableOpacity style={styles.backRow} onPress={closeResource} activeOpacity={0.8}>
-            <Ionicons name="chevron-back" size={18} color="#2d9c86" />
+            <Ionicons name="chevron-back" size={18} color="#276653" />
             <Text style={styles.backText}>{t('resources.back')}</Text>
           </TouchableOpacity>
           <Text style={styles.headerTitle}>{t(selectedResource.titleKey)}</Text>
@@ -473,7 +473,7 @@ export default function RessourcesTab() {
                   onPress={() => toggleChecklistItem(selectedResource.id, index)}
                   activeOpacity={0.8}
                 >
-                  <Ionicons name={checks[index] ? 'checkbox' : 'square-outline'} size={18} color="#2d9c86" />
+                  <Ionicons name={checks[index] ? 'checkbox' : 'square-outline'} size={18} color="#276653" />
                   <Text style={styles.checkText}>{item}</Text>
                 </TouchableOpacity>
               ))}
@@ -602,7 +602,7 @@ export default function RessourcesTab() {
             >
               <View style={styles.cardTopRow}>
                 <View style={styles.iconWrap}>
-                  <Ionicons name={resource.icon as any} size={18} color="#2d9c86" />
+                  <Ionicons name={resource.icon as any} size={18} color="#276653" />
                 </View>
                 <View style={styles.categoryBadge}>
                   <Text style={styles.categoryText}>{t(resource.categoryKey)}</Text>
@@ -614,7 +614,7 @@ export default function RessourcesTab() {
 
               <View style={styles.openRow}>
                 <Text style={styles.openText}>{completed[resource.id] ? t('resources.redo') : t('resources.start')}</Text>
-                <Ionicons name="arrow-forward" size={14} color="#2d9c86" />
+                <Ionicons name="arrow-forward" size={14} color="#276653" />
               </View>
             </TouchableOpacity>
           </Animated.View>
@@ -627,7 +627,7 @@ export default function RessourcesTab() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   screenAnimated: {
     overflow: 'hidden',
@@ -654,7 +654,7 @@ const styles = StyleSheet.create({
   headerTitle: { fontSize: 36, fontWeight: '800', color: '#18211f', letterSpacing: -0.5 },
   headerSubtitle: { fontSize: 14, color: '#6b7571', marginTop: 2, fontWeight: '500' },
   backRow: { flexDirection: 'row', alignItems: 'center', gap: 2, marginBottom: 10 },
-  backText: { color: '#2d9c86', fontSize: 13, fontWeight: '700' },
+  backText: { color: '#276653', fontSize: 13, fontWeight: '700' },
   listContainer: {
     marginHorizontal: 8,
     marginBottom: 84,
@@ -677,7 +677,7 @@ const styles = StyleSheet.create({
   },
   resourceCardLongPressed: {
     transform: [{ scale: 0.985 }],
-    borderColor: '#2d9c86',
+    borderColor: '#276653',
   },
   stateCard: {
     backgroundColor: '#ffffff',
@@ -712,17 +712,17 @@ const styles = StyleSheet.create({
   stateTitle: {
     fontSize: 14,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
   stateSubtitle: {
     fontSize: 12,
-    color: '#6f7a76',
+    color: '#51695f',
     textAlign: 'center',
   },
   retryButton: {
     marginTop: 2,
     borderRadius: 10,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     paddingHorizontal: 12,
     paddingVertical: 8,
   },
@@ -771,13 +771,13 @@ const styles = StyleSheet.create({
   },
   resourceTitle: {
     fontSize: 17,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '700',
     marginBottom: 6,
   },
   resourceDetail: {
     fontSize: 13,
-    color: '#6f7a76',
+    color: '#51695f',
     lineHeight: 19,
   },
   openRow: {
@@ -787,7 +787,7 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   openText: {
-    color: '#2d9c86',
+    color: '#276653',
     fontSize: 13,
     fontWeight: '700',
   },
@@ -808,7 +808,7 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 12,
-    color: '#6f7a76',
+    color: '#51695f',
     fontWeight: '600',
   },
   progressTrack: {
@@ -821,11 +821,11 @@ const styles = StyleSheet.create({
   progressFill: {
     height: 8,
     borderRadius: 999,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
   },
   exerciseStep: {
     fontSize: 16,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '700',
     lineHeight: 24,
   },
@@ -836,7 +836,7 @@ const styles = StyleSheet.create({
   },
   smallButton: {
     flex: 1,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
@@ -852,14 +852,14 @@ const styles = StyleSheet.create({
   },
   blockTitle: {
     fontSize: 15,
-    color: '#1a2320',
+    color: '#183e36',
     fontWeight: '700',
     marginBottom: 10,
   },
   timerValue: {
     fontSize: 34,
     fontWeight: '800',
-    color: '#2d9c86',
+    color: '#276653',
     letterSpacing: 1,
     textAlign: 'center',
   },
@@ -937,7 +937,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   breathingPhaseCount: {
-    color: '#2d9c86',
+    color: '#276653',
     fontSize: 20,
     fontWeight: '800',
   },
@@ -972,7 +972,7 @@ const styles = StyleSheet.create({
   },
   checkText: {
     fontSize: 14,
-    color: '#1a2320',
+    color: '#183e36',
     flex: 1,
   },
   promptItem: {
@@ -985,17 +985,17 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   promptInput: {
-    backgroundColor: '#f3f6f4',
+    backgroundColor: '#f2f2e9',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 10,
-    color: '#1a2320',
+    color: '#183e36',
     fontSize: 14,
   },
   completeButton: {
     marginTop: 2,
     marginBottom: 8,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 14,
     paddingVertical: 14,
     alignItems: 'center',

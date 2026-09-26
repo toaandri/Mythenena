@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const securityItems = [
-  { label: 'Changer le mot de passe', icon: 'key-outline', color: '#2d9c86' },
+  { label: 'Changer le mot de passe', icon: 'key-outline', color: '#276653' },
   { label: 'Vérification en deux étapes', icon: 'shield-outline', color: '#3b5bda' },
   { label: 'Signalements', icon: 'warning-outline', color: '#bf7a18' },
   { label: 'Historique de connexion', icon: 'time-outline', color: '#d65b5b' },
@@ -18,20 +18,14 @@ export default function SecuritySettingsScreen() {
   return (
     <View style={styles.screen}>
       <View style={styles.backgroundBlobTop} />
-      <ScrollView
-        style={{ paddingTop: Math.max(insets.top + 8, 18) }}
-        contentContainerStyle={styles.content}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.glassHeader}>
-          <TouchableOpacity style={styles.closeButton} onPress={() => router.back()} activeOpacity={0.85}>
-            <Ionicons name="close" size={20} color="#23443c" />
-          </TouchableOpacity>
-          <View style={styles.headerContent}>
-            <Text style={styles.title}>Sécurité</Text>
-          </View>
-        </View>
+      <View style={[styles.topBar, { paddingTop: Math.max(insets.top + 8, 18) }]}>
+        <TouchableOpacity style={styles.closeButton} onPress={() => router.back()} activeOpacity={0.85}>
+          <Ionicons name="close" size={20} color="#23443c" />
+        </TouchableOpacity>
+        <Text style={styles.topBarTitle}>Sécurité</Text>
+      </View>
 
+      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
         <View style={styles.card}>
           {securityItems.map((item) => (
             <TouchableOpacity key={item.label} style={styles.row} activeOpacity={0.8}>
@@ -51,7 +45,7 @@ export default function SecuritySettingsScreen() {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: '#eef2ef',
+    backgroundColor: '#f8f6f0',
   },
   backgroundBlobTop: {
     position: 'absolute',
@@ -63,24 +57,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(45, 156, 134, 0.13)',
   },
   content: {
-    paddingBottom: 118,
+    paddingHorizontal: 18,
+    paddingBottom: 32,
   },
-  glassHeader: {
-    marginHorizontal: 18,
-    marginBottom: 14,
-    paddingHorizontal: 14,
-    paddingTop: 8,
-    paddingBottom: 12,
-    borderRadius: 24,
-    backgroundColor: 'rgba(255,255,255,0.28)',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.55)',
-    shadowColor: '#1b2e2a',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.12,
-    shadowRadius: 20,
-    elevation: 3,
-    alignItems: 'flex-end',
+  topBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    paddingHorizontal: 18,
+    paddingBottom: 10,
   },
   closeButton: {
     width: 38,
@@ -92,19 +77,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#d8e3de',
   },
-  headerContent: {
-    width: '100%',
-    marginTop: 10,
-    alignItems: 'flex-start',
-  },
-  title: {
-    fontSize: 34,
+  topBarTitle: {
+    fontSize: 18,
     fontWeight: '800',
-    color: '#1a2320',
+    color: '#183e36',
     letterSpacing: -0.4,
   },
   card: {
-    marginHorizontal: 18,
     backgroundColor: '#ffffff',
     borderRadius: 20,
     overflow: 'hidden',
@@ -122,7 +101,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#eef2ef',
+    borderBottomColor: '#f8f6f0',
   },
   iconWrap: {
     width: 34,
@@ -136,6 +115,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 15,
     fontWeight: '700',
-    color: '#1a2320',
+    color: '#183e36',
   },
 });

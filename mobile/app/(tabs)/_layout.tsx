@@ -24,8 +24,8 @@ export default function TabLayout() {
     <View style={styles.root}>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: '#2d9c86',
-          tabBarInactiveTintColor: '#8b9591',
+          tabBarActiveTintColor: '#276653',
+          tabBarInactiveTintColor: '#63756c',
           tabBarShowLabel: true,
           headerShown: false,
           tabBarBackground: () => (
@@ -39,7 +39,7 @@ export default function TabLayout() {
             position: 'absolute',
             left: 10,
             right: 10,
-            bottom: 10,
+            bottom: Math.max(insets.bottom, 10),
             height: 64,
             paddingBottom: 7,
             paddingTop: 7,
@@ -176,7 +176,7 @@ const styles = StyleSheet.create({
     opacity: 0.26,
   },
   brandText: {
-    color: '#2d9c86',
+    color: '#276653',
     fontSize: 18,
     fontWeight: '800',
     letterSpacing: 0.8,
