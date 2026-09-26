@@ -5,16 +5,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
-  LogIn,
-  Mail,
-  Phone,
-  Lock,
-  Eye,
-  EyeOff,
+  Leaf,
+  User,
   AlertCircle,
   CheckCircle,
 } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
+import { useSession } from "@/lib/context/SessionContext";
 import { Container } from "@/components/layout/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
@@ -22,45 +19,34 @@ import { Field, Input } from "@/components/ui/Field";
 
 export default function ConnexionPage() {
   const router = useRouter();
-  const { t } = useLang();
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
+  const { t, lang } = useLang();
+  const { ensureSession } = useSession();
+  const [pseudonym, setPseudonym] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const isEmail = identifier.includes("@");
-  const isPhone = /^[\d\s+\-]{8,}$/.test(identifier);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setSuccess(false);
 
-    if (!identifier.trim() || !password) {
-      setError(t.connexion?.errors?.required || "Veuillez remplir tous les champs");
-      return;
-    }
-
-    if (!isEmail && !isPhone) {
-      setError(t.connexion?.errors?.invalidIdentifier || "Entrez un email ou un numéro de téléphone valide");
+    const name = pseudonym.trim();
+    if (!name || name.length < 3) {
+      setError("Le pseudonyme doit contenir au moins 3 caractères.");
       return;
     }
 
     setLoading(true);
-
-    // Demo: any non-empty credentials work
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setLoading(false);
-
-    if (identifier.trim() && password) {
+    try {
+      await ensureSession(lang === "mg" ? "mg" : "fr");
       setSuccess(true);
-      setTimeout(() => router.push("/"), 2000);
-      return;
+      setTimeout(() => router.push("/"), 800);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Connexion impossible. Vérifiez votre connexion.");
+    } finally {
+      setLoading(false);
     }
-
-    setError(t.connexion?.errors?.invalidCredentials || "Identifiants incorrects");
   };
 
   return (
@@ -86,11 +72,11 @@ export default function ConnexionPage() {
             <Card className="p-6 sm:p-8">
               <div className="mb-7 text-center">
                 <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                  <LogIn size={22} aria-hidden />
+                  <Leaf size={22} aria-hidden />
                 </span>
                 <h2 className="text-h3 text-ink">{t.connexion?.title || "Connexion"}</h2>
                 <p className="mt-2 text-sm text-ink-muted">
-                  {t.connexion?.subtitle || "Connectez-vous pour accéder à votre espace personnel"}
+                  Choisissez un pseudonyme pour accéder à votre espace. Votre identité reste anonyme.
                 </p>
               </div>
 
@@ -111,67 +97,29 @@ export default function ConnexionPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <Field label={t.connexion?.identifierLabel || "Email ou numéro de téléphone"} htmlFor="identifier">
+                <Field label="Votre pseudonyme" htmlFor="pseudonym">
                   <div className="relative">
-                    {isEmail ? (
-                      <Mail size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    ) : (
-                      <Phone size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    )}
+                    <User size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
                     <Input
-                      id="identifier"
-                      type={isEmail ? "email" : "tel"}
-                      value={identifier}
+                      id="pseudonym"
+                      type="text"
+                      value={pseudonym}
                       onChange={(e) => {
-                        setIdentifier(e.target.value);
+                        setPseudonym(e.target.value);
                         if (error) setError("");
                       }}
-                      placeholder={isEmail ? "vous@exemple.com" : "+261 3X XX XX XX"}
+                      placeholder="Ex: Lotus, Nuage, Horizon..."
                       className="pl-11"
                       autoComplete="username"
+                      maxLength={32}
                       disabled={success}
                     />
                   </div>
+                  <p className="mt-1.5 text-xs text-ink-subtle">3 à 32 caractères. Aucune information personnelle requise.</p>
                 </Field>
-
-                <Field label={t.connexion?.passwordLabel || "Mot de passe"} htmlFor="password">
-                  <div className="relative">
-                    <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    <Input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        if (error) setError("");
-                      }}
-                      placeholder={t.connexion?.passwordPlaceholder || "••••••••"}
-                      className="pl-11 pr-11"
-                      autoComplete="current-password"
-                      disabled={success}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted transition-colors hover:text-ink"
-                      aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                </Field>
-
-                <div className="flex justify-end">
-                  <Link
-                    href="/aide"
-                    className="rounded-lg text-[0.8125rem] font-semibold text-brand transition-colors hover:text-brand-hover"
-                  >
-                    Mot de passe oublié ?
-                  </Link>
-                </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={loading || success} loading={loading}>
-                  {t.connexion?.submit || "Se connecter"}
+                  Accéder à l'application
                 </Button>
               </form>
 
@@ -183,10 +131,6 @@ export default function ConnexionPage() {
                 >
                   {t.connexion?.signupLink || "S'inscrire"}
                 </Link>
-              </p>
-
-              <p className="mt-4 text-center text-xs text-ink-subtle">
-                {t.connexion?.demoNote || "Mode démo : tout identifiant/mot de passe fonctionne"}
               </p>
             </Card>
           </div>
