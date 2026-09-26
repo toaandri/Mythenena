@@ -19,6 +19,7 @@ import { Badge } from "@/components/ui/Badge";
 import { ButtonLink } from "@/components/ui/Button";
 import { Card, FeatureCard } from "@/components/ui/Card";
 import { cn } from "@/lib/utils";
+import { Logo, Wordmark } from "@/components/Logo";
 
 /* ── Live stats depuis le backend ── */
 type Stats = { postCount?: number; sessionCount?: number; resourceCount?: number };
@@ -151,6 +152,10 @@ function HeroSection({ stats }: { stats: Stats }) {
 
           {/* Colonne texte */}
           <div className="animate-fade-rise">
+            <div className="mb-6 flex items-center gap-3" aria-label="Mythenena">
+              <Logo size={48} />
+              <Wordmark className="text-xl" />
+            </div>
             <Badge tone="brand" icon={<ShieldCheck size={13} aria-hidden />}>
               {t.home.eyebrow}
             </Badge>

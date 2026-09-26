@@ -3,56 +3,28 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import {
-  ArrowLeft,
-  Leaf,
-  Mail,
-  Phone,
-  Lock,
-  Eye,
-  EyeOff,
-  AlertCircle,
-  CheckCircle,
-} from "lucide-react";
+import { ArrowLeft, Leaf, AlertCircle, CheckCircle } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
 import { useSession } from "@/lib/context/SessionContext";
 import { Container } from "@/components/layout/Container";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Field, Input } from "@/components/ui/Field";
 
 export default function ConnexionPage() {
   const router = useRouter();
   const { t, lang } = useLang();
   const { ensureSession } = useSession();
-  const [identifier, setIdentifier] = useState("");
-  const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const isEmail = identifier.includes("@");
-  const isPhone = /^[\d\s+\-]{8,}$/.test(identifier);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
     setError("");
     setSuccess(false);
 
-    if (!identifier.trim() || !password) {
-      setError("Veuillez remplir tous les champs");
-      return;
-    }
-
-    if (!isEmail && !isPhone) {
-      setError("Entrez un email ou un numéro de téléphone valide");
-      return;
-    }
-
     setLoading(true);
     try {
-      await ensureSession(lang === "mg" ? "mg" : "fr", identifier.trim().slice(0, 32));
+      await ensureSession(lang === "mg" ? "mg" : "fr");
       setSuccess(true);
       setTimeout(() => router.push("/"), 800);
     } catch (err) {
@@ -88,9 +60,7 @@ export default function ConnexionPage() {
                   <Leaf size={22} aria-hidden />
                 </span>
                 <h2 className="text-h3 text-ink">{t.connexion?.title || "Connexion"}</h2>
-                <p className="mt-2 text-sm text-ink-muted">
-                  Connectez-vous pour accéder à votre espace personnel.
-                </p>
+                <p className="mt-2 text-sm text-ink-muted">{t.connexion.anonymousNote}</p>
               </div>
 
               {success && (
@@ -109,78 +79,17 @@ export default function ConnexionPage() {
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <Field label="Email ou numéro de téléphone" htmlFor="identifier">
-                  <div className="relative">
-                    {isEmail ? (
-                      <Mail size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    ) : (
-                      <Phone size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    )}
-                    <Input
-                      id="identifier"
-                      type={isEmail ? "email" : "tel"}
-                      value={identifier}
-                      onChange={(e) => {
-                        setIdentifier(e.target.value);
-                        if (error) setError("");
-                      }}
-                      placeholder={isEmail ? "vous@exemple.com" : "+261 3X XX XX XX"}
-                      className="pl-11"
-                      autoComplete="username"
-                      disabled={success}
-                    />
-                  </div>
-                </Field>
-
-                <Field label="Mot de passe" htmlFor="password">
-                  <div className="relative">
-                    <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
-                    <Input
-                      id="password"
-                      type={showPassword ? "text" : "password"}
-                      value={password}
-                      onChange={(e) => {
-                        setPassword(e.target.value);
-                        if (error) setError("");
-                      }}
-                      placeholder="••••••••"
-                      className="pl-11 pr-11"
-                      autoComplete="current-password"
-                      disabled={success}
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword((v) => !v)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted transition-colors hover:text-ink"
-                      aria-label={showPassword ? "Masquer le mot de passe" : "Afficher le mot de passe"}
-                    >
-                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-                    </button>
-                  </div>
-                </Field>
-
-                <div className="flex justify-end">
-                  <Link
-                    href="/aide"
-                    className="rounded-lg text-[0.8125rem] font-semibold text-brand transition-colors hover:text-brand-hover"
-                  >
-                    Mot de passe oublié ?
-                  </Link>
-                </div>
-
-                <Button type="submit" size="lg" className="w-full" disabled={loading || success} loading={loading}>
-                  Accéder à l'application
-                </Button>
-              </form>
+              <Button onClick={() => void handleSubmit()} size="lg" className="w-full" disabled={loading || success} loading={loading}>
+                {t.connexion.submit}
+              </Button>
 
               <p className="mt-6 text-center text-sm text-ink-muted">
-                {t.connexion?.noAccount || "Pas encore de compte ?"}{" "}
+                {t.connexion.noAccount}{" "}
                 <Link
                   href="/inscription"
                   className="font-semibold text-brand transition-colors hover:text-brand-hover"
                 >
-                  {t.connexion?.signupLink || "S'inscrire"}
+                  {t.connexion.signupLink}
                 </Link>
               </p>
             </Card>

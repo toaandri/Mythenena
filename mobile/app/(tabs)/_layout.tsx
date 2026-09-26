@@ -1,24 +1,29 @@
-import { Tabs, useGlobalSearchParams, useSegments } from 'expo-router';
+import { Redirect, Tabs, useGlobalSearchParams, useSegments } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-import { Platform, StyleSheet, View, Text } from 'react-native';
+import { ActivityIndicator, Platform, StyleSheet, View } from 'react-native';
+import { Text } from '@/components/OutfitText';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useI18n } from '@/lib/i18n';
+import { useSession } from '@/lib/session';
+import MythenenaLogo from '@/components/MythenenaLogo';
 
 export default function TabLayout() {
   const { t } = useI18n();
+  const { session, loading, onboardingComplete } = useSession();
   const insets = useSafeAreaInsets();
   const segments = useSegments();
   const params = useGlobalSearchParams<{ thread?: string | string[] }>();
-  const unreadMessagesCount = 3;
   const activeTab = segments[segments.length - 1];
   const isInMessageThread = typeof params.thread === 'string' && params.thread.length > 0;
   const hideLanguageSwitcher = activeTab === 'chat' || activeTab === 'annuaire';
   const hideAppName = activeTab === 'chat' || (activeTab === 'annuaire' && isInMessageThread);
   const showHomeTopControls = activeTab === '(tabs)';
-  const showPremiumTrigger = showHomeTopControls;
   const showSettingsTrigger = showHomeTopControls;
+
+  if (loading || (session && onboardingComplete === null)) return <View style={{ flex: 1, backgroundColor: '#f8f6f0', justifyContent: 'center' }}><ActivityIndicator color="#276653" /></View>;
+  if (session && onboardingComplete === false) return <Redirect href="/onboarding" />;
 
   return (
     <View style={styles.root}>
@@ -100,11 +105,6 @@ export default function TabLayout() {
                   size={17}
                   color={color}
                 />
-                {unreadMessagesCount > 0 && (
-                  <View style={styles.unreadBadge}>
-                    <Text style={styles.unreadBadgeText}>{unreadMessagesCount > 99 ? '99+' : unreadMessagesCount}</Text>
-                  </View>
-                )}
               </View>
             ),
           }}
@@ -151,12 +151,12 @@ export default function TabLayout() {
       </Tabs>
       {!hideAppName && (
         <View pointerEvents="none" style={[styles.brandContainer, { top: insets.top + 8 }]}> 
+          <MythenenaLogo size={25} />
           <Text style={styles.brandText}>MYTHENENA</Text>
         </View>
       )}
       {!hideLanguageSwitcher && (
         <LanguageSwitcher
-          showPremiumTrigger={showPremiumTrigger}
           showSettingsTrigger={showSettingsTrigger}
           topOffset={hideAppName ? 8 : 38}
         />
@@ -168,12 +168,24 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
+    width: '100%',
+    maxWidth: 430,
+    alignSelf: 'center',
+    backgroundColor: '#f8f6f0',
   },
   brandContainer: {
     position: 'absolute',
     right: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
     zIndex: 1,
-    opacity: 0.26,
+    opacity: 0.72,
+  },
+  brandLogo: {
+    width: 25,
+    height: 25,
+    borderRadius: 7,
   },
   brandText: {
     color: '#276653',

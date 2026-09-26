@@ -1,4 +1,4 @@
-import { and, asc, count, desc, eq, getTableColumns, inArray, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, getTableColumns, inArray, or, sql } from "drizzle-orm";
 import {
   forumBlocks,
   forumCategories,
@@ -60,7 +60,7 @@ export type ModerationPatch = {
 
 export interface ForumRepo {
   listCategories(): Promise<ForumCategoryRow[]>;
-  findCategory(id: string): Promise<ForumCategoryRow | undefined>;
+  findCategory(idOrSlug: string): Promise<ForumCategoryRow | undefined>;
 
   createPost(data: NewForumPost): Promise<ForumPostRow>;
   findPost(id: string): Promise<ForumPostRow | undefined>;
@@ -124,8 +124,12 @@ export function createForumRepo(db: DB): ForumRepo {
         .orderBy(asc(forumCategories.position));
     },
 
-    async findCategory(id) {
-      const [row] = await db.select().from(forumCategories).where(eq(forumCategories.id, id)).limit(1);
+    async findCategory(idOrSlug) {
+      const [row] = await db
+        .select()
+        .from(forumCategories)
+        .where(or(eq(forumCategories.id, idOrSlug), eq(forumCategories.slug, idOrSlug)))
+        .limit(1);
       return row;
     },
 

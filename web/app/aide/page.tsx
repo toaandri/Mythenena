@@ -53,15 +53,6 @@ const FAQ_CATEGORIES = [
     ],
   },
   {
-    id: "premium",
-    name: "aide.categories.premium",
-    icon: Shield,
-    questions: [
-      { q: "aide.faq.q14", a: "aide.faq.a14" },
-      { q: "aide.faq.q15", a: "aide.faq.a15" },
-    ],
-  },
-  {
     id: "account",
     name: "aide.categories.account",
     icon: Users,
@@ -103,12 +94,6 @@ const QUICK_LINKS = [
     href: "/annuaire", 
     icon: Users,
     desc: "aide.quickLinksDesc.annuaire"
-  },
-  { 
-    label: "aide.quickLinks.premium", 
-    href: "/annuaire", 
-    icon: Shield,
-    desc: "aide.quickLinksDesc.premium"
   },
 ];
 

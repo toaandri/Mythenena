@@ -26,7 +26,7 @@ function getModel(): GenerativeModel {
       "GEMINI_API_KEY non configurée — le module IA est indisponible."
     );
   }
-  const modelName = process.env.GEMINI_TEXT_MODEL ?? "gemini-1.5-flash";
+  const modelName = process.env.GEMINI_TEXT_MODEL ?? "gemini-flash-lite-latest";
   const genAI = new GoogleGenerativeAI(key);
   return genAI.getGenerativeModel({ model: modelName });
 }
@@ -169,7 +169,7 @@ export async function chat(
 
   const systemPrompt = `
 Tu es un compagnon d'écoute bienveillant pour la plateforme Mythenena à Madagascar.
-Ton rôle est d'offrir un espace d'écoute active et de soutien émotionnel, pas de faire de la thérapie.
+Ton rôle est d'offrir un espace sûr, de soutien émotionnel et d'orientation, sans diagnostic ni jugement.
 
 Principes FONDAMENTAUX :
 1. NE JAMAIS poser de diagnostic, prescrire un traitement ou attribuer une étiquette psychologique.
@@ -177,8 +177,8 @@ Principes FONDAMENTAUX :
 3. Utiliser des techniques d'écoute active : reformulation, validation émotionnelle, questions ouvertes.
 4. Langue principale : ${lang}. Si l'utilisateur écrit dans une autre langue, s'adapter.
 5. Formulations accessibles, sans jargon clinique ni termes stigmatisants.
-6. Si l'utilisateur exprime de la détresse grave ou des idées suicidaires, orienter vers des ressources humaines.
-7. Rappeler régulièrement que Mythenena est un outil de soutien, pas un substitut médical.
+6. Si l'utilisateur exprime de la détresse grave ou des idées suicidaires, orienter vers les ressources humaines disponibles et les urgences si nécessaire.
+7. Rester centré sur le soutien, l'écoute et l'orientation, sans présenter l'IA comme un substitut à un humain ou à un professionnel.
 ${surveyContext ? `\nContexte du questionnaire préalable :\n${surveyContext}` : ""}
 
 Réponds de manière chaleureuse, courte (3-5 phrases max), et invite à continuer à partager.
@@ -197,7 +197,7 @@ Réponds de manière chaleureuse, courte (3-5 phrases max), et invite à continu
 
   try {
     const chat = model.startChat({
-      systemInstruction: systemPrompt,
+      systemInstruction: { role: "system", parts: [{ text: systemPrompt }] },
       history: contents.slice(0, -1),
     });
     const result = await chat.sendMessage(userMessage);
@@ -210,6 +210,29 @@ Réponds de manière chaleureuse, courte (3-5 phrases max), et invite à continu
       ? "Misaotra anao noho ny fahasahiananao niteny. Azafady miezaha indray kely."
       : "Merci de m'avoir partagé ça. Je suis là pour t'écouter. Peux-tu me dire un peu plus ?";
   }
+}
+
+export async function translateText(text: string, source: string, target: string): Promise<string> {
+  const languageNames: Record<string, string> = {
+    ar: "Arabic",
+    de: "German",
+    en: "English",
+    es: "Spanish",
+    fr: "French",
+    it: "Italian",
+    ja: "Japanese",
+    ko: "Korean",
+    mg: "Malagasy",
+    pt: "Portuguese",
+    "zh-Hans": "Simplified Chinese",
+  };
+  const sourceLanguage = source === "auto" ? "the detected source language" : languageNames[source] ?? source;
+  const targetLanguage = languageNames[target] ?? target;
+  const prompt = `Translate the following text from ${sourceLanguage} to ${targetLanguage}. Preserve its meaning and tone. Reply only with the translation, without quotes or commentary.\n\n${text}`;
+  const result = await getModel().generateContent(prompt);
+  const translated = result.response.text().trim();
+  if (!translated) throw new Error("Gemini returned an empty translation.");
+  return translated;
 }
 
 // ---------------------------------------------------------------------------

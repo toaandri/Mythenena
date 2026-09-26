@@ -1,0 +1,25 @@
+MYTHENENA — SOUTENANCE
+
+Fichier principal : Mythenena_Soutenance.pptx
+10 diapositives. 12 minutes de présentation, puis 3 minutes de questions.
+
+Copier ce dossier sur le disque de l’ordinateur du jury avant de commencer.
+Ouvrir le fichier dans Microsoft PowerPoint et lancer le mode Diaporama.
+Les démonstrations des diapositives 4, 5 et 6 sont intégrées au fichier.
+Elles sont silencieuses : le présentateur commente le parcours.
+Si une vidéo ne démarre pas automatiquement, cliquer dessus.
+Aucune connexion au projet ni installation de l’application n’est nécessaire.
+
+SECOURS
+Demo_1.mp4 : questionnaire, accueil et IA.
+Demo_2.mp4 : ressources et exercices animés.
+Demo_3.mp4 : forum et accompagnant.
+Mythenena_support_statique.pdf : version sans animation.
+Guide_oral_15_minutes.md : texte, minutage et réponses aux questions possibles.
+
+Faire un essai sur l’ordinateur du jury avant le passage, notamment si le logiciel
+n’est pas Microsoft PowerPoint. Le PDF ne contient pas les vidéos.
+
+Les profils et échanges de la démonstration sont fictifs.
+Les prix et crédits des offres restent à définir.
+

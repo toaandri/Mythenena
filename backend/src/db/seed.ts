@@ -4,6 +4,8 @@ import {
   activityLibrary,
   associations,
   forumCategories,
+  forumPosts,
+  forumReplies,
   professionals,
   resources,
   surveyQuestions,
@@ -85,6 +87,19 @@ const CATEGORIES = [
     icon: "sun",
     position: 7,
   },
+];
+
+const FORUM_POSTS = [
+  { id: "post-demo-001", pseudonym: "Lumière_du_soir", avatarSeed: "demo-lumiere", content: "Je teste une routine sans écran avant de dormir. Ce qui m'aide le plus, c'est de noter une seule pensée avant de poser le téléphone.", categoryId: "cat-sleep", daysAgo: 1 },
+  { id: "post-demo-002", pseudonym: "Pas_après_pas", avatarSeed: "demo-pas", content: "Cette semaine, j'ai réussi à sortir marcher dix minutes malgré une journée lourde. Je partage cette petite victoire.", categoryId: "cat-moments", daysAgo: 2 },
+  { id: "post-demo-003", pseudonym: "Miora", avatarSeed: "demo-miora", content: "Comment faites-vous quand les inquiétudes reviennent le soir ? Je cherche des idées simples à essayer.", categoryId: "cat-anxiety", daysAgo: 3 },
+  { id: "post-demo-004", pseudonym: "Etudiant_zen", avatarSeed: "demo-etudiant", content: "Les examens approchent et la pression monte. Respirer lentement avant de commencer m'aide à retrouver un peu de concentration.", categoryId: "cat-stress", daysAgo: 4 },
+];
+
+const FORUM_REPLIES = [
+  { id: "reply-demo-001", postId: "post-demo-001", pseudonym: "Aina", avatarSeed: "demo-aina", content: "J'écris aussi trois lignes dans un carnet. Cela m'aide à ne pas garder toutes mes pensées en tête." },
+  { id: "reply-demo-002", postId: "post-demo-003", pseudonym: "Mandroso", avatarSeed: "demo-mandroso", content: "La respiration 4-6 et l'exercice 5-4-3-2-1 sont faciles à essayer quand l'inquiétude monte." },
+  { id: "reply-demo-003", postId: "post-demo-004", pseudonym: "Tiana", avatarSeed: "demo-tiana", content: "Je découpe mes révisions en petites étapes et je fais une vraie pause entre deux." },
 ];
 
 /** Les 5 questions du mini-sondage (étape 1 du parcours). */
@@ -600,6 +615,27 @@ async function seed() {
     .values(CATEGORIES)
     .onConflictDoNothing();
   console.log(`   ✓ ${CATEGORIES.length} thématiques de forum`);
+
+  await db.insert(forumPosts).values(FORUM_POSTS.map((post) => ({
+    id: post.id,
+    authorSessionId: null,
+    pseudonym: post.pseudonym,
+    avatarSeed: post.avatarSeed,
+    content: `${post.content} [Donnée de démonstration]`,
+    categoryId: post.categoryId,
+    moderationStatus: "visible",
+    isFlagged: false,
+    createdAt: new Date(Date.now() - post.daysAgo * 86400000),
+    updatedAt: new Date(Date.now() - post.daysAgo * 86400000),
+  }))).onConflictDoNothing();
+  await db.insert(forumReplies).values(FORUM_REPLIES.map((reply) => ({
+    ...reply,
+    authorSessionId: null,
+    content: `${reply.content} [Donnée de démonstration]`,
+    moderationStatus: "visible",
+    isFlagged: false,
+  }))).onConflictDoNothing();
+  console.log(`   ✓ ${FORUM_POSTS.length} publications et ${FORUM_REPLIES.length} réponses fictives`);
 
   await db
     .insert(surveyQuestions)

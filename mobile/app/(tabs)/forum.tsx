@@ -1,320 +1,55 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { ActivityIndicator, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { useFocusEffect } from 'expo-router';
+import { ActivityIndicator, View } from 'react-native';
+import { Text, TextInput } from '@/components/OutfitText';
 import { useI18n } from '@/lib/i18n';
 import { useSession } from '@/lib/session';
 import { apiFetch } from '@/lib/api';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSocialCopy } from '@/lib/socialCopy';
+import { Avatar, Button, Chip, Heading, Page, s } from '@/components/social/ui';
 
-type Category = { id: string; slug: string; labelFr: string; labelMg: string; description: string; icon?: string };
-type Post = {
-  id: string;
-  pseudonym: string;
-  content: string;
-  repliesCount: number;
-  reactions: Array<{ type: string; count: number; active: boolean }>;
-  createdAt: string;
-};
-
+type Category = { id: string; slug: string; labelFr: string; labelMg: string };
+type Post = { id: string; pseudonym: string; content: string; createdAt: string; repliesCount: number; reactions: { type: string; count: number; active: boolean }[] };
+type Detail = { post: Post; replies: Post[] };
 export default function ForumTab() {
-  const { t, language } = useI18n();
-  const { ensureSession } = useSession();
-  const insets = useSafeAreaInsets();
-
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [selected, setSelected] = useState<Category | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [content, setContent] = useState('');
-  const [showForm, setShowForm] = useState(false);
-  const [error, setError] = useState('');
-  const [loadingCats, setLoadingCats] = useState(true);
-  const [loadingPosts, setLoadingPosts] = useState(false);
-  const [sending, setSending] = useState(false);
-
-  // Charger catégories
-  useEffect(() => {
-    void apiFetch<{ categories: Category[] }>('/api/forum/categories', { auth: false })
-      .then(({ categories: cats }) => {
-        setCategories(cats);
-        setSelected(cats[0] ?? null);
-      })
-      .catch(() => setError('Forum temporairement indisponible.'))
-      .finally(() => setLoadingCats(false));
-  }, []);
-
-  // Charger posts quand la catégorie change
-  const loadPosts = useCallback(async (cat: Category | null) => {
-    if (!cat) return;
-    setLoadingPosts(true);
-    try {
-      const data = await apiFetch<{ items: Post[] }>(
-        `/api/forum/posts?category=${encodeURIComponent(cat.slug)}&limit=50`,
-        { auth: false }
-      );
-      setPosts(data.items);
-    } catch {
-      setError('Publications indisponibles.');
-    } finally {
-      setLoadingPosts(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    void loadPosts(selected);
-  }, [selected, loadPosts]);
-
-  const publish = async () => {
-    if (!selected || !content.trim()) return;
-    setSending(true);
-    setError('');
-    try {
-      await ensureSession(language === 'mg' ? 'mg' : 'fr');
-      const { post } = await apiFetch<{ post: Post }>('/api/forum/posts', {
-        method: 'POST',
-        body: JSON.stringify({ categoryId: selected.id, content: content.trim() }),
-      });
-      setPosts((prev) => [post, ...prev]);
-      setContent('');
-      setShowForm(false);
-    } catch (e) {
-      setError(e instanceof Error ? e.message : 'Publication impossible.');
-    } finally {
-      setSending(false);
-    }
+  const { t, language } = useI18n(); const c = useSocialCopy(); const { ensureSession } = useSession();
+  const [categories, setCategories] = useState<Category[]>([]); const [category, setCategory] = useState(''); const [sort, setSort] = useState<'recent' | 'discussed' | 'oldest'>('recent'); const [postCategory, setPostCategory] = useState('');
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [posts, setPosts] = useState<Post[]>([]); const [postId, setPostId] = useState<string | null>(null); const [detail, setDetail] = useState<Detail | null>(null);
+  const [screen, setScreen] = useState<'feed' | 'compose' | 'rules' | 'report'>('feed');
+  const [content, setContent] = useState(''); const [reply, setReply] = useState(''); const [report, setReport] = useState(''); const [reportId, setReportId] = useState('');
+  const [loading, setLoading] = useState(true); const [busy, setBusy] = useState(false); const [error, setError] = useState(false); const [notice, setNotice] = useState(false); const [revision, setRevision] = useState(0);
+  const refresh = () => { setLoading(true); setError(false); setRevision(value => value + 1); };
+  useFocusEffect(useCallback(() => {
+    setLoading(true);
+    setError(false);
+    setRevision(value => value + 1);
+  }, []));
+  useEffect(() => { let current = true;
+    const query = `${category ? `&category=${encodeURIComponent(category)}` : ''}&sort=${sort}`;
+    Promise.all([apiFetch<{ categories: Category[] }>('/api/forum/categories'), postId ? apiFetch<Detail>(`/api/forum/posts/${encodeURIComponent(postId)}`) : apiFetch<{ items: Post[] }>(`/api/forum/posts?limit=50${query}`)])
+      .then(([cats, data]) => { if (!current) return; setCategories(cats.categories); if ('post' in data) setDetail(data); else setPosts(data.items); })
+      .catch(() => { if (current) setError(true); }).finally(() => { if (current) setLoading(false); });
+    return () => { current = false; };
+  }, [category, postId, revision, sort]);
+  const mutate = async (action: () => Promise<void>) => { if (busy) return; setBusy(true); setError(false); try { await ensureSession(language === 'mg' ? 'mg' : 'fr'); await action(); } catch { setError(true); } finally { setBusy(false); } };
+  const publish = () => mutate(async () => { if (!content.trim() || !postCategory) return; await apiFetch('/api/forum/posts', { method: 'POST', body: JSON.stringify({ categoryId: postCategory, content: content.trim() }) }); setContent(''); setScreen('feed'); setCategory(categories.find(item => item.id === postCategory)?.slug || ''); refresh(); });
+  const respond = () => mutate(async () => { if (!postId || !reply.trim()) return; const data = await apiFetch<Detail>(`/api/forum/posts/${encodeURIComponent(postId)}/reply`, { method: 'POST', body: JSON.stringify({ content: reply.trim() }) }); setDetail(data); setReply(''); });
+  const react = (post: Post) => mutate(async () => { await apiFetch(`/api/forum/posts/${encodeURIComponent(post.id)}/react`, { method: 'POST', body: JSON.stringify({ type: 'support' }) }); refresh(); });
+  const sendReport = () => mutate(async () => { await apiFetch('/api/forum/report', { method: 'POST', body: JSON.stringify({ targetId: reportId, targetType: 'post', reason: 'other', details: report.trim() }) }); setReport(''); setScreen('feed'); setNotice(true); });
+  const label = (cat: Category) => language === 'mg' ? cat.labelMg : cat.labelFr;
+  const back = () => { if (postId) setLoading(true); setScreen('feed'); setPostId(null); setDetail(null); setReply(''); setError(false); setNotice(false); };
+  const card = (post: Post, full = false) => {
+    const reaction = post.reactions.find(item => item.type === 'support');
+    return <View key={post.id} style={s.card}><View style={s.row}><Avatar name={post.pseudonym} /><View style={s.grow}><Text style={s.name}>{post.pseudonym}</Text><Text style={s.small}>{new Date(post.createdAt).toLocaleDateString(language === 'en' ? 'en-GB' : 'fr-FR', { day: 'numeric', month: 'short' })}</Text></View></View><Text style={s.text}>{post.content}</Text><View style={s.wrap}><Button label={`${reaction?.active ? '♥' : '♡'} ${c('support')} · ${reaction?.count || 0}`} secondary={!reaction?.active} disabled={busy} onPress={() => react(post)} />{!full && <Button label={`${c('replies')} · ${post.repliesCount}`} secondary disabled={busy} onPress={() => { setLoading(true); setError(false); setDetail(null); setPostId(post.id); setReply(''); setNotice(false); }} />}</View><Button label={c('report')} secondary disabled={busy} onPress={() => { setReportId(post.id); setReport(''); setScreen('report'); setNotice(false); }} /></View>;
   };
-
-  const react = async (post: Post) => {
-    try {
-      await ensureSession(language === 'mg' ? 'mg' : 'fr');
-      await apiFetch(`/api/forum/posts/${post.id}/react`, {
-        method: 'POST',
-        body: JSON.stringify({ type: 'support' }),
-      });
-      void loadPosts(selected);
-    } catch {
-      // silencieux
-    }
-  };
-
-  const getCategoryLabel = (cat: Category) =>
-    language === 'mg' ? cat.labelMg : cat.labelFr;
-
-  const supportCount = (post: Post) =>
-    post.reactions.find((r) => r.type === 'support')?.count ?? 0;
-
-  const hasReacted = (post: Post) =>
-    post.reactions.find((r) => r.type === 'support')?.active ?? false;
-
-  return (
-    <View style={[styles.screen, { paddingTop: Math.max(insets.top + 8, 18) }]}>
-      <View style={styles.backgroundBlobTop} />
-      <View style={styles.screenHeader}>
-        <Text style={styles.headerTitle}>{t('forum.title')}</Text>
-        <Text style={styles.headerSubtitle}>{t('forum.subtitle')}</Text>
-      </View>
-
-      {/* Catégories */}
-      {!loadingCats && categories.length > 0 && (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.catRow}>
-          {categories.map((cat) => (
-            <TouchableOpacity
-              key={cat.id}
-              style={[styles.catPill, selected?.id === cat.id && styles.catPillActive]}
-              onPress={() => setSelected(cat)}
-              activeOpacity={0.8}
-            >
-              <Text style={[styles.catPillText, selected?.id === cat.id && styles.catPillTextActive]}>
-                {getCategoryLabel(cat)}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-
-      {error !== '' && (
-        <View style={styles.errorBanner}>
-          <Ionicons name="alert-circle-outline" size={16} color="#c53030" />
-          <Text style={styles.errorText}>{error}</Text>
-        </View>
-      )}
-
-      <ScrollView contentContainerStyle={styles.listContainer} showsVerticalScrollIndicator={false}>
-        {/* Bouton publier */}
-        <TouchableOpacity
-          style={styles.createButton}
-          activeOpacity={0.85}
-          onPress={() => setShowForm((v) => !v)}
-        >
-          <Ionicons name={showForm ? 'close-circle-outline' : 'add-circle-outline'} size={18} color="#ffffff" />
-          <Text style={styles.createButtonText}>
-            {showForm ? 'Annuler' : t('forum.createButton')}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Formulaire */}
-        {showForm && (
-          <View style={styles.createCard}>
-            <Text style={styles.createTitle}>Partager avec la communauté</Text>
-            <TextInput
-              style={[styles.input, styles.textarea]}
-              value={content}
-              onChangeText={setContent}
-              placeholder="Exprimez-vous librement, dans le respect et la bienveillance..."
-              placeholderTextColor="#95a09b"
-              multiline
-              textAlignVertical="top"
-              maxLength={2000}
-            />
-            <TouchableOpacity
-              style={[styles.submitButton, (sending || !content.trim()) && styles.submitButtonDisabled]}
-              onPress={publish}
-              activeOpacity={0.86}
-              disabled={sending || !content.trim()}
-            >
-              {sending
-                ? <ActivityIndicator size="small" color="#fff" />
-                : <Text style={styles.submitButtonText}>{t('forum.form.submit')}</Text>
-              }
-            </TouchableOpacity>
-          </View>
-        )}
-
-        {/* Loading */}
-        {loadingPosts && (
-          <View style={styles.loadingCard}>
-            <ActivityIndicator size="small" color="#276653" />
-          </View>
-        )}
-
-        {/* Posts */}
-        {!loadingPosts && posts.map((post) => (
-          <View key={post.id} style={styles.threadCard}>
-            <View style={styles.postMeta}>
-              <View style={styles.avatar}>
-                <Text style={styles.avatarText}>{post.pseudonym.charAt(0).toUpperCase()}</Text>
-              </View>
-              <View style={styles.metaInfo}>
-                <Text style={styles.pseudonym}>{post.pseudonym}</Text>
-                <Text style={styles.postTime}>
-                  {new Date(post.createdAt).toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })}
-                </Text>
-              </View>
-            </View>
-
-            <Text style={styles.postContent}>{post.content}</Text>
-
-            <View style={styles.postActions}>
-              <TouchableOpacity
-                style={[styles.actionBtn, hasReacted(post) && styles.actionBtnActive]}
-                onPress={() => react(post)}
-                activeOpacity={0.8}
-              >
-                <Ionicons name={hasReacted(post) ? 'heart' : 'heart-outline'} size={15} color={hasReacted(post) ? '#d65b5b' : '#6b7571'} />
-                <Text style={[styles.actionText, hasReacted(post) && styles.actionTextActive]}>
-                  {supportCount(post) > 0 ? supportCount(post).toString() : 'Soutenir'}
-                </Text>
-              </TouchableOpacity>
-
-              <View style={styles.actionBtn}>
-                <Ionicons name="chatbubble-ellipses-outline" size={15} color="#6b7571" />
-                <Text style={styles.actionText}>{post.repliesCount > 0 ? `${post.repliesCount} réponse${post.repliesCount > 1 ? 's' : ''}` : 'Répondre'}</Text>
-              </View>
-            </View>
-          </View>
-        ))}
-
-        {!loadingPosts && posts.length === 0 && !error && (
-          <View style={styles.emptyCard}>
-            <Ionicons name="chatbubbles-outline" size={28} color="#8a9490" />
-            <Text style={styles.emptyTitle}>Soyez le premier à partager</Text>
-            <Text style={styles.emptySubtitle}>Cette communauté vous attend. Votre témoignage peut aider quelqu'un.</Text>
-          </View>
-        )}
-      </ScrollView>
-    </View>
-  );
+  return <Page>{(screen !== 'feed' || postId) && <Button label={c('back')} secondary disabled={busy} onPress={back} />}
+    <Heading label={t('forum.title')} title={screen === 'rules' ? c('rules') : screen === 'compose' ? c('share') : screen === 'report' ? c('report') : postId ? c('replies') : c('forum')} subtitle={screen === 'feed' && !postId ? c('together') : undefined} />
+    {error && <View style={s.banner}><Text accessibilityRole="alert" style={s.error}>{c('error')}</Text><Button label={c('retry')} secondary disabled={busy} onPress={() => refresh()} /></View>}
+    {notice && <Text accessibilityLiveRegion="polite" style={s.muted}>{c('reported')}</Text>}
+    {screen === 'rules' ? <View style={s.card}><Text style={s.text}>{c('respect')}</Text></View> : screen === 'report' ? <View style={s.card}><TextInput accessibilityLabel={c('reason')} value={report} onChangeText={setReport} placeholder={c('reason')} multiline maxLength={1000} style={[s.input, s.textarea]} /><Button label={c('report')} busy={busy} disabled={!report.trim()} onPress={sendReport} /></View> : screen === 'compose' ? <View style={s.card}><View style={s.wrap}>{categories.map(cat => <Chip key={cat.id} label={label(cat)} active={postCategory === cat.id} onPress={() => { if (!busy) setPostCategory(cat.id); }} />)}</View><TextInput accessibilityLabel={c('share')} placeholder={c('share')} value={content} onChangeText={setContent} editable={!busy} multiline maxLength={2000} style={[s.input, s.textarea]} /><Button label={c('publish')} busy={busy} disabled={!content.trim() || !postCategory} onPress={publish} /></View> : <>
+      {!postId && <><View style={s.row}><Button label={`＋ ${c('share')}`} disabled={busy || !categories.length} onPress={() => { setPostCategory(categories.find(cat => cat.slug === category)?.id || categories[0]?.id || ''); setScreen('compose'); setNotice(false); }} /><View style={s.grow}><Button label={filtersOpen ? 'Masquer les filtres' : `☰ Filtres${category || sort !== 'recent' ? ' · actifs' : ''}`} secondary onPress={() => setFiltersOpen(value => !value)} /></View></View>{filtersOpen && <View style={[s.card, { gap: 10 }]}><Text style={s.name}>Explorer les discussions</Text><Text style={s.small}>Thématique</Text><View style={s.wrap}><Chip label={c('all')} active={!category} onPress={() => { if (!busy && category) { setLoading(true); setError(false); setCategory(''); } }} />{categories.map(cat => <Chip key={cat.id} label={label(cat)} active={category === cat.slug} onPress={() => { if (!busy && category !== cat.slug) { setLoading(true); setError(false); setCategory(cat.slug); } }} />)}</View><Text style={s.small}>Trier par</Text><View style={s.wrap}><Chip label="Récentes" active={sort === 'recent'} onPress={() => setSort('recent')} /><Chip label="Plus discutées" active={sort === 'discussed'} onPress={() => setSort('discussed')} /><Chip label="Plus anciennes" active={sort === 'oldest'} onPress={() => setSort('oldest')} /></View></View>}</>}
+      {loading ? <ActivityIndicator color="#276653" /> : postId ? detail && <>{card(detail.post, true)}{detail.replies.map(item => <View key={item.id} style={s.card}><Text style={s.name}>{item.pseudonym}</Text><Text style={s.text}>{item.content}</Text></View>)}<View style={s.card}><TextInput accessibilityLabel={c('reply')} placeholder={c('write')} value={reply} onChangeText={setReply} editable={!busy} multiline maxLength={2000} style={[s.input, s.textarea]} /><Button label={c('reply')} busy={busy} disabled={!reply.trim()} onPress={respond} /></View></> : <>{posts.map(post => card(post))}{!posts.length && !error && <View style={s.card}><Text style={s.muted}>{c('empty')}</Text></View>}<Button label={c('rules')} secondary onPress={() => setScreen('rules')} /></>}
+    </>}
+  </Page>;
 }
-
-const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: '#f8f6f0' },
-  backgroundBlobTop: {
-    position: 'absolute', top: -80, right: -50,
-    width: 220, height: 220, borderRadius: 110,
-    backgroundColor: 'rgba(45, 156, 134, 0.13)',
-  },
-  screenHeader: { paddingHorizontal: 18, marginBottom: 10 },
-  headerTitle: { fontSize: 36, fontWeight: '800', color: '#18211f', letterSpacing: -0.5 },
-  headerSubtitle: { fontSize: 14, color: '#6b7571', marginTop: 2, fontWeight: '500' },
-  catRow: { paddingHorizontal: 18, paddingBottom: 10, gap: 8, flexDirection: 'row' },
-  catPill: {
-    paddingHorizontal: 14, paddingVertical: 7, borderRadius: 999,
-    backgroundColor: '#f0f5f3', borderWidth: 1, borderColor: '#dbe7e2',
-  },
-  catPillActive: { backgroundColor: '#276653', borderColor: '#276653' },
-  catPillText: { fontSize: 13, fontWeight: '700', color: '#51695f' },
-  catPillTextActive: { color: '#ffffff' },
-  errorBanner: {
-    flexDirection: 'row', alignItems: 'center', gap: 8,
-    backgroundColor: '#fdecec', marginHorizontal: 18, marginBottom: 8,
-    borderRadius: 12, padding: 10,
-  },
-  errorText: { flex: 1, fontSize: 12, color: '#c53030' },
-  listContainer: { marginHorizontal: 18, marginBottom: 84, paddingVertical: 4, gap: 12 },
-  createButton: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8,
-    backgroundColor: '#276653', borderRadius: 14, paddingVertical: 13,
-    shadowColor: '#276653', shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.18, shadowRadius: 10, elevation: 3,
-  },
-  createButtonText: { color: '#ffffff', fontSize: 14, fontWeight: '800' },
-  createCard: {
-    backgroundColor: '#ffffff', borderRadius: 16, borderWidth: 1,
-    borderColor: 'rgba(223, 230, 227, 0.95)', padding: 14, gap: 10,
-  },
-  createTitle: { fontSize: 15, fontWeight: '800', color: '#18211f' },
-  input: {
-    backgroundColor: '#f4f7f6', borderRadius: 12, borderWidth: 1,
-    borderColor: '#dbe7e2', paddingHorizontal: 12, paddingVertical: 10,
-    fontSize: 13, color: '#1b2421',
-  },
-  textarea: { minHeight: 100 },
-  submitButton: {
-    borderRadius: 12, backgroundColor: '#276653',
-    alignItems: 'center', justifyContent: 'center', paddingVertical: 12,
-  },
-  submitButtonDisabled: { opacity: 0.55 },
-  submitButtonText: { color: '#ffffff', fontSize: 13, fontWeight: '800' },
-  loadingCard: { alignItems: 'center', paddingVertical: 20 },
-  threadCard: {
-    backgroundColor: '#ffffff', borderRadius: 18, padding: 14,
-    borderWidth: 1, borderColor: 'rgba(223, 230, 227, 0.95)',
-    shadowColor: '#1c2b27', shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05, shadowRadius: 8, elevation: 1, gap: 10,
-  },
-  postMeta: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  avatar: {
-    width: 34, height: 34, borderRadius: 17,
-    backgroundColor: '#e6f4ef', alignItems: 'center', justifyContent: 'center',
-  },
-  avatarText: { fontSize: 15, fontWeight: '800', color: '#276653' },
-  metaInfo: { flex: 1 },
-  pseudonym: { fontSize: 14, fontWeight: '700', color: '#183e36' },
-  postTime: { fontSize: 11, color: '#8a9490', marginTop: 1 },
-  postContent: { fontSize: 14, color: '#2a3d36', lineHeight: 22 },
-  postActions: { flexDirection: 'row', gap: 12, paddingTop: 4 },
-  actionBtn: {
-    flexDirection: 'row', alignItems: 'center', gap: 5,
-    paddingHorizontal: 12, paddingVertical: 7, borderRadius: 999,
-    backgroundColor: '#f4f8f6',
-  },
-  actionBtnActive: { backgroundColor: '#fdecec' },
-  actionText: { fontSize: 12, color: '#6b7571', fontWeight: '600' },
-  actionTextActive: { color: '#d65b5b' },
-  emptyCard: {
-    backgroundColor: '#ffffff', borderRadius: 18, padding: 28,
-    alignItems: 'center', gap: 10,
-    borderWidth: 1, borderColor: 'rgba(223, 230, 227, 0.95)',
-  },
-  emptyTitle: { fontSize: 16, fontWeight: '700', color: '#183e36', textAlign: 'center' },
-  emptySubtitle: { fontSize: 13, color: '#6b7571', lineHeight: 20, textAlign: 'center' },
-});

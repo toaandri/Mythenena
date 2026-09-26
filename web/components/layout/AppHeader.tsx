@@ -10,7 +10,6 @@ import { cn } from "@/lib/utils";
 import { Logo, Wordmark } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { SettingsModal } from "@/components/SettingsModal";
-import { OffersButton } from "@/components/OffersButton";
 
 const NAV = [
   { href: "/forum",     key: "forum"       as const },
@@ -100,8 +99,6 @@ export function AppHeader() {
           <ButtonLink href="/chat" size="sm" className="ml-1.5 hidden sm:inline-flex">
               {t.nav.chat}
             </ButtonLink>
-
-          <OffersButton />
 
           <button
             type="button"

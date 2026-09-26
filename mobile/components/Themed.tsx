@@ -2,7 +2,9 @@
  * Learn more about Light and Dark modes:
  * https://docs.expo.io/guides/color-schemes/
  */
-import { Text as DefaultText, View as DefaultView } from 'react-native';
+import { View as DefaultView } from 'react-native';
+import type { TextProps as NativeTextProps } from 'react-native';
+import { Text as DefaultText } from '@/components/OutfitText';
 
 import { useColorScheme } from './useColorScheme';
 
@@ -13,7 +15,7 @@ type ThemeProps = {
   darkColor?: string;
 };
 
-export type TextProps = ThemeProps & DefaultText['props'];
+export type TextProps = ThemeProps & NativeTextProps;
 export type ViewProps = ThemeProps & DefaultView['props'];
 
 export function useThemeColor(

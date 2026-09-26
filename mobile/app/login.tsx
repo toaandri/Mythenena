@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text } from '@/components/OutfitText';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -12,35 +13,19 @@ export default function LoginScreen() {
   const { t, language } = useI18n();
   const { ensureSession } = useSession();
 
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const isEmail = identifier.includes('@');
-  const isPhone = /^[\d\s+\-]{8,}$/.test(identifier);
 
   const handleSubmit = async () => {
     setError('');
     setSuccess(false);
 
-    if (!identifier.trim() || !password) {
-      setError('Veuillez remplir tous les champs.');
-      return;
-    }
-
-    if (!isEmail && !isPhone) {
-      setError('Entrez un email ou un numéro de téléphone valide.');
-      return;
-    }
-
     setLoading(true);
     try {
-      await ensureSession(language === 'mg' ? 'mg' : 'fr', identifier.trim());
+      await ensureSession(language === 'mg' ? 'mg' : 'fr');
       setSuccess(true);
-      setTimeout(() => router.replace('/(tabs)'), 800);
+      router.replace('/onboarding');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Connexion impossible. Vérifiez votre connexion.');
     } finally {
@@ -71,7 +56,7 @@ export default function LoginScreen() {
             <Ionicons name="leaf-outline" size={22} color="#2d9c86" />
           </View>
           <Text style={styles.title}>{t('login.title')}</Text>
-          <Text style={styles.subtitle}>Connectez-vous pour accéder à votre espace personnel.</Text>
+          <Text style={styles.subtitle}>{t('login.anonymousNote')}</Text>
 
           {success && (
             <View style={styles.successBanner}>
@@ -87,49 +72,6 @@ export default function LoginScreen() {
             </View>
           )}
 
-          <Text style={styles.sectionLabel}>Email ou numéro de téléphone</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name={isEmail ? 'mail-outline' : 'call-outline'} size={18} color="#7a8a85" />
-            <TextInput
-              value={identifier}
-              onChangeText={(value) => {
-                setIdentifier(value);
-                if (error) setError('');
-              }}
-              placeholder={isEmail ? 'vous@exemple.com' : '+261 3X XX XX XX'}
-              placeholderTextColor="#7a8a85"
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType={isEmail ? 'email-address' : 'phone-pad'}
-              style={styles.input}
-              editable={!success}
-            />
-          </View>
-
-          <Text style={styles.sectionLabel}>Mot de passe</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name="lock-closed-outline" size={18} color="#7a8a85" />
-            <TextInput
-              value={password}
-              onChangeText={(value) => {
-                setPassword(value);
-                if (error) setError('');
-              }}
-              placeholder="••••••••"
-              placeholderTextColor="#7a8a85"
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
-              style={[styles.input, styles.inputWithAction]}
-              editable={!success}
-            />
-            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
-              <Ionicons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={18}
-                color="#6b7a76"
-              />
-            </TouchableOpacity>
-          </View>
         </View>
 
         <TouchableOpacity
@@ -139,7 +81,7 @@ export default function LoginScreen() {
           disabled={loading || success}
         >
           <Text style={styles.primaryButtonText}>
-            {loading ? 'Connexion...' : "Accéder à l'application"}
+            {loading ? t('common.loading') : t('login.submit')}
           </Text>
           {!loading && <Ionicons name="arrow-forward" size={18} color="#ffffff" />}
         </TouchableOpacity>

@@ -16,7 +16,7 @@ export function testConfig(overrides: Partial<AppConfig> = {}): AppConfig {
     corsOrigins: ["http://localhost:3000"],
     moderatorTokens: ["jeton-moderateur-de-test"],
     apiBaseUrl: "http://localhost:4000",
-    geminiTextModel: "gemini-1.5-flash",
+    geminiTextModel: "gemini-flash-lite-latest",
     geminiTtsModel: "gemini-2.5-flash-preview-tts",
     geminiTtsLanguage: "mg-MG",
     groqSttModel: "whisper-large-v3-turbo",

@@ -20,7 +20,7 @@ const envSchema = z.object({
   MODERATOR_TOKENS: z.string().default(""),
   // --- IA : Gemini ---
   GEMINI_API_KEY: z.string().optional(),
-  GEMINI_TEXT_MODEL: z.string().default("gemini-1.5-flash"),
+  GEMINI_TEXT_MODEL: z.string().default("gemini-flash-lite-latest"),
   GEMINI_TTS_MODEL: z.string().default("gemini-2.5-flash-preview-tts"),
   GEMINI_TTS_LANGUAGE: z.string().default("mg-MG"),
   // --- IA : Groq Whisper ---

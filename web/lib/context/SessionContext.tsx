@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 import { apiFetch, getSessionToken, setSessionToken } from "@/lib/api";
 
 export type AnonymousSession = {
@@ -28,6 +28,7 @@ const SessionContext = createContext<SessionContextValue>({
 export function SessionProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<AnonymousSession | null>(null);
   const [loading, setLoading] = useState(true);
+  const restoreSession = useRef<Promise<AnonymousSession | null>>(Promise.resolve(null));
 
   useEffect(() => {
     const token = getSessionToken();
@@ -35,13 +36,22 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       setLoading(false);
       return;
     }
-    apiFetch<{ session: AnonymousSession }>("/api/session/me")
-      .then(({ session: current }) => setSession(current))
-      .catch(() => setSessionToken(null))
+    restoreSession.current = apiFetch<{ session: AnonymousSession }>("/api/session/me")
+      .then(({ session: current }) => {
+        if (getSessionToken() !== token) return null;
+        setSession(current);
+        return current;
+      })
+      .catch(() => {
+        if (getSessionToken() === token) setSessionToken(null);
+        return null;
+      })
       .finally(() => setLoading(false));
   }, []);
 
   const ensureSession = useCallback(async (language: "fr" | "mg" = "fr", pseudonym?: string) => {
+    const restored = await restoreSession.current;
+    if (restored && getSessionToken()) return restored;
     if (session && getSessionToken()) return session;
     const created = await apiFetch<{ token: string; session: AnonymousSession }>("/api/session/start", {
       method: "POST",
@@ -49,12 +59,14 @@ export function SessionProvider({ children }: { children: ReactNode }) {
       body: JSON.stringify({ language, retainHistory: true, ...(pseudonym ? { pseudonym } : {}) }),
     });
     setSessionToken(created.token);
+    restoreSession.current = Promise.resolve(created.session);
     setSession(created.session);
     return created.session;
   }, [session]);
 
   const clearSession = useCallback(() => {
     setSessionToken(null);
+    restoreSession.current = Promise.resolve(null);
     setSession(null);
   }, []);
 

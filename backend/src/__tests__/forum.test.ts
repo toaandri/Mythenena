@@ -89,6 +89,17 @@ describe("GET /api/forum/posts", () => {
     expect(body.items[0].content).toBe("Sur la solitude");
   });
 
+  it("filtre aussi par slug de catégorie", async () => {
+    const ctx = createTestContext();
+    const author = await startSession(ctx);
+    await publish(ctx, author.token, "Sur le stress", "cat-stress");
+
+    const body = await (await ctx.app.request("/api/forum/posts?category=stress")).json();
+
+    expect(body.items).toHaveLength(1);
+    expect(body.items[0].content).toBe("Sur le stress");
+  });
+
   it("refuse une catégorie inconnue", async () => {
     const ctx = createTestContext();
     const response = await ctx.app.request("/api/forum/posts?category=inexistante");

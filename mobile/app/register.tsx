@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text, TextInput } from '@/components/OutfitText';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/lib/i18n';
 import { useSession } from '@/lib/session';
+import { apiFetch } from '@/lib/api';
 
 export default function RegisterScreen() {
   const router = useRouter();
@@ -12,17 +14,13 @@ export default function RegisterScreen() {
   const { t, language } = useI18n();
   const { ensureSession } = useSession();
 
-  const [form, setForm] = useState({ name: '', identifier: '', password: '', confirmPassword: '' });
-  const [showPassword, setShowPassword] = useState(false);
+  const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const isEmail = form.identifier.includes('@');
-  const isPhone = /^[\d\s+\-]{8,}$/.test(form.identifier);
-
-  const handleChange = (field: keyof typeof form, value: string) => {
-    setForm((prev) => ({ ...prev, [field]: value }));
+  const handleChange = (value: string) => {
+    setName(value);
     if (error) setError('');
   };
 
@@ -30,36 +28,22 @@ export default function RegisterScreen() {
     setError('');
     setSuccess(false);
 
-    if (!form.name.trim() || !form.identifier.trim() || !form.password || !form.confirmPassword) {
-      setError(t('register.error.required'));
-      return;
-    }
-
-    if (form.name.trim().length < 2) {
+    if (name.trim().length < 3) {
       setError(t('register.error.nameTooShort'));
-      return;
-    }
-
-    if (!isEmail && !isPhone) {
-      setError(t('register.error.invalidIdentifier'));
-      return;
-    }
-
-    if (form.password.length < 6) {
-      setError(t('register.error.passwordTooShort'));
-      return;
-    }
-
-    if (form.password !== form.confirmPassword) {
-      setError(t('register.error.passwordMismatch'));
       return;
     }
 
     setLoading(true);
     try {
-      await ensureSession(language === 'mg' ? 'mg' : 'fr', form.name.trim());
+      const session = await ensureSession(language === 'mg' ? 'mg' : 'fr');
+      if (session.pseudonym !== name.trim()) {
+        await apiFetch('/api/session/preferences', {
+          method: 'PATCH',
+          body: JSON.stringify({ pseudonym: name.trim() }),
+        });
+      }
       setSuccess(true);
-      setTimeout(() => router.replace('/(tabs)'), 800);
+      router.replace('/onboarding');
     } catch (e) {
       setError(e instanceof Error ? e.message : 'Inscription impossible. Réessayez.');
     } finally {
@@ -110,8 +94,8 @@ export default function RegisterScreen() {
           <View style={styles.inputWrap}>
             <Ionicons name="person-outline" size={18} color="#7a8a85" />
             <TextInput
-              value={form.name}
-              onChangeText={(value) => handleChange('name', value)}
+              value={name}
+              onChangeText={handleChange}
               placeholder={t('register.namePlaceholder')}
               placeholderTextColor="#7a8a85"
               autoCapitalize="none"
@@ -120,65 +104,6 @@ export default function RegisterScreen() {
             />
           </View>
 
-          <Text style={styles.sectionLabel}>{t('register.identifierLabel')}</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name={isEmail ? 'mail-outline' : 'call-outline'} size={18} color="#7a8a85" />
-            <TextInput
-              value={form.identifier}
-              onChangeText={(value) => handleChange('identifier', value)}
-              placeholder={isEmail ? 'vous@exemple.com' : '+261 3X XX XX XX'}
-              placeholderTextColor="#7a8a85"
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType={isEmail ? 'email-address' : 'phone-pad'}
-              style={styles.input}
-              editable={!success}
-            />
-          </View>
-
-          <Text style={styles.sectionLabel}>{t('register.passwordLabel')}</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name="lock-closed-outline" size={18} color="#7a8a85" />
-            <TextInput
-              value={form.password}
-              onChangeText={(value) => handleChange('password', value)}
-              placeholder={t('register.passwordPlaceholder')}
-              placeholderTextColor="#7a8a85"
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
-              style={[styles.input, styles.inputWithAction]}
-              editable={!success}
-            />
-            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
-              <Ionicons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={18}
-                color="#6b7a76"
-              />
-            </TouchableOpacity>
-          </View>
-
-          <Text style={styles.sectionLabel}>{t('register.confirmPasswordLabel')}</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name="shield-checkmark-outline" size={18} color="#7a8a85" />
-            <TextInput
-              value={form.confirmPassword}
-              onChangeText={(value) => handleChange('confirmPassword', value)}
-              placeholder={t('register.confirmPasswordPlaceholder')}
-              placeholderTextColor="#7a8a85"
-              secureTextEntry={!showPassword}
-              autoCapitalize="none"
-              style={[styles.input, styles.inputWithAction]}
-              editable={!success}
-            />
-            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
-              <Ionicons
-                name={showPassword ? 'eye-off-outline' : 'eye-outline'}
-                size={18}
-                color="#6b7a76"
-              />
-            </TouchableOpacity>
-          </View>
         </View>
 
         <TouchableOpacity

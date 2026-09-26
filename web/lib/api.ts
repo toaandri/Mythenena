@@ -1,5 +1,19 @@
-const BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+const CONFIGURED_BASE_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
 const TOKEN_KEY = "mythenena.session-token";
+
+function getBaseUrl(): string {
+  if (typeof window === "undefined") return CONFIGURED_BASE_URL;
+
+  try {
+    const apiUrl = new URL(CONFIGURED_BASE_URL);
+    if (apiUrl.hostname === "localhost" || apiUrl.hostname === "127.0.0.1") {
+      apiUrl.hostname = window.location.hostname;
+    }
+    return apiUrl.origin;
+  } catch {
+    return CONFIGURED_BASE_URL;
+  }
+}
 
 export type ApiErrorPayload = { error?: { message?: string }; message?: string };
 
@@ -25,7 +39,7 @@ export async function apiFetch<T>(
 ): Promise<T> {
   const { auth = true, headers, ...init } = options;
   const token = auth ? getSessionToken() : null;
-  const response = await fetch(`${BASE_URL}${path}`, {
+  const response = await fetch(`${getBaseUrl()}${path}`, {
     ...init,
     headers: {
       "Content-Type": "application/json",
@@ -37,6 +51,21 @@ export async function apiFetch<T>(
   if (!response.ok) {
     const body = (await response.json().catch(() => ({}))) as ApiErrorPayload;
     throw new ApiError(response.status, body.error?.message ?? body.message ?? "Le service est indisponible.");
+  }
+  return response.json() as Promise<T>;
+}
+
+export async function apiUpload<T>(path: string, body: FormData, auth = true): Promise<T> {
+  const token = auth ? getSessionToken() : null;
+  const response = await fetch(`${getBaseUrl()}${path}`, {
+    method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    body,
+  });
+
+  if (!response.ok) {
+    const result = (await response.json().catch(() => ({}))) as ApiErrorPayload;
+    throw new ApiError(response.status, result.error?.message ?? result.message ?? "Le service est indisponible.");
   }
   return response.json() as Promise<T>;
 }

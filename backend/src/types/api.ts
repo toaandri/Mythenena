@@ -11,12 +11,12 @@ import type { ReactionType, ReportReason, ReportStatus, ReportTargetType } from 
 import type { ResourceType } from "./resource";
 
 export const DISCLAIMER_FR =
-  "Mythenena est un outil d'écoute, de pré-dépistage et de soutien entre pairs. " +
-  "Ce n'est pas un service médical et ne remplace pas une consultation.";
+  "Mythenena est un outil d'écoute, de clarification et de soutien. " +
+  "Il aide à mieux comprendre ce que l'on vit et à orienter vers des ressources adaptées.";
 
 export const DISCLAIMER_MG =
-  "Ny Mythenena dia fitaovana hanampy amin'ny fandrenesana, fanadihadiana ary fiainana miaraka. " +
-  "Tsy serivisy ara-pitsaboana izy ary tsy solo-soloin'ny fan visitsika mpitsaboana.";
+  "Ny Mythenena dia fitaovana hanampy amin'ny fandrenesana, fanazavana ary fanohanana. " +
+  "Mampirisika ny fanazavana sy fanoroana amin'ny loharanon-kafatra mifanaraka amin'ny filana.";
 
 // --- Session -----------------------------------------------------------------
 

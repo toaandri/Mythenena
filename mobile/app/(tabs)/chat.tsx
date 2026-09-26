@@ -1,26 +1,37 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, ScrollView, Platform, KeyboardAvoidingView, Keyboard, ActivityIndicator } from 'react-native';
+import { Text, TextInput } from '@/components/OutfitText';
 import { Ionicons, Feather } from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
-import { useLocalSearchParams } from 'expo-router';
+import { AudioModule, RecordingPresets, setAudioModeAsync, useAudioRecorder } from 'expo-audio';
+import * as Speech from 'expo-speech';
+import { useIsFocused, useLocalSearchParams } from 'expo-router';
+import AssistantSphere from '@/components/AssistantSphere';
 import { useI18n } from '@/lib/i18n';
 import { useSession } from '@/lib/session';
-import { apiFetch } from '@/lib/api';
+import { apiFetch, apiUpload } from '@/lib/api';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 type ChatMsg = { id: string; role: 'user' | 'assistant'; content: string; timestamp: string };
+type VoiceStatus = 'idle' | 'requesting' | 'recording' | 'transcribing';
 
 export default function ChatTab() {
   const params = useLocalSearchParams<{ topic?: string | string[]; seedMessage?: string | string[] }>();
   const { t, language } = useI18n();
   const { ensureSession } = useSession();
   const insets = useSafeAreaInsets();
+  const focused = useIsFocused();
+  const [speaking, setSpeaking] = useState(false);
   const scrollRef = useRef<ScrollView>(null);
+  const audioRecorder = useAudioRecorder(RecordingPresets.HIGH_QUALITY);
 
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState<ChatMsg[]>([]);
   const [loading, setLoading] = useState(false);
   const [typing, setTyping] = useState(false);
+  const [voiceStatus, setVoiceStatus] = useState<VoiceStatus>('idle');
+  const [voiceCallActive, setVoiceCallActive] = useState(false);
+  const [voiceError, setVoiceError] = useState<string | null>(null);
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
   const [safetyAlert, setSafetyAlert] = useState<string | null>(null);
 
@@ -35,6 +46,17 @@ export default function ChatTab() {
     }
     return '';
   }, [params.seedMessage]);
+
+  const voiceStatusRef = useRef<VoiceStatus>('idle');
+  const voiceCallActiveRef = useRef(false);
+  const updateVoiceStatus = (status: VoiceStatus) => {
+    voiceStatusRef.current = status;
+    setVoiceStatus(status);
+  };
+  const updateVoiceCall = (active: boolean) => {
+    voiceCallActiveRef.current = active;
+    setVoiceCallActive(active);
+  };
 
   // Charger historique + envoyer seed au démarrage
   useEffect(() => {
@@ -71,7 +93,7 @@ export default function ChatTab() {
     }
   }, [messages]);
 
-  const sendToApi = async (sessionId: string, text: string) => {
+  const sendToApi = async (sessionId: string, text: string, speakResponse = false, resumeVoiceCall = false) => {
     const userMsg: ChatMsg = { id: Date.now().toString(), role: 'user', content: text, timestamp: new Date().toISOString() };
     setMessages((prev) => [...prev, userMsg]);
     setTyping(true);
@@ -88,6 +110,22 @@ export default function ChatTab() {
       }
       if (resp.message) {
         setMessages((prev) => [...prev, resp.message!]);
+        if (speakResponse && (!resumeVoiceCall || voiceCallActiveRef.current)) {
+          await Speech.stop();
+          Speech.speak(resp.message.content, {
+            language: language === 'mg' ? 'mg-MG' : 'fr-FR',
+            onStart: () => setSpeaking(true),
+            onDone: () => {
+              setSpeaking(false);
+              if (resumeVoiceCall && voiceCallActiveRef.current) void startVoiceRecording(true);
+            },
+            onStopped: () => setSpeaking(false),
+            onError: () => {
+              setSpeaking(false);
+              if (resumeVoiceCall && voiceCallActiveRef.current) void startVoiceRecording(true);
+            },
+          });
+        }
       }
     } catch (e) {
       const errMsg: ChatMsg = {
@@ -97,10 +135,103 @@ export default function ChatTab() {
         timestamp: new Date().toISOString(),
       };
       setMessages((prev) => [...prev, errMsg]);
+      if (resumeVoiceCall && voiceCallActiveRef.current) {
+        setTimeout(() => {
+          if (voiceCallActiveRef.current) void startVoiceRecording(true);
+        }, 0);
+      }
     } finally {
       setTyping(false);
     }
   };
+
+  const startVoiceRecording = async (forCall = false) => {
+    if (voiceStatusRef.current !== 'idle' || typing) return;
+    setVoiceError(null);
+    updateVoiceStatus('requesting');
+    try {
+      const permission = await AudioModule.requestRecordingPermissionsAsync();
+      if (!permission.granted) {
+        setVoiceError(t('chat.voicePermissionDenied'));
+        updateVoiceStatus('idle');
+        if (forCall) updateVoiceCall(false);
+        return;
+      }
+
+      await setAudioModeAsync({ allowsRecording: true, playsInSilentMode: true });
+      await audioRecorder.prepareToRecordAsync();
+      audioRecorder.record();
+      updateVoiceStatus('recording');
+    } catch (error) {
+      setVoiceError(error instanceof Error ? error.message : t('chat.voiceError'));
+      updateVoiceStatus('idle');
+      if (forCall) updateVoiceCall(false);
+    }
+  };
+
+  const stopVoiceRecording = async () => {
+    if (voiceStatus !== 'recording') return;
+    updateVoiceStatus('transcribing');
+    setVoiceError(null);
+
+    try {
+      await audioRecorder.stop();
+      const uri = audioRecorder.uri;
+      if (!uri) throw new Error(t('chat.voiceEmpty'));
+
+      const form = new FormData();
+      if (Platform.OS === 'web') {
+        const blob = await fetch(uri).then((response) => response.blob());
+        if (!blob.size) throw new Error(t('chat.voiceEmpty'));
+        const filename = blob.type.includes('mp4') ? 'voice.m4a' : 'voice.webm';
+        form.append('audio', blob, filename);
+      } else {
+        form.append('audio', {
+          uri,
+          name: 'voice.m4a',
+          type: 'audio/mp4',
+        } as unknown as Blob);
+      }
+      form.append('language', language === 'mg' ? 'mg' : 'fr');
+
+      const transcription = await apiUpload<{ text: string }>('/api/transcription', form, { auth: false });
+      const transcript = transcription.text.trim();
+      if (!transcript) throw new Error(t('chat.voiceEmpty'));
+
+      const session = await ensureSession(language === 'mg' ? 'mg' : 'fr');
+      await sendToApi(session.id, transcript, true, voiceCallActiveRef.current);
+    } catch (error) {
+      setVoiceError(error instanceof Error ? error.message : t('chat.voiceError'));
+    } finally {
+      updateVoiceStatus('idle');
+      await setAudioModeAsync({ allowsRecording: false, playsInSilentMode: true }).catch(() => {});
+    }
+  };
+
+  const endVoiceCall = async () => {
+    updateVoiceCall(false);
+    setSpeaking(false);
+    await Speech.stop();
+    if (voiceStatusRef.current === 'recording') {
+      await audioRecorder.stop().catch(() => {});
+      updateVoiceStatus('idle');
+      await setAudioModeAsync({ allowsRecording: false, playsInSilentMode: true }).catch(() => {});
+    }
+  };
+
+  const toggleVoiceCall = async () => {
+    if (voiceCallActiveRef.current) {
+      await endVoiceCall();
+      return;
+    }
+    if (voiceStatusRef.current !== 'idle' || typing) return;
+    updateVoiceCall(true);
+    await startVoiceRecording(true);
+  };
+
+  useEffect(() => {
+    if (!focused && voiceCallActiveRef.current) void endVoiceCall();
+  }, [focused]);
 
   const sendMessage = async () => {
     const trimmed = message.trim();
@@ -141,7 +272,13 @@ export default function ChatTab() {
             <Text style={styles.personName}>Assistant IA</Text>
             <View style={styles.statusRow}>
               <View style={[styles.onlineDot, typing && styles.onlineDotTyping]} />
-              <Text style={styles.statusText}>{typing ? 'En train d\'écrire...' : t('chat.available')}</Text>
+              <Text style={styles.statusText}>
+                {voiceStatus === 'requesting' ? t('chat.voiceRequesting')
+                  : voiceStatus === 'recording' ? (voiceCallActive ? t('chat.listening') : t('chat.voiceRecording'))
+                    : voiceStatus === 'transcribing' ? t('chat.voiceTranscribing')
+                      : voiceCallActive ? t('chat.calling')
+                        : typing ? 'En train d\'écrire...' : t('chat.available')}
+              </Text>
             </View>
           </View>
         </View>
@@ -157,6 +294,10 @@ export default function ChatTab() {
           </TouchableOpacity>
         </View>
       )}
+
+      {voiceError && <Text accessibilityRole="alert" style={styles.voiceError}>{voiceError}</Text>}
+
+      {!isKeyboardOpen && <AssistantSphere focused={focused} active={speaking || voiceStatus === 'recording'} busy={typing || voiceStatus === 'transcribing'} />}
 
       <ScrollView
         ref={scrollRef}
@@ -204,8 +345,23 @@ export default function ChatTab() {
 
       {/* Composer */}
       <BlurView intensity={70} tint="light" style={[styles.composer, { marginBottom: composerBottomGap }]}>
-        <TouchableOpacity style={styles.audioAction}>
-          <Feather name="mic" size={18} color="#276653" />
+        <TouchableOpacity
+          style={[styles.callAction, voiceCallActive && styles.callActionActive]}
+          accessibilityRole="button"
+          accessibilityLabel={voiceCallActive ? t('chat.callEnd') : t('chat.callStart')}
+          disabled={voiceStatus === 'requesting' || (!voiceCallActive && (voiceStatus !== 'idle' || typing))}
+          onPress={() => void toggleVoiceCall()}
+        >
+          <Ionicons name={voiceCallActive ? 'call' : 'call-outline'} size={17} color={voiceCallActive ? '#fff' : '#276653'} style={voiceCallActive ? styles.hangupIcon : undefined} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.audioAction, voiceStatus === 'recording' && styles.voiceRecording]}
+          accessibilityRole="button"
+          accessibilityLabel={voiceStatus === 'recording' ? (voiceCallActive ? t('chat.turnStop') : t('chat.voiceStop')) : (voiceCallActive ? t('chat.turnStart') : t('chat.voiceStart'))}
+          disabled={typing || speaking || voiceStatus === 'requesting' || voiceStatus === 'transcribing'}
+          onPress={() => void (voiceStatus === 'recording' ? stopVoiceRecording() : startVoiceRecording())}
+        >
+          <Feather name={voiceStatus === 'recording' ? 'square' : 'mic'} size={18} color={voiceStatus === 'recording' ? '#fff' : '#276653'} />
         </TouchableOpacity>
         <TextInput
           style={styles.composerInput}
@@ -256,10 +412,18 @@ const styles = StyleSheet.create({
     shadowColor: '#1c2b27', shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06, shadowRadius: 6, elevation: 1,
   },
+  callAction: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center', backgroundColor: '#e6ede5' },
+  callActionActive: { backgroundColor: '#c53030' },
+  hangupIcon: { transform: [{ rotate: '135deg' }] },
   safetyBanner: {
     backgroundColor: '#fdecec', marginHorizontal: 10, marginTop: 8,
     borderRadius: 12, padding: 12, flexDirection: 'row', alignItems: 'center', gap: 8,
   },
+  voiceError: {
+    color: '#c53030', fontSize: 12, lineHeight: 18,
+    marginHorizontal: 18, marginTop: 6,
+  },
+  voiceRecording: { backgroundColor: '#c53030' },
   safetyText: { flex: 1, fontSize: 12, color: '#c53030', lineHeight: 18 },
   chatTranscript: { flex: 1, paddingHorizontal: 10, marginTop: 8 },
   chatContent: { gap: 12, paddingVertical: 14, paddingHorizontal: 10, paddingBottom: 20 },

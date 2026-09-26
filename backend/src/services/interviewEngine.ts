@@ -74,7 +74,7 @@ const MAX_PHASE = 9;
 function getGeminiModel() {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY manquante");
-  const modelName = process.env.GEMINI_TEXT_MODEL ?? "gemini-1.5-flash";
+  const modelName = process.env.GEMINI_TEXT_MODEL ?? "gemini-flash-lite-latest";
   const genAI = new GoogleGenerativeAI(key);
   return genAI.getGenerativeModel({ model: modelName });
 }
@@ -110,7 +110,7 @@ RÈGLES ABSOLUES :
 3. L'utilisateur peut refuser un sujet, corriger une interprétation ou terminer à tout moment.
 4. Formulations bienveillantes, accessibles, sans jargon clinique.
 5. Si la personne exprime une détresse grave, orienter vers des ressources humaines et arrêter l'exploration.
-6. Rappeler que Mythenena est un outil de soutien, pas un substitut médical.
+6. Rester centré sur le soutien, l'écoute et l'orientation, sans présenter Mythenena comme un substitut à un humain ou à un professionnel.
 
 Historique de la conversation :
 ${historyText || "(début de l'entretien)"}

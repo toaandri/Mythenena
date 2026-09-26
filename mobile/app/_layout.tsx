@@ -1,4 +1,5 @@
 import { useFonts } from 'expo-font';
+import { Outfit_400Regular, Outfit_500Medium, Outfit_600SemiBold, Outfit_700Bold, Outfit_800ExtraBold, Outfit_900Black } from '@expo-google-fonts/outfit';
 import { DarkTheme, DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
@@ -8,7 +9,8 @@ import { useColorScheme } from '@/components/useColorScheme';
 import { I18nProvider } from '@/lib/i18n';
 import { SessionProvider } from '@/lib/session';
 import { initNotifications, sendImmediateNotification, scheduleRepeatingNotification } from '@/lib/notifications';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Text } from '@/components/OutfitText';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -26,6 +28,12 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    Outfit_400Regular,
+    Outfit_500Medium,
+    Outfit_600SemiBold,
+    Outfit_700Bold,
+    Outfit_800ExtraBold,
+    Outfit_900Black,
   });
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
@@ -81,18 +89,18 @@ function RootLayoutNav() {
     <I18nProvider>
       <SessionProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <View style={{ flex: 1 }}>
+        <View style={styles.appShell}>
           {banner && (
             <View style={styles.banner} pointerEvents="none">
               <Text style={styles.bannerTitle}>{banner.title}</Text>
               {banner.body ? <Text style={styles.bannerBody}>{banner.body}</Text> : null}
             </View>
           )}
-          <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="premium" options={{ presentation: 'modal', headerShown: false }} />
-          <Stack.Screen name="login" options={{ headerShown: false }} />
-          <Stack.Screen name="register" options={{ headerShown: false }} />
+          <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="login" />
+          <Stack.Screen name="register" />
+          <Stack.Screen name="onboarding" options={{ gestureEnabled: false }} />
           <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
           </Stack>
         </View>
@@ -103,6 +111,13 @@ function RootLayoutNav() {
 }
 
 const styles = StyleSheet.create({
+  appShell: {
+    flex: 1,
+    width: '100%',
+    maxWidth: 430,
+    alignSelf: 'center',
+    backgroundColor: '#f8f6f0',
+  },
   banner: {
     position: 'absolute',
     top: 30,

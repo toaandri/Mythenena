@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Text } from '@/components/OutfitText';
 import { Ionicons } from '@expo/vector-icons';
 import { Language, useI18n } from '@/lib/i18n';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -8,12 +9,11 @@ import { useRouter } from 'expo-router';
 const languages: Language[] = ['fr', 'en', 'mg'];
 
 type LanguageSwitcherProps = {
-  showPremiumTrigger?: boolean;
   showSettingsTrigger?: boolean;
   topOffset?: number;
 };
 
-export default function LanguageSwitcher({ showPremiumTrigger = false, showSettingsTrigger = false, topOffset = 8 }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ showSettingsTrigger = false, topOffset = 8 }: LanguageSwitcherProps) {
   const { language, setLanguage, t } = useI18n();
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -22,17 +22,6 @@ export default function LanguageSwitcher({ showPremiumTrigger = false, showSetti
   return (
     <View style={[styles.container, { top: insets.top + topOffset }]}>
       <View style={styles.actionsRow}>
-        {showPremiumTrigger && (
-          <TouchableOpacity
-            style={styles.premiumTrigger}
-            onPress={() => router.push('/premium')}
-            activeOpacity={0.85}
-          >
-            <Ionicons name="diamond-outline" size={15} color="#7a4a10" />
-            <Text style={styles.premiumTriggerText}>{t('premium.trigger')}</Text>
-          </TouchableOpacity>
-        )}
-
         {showSettingsTrigger && (
           <TouchableOpacity
             style={styles.settingsTrigger}
@@ -81,22 +70,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-  },
-  premiumTrigger: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: '#fdeccf',
-    borderWidth: 1,
-    borderColor: '#f0d6a3',
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-  },
-  premiumTriggerText: {
-    color: '#7a4a10',
-    fontSize: 11,
-    fontWeight: '800',
   },
   trigger: {
     flexDirection: 'row',

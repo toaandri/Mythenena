@@ -35,7 +35,7 @@ export default function AnnuairePage() {
   useEffect(() => {
     let active = true;
     setLoading(true);
-    const params = new URLSearchParams({ limit: "50", includeFictional: "true" });
+    const params = new URLSearchParams({ limit: "50" });
     if (city) params.set("city", city);
     if (specialty) params.set("specialty", specialty);
     if (onlyAvailable) params.set("acceptsNewPatients", "true");

@@ -150,7 +150,7 @@ async function generateGuidedInstructions(
 
   try {
     const genAI = new GoogleGenerativeAI(key);
-    const model = genAI.getGenerativeModel({ model: process.env.GEMINI_TEXT_MODEL ?? "gemini-1.5-flash" });
+    const model = genAI.getGenerativeModel({ model: process.env.GEMINI_TEXT_MODEL ?? "gemini-flash-lite-latest" });
 
     const prompt = `
 Tu génères des instructions guidées personnalisées pour une activité de bien-être.

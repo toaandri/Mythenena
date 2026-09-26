@@ -19,6 +19,7 @@ import { createTranscriptionRoutes } from "./routes/transcription";
 import { createInterviewRoutes } from "./routes/interview";
 import { createProfileRoutes } from "./routes/profile";
 import { createActivitiesRoutes } from "./routes/activities";
+import { createTranslationRoutes } from "./routes/translate";
 import { getDb } from "./db";
 
 /**
@@ -98,6 +99,7 @@ export function createApp(deps: { repos: Repos; config: AppConfig }): Hono<AppBi
   app.route("/api/annuaire", createAnnuaireRoutes(deps));
   app.route("/api/ressources", createResourceRoutes(deps));
   app.route("/api/transcription", createTranscriptionRoutes(deps));
+  app.route("/api/translate", createTranslationRoutes({ config: deps.config }));
 
   // --- Espaces communautaires : lecture publique, écriture authentifiée ------
   // L'authentification est appliquée endpoint par endpoint dans chaque
