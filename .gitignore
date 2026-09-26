@@ -1,4 +1,4 @@
-﻿# === Secrets — NE JAMAIS VERSIONNER ===
+# === Secrets — NE JAMAIS VERSIONNER ===
 .env
 .env.local
 .env.*.local
