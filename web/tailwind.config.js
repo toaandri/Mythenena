@@ -30,6 +30,14 @@ module.exports = {
           DEFAULT: "rgb(var(--accent) / <alpha-value>)",
           soft: "rgb(var(--accent-soft) / <alpha-value>)",
         },
+        premium: {
+          DEFAULT: "rgb(var(--premium) / <alpha-value>)",
+          hover: "rgb(var(--premium-hover) / <alpha-value>)",
+          soft: "rgb(var(--premium-soft) / <alpha-value>)",
+          softer: "rgb(var(--premium-softer) / <alpha-value>)",
+          line: "rgb(var(--premium-line) / <alpha-value>)",
+          on: "rgb(var(--premium-on) / <alpha-value>)",
+        },
         success: {
           DEFAULT: "rgb(var(--success) / <alpha-value>)",
           soft: "rgb(var(--success-soft) / <alpha-value>)",
@@ -105,6 +113,21 @@ module.exports = {
           "0%, 70%, 100%": { transform: "translateY(0)" },
           "35%": { transform: "translateY(-4px)" },
         },
+        /* Halo de la zone scannée (scan corporel) */
+        "zone-pulse": {
+          "0%, 100%": { opacity: "0.12", transform: "scale(1)" },
+          "50%": { opacity: "0.26", transform: "scale(1.07)" },
+        },
+        /* Bascule de la tête d'un côté puis de l'autre */
+        "head-roll": {
+          "0%, 100%": { transform: "rotate(-7deg)" },
+          "50%": { transform: "rotate(7deg)" },
+        },
+        /* Montée / descente sur la pointe des pieds */
+        "body-bob": {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-1.8px)" },
+        },
       },
       animation: {
         "fade-rise": "fade-rise .45s cubic-bezier(0.22, 1, 0.36, 1) both",
@@ -113,6 +136,9 @@ module.exports = {
         "bubble-in": "bubble-in .28s cubic-bezier(0.22, 1, 0.36, 1) both",
         breathe: "breathe 7s ease-in-out infinite",
         "dot-bounce": "dot-bounce 1.2s ease-in-out infinite",
+        "zone-pulse": "zone-pulse 2.6s ease-in-out infinite",
+        "head-roll": "head-roll 3.4s ease-in-out infinite",
+        "body-bob": "body-bob 2.2s ease-in-out infinite",
       },
     },
   },

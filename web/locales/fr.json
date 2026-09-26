@@ -13,7 +13,8 @@
     "commencer": "Commencer",
     "ressources": "Ressources",
     "traducteur": "Traducteur",
-    "synthese": "Mon bilan"
+    "synthese": "Mon bilan",
+    "messages": "Messages"
   },
   "home": {
     "eyebrow": "Anonyme · Gratuit · Disponible 24h/24",
@@ -101,7 +102,37 @@
     "crisisMsg": "Si vous êtes en danger, appelez le +261 20 22 XXX XX (ligne d'écoute Madagascar) ou rendez-vous aux urgences les plus proches.",
     "typing": "Traduction en cours…",
     "send": "Envoyer",
-    "disclaimerShort": "L'IA ne remplace pas un professionnel de santé."
+    "disclaimerShort": "L'IA ne remplace pas un professionnel de santé.",
+    "messagesTitle": "Modes de communication",
+    "messagesDesc": "Choisissez comment vous souhaitez échanger",
+    "textChat": "Chat par écrit",
+    "textChatDesc": "Échangez par messages texte avec l'assistant IA",
+    "voiceCall": "Appel vocal",
+    "voiceCallDesc": "Parlez directement avec l'assistant IA",
+    "voiceMessage": "Message vocal",
+    "voiceMessageDesc": "Envoyez un message vocal à l'assistant IA"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Discutez avec d'autres membres en toute confidentialité",
+    "search": "Rechercher une conversation...",
+    "placeholder": "Écrivez un message...",
+    "send": "Envoyer",
+    "more": "Plus d'options",
+    "emptyTitle": "Aucune conversation",
+    "emptyDesc": "Commencez une nouvelle conversation en cliquant sur le bouton ci-dessous",
+    "newConversation": "Nouvelle conversation",
+    "online": "En ligne",
+    "offline": "Hors ligne",
+    "voiceMsg": "Message vocal",
+    "messagesTitle": "Modes de communication",
+    "messagesDesc": "Choisissez comment vous souhaitez échanger",
+    "textChat": "Chat par écrit",
+    "textChatDesc": "Échangez par messages texte",
+    "voiceCall": "Appel vocal",
+    "voiceCallDesc": "Parlez directement",
+    "voiceMessage": "Message vocal",
+    "voiceMessageDesc": "Envoyez un message vocal"
   },
   "sondage": {
     "title": "Comment vous sentez-vous ?",
@@ -323,6 +354,54 @@
     "configTitle": "Configuration requise",
     "configDesc": "Ajoutez vos clés Azure Translator dans le fichier .env.local à la racine de web/ :",
     "maxChars": "{count} / {max} caractères"
+  },
+  "offers": {
+    "title": "Premium",
+    "buttonLabel": "Premium",
+    "modalTitle": "Choisissez l'accompagnement qui vous convient",
+    "modalDesc": "Commencez gratuitement, et evoluez vers un suivi professionnel quand vous le souhaitez.",
+    "modalFoot": "Anonyme · Sans engagement · Résiliable à tout moment",
+    "premiumLabel": "Premium",
+    "freeLabel": "Offre gratuite",
+    "inLabel": "Inclus",
+    "perMonth": "par mois",
+    "popular": "Le plus choisi",
+    "bookingTitle": "Confirmer votre choix",
+    "bookingDesc": "Vous allez être redirigé vers la prise de rendez-vous avec un professionnel de l'écoute.",
+    "back": "Retour",
+    "bookNow": "Commencer",
+    "freeText": "Gratuit",
+    "free": {
+      "name": "Offre Gratuite",
+      "subtitle": "Découverte & Autonomie",
+      "stat": "Accès illimité",
+      "priceNote": "Sans carte bancaire · Sans engagement",
+      "feature1": "Évaluation Personnelle en accès illimité",
+      "feature2": "Espaces d'Échange — Forum d'Entraide",
+      "feature3": "Tchat avec l'Assistant IA 24h/24",
+      "note": "Sans suivi professionnel.",
+      "cta": "Commencer gratuitement"
+    },
+    "essential": {
+      "name": "Suivi Essentiel",
+      "subtitle": "Accompagnement Modéré",
+      "stat": "2 h par semaine",
+      "priceNote": "Facturation mensuelle · résiliable à tout moment",
+      "feature1": "Tous les avantages de l'offre gratuite",
+      "feature2": "1 séance personnalisée de 2 h par semaine",
+      "feature3": "Avec un professionnel de l'écoute",
+      "cta": "Choisir cet accompagnement"
+    },
+    "intensive": {
+      "name": "Suivi Intensif",
+      "subtitle": "Accompagnement Renforcé",
+      "stat": "4 h par semaine",
+      "priceNote": "Facturation mensuelle · résiliable à tout moment",
+      "feature1": "Tous les avantages de l'offre gratuite",
+      "feature2": "2 séances personnalisées de 2 h par semaine",
+      "feature3": "Avec un professionnel dédié",
+      "cta": "Opter pour le suivi intensif"
+    }
   },
   "footer": {
     "tagline": "Une plateforme d'écoute et de soutien en santé mentale, pensée pour Madagascar.",

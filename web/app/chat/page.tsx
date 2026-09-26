@@ -1,13 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AlertTriangle, Lock, SendHorizonal, Sparkles } from "lucide-react";
+import { AlertTriangle, Lock, SendHorizonal, Sparkles, Mic, MessageSquare, Phone, X } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
 import { useTranslate } from "@/lib/useTranslate";
 import { Container } from "@/components/layout/Container";
 import { Badge, Dot } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Textarea } from "@/components/ui/Field";
+import { Dialog } from "@/components/ui/Dialog";
+
+export const dynamic = "force-dynamic";
 
 type Message = { role: "ai" | "user"; text: string; translating?: boolean };
 
@@ -35,6 +38,60 @@ function pickResponse(text: string): string {
   return AI_RESPONSES.default;
 }
 
+/* ─── Modal Messages (texte + appel) ─── */
+function MessagesModal({ open, onClose, t }: { open: boolean; onClose: () => void; t: any }) {
+  return (
+    <Dialog open={open} onClose={onClose} title={t.messagesTitle} description={t.messagesDesc}>
+      <div className="flex flex-col gap-4">
+        {/* Chat texte */}
+        <Button
+          variant="soft"
+          className="w-full justify-start gap-3 text-left py-4"
+          onClick={() => { onClose(); }}
+        >
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
+            <MessageSquare size={20} aria-hidden />
+          </span>
+          <div>
+            <p className="font-semibold text-ink">{t.textChat}</p>
+            <p className="text-sm text-ink-muted">{t.textChatDesc}</p>
+          </div>
+        </Button>
+
+        {/* Appel vocal */}
+        <Button
+          variant="soft"
+          className="w-full justify-start gap-3 text-left py-4"
+          onClick={() => { onClose(); }}
+        >
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
+            <Phone size={20} aria-hidden />
+          </span>
+          <div>
+            <p className="font-semibold text-ink">{t.voiceCall}</p>
+            <p className="text-sm text-ink-muted">{t.voiceCallDesc}</p>
+          </div>
+        </Button>
+
+        {/* Message vocal */}
+        <Button
+          variant="soft"
+          className="w-full justify-start gap-3 text-left py-4"
+          onClick={() => { onClose(); }}
+        >
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-soft text-brand">
+            <Mic size={20} aria-hidden />
+          </span>
+          <div>
+            <p className="font-semibold text-ink">{t.voiceMessage}</p>
+            <p className="text-sm text-ink-muted">{t.voiceMessageDesc}</p>
+          </div>
+        </Button>
+      </div>
+    </Dialog>
+  );
+}
+
 export default function ChatPage() {
   const { t, lang } = useLang();
   const { translate } = useTranslate();
@@ -43,6 +100,7 @@ export default function ChatPage() {
   const [input, setInput] = useState("");
   const [crisis, setCrisis] = useState(false);
   const [typing, setTyping] = useState(false);
+  const [messagesOpen, setMessagesOpen] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -115,9 +173,9 @@ export default function ChatPage() {
         <Container size="narrow" className="pt-5">
           <div
             role="alert"
-            className="flex items-start gap-3.5 rounded-2xl border border-danger/25 bg-danger-soft p-5"
+            className="flex items-start gap-3.5 rounded-2xl border border-brand/25 bg-brand-soft p-5"
           >
-            <AlertTriangle size={19} className="mt-0.5 shrink-0 text-danger" aria-hidden />
+            <AlertTriangle size={19} className="mt-0.5 shrink-0 text-brand" aria-hidden />
             <div>
               <p className="text-sm font-semibold text-ink">{t.chat.crisisTitle}</p>
               <p className="mt-1 text-[0.8125rem] leading-relaxed text-ink-muted">{t.chat.crisisMsg}</p>
@@ -186,10 +244,21 @@ export default function ChatPage() {
             >
               <SendHorizonal size={18} aria-hidden />
             </Button>
+            {/* Bouton Messages (texte + appel) */}
+            <Button
+              variant="outline"
+              onClick={() => setMessagesOpen(true)}
+              aria-label={t.chat.messagesTitle}
+              className="h-11 w-11 shrink-0 rounded-xl p-0"
+            >
+              <MessageSquare size={18} aria-hidden />
+            </Button>
           </div>
           <p className="mt-2.5 text-center text-[0.7rem] text-ink-subtle">{t.chat.disclaimerShort}</p>
         </Container>
       </div>
+
+      <MessagesModal open={messagesOpen} onClose={() => setMessagesOpen(false)} t={t.chat} />
     </div>
   );
 }

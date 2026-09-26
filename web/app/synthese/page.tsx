@@ -30,20 +30,18 @@ import { cn } from "@/lib/utils";
 // Scores de démonstration — branchés sur les réponses réelles via l'API.
 const SCORES = [72, 45, 38, 60, 50];
 
-type Tone = "success" | "warning" | "danger";
+type LevelTone = "brand";
 
-const LEVELS: { min: number; tone: Tone; label: "low" | "medium" | "high" }[] = [
-  { min: 65, tone: "success", label: "low" },
-  { min: 40, tone: "warning", label: "medium" },
-  { min: 0, tone: "danger", label: "high" },
+const LEVELS: { min: number; tone: LevelTone; label: "low" | "medium" | "high" }[] = [
+  { min: 65, tone: "brand", label: "low" },
+  { min: 40, tone: "brand", label: "medium" },
+  { min: 0, tone: "brand", label: "high" },
 ];
 
 /* Classes écrites en toutes lettres : Tailwind ne peut pas détecter `text-${tone}`. */
 const TONE = {
-  success: { text: "text-success", bg: "bg-success", stroke: "stroke-success" },
-  warning: { text: "text-warning", bg: "bg-warning", stroke: "stroke-warning" },
-  danger: { text: "text-danger", bg: "bg-danger", stroke: "stroke-danger" },
-} satisfies Record<Tone, { text: string; bg: string; stroke: string }>;
+  brand: { text: "text-brand", bg: "bg-brand", stroke: "stroke-brand" },
+} satisfies Record<LevelTone, { text: string; bg: string; stroke: string }>;
 
 const levelOf = (value: number) => LEVELS.find((l) => value >= l.min) ?? LEVELS[LEVELS.length - 1];
 
@@ -201,8 +199,8 @@ export default function SynthesePage() {
       </Card>
 
       {/* ───── Avertissement ───── */}
-      <div className="flex items-start gap-3 rounded-2xl border border-warning/25 bg-warning-soft p-5">
-        <Info size={17} className="mt-0.5 shrink-0 text-warning" aria-hidden />
+      <div className="flex items-start gap-3 rounded-2xl border border-brand/25 bg-brand-soft p-5">
+        <Info size={17} className="mt-0.5 shrink-0 text-brand" aria-hidden />
         <p className="text-[0.8125rem] leading-relaxed text-ink-muted">{t.synthese.disclaimer}</p>
       </div>
     </PageBody>

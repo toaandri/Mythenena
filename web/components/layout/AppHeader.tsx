@@ -9,11 +9,13 @@ import { useTheme } from "@/lib/context/ThemeContext";
 import { cn } from "@/lib/utils";
 import { Logo, Wordmark } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
+import { OffersButton } from "@/components/OffersButton";
 
 const NAV = [
   { href: "/forum",     key: "forum"       as const },
   { href: "/chat",      key: "chat"        as const },
   { href: "/ressources", key: "ressources" as const },
+  { href: "/messages",  key: "messages"    as const },
 ];
 
 const LANGS: { code: Lang; label: string }[] = [
@@ -95,6 +97,8 @@ export function AppHeader() {
           <ButtonLink href="/chat" size="sm" className="ml-1.5 hidden sm:inline-flex">
               {t.nav.chat}
             </ButtonLink>
+
+          <OffersButton />
 
           <button
             type="button"

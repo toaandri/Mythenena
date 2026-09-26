@@ -13,7 +13,8 @@
     "commencer": "Get Started",
     "ressources": "Resources",
     "traducteur": "Translator",
-    "synthese": "My summary"
+    "synthese": "My summary",
+    "messages": "Messages"
   },
   "home": {
     "eyebrow": "Anonymous · Free · Available 24/7",
@@ -101,7 +102,37 @@
     "crisisMsg": "If you are in danger, call +261 20 22 XXX XX (Madagascar listening line) or go to the nearest emergency room.",
     "typing": "Translating…",
     "send": "Send",
-    "disclaimerShort": "AI does not replace a health professional."
+    "disclaimerShort": "AI does not replace a health professional.",
+    "messagesTitle": "Communication modes",
+    "messagesDesc": "Choose how you want to communicate",
+    "textChat": "Text chat",
+    "textChatDesc": "Exchange text messages with the AI assistant",
+    "voiceCall": "Voice call",
+    "voiceCallDesc": "Talk directly with the AI assistant",
+    "voiceMessage": "Voice message",
+    "voiceMessageDesc": "Send a voice message to the AI assistant"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Chat with other members privately",
+    "search": "Search conversations...",
+    "placeholder": "Write a message...",
+    "send": "Send",
+    "more": "More options",
+    "emptyTitle": "No conversations yet",
+    "emptyDesc": "Start a new conversation by clicking the button below",
+    "newConversation": "New conversation",
+    "online": "Online",
+    "offline": "Offline",
+    "voiceMsg": "Voice message",
+    "messagesTitle": "Communication modes",
+    "messagesDesc": "Choose how you want to communicate",
+    "textChat": "Text chat",
+    "textChatDesc": "Exchange text messages",
+    "voiceCall": "Voice call",
+    "voiceCallDesc": "Talk directly",
+    "voiceMessage": "Voice message",
+    "voiceMessageDesc": "Send a voice message"
   },
   "sondage": {
     "title": "How are you feeling?",
@@ -164,15 +195,110 @@
     "inhale": "Inhale",
     "hold": "Hold",
     "exhale": "Exhale",
+    "exercises": "Soothing exercises",
+    "exerciseDuration": "min",
+    "exerciseStart": "Start",
+    "exerciseClose": "Close",
+    "exerciseList": [
+      {
+        "id": "scan",
+        "title": "Body scan",
+        "desc": "Mentally scan each part of your body to release tension.",
+        "duration": 5,
+        "tag": "Relaxation",
+        "steps": [
+          "Lie down or sit comfortably, eyes closed.",
+          "Bring attention to your feet. Feel them, release all tension.",
+          "Slowly move up: ankles, calves, knees, thighs.",
+          "Continue to belly, chest, shoulders.",
+          "Finish with neck, face, top of head."
+        ]
+      },
+      {
+        "id": "grounding",
+        "title": "5-4-3-2-1 Grounding",
+        "desc": "Return to the present moment by engaging your 5 senses to calm anxiety.",
+        "duration": 3,
+        "tag": "Anxiety",
+        "steps": [
+          "Name 5 things you see around you.",
+          "Name 4 things you can touch. Touch them.",
+          "Name 3 sounds you hear right now.",
+          "Name 2 smells you notice (or like).",
+          "Name 1 thing you can taste.",
+          "Breathe slowly. You are here, safe."
+        ]
+      },
+      {
+        "id": "muscle",
+        "title": "Muscle relaxation",
+        "desc": "Tense and release each muscle group to free physical stress.",
+        "duration": 7,
+        "tag": "Stress",
+        "steps": [
+          "Clench fists hard for 5 seconds, then release.",
+          "Tense arms and shoulders 5 seconds, then release.",
+          "Scrunch face hard 5 seconds, then release.",
+          "Tense belly 5 seconds, then release.",
+          "Tense legs and feet 5 seconds, then release.",
+          "Stay still 1 minute and observe the relaxation in your whole body."
+        ]
+      },
+      {
+        "id": "visualisation",
+        "title": "Peaceful visualization",
+        "desc": "Imagine a safe, calm place to reduce stress and find serenity.",
+        "duration": 5,
+        "tag": "Meditation",
+        "steps": [
+          "Close eyes and breathe slowly three times.",
+          "Imagine a place where you feel safe: beach, forest, room.",
+          "Observe the details: colors, sounds, smells of this place.",
+          "Feel the warmth or coolness of the air on your skin.",
+          "Stay in this place as long as you wish.",
+          "Return gently by wiggling fingers, then open eyes."
+        ]
+      }
+    ],
     "articles": "Articles & Guides",
     "readMore": "Read",
     "articleList": [
-      { "title": "Understanding depression", "desc": "Symptoms, causes and first steps toward well-being.", "tag": "Depression" },
-      { "title": "Managing daily anxiety", "desc": "Simple techniques to reduce stress and find calm.", "tag": "Anxiety" },
-      { "title": "Recognizing a toxic relationship", "desc": "Signs of emotional control and how to break free.", "tag": "Relationships" },
-      { "title": "Building self-esteem", "desc": "Practical exercises to regain confidence in yourself.", "tag": "Self-esteem" },
-      { "title": "Sleep and mental health", "desc": "Why sleeping well is essential for your psychological balance.", "tag": "Sleep" },
-      { "title": "Talking about your suffering", "desc": "How to break the silence and ask for help without shame.", "tag": "Testimony" }
+      {
+        "title": "Understanding depression",
+        "desc": "Symptoms, causes and first steps toward well-being.",
+        "tag": "Depression",
+        "content": "Depression is much more than a passing sadness. It's a mood disorder that affects how you feel, think, and handle daily activities.\n\n**Common symptoms**\nPersistent sadness, loss of interest in usual activities, fatigue, sleep disturbances, difficulty concentrating, feelings of guilt or worthlessness.\n\n**Possible causes**\nBiological factors (chemical imbalance in the brain), difficult life events (grief, separation, unemployment), family history, chronic illness.\n\n**First steps**\nTalk to someone you trust. Consult a doctor or mental health professional. Maintain a daily routine, even minimal. Avoid isolation."
+      },
+      {
+        "title": "Managing daily anxiety",
+        "desc": "Simple techniques to reduce stress and find calm.",
+        "tag": "Anxiety",
+        "content": "Anxiety is a natural reaction to stress, but when it becomes excessive, it can disrupt your daily life.\n\n**Recognizing anxiety**\nPalpitations, muscle tension, intrusive thoughts, avoidance of certain situations, irritability.\n\n**Effective techniques**\nDeep breathing (4-7-8 technique), mindfulness meditation, regular physical exercise, limiting caffeine and screens in the evening.\n\n**When to consult**\nIf anxiety lasts more than 6 months, interferes with your work or relationships, or is accompanied by panic attacks, consult a professional."
+      },
+      {
+        "title": "Recognizing a toxic relationship",
+        "desc": "Signs of emotional control and how to break free.",
+        "tag": "Relationships",
+        "content": "A toxic relationship can be hard to identify from the inside, especially when you love the person involved.\n\n**Warning signs**\nYou feel constantly criticized or devalued. You walk on eggshells. You isolate from your loved ones. You fear the other's reactions.\n\n**Emotional control**\nManipulation, excessive jealousy, control of outings and acquaintances are forms of psychological violence.\n\n**Breaking free**\nTalk to a trusted friend or professional. Set clear boundaries. Know that you deserve a respectful relationship."
+      },
+      {
+        "title": "Building self-esteem",
+        "desc": "Practical exercises to regain confidence in yourself.",
+        "tag": "Self-esteem",
+        "content": "Self-esteem is the value you give yourself. It builds and strengthens over time and with practice.\n\n**Daily exercises**\nWrite down 3 positive things you did or felt each evening. Replace automatic negative thoughts with neutral or kind formulations.\n\n**Setting small goals**\nEvery goal achieved, even a tiny one, builds confidence. Start with simple actions and gradually increase.\n\n**Circle**\nDistance yourself from people who devalue you. Surround yourself with people who support and encourage you."
+      },
+      {
+        "title": "Sleep and mental health",
+        "desc": "Why sleeping well is essential for your psychological balance.",
+        "tag": "Sleep",
+        "content": "Sleep is a fundamental pillar of mental health. Chronic lack of sleep increases the risk of depression and anxiety.\n\n**Sleep hygiene**\nGo to bed and wake up at fixed times. Avoid screens 1h before sleep. Keep your bedroom cool and dark. Avoid caffeine after 2pm.\n\n**Soothing rituals**\nA herbal tea, light reading, a few minutes of deep breathing or meditation can signal your brain it's time to sleep.\n\n**When to consult**\nIf you sleep less than 6h per night for more than 3 weeks, or if you wake up exhausted despite a full night, talk to a doctor."
+      },
+      {
+        "title": "Talking about your suffering",
+        "desc": "How to break the silence and ask for help without shame.",
+        "tag": "Testimony",
+        "content": "Talking about what you feel is often the hardest first step, yet the most liberating.\n\n**Why silence is heavy**\nKeeping your suffering to yourself amplifies it. Isolation reinforces negative thoughts and prevents finding solutions.\n\n**How to start**\nChoose a trusted person. Start with a simple phrase: 'I'm not doing well right now.' You don't have to explain everything at once.\n\n**If you have no one**\nMythenena's AI assistant is available 24/7, without judgment. Forums also allow sharing anonymously with people who understand."
+      }
     ]
   },
   "annuaire": {
@@ -227,6 +353,54 @@
     "configTitle": "Configuration required",
     "configDesc": "Add your Azure Translator keys in the .env.local file at the root of web/:",
     "maxChars": "{count} / {max} characters"
+  },
+  "offers": {
+    "title": "Premium",
+    "buttonLabel": "Premium",
+    "modalTitle": "Choose the support that fits you",
+    "modalDesc": "Start for free, and move to professional follow-up whenever you need it.",
+    "modalFoot": "Anonymous · No commitment · Cancel anytime",
+    "premiumLabel": "Premium",
+    "freeLabel": "Free offer",
+    "inLabel": "Included",
+    "perMonth": "per month",
+    "popular": "Most popular",
+    "bookingTitle": "Confirm your choice",
+    "bookingDesc": "You will be redirected to book a session with a mental health professional.",
+    "back": "Back",
+    "bookNow": "Continue",
+    "freeText": "Free",
+    "free": {
+      "name": "Free Offer",
+      "subtitle": "Discovery & Autonomy",
+      "stat": "Unlimited access",
+      "priceNote": "No credit card · No commitment",
+      "feature1": "Unlimited access to the Personal Assessment",
+      "feature2": "Exchange Spaces — Peer Support Forum",
+      "feature3": "Chat with the AI Assistant 24/7",
+      "note": "No professional follow-up.",
+      "cta": "Start for free"
+    },
+    "essential": {
+      "name": "Essential Support",
+      "subtitle": "Moderate Follow-up",
+      "stat": "2 h per week",
+      "priceNote": "Monthly billing · cancel anytime",
+      "feature1": "All the benefits of the free offer",
+      "feature2": "1 personalised 2-hour session per week",
+      "feature3": "With a trained listening professional",
+      "cta": "Choose this support"
+    },
+    "intensive": {
+      "name": "Intensive Support",
+      "subtitle": "Enhanced Follow-up",
+      "stat": "4 h per week",
+      "priceNote": "Monthly billing · cancel anytime",
+      "feature1": "All the benefits of the free offer",
+      "feature2": "2 personalised 2-hour sessions per week",
+      "feature3": "With a dedicated professional",
+      "cta": "Opt for intensive support"
+    }
   },
   "footer": {
     "tagline": "A listening and mental health support platform, built for Madagascar.",

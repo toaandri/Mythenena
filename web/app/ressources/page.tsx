@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, BookOpen, X } from "lucide-react";
 import { useLang } from "@/lib/context/LangContext";
+import { useCssVar } from "@/lib/useCssVar";
 import { Container, Section } from "@/components/layout/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { Badge } from "@/components/ui/Badge";
@@ -11,7 +12,7 @@ import { IconBreath, IconBody, IconSenses, IconMuscle, IconVisu } from "@/compon
 
 /* ─── Composant cercle timer ─── */
 
-type Phase = { label: string; duration: number; color: string };
+type Phase = { id: string; label: string; duration: number; color: string };
 
 function CircleTimer({
   phases, title, desc, Icon,
@@ -60,7 +61,7 @@ function CircleTimer({
 
         {/* Icône animée au centre */}
         <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-          <Icon phase={running ? phase.label : ""} />
+          <Icon phase={running ? phase.id : ""} />
           {running && (
             <span className="text-lg font-bold tabular-nums leading-none" style={{ color: phase.color }}>
               {remaining}
@@ -99,6 +100,7 @@ function CircleTimer({
 
 function Exercises() {
   const { t } = useLang();
+  const brand = useCssVar("--brand");
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
       <CircleTimer
@@ -106,9 +108,9 @@ function Exercises() {
         desc={t.ressources.breathingDesc}
         Icon={IconBreath}
         phases={[
-          { label: "inhale", duration: 4, color: "#4A9B8E" },
-          { label: "hold",   duration: 7, color: "#F6AD55" },
-          { label: "exhale", duration: 8, color: "#68B5C8" },
+          { id: "inhale", label: t.ressources.inhale, duration: 4, color: brand },
+          { id: "hold",   label: t.ressources.hold,   duration: 7, color: brand },
+          { id: "exhale", label: t.ressources.exhale, duration: 8, color: brand },
         ]}
       />
       {/* label affiché sous le cercle pour la respiration */}
@@ -117,10 +119,10 @@ function Exercises() {
         desc="Relâchez les tensions de chaque partie du corps."
         Icon={IconBody}
         phases={[
-          { label: "Pieds & jambes", duration: 10, color: "#9F7AEA" },
-          { label: "Ventre & dos",   duration: 10, color: "#B794F4" },
-          { label: "Épaules & bras", duration: 10, color: "#9F7AEA" },
-          { label: "Visage & tête",  duration: 10, color: "#B794F4" },
+          { id: "legs",   label: "Pieds & jambes",  duration: 10, color: brand },
+          { id: "torso",  label: "Ventre & dos",    duration: 10, color: brand },
+          { id: "arms",   label: "Épaules & bras",  duration: 10, color: brand },
+          { id: "head",   label: "Visage & tête",   duration: 10, color: brand },
         ]}
       />
       <CircleTimer
@@ -128,11 +130,11 @@ function Exercises() {
         desc="Revenez au présent en mobilisant vos 5 sens."
         Icon={IconSenses}
         phases={[
-          { label: "5 choses vues",  duration: 10, color: "#F6AD55" },
-          { label: "4 touchées",     duration: 10, color: "#ED8936" },
-          { label: "3 sons entendus",duration: 10, color: "#F6AD55" },
-          { label: "2 odeurs",       duration: 10, color: "#ED8936" },
-          { label: "1 goût",         duration: 10, color: "#F6AD55" },
+          { id: "vue",     label: "5 choses vues",   duration: 10, color: brand },
+          { id: "toucher", label: "4 touchées",      duration: 10, color: brand },
+          { id: "ouie",    label: "3 sons entendus", duration: 10, color: brand },
+          { id: "odeur",   label: "2 odeurs",        duration: 10, color: brand },
+          { id: "gout",    label: "1 goût",          duration: 10, color: brand },
         ]}
       />
       <CircleTimer
@@ -140,12 +142,12 @@ function Exercises() {
         desc="Contractez puis relâchez pour libérer le stress."
         Icon={IconMuscle}
         phases={[
-          { label: "Contractez", duration: 5,  color: "#FC8181" },
-          { label: "Relâchez",   duration: 10, color: "#68D391" },
-          { label: "Contractez", duration: 5,  color: "#FC8181" },
-          { label: "Relâchez",   duration: 10, color: "#68D391" },
-          { label: "Contractez", duration: 5,  color: "#FC8181" },
-          { label: "Relâchez",   duration: 10, color: "#68D391" },
+          { id: "contract", label: "Contractez", duration: 5,  color: brand },
+          { id: "release",  label: "Relâchez",   duration: 10, color: brand },
+          { id: "contract", label: "Contractez", duration: 5,  color: brand },
+          { id: "release",  label: "Relâchez",   duration: 10, color: brand },
+          { id: "contract", label: "Contractez", duration: 5,  color: brand },
+          { id: "release",  label: "Relâchez",   duration: 10, color: brand },
         ]}
       />
       <CircleTimer
@@ -153,10 +155,10 @@ function Exercises() {
         desc="Imaginez un lieu sûr pour retrouver la sérénité."
         Icon={IconVisu}
         phases={[
-          { label: "Fermez les yeux",  duration: 15, color: "#1a1a2e" },
-          { label: "Imaginez le lieu", duration: 15, color: "#68B5C8" },
-          { label: "Observez",         duration: 15, color: "#87CEEB" },
-          { label: "Ressentez",        duration: 15, color: "#4A9B8E" },
+          { id: "close",    label: "Fermez les yeux",   duration: 15, color: brand },
+          { id: "imagine",  label: "Imaginez le lieu",  duration: 15, color: brand },
+          { id: "observe",  label: "Observez",          duration: 15, color: brand },
+          { id: "feel",     label: "Ressentez",         duration: 15, color: brand },
         ]}
       />
     </div>
@@ -165,13 +167,13 @@ function Exercises() {
 
 /* ─── Modal article ─── */
 
-const TAG_TONE: Record<string, "brand" | "warning" | "accent" | "danger" | "success"> = {
-  Dépression: "danger",      Depression: "danger",
-  Anxiété: "warning",        Anxiety: "warning",
-  Relations: "brand",        Relationships: "brand",
-  "Estime de soi": "accent", "Self-esteem": "accent",
-  Sommeil: "success",        Sleep: "success",
-  Témoignage: "warning",     Testimony: "warning",
+const TAG_TONE: Record<string, "brand"> = {
+  Dépression: "brand",      Depression: "brand",
+  Anxiété: "brand",        Anxiety: "brand",
+  Relations: "brand",      Relationships: "brand",
+  "Estime de soi": "brand", "Self-esteem": "brand",
+  Sommeil: "brand",        Sleep: "brand",
+  Témoignage: "brand",     Testimony: "brand",
 };
 
 type Article = { title: string; desc: string; tag: string; content?: string };
