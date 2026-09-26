@@ -74,12 +74,42 @@ const FAQ_CATEGORIES = [
 ];
 
 const QUICK_LINKS = [
-  { label: "aide.quickLinks.evaluation", href: "/sondage", icon: Heart },
-  { label: "aide.quickLinks.forum", href: "/forum", icon: MessageCircle },
-  { label: "aide.quickLinks.chat", href: "/chat", icon: Smartphone },
-  { label: "aide.quickLinks.resources", href: "/ressources", icon: BookOpen },
-  { label: "aide.quickLinks.annuaire", href: "/annuaire", icon: Users },
-  { label: "aide.quickLinks.premium", href: "/annuaire", icon: Shield },
+  { 
+    label: "aide.quickLinks.evaluation", 
+    href: "/sondage", 
+    icon: Heart,
+    desc: "aide.quickLinksDesc.evaluation"
+  },
+  { 
+    label: "aide.quickLinks.forum", 
+    href: "/forum", 
+    icon: MessageCircle,
+    desc: "aide.quickLinksDesc.forum"
+  },
+  { 
+    label: "aide.quickLinks.chat", 
+    href: "/chat", 
+    icon: Smartphone,
+    desc: "aide.quickLinksDesc.chat"
+  },
+  { 
+    label: "aide.quickLinks.resources", 
+    href: "/ressources", 
+    icon: BookOpen,
+    desc: "aide.quickLinksDesc.resources"
+  },
+  { 
+    label: "aide.quickLinks.annuaire", 
+    href: "/annuaire", 
+    icon: Users,
+    desc: "aide.quickLinksDesc.annuaire"
+  },
+  { 
+    label: "aide.quickLinks.premium", 
+    href: "/annuaire", 
+    icon: Shield,
+    desc: "aide.quickLinksDesc.premium"
+  },
 ];
 
 export default function AidePage() {
@@ -140,13 +170,16 @@ export default function AidePage() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="flex items-center gap-3 rounded-xl border border-line bg-surface p-4 transition-all hover:border-brand-line hover:bg-brand-soft/50 hover:shadow-md"
+                    className="flex flex-col items-start gap-2 rounded-xl border border-line bg-surface p-4 transition-all hover:border-brand-line hover:bg-brand-soft/50 hover:shadow-md"
                   >
-                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft text-brand">
-                      <link.icon size={18} aria-hidden />
-                    </span>
-                    <span className="font-medium text-ink">{t.aide.quickLinks[link.label as keyof typeof t.aide.quickLinks]}</span>
-                    <ArrowRight size={16} className="ml-auto text-ink-subtle" />
+                    <div className="flex items-center gap-3 w-full">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-soft text-brand">
+                        <link.icon size={18} aria-hidden />
+                      </span>
+                      <span className="font-medium text-ink">{t.aide.quickLinks[link.label as keyof typeof t.aide.quickLinks]}</span>
+                      <ArrowRight size={16} className="ml-auto text-ink-subtle" />
+                    </div>
+                    <p className="text-xs text-ink-muted w-full pl-12">{t.aide.quickLinksDesc[link.desc as keyof typeof t.aide.quickLinksDesc]}</p>
                   </Link>
                 ))}
               </div>

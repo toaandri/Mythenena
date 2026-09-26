@@ -13,7 +13,8 @@ import Link from "next/link";
 export default function InscriptionPage() {
   const { t } = useLang();
   const [form, setForm] = useState({
-    name: "",
+    pseudo: "",
+    gender: "",
     identifier: "",
     password: "",
     confirmPassword: "",
@@ -35,13 +36,13 @@ export default function InscriptionPage() {
     e.preventDefault();
     setError("");
 
-    if (!form.name.trim() || !form.identifier.trim() || !form.password || !form.confirmPassword) {
+    if (!form.pseudo.trim() || !form.gender || !form.identifier.trim() || !form.password || !form.confirmPassword) {
       setError(t.inscription?.errors?.required || "Veuillez remplir tous les champs");
       return;
     }
 
-    if (form.name.trim().length < 2) {
-      setError(t.inscription?.errors?.nameTooShort || "Le nom doit contenir au moins 2 caractères");
+    if (form.pseudo.trim().length < 2) {
+      setError(t.inscription?.errors?.nameTooShort || "Le pseudo doit contenir au moins 2 caractères");
       return;
     }
 
@@ -110,21 +111,56 @@ export default function InscriptionPage() {
 
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-ink mb-2">
-                  {t.inscription?.nameLabel || "Nom d'affichage"}
+                <label htmlFor="pseudo" className="block text-sm font-medium text-ink mb-2">
+                  {t.inscription?.pseudoLabel || "Pseudonyme"}
                 </label>
                 <div className="relative">
                   <User size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
                   <Input
-                    id="name"
+                    id="pseudo"
                     type="text"
-                    value={form.name}
-                    onChange={(e) => handleChange("name", e.target.value)}
-                    placeholder={t.inscription?.namePlaceholder || "Votre prénom ou pseudo"}
+                    value={form.pseudo}
+                    onChange={(e) => handleChange("pseudo", e.target.value)}
+                    placeholder={t.inscription?.pseudoPlaceholder || "Votre pseudo"}
                     className="pl-11"
-                    autoComplete="name"
+                    autoComplete="username"
                     disabled={success}
                   />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="gender" className="block text-sm font-medium text-ink mb-2">
+                  {t.inscription?.genderLabel || "Genre"}
+                </label>
+                <div className="flex gap-3">
+                  {["male", "female"].map((g) => (
+                    <button
+                      key={g}
+                      type="button"
+                      onClick={() => handleChange("gender", g)}
+                      className={cn(
+                        "flex-1 flex items-center justify-center gap-2 h-11 rounded-xl border-2 text-sm font-medium transition-all",
+                        form.gender === g
+                          ? "border-emerald-500 bg-emerald-50 text-emerald-600"
+                          : "border-line text-ink-muted hover:border-brand-line"
+                      )}
+                    >
+                      {g === "male" ? (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                          <circle cx="12" cy="5" r="3" />
+                          <path d="M12 8v10M5 14h14" />
+                        </svg>
+                      ) : (
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+                          <circle cx="12" cy="5" r="3" />
+                          <path d="M12 8v10M5 14h14" />
+                          <circle cx="12" cy="18" r="3" />
+                        </svg>
+                      )}
+                      {t.inscription?.genderOptions?.[g as keyof typeof t.inscription.genderOptions] || (g === "male" ? "Homme" : "Femme")}
+                    </button>
+                  ))}
                 </div>
               </div>
 

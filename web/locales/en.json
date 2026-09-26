@@ -72,6 +72,11 @@
       "esteem": "Building self-esteem",
       "sobriety": "Path to sobriety (addictions)"
     },
+    "topicDescriptions": {
+      "depression": "A safe space to share experiences, find support, and no longer feel alone facing depression.",
+      "esteem": "Connect with others working on their confidence. Share your wins and challenges.",
+      "sobriety": "A supportive group to move forward together towards sobriety, whatever your journey."
+    },
     "members": "members",
     "cta": "Create a new topic",
     "categories": [
@@ -112,7 +117,9 @@
     "send": "Send",
     "groupRules": "Group rules",
     "membersList": "View members",
-    "leaveGroup": "Leave group"
+    "leaveGroup": "Leave group",
+    "joinGroup": "Join",
+    "joinGroupDesc": "Join this group to participate in discussions"
   },
   "chat": {
     "title": "Instant AI Help",
@@ -486,10 +493,19 @@
   },
   "settings": {
     "title": "Settings",
-    "privacy": "Privacy Policy",
-    "login": "Log In",
-    "signup": "Sign Up",
-    "help": "Help & Usage"
+    "privacy": "Privacy",
+    "profile": "Profile",
+    "security": "Security",
+    "help": "Help & Usage",
+    "modalDesc": "Manage your account, privacy and preferences",
+    "privacyDesc": "View our complete privacy policy",
+    "profileDesc": "Manage your login and account",
+    "securityDesc": "Security, logout and devices",
+    "helpDesc": "Guides, FAQ and support",
+    "logout": "Log out",
+    "logoutDesc": "Log out of all devices",
+    "loggedInAs": "Logged in as",
+    "notLoggedIn": "Not logged in"
   },
   "confidentialite": {
     "title": "Privacy Policy",
@@ -567,6 +583,13 @@
       "invalidIdentifier": "Enter a valid email or phone number",
       "passwordTooShort": "Password must be at least 6 characters",
       "passwordMismatch": "Passwords do not match"
+    },
+    "pseudoLabel": "Nickname",
+    "pseudoPlaceholder": "Your nickname (min 2 characters)",
+    "genderLabel": "Gender",
+    "genderOptions": {
+      "male": "Male",
+      "female": "Female"
     }
   },
   "aide": {
@@ -636,6 +659,15 @@
       "a17": "On the Login page, click \"Forgot Password\" (coming soon). You'll receive a reset link by email or SMS based on your identifier.",
       "q18": "Can I change my email/phone?",
       "a18": "Yes, from your account settings (gear icon top right > Login > edit)."
-    }
+    },
+    "quickLinksDesc": {
+      "evaluation": "Take a 5-question assessment to understand your well-being",
+      "forum": "Join anonymous support groups (depression, self-esteem, sobriety)",
+      "chat": "Chat 24/7 with the AI assistant in French, Malagasy, or English",
+      "resources": "Breathing exercises, body scan, articles and practical guides",
+      "annuaire": "Find a verified psychologist or psychiatrist near you",
+      "premium": "Access professional follow-up: 1 or 2 weekly 2-hour sessions"
+    },
+    "modalIntro": "Quick access to main features and contextual help"
   }
 }

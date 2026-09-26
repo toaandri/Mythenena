@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Menu, X, Languages, Moon, Sun, Settings, Lock, User, LogIn, UserPlus, HelpCircle } from "lucide-react";
+import { Menu, X, Languages, Moon, Sun, Settings } from "lucide-react";
 import { useLang, type Lang } from "@/lib/context/LangContext";
 import { useTheme } from "@/lib/context/ThemeContext";
 import { cn } from "@/lib/utils";
 import { Logo, Wordmark } from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
+import { SettingsModal } from "@/components/SettingsModal";
 import { OffersButton } from "@/components/OffersButton";
 
 const NAV = [
@@ -94,7 +95,7 @@ export function AppHeader() {
           <LangSwitcher />
           <ThemeToggle theme={theme} onToggle={toggleTheme} />
 
-          <SettingsMenu />
+          <SettingsModal />
 
           <ButtonLink href="/chat" size="sm" className="ml-1.5 hidden sm:inline-flex">
               {t.nav.chat}
@@ -219,64 +220,5 @@ function ThemeToggle({ theme, onToggle }: { theme: string; onToggle: () => void 
     >
       {theme === "dark" ? <Sun size={17} /> : <Moon size={17} />}
     </button>
-  );
-}
-
-function SettingsMenu() {
-  const { t } = useLang();
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    const onClick = () => setOpen(false);
-    document.addEventListener("keydown", onKey);
-    window.addEventListener("click", onClick);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      window.removeEventListener("click", onClick);
-    };
-  }, [open]);
-
-  const menuItems = [
-    { label: t.settings?.privacy || "Conditions de confidentialité", icon: Lock, href: "/confidentialite" },
-    { label: t.settings?.login || "Connexion", icon: LogIn, href: "/connexion" },
-    { label: t.settings?.signup || "Inscription", icon: UserPlus, href: "/inscription" },
-    { label: t.settings?.help || "Aide à l'utilisation", icon: HelpCircle, href: "/aide" },
-  ];
-
-  return (
-    <div className="relative" onClick={(e) => e.stopPropagation()}>
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-expanded={open}
-        aria-haspopup="menu"
-        aria-label={t.settings?.title || "Paramètres"}
-        className="inline-flex h-10 w-10 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-surface-3 hover:text-ink"
-      >
-        <Settings size={19} />
-      </button>
-
-      {open && (
-        <div
-          role="menu"
-          className="absolute right-0 top-full z-50 mt-1.5 w-56 animate-scale-in overflow-hidden rounded-xl border border-line bg-surface p-1 shadow-lg"
-        >
-          {menuItems.map((item, i) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              role="menuitem"
-              onClick={() => setOpen(false)}
-              className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-left text-[0.875rem] transition-colors text-ink-muted hover:bg-surface-2 hover:text-ink"
-            >
-              <item.icon size={17} className="flex-shrink-0" aria-hidden />
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }

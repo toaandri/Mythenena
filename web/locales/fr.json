@@ -72,6 +72,11 @@
       "esteem": "Renforcer l'estime de soi",
       "sobriety": "Chemin vers la sobriété (addictions)"
     },
+    "topicDescriptions": {
+      "depression": "Un espace sécurisé pour partager vos expériences, trouver du soutien et ne plus vous sentir seul face à la dépression.",
+      "esteem": "Échangez avec d'autres personnes qui travaillent sur leur confiance en elles. Partagez vos victoires et vos défis.",
+      "sobriety": "Un groupe de soutien bienveillant pour avancer ensemble vers la sobriété, quel que soit votre parcours."
+    },
     "members": "membres",
     "cta": "Créer un nouveau sujet",
     "categories": [
@@ -112,7 +117,9 @@
     "send": "Envoyer",
     "groupRules": "Règles du groupe",
     "membersList": "Voir les membres",
-    "leaveGroup": "Quitter le groupe"
+    "leaveGroup": "Quitter le groupe",
+    "joinGroup": "Rejoindre",
+    "joinGroupDesc": "Rejoindre ce groupe pour participer aux discussions"
   },
   "chat": {
     "title": "Aide Instantanée par IA",
@@ -475,10 +482,19 @@
   },
   "settings": {
     "title": "Paramètres",
-    "privacy": "Conditions de confidentialité",
-    "login": "Connexion",
-    "signup": "Inscription",
-    "help": "Aide à l'utilisation"
+    "privacy": "Confidentialité",
+    "profile": "Profil",
+    "security": "Sécurité",
+    "help": "Aide à l'utilisation",
+    "modalDesc": "Gérez votre compte, confidentialité et préférences",
+    "privacyDesc": "Consultez notre politique de confidentialité complète",
+    "profileDesc": "Gérez votre connexion et votre compte",
+    "securityDesc": "Sécurité, déconnexion et appareils",
+    "helpDesc": "Guides, FAQ et assistance",
+    "logout": "Déconnexion",
+    "logoutDesc": "Déconnecter tous vos appareils",
+    "loggedInAs": "Connecté en tant que",
+    "notLoggedIn": "Non connecté"
   },
   "footer": {
     "tagline": "Une plateforme d'écoute et de soutien en santé mentale, pensée pour Madagascar.",
@@ -568,6 +584,13 @@
       "invalidIdentifier": "Entrez un email ou un numéro de téléphone valide",
       "passwordTooShort": "Le mot de passe doit contenir au moins 6 caractères",
       "passwordMismatch": "Les mots de passe ne correspondent pas"
+    },
+    "pseudoLabel": "Pseudonyme",
+    "pseudoPlaceholder": "Votre pseudo (min 2 caractères)",
+    "genderLabel": "Genre",
+    "genderOptions": {
+      "male": "Homme",
+      "female": "Femme"
     }
   },
   "aide": {
@@ -637,6 +660,15 @@
       "a17": "Sur la page Connexion, cliquez sur \"Mot de passe oublié\" (à venir). Vous recevrez un lien de réinitialisation par email ou SMS selon votre identifiant.",
       "q18": "Puis-je changer mon email/téléphone ?",
       "a18": "Oui, depuis les paramètres de votre compte (icône engrenage en haut à droite > Connexion > modifier)."
-    }
+    },
+    "quickLinksDesc": {
+      "evaluation": "Faites votre bilan en 5 questions pour comprendre votre état",
+      "forum": "Rejoignez des groupes de parole anonymes (dépression, estime de soi, sobriété)",
+      "chat": "Discutez 24h/24 avec l'assistant IA en français, malagasy ou anglais",
+      "resources": "Exercices de respiration, scan corporel, articles et guides pratiques",
+      "annuaire": "Trouvez un psychologue ou psychiatre vérifié près de chez vous",
+      "premium": "Accédez à un suivi professionnel : 1 ou 2 séances de 2h par semaine"
+    },
+    "modalIntro": "Accès rapide aux fonctionnalités principales et aide contextuelle"
   }
 }
