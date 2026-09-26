@@ -1,0 +1,4 @@
+{
+    "chat.disableAIFeatures": false,
+    "ports.openBrowser": "external"
+}

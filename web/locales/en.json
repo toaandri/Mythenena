@@ -1,0 +1,641 @@
+{
+  "common": {
+    "language": "Language",
+    "backHome": "Back to home",
+    "loading": "Loading…",
+    "close": "Close"
+  },
+  "nav": {
+    "evaluation": "Assessment",
+    "forum": "Support Forum",
+    "chat": "AI Help",
+    "psychologues": "Psychologists",
+    "commencer": "Get Started",
+    "ressources": "Resources",
+    "traducteur": "Translator",
+    "synthese": "My summary",
+    "messages": "Messages"
+  },
+  "home": {
+    "eyebrow": "Anonymous · Free · Available 24/7",
+    "titleLead": "Speak up.",
+    "titleAccent": "Someone is listening.",
+    "subtitle": "Assessment, AI listening, peer support and mental health professionals in Madagascar. In French, Malagasy and English.",
+    "ctaPrimary": "Start my assessment",
+    "ctaSecondary": "Talk to the assistant",
+    "trustAnonymous": "100% anonymous",
+    "trustFree": "Free, no credit card",
+    "trustLanguages": "French · Malagasy · English",
+    "pillarsEyebrow": "What you will find here",
+    "pillarsTitle": "Four ways in, the same listening",
+    "pillarsSubtitle": "Go at your own pace. Each tool works on its own, or chains with the others.",
+    "pillarEvaluationDesc": "Five simple questions to locate your mood, sleep and energy. You can skip any question.",
+    "pillarForumDesc": "Share what you are going through and read testimonies from people in the same situation, under a pseudonym.",
+    "pillarChatDesc": "An assistant available at any time, in French, Malagasy or English, with detection of emergency situations.",
+    "pillarProDesc": "A directory of verified psychologists and psychiatrists, filterable by city and availability.",
+    "stepsEyebrow": "How it works",
+    "stepsTitle": "Three steps, at your own pace",
+    "stepsSubtitle": "No account to create, no data sent to anyone without your consent.",
+    "step1Title": "Answer freely",
+    "step1Desc": "A short exploratory check-in. You stay in control: every question can be skipped.",
+    "step2Title": "Understand where you stand",
+    "step2Desc": "A visual summary of your well-being dimensions, with resources matched to them.",
+    "step3Title": "Take action",
+    "step3Desc": "Join the community, talk to the assistant, or book an appointment with a professional.",
+    "crisisTitle": "Need help right now?",
+    "crisisDesc": "If you are in immediate danger, or if someone else is, call emergency services or go to the nearest emergency room. You are not alone.",
+    "crisisCta": "See emergency contacts",
+    "ctaTitle": "Taking care of yourself starts with one sentence",
+    "ctaSubtitle": "No sign-up, no judgement, no trace of what you write.",
+    "ctaButton": "Start my assessment"
+  },
+  "hero": {
+    "badge": "Anonymous · Free · Accessible",
+    "title": "Your mental health support space",
+    "subtitle": "A first step toward well-being, at your own pace, without judgment."
+  },
+  "evaluation": {
+    "title": "Your Personal Assessment",
+    "question": "How are you feeling today?",
+    "symptoms": [
+      "Depression",
+      "Suicidal thoughts",
+      "Lack of self-confidence",
+      "Addiction (alcohol, drugs)"
+    ],
+    "cta": "Continue my assessment"
+  },
+  "forum": {
+    "title": "Caring Community Space",
+    "topics": {
+      "depression": "Overcoming depression",
+      "esteem": "Building self-esteem",
+      "sobriety": "Path to sobriety (addictions)"
+    },
+    "members": "members",
+    "cta": "Create a new topic",
+    "categories": [
+      "All",
+      "Depression",
+      "Anxiety",
+      "Self-esteem",
+      "Relationships",
+      "Sobriety"
+    ],
+    "newTopic": "New topic",
+    "titlePlaceholder": "Title of your topic",
+    "bodyPlaceholder": "Describe your situation...",
+    "anonymousNote": "Your post is anonymous. No personal information is shared.",
+    "cancel": "Cancel",
+    "publish": "Publish",
+    "replies": "replies",
+    "found": "professional(s) found",
+    "pageTitle": "Support Forum",
+    "pageSubtitle": "A caring space to share and connect",
+    "topicsTitle": "Support Groups",
+    "participants": "participants",
+    "createTopic": "Create a new group",
+    "empty": "No groups yet.",
+    "emptyDesc": "Be the first to create a support group.",
+    "emptyCta": "Create the first group",
+    "like": "Like",
+    "anonymous": "Anonymous",
+    "searchPlaceholder": "Search a group…",
+    "allCategories": "All groups",
+    "sortRecent": "Most recent",
+    "sortPopular": "Most active",
+    "category": "Group",
+    "postedBy": "Created by",
+    "resultsCount": "groups",
+    "noResults": "No group matches your search.",
+    "messagePlaceholder": "Write a message...",
+    "send": "Send",
+    "groupRules": "Group rules",
+    "membersList": "View members",
+    "leaveGroup": "Leave group"
+  },
+  "chat": {
+    "title": "Instant AI Help",
+    "online": "Online · available 24/7",
+    "confidential": "Confidential",
+    "disclaimer": "This assistant is a listening and support tool. It does not replace a mental health professional.",
+    "placeholder": "Express yourself freely...",
+    "greeting": "Hello. I am here to listen to you, without judgment and in complete confidentiality. How are you feeling right now?",
+    "bubble": "Hello. I am here to listen to you. I do not replace a health professional.",
+    "crisisTitle": "Emergency line available",
+    "crisisMsg": "If you are in danger, call +261 20 22 XXX XX (Madagascar listening line) or go to the nearest emergency room.",
+    "typing": "Translating…",
+    "send": "Send",
+    "disclaimerShort": "AI does not replace a health professional.",
+    "messagesTitle": "Communication modes",
+    "messagesDesc": "Choose how you want to communicate",
+    "textChat": "Text chat",
+    "textChatDesc": "Exchange text messages with the AI assistant",
+    "voiceCall": "Voice call",
+    "voiceCallDesc": "Talk directly with the AI assistant",
+    "voiceMessage": "Voice message",
+    "voiceMessageDesc": "Send a voice message to the AI assistant"
+  },
+  "messages": {
+    "title": "Messages",
+    "subtitle": "Chat with other members privately",
+    "search": "Search conversations...",
+    "placeholder": "Write a message...",
+    "send": "Send",
+    "more": "More options",
+    "emptyTitle": "No conversations yet",
+    "emptyDesc": "Start a new conversation by clicking the button below",
+    "newConversation": "New conversation",
+    "online": "Online",
+    "offline": "Offline",
+    "voiceMsg": "Voice message",
+    "messagesTitle": "Communication modes",
+    "messagesDesc": "Choose how you want to communicate",
+    "textChat": "Text chat",
+    "textChatDesc": "Exchange text messages",
+    "voiceCall": "Voice call",
+    "voiceCallDesc": "Talk directly",
+    "voiceMessage": "Voice message",
+    "voiceMessageDesc": "Send a voice message"
+  },
+  "sondage": {
+    "title": "How are you feeling?",
+    "subtitle": "5 questions to better support you. You can skip any question.",
+    "skip": "Skip",
+    "next": "Next",
+    "finish": "See my summary",
+    "progress": "Question",
+    "of": "of",
+    "stepOf": "Question {current} of {total}",
+    "questions": [
+      {
+        "q": "How would you describe your mood over the past few days?",
+        "choices": [
+          "Pretty good",
+          "Neutral",
+          "Sad or empty",
+          "Very difficult"
+        ]
+      },
+      {
+        "q": "How are you sleeping right now?",
+        "choices": [
+          "Well",
+          "Some difficulties",
+          "Poorly, often waking up",
+          "Very little or too much"
+        ]
+      },
+      {
+        "q": "What is your daily stress level?",
+        "choices": [
+          "Low",
+          "Moderate",
+          "High",
+          "Very high"
+        ]
+      },
+      {
+        "q": "How do you feel in your relationships with others?",
+        "choices": [
+          "Well surrounded",
+          "Sometimes alone",
+          "Often isolated",
+          "In conflict"
+        ]
+      },
+      {
+        "q": "Do you feel motivated for your usual activities?",
+        "choices": [
+          "Yes, as before",
+          "A little less",
+          "Much less",
+          "Not at all"
+        ]
+      }
+    ]
+  },
+  "questionnaire": {
+    "title": "In-depth Assessment",
+    "subtitle": "Questions adapted to your situation. You stay in control.",
+    "skip": "Skip this question",
+    "next": "Next",
+    "finish": "Finish",
+    "progress": "Question",
+    "of": "of",
+    "stepOf": "Question {current} of {total}",
+    "multipleAllowed": "Multiple answers allowed",
+    "other": "Other / hard to determine",
+    "back": "Back",
+    "summaryTitle": "Summary of your answers",
+    "summarySubtitle": "You answered {answered} question(s) out of {total}."
+  },
+  "synthese": {
+    "title": "Your Summary",
+    "subtitle": "This is an exploratory overview, not a medical diagnosis.",
+    "disclaimer": "This tool does not replace a mental health professional. If you are suffering, please consult a specialist.",
+    "dimensions": [
+      "Mood",
+      "Sleep",
+      "Stress",
+      "Relationships",
+      "Motivation"
+    ],
+    "wellbeing": "Overall well-being",
+    "seeProf": "Consult a professional",
+    "retry": "Redo the assessment",
+    "chat": "Talk to the AI assistant",
+    "low": "Low",
+    "medium": "Moderate",
+    "high": "High",
+    "byDimension": "By dimension",
+    "overallChart": "Overview",
+    "whatNext": "What next?",
+    "resourceHint": "Start with the breathing exercise: it calms anxiety in a few minutes."
+  },
+  "ressources": {
+    "title": "Resources & Well-being",
+    "subtitle": "Practical exercises, articles and guides to take care of yourself.",
+    "breathing": "Breathing exercise",
+    "breathingDesc": "4-7-8 technique to calm anxiety in a few minutes.",
+    "breathingStart": "Start",
+    "breathingStop": "Stop",
+    "breathingReady": "Ready",
+    "breathingCycle": "Cycles",
+    "inhale": "Inhale",
+    "hold": "Hold",
+    "exhale": "Exhale",
+    "exercises": "Soothing exercises",
+    "exerciseDuration": "min",
+    "exerciseStart": "Start",
+    "exerciseClose": "Close",
+    "exerciseList": [
+      {
+        "id": "scan",
+        "title": "Body scan",
+        "desc": "Mentally scan each part of your body to release tension.",
+        "duration": 5,
+        "tag": "Relaxation",
+        "steps": [
+          "Lie down or sit comfortably, eyes closed.",
+          "Bring attention to your feet. Feel them, release all tension.",
+          "Slowly move up: ankles, calves, knees, thighs.",
+          "Continue to belly, chest, shoulders.",
+          "Finish with neck, face, top of head."
+        ]
+      },
+      {
+        "id": "grounding",
+        "title": "5-4-3-2-1 Grounding",
+        "desc": "Return to the present moment by engaging your 5 senses to calm anxiety.",
+        "duration": 3,
+        "tag": "Anxiety",
+        "steps": [
+          "Name 5 things you see around you.",
+          "Name 4 things you can touch. Touch them.",
+          "Name 3 sounds you hear right now.",
+          "Name 2 smells you notice (or like).",
+          "Name 1 thing you can taste.",
+          "Breathe slowly. You are here, safe."
+        ]
+      },
+      {
+        "id": "muscle",
+        "title": "Muscle relaxation",
+        "desc": "Tense and release each muscle group to free physical stress.",
+        "duration": 7,
+        "tag": "Stress",
+        "steps": [
+          "Clench fists hard for 5 seconds, then release.",
+          "Tense arms and shoulders 5 seconds, then release.",
+          "Scrunch face hard 5 seconds, then release.",
+          "Tense belly 5 seconds, then release.",
+          "Tense legs and feet 5 seconds, then release.",
+          "Stay still 1 minute and observe the relaxation in your whole body."
+        ]
+      },
+      {
+        "id": "visualisation",
+        "title": "Peaceful visualization",
+        "desc": "Imagine a safe, calm place to reduce stress and find serenity.",
+        "duration": 5,
+        "tag": "Meditation",
+        "steps": [
+          "Close eyes and breathe slowly three times.",
+          "Imagine a place where you feel safe: beach, forest, room.",
+          "Observe the details: colors, sounds, smells of this place.",
+          "Feel the warmth or coolness of the air on your skin.",
+          "Stay in this place as long as you wish.",
+          "Return gently by wiggling fingers, then open eyes."
+        ]
+      }
+    ],
+    "articles": "Articles & Guides",
+    "readMore": "Read",
+    "articleList": [
+      {
+        "title": "Understanding depression",
+        "desc": "Symptoms, causes and first steps toward well-being.",
+        "tag": "Depression",
+        "content": "Depression is much more than a passing sadness. It's a mood disorder that affects how you feel, think, and handle daily activities.\n\n**Common symptoms**\nPersistent sadness, loss of interest in usual activities, fatigue, sleep disturbances, difficulty concentrating, feelings of guilt or worthlessness.\n\n**Possible causes**\nBiological factors (chemical imbalance in the brain), difficult life events (grief, separation, unemployment), family history, chronic illness.\n\n**First steps**\nTalk to someone you trust. Consult a doctor or mental health professional. Maintain a daily routine, even minimal. Avoid isolation."
+      },
+      {
+        "title": "Managing daily anxiety",
+        "desc": "Simple techniques to reduce stress and find calm.",
+        "tag": "Anxiety",
+        "content": "Anxiety is a natural reaction to stress, but when it becomes excessive, it can disrupt your daily life.\n\n**Recognizing anxiety**\nPalpitations, muscle tension, intrusive thoughts, avoidance of certain situations, irritability.\n\n**Effective techniques**\nDeep breathing (4-7-8 technique), mindfulness meditation, regular physical exercise, limiting caffeine and screens in the evening.\n\n**When to consult**\nIf anxiety lasts more than 6 months, interferes with your work or relationships, or is accompanied by panic attacks, consult a professional."
+      },
+      {
+        "title": "Recognizing a toxic relationship",
+        "desc": "Signs of emotional control and how to break free.",
+        "tag": "Relationships",
+        "content": "A toxic relationship can be hard to identify from the inside, especially when you love the person involved.\n\n**Warning signs**\nYou feel constantly criticized or devalued. You walk on eggshells. You isolate from your loved ones. You fear the other's reactions.\n\n**Emotional control**\nManipulation, excessive jealousy, control of outings and acquaintances are forms of psychological violence.\n\n**Breaking free**\nTalk to a trusted friend or professional. Set clear boundaries. Know that you deserve a respectful relationship."
+      },
+      {
+        "title": "Building self-esteem",
+        "desc": "Practical exercises to regain confidence in yourself.",
+        "tag": "Self-esteem",
+        "content": "Self-esteem is the value you give yourself. It builds and strengthens over time and with practice.\n\n**Daily exercises**\nWrite down 3 positive things you did or felt each evening. Replace automatic negative thoughts with neutral or kind formulations.\n\n**Setting small goals**\nEvery goal achieved, even a tiny one, builds confidence. Start with simple actions and gradually increase.\n\n**Circle**\nDistance yourself from people who devalue you. Surround yourself with people who support and encourage you."
+      },
+      {
+        "title": "Sleep and mental health",
+        "desc": "Why sleeping well is essential for your psychological balance.",
+        "tag": "Sleep",
+        "content": "Sleep is a fundamental pillar of mental health. Chronic lack of sleep increases the risk of depression and anxiety.\n\n**Sleep hygiene**\nGo to bed and wake up at fixed times. Avoid screens 1h before sleep. Keep your bedroom cool and dark. Avoid caffeine after 2pm.\n\n**Soothing rituals**\nA herbal tea, light reading, a few minutes of deep breathing or meditation can signal your brain it's time to sleep.\n\n**When to consult**\nIf you sleep less than 6h per night for more than 3 weeks, or if you wake up exhausted despite a full night, talk to a doctor."
+      },
+      {
+        "title": "Talking about your suffering",
+        "desc": "How to break the silence and ask for help without shame.",
+        "tag": "Testimony",
+        "content": "Talking about what you feel is often the hardest first step, yet the most liberating.\n\n**Why silence is heavy**\nKeeping your suffering to yourself amplifies it. Isolation reinforces negative thoughts and prevents finding solutions.\n\n**How to start**\nChoose a trusted person. Start with a simple phrase: 'I'm not doing well right now.' You don't have to explain everything at once.\n\n**If you have no one**\nMythenena's AI assistant is available 24/7, without judgment. Forums also allow sharing anonymously with people who understand."
+      }
+    ]
+  },
+  "annuaire": {
+    "title": "Personalized Therapeutic Follow-up",
+    "pageTitle": "Professionals Directory",
+    "pageSubtitle": "Verified psychologists and psychiatrists, in Antananarivo and across Madagascar.",
+    "allCities": "All cities",
+    "allTitles": "All specialties",
+    "availableOnly": "Available only",
+    "available": "Available",
+    "unavailable": "Unavailable",
+    "years": "years of experience",
+    "call": "Call",
+    "rdv": "Book appointment",
+    "rdvTitle": "Appointment request",
+    "rdvAvailability": "Your availability (e.g. Monday morning)",
+    "rdvReason": "Reason for consultation (optional)...",
+    "rdvNote": "Your request will be sent anonymously. The professional will contact you through the platform.",
+    "cancel": "Cancel",
+    "send": "Send request",
+    "noResult": "No professional matches your criteria.",
+    "bio1": "Specialized in anxiety disorders, depression and trauma. In-office and teleconsultation available.",
+    "bio2": "Cognitive-behavioral approach (CBT). Support for adults experiencing psychological distress.",
+    "bio3": "Specialized in toxic relationships, self-esteem and support for women victims of violence.",
+    "bio4": "Treatment of addictions, mood disorders and psychoses. Consultations by appointment.",
+    "bio5": "Support for adolescents and young adults. Art therapy and humanistic approach.",
+    "bio6": "Expert in community mental health. Individual consultations and support groups.",
+    "doctorTitle": "Clinical psychologist for 12 years",
+    "doctorQuote": "How are you feeling after our last session?",
+    "filters": "Filters",
+    "reset": "Reset",
+    "results": "{count} professional(s)",
+    "languages": "Languages"
+  },
+  "traducteur": {
+    "title": "Translator",
+    "subtitle": "Translate freely between French, Malagasy, English and more.",
+    "source": "Source text",
+    "result": "Translation",
+    "translate": "Translate",
+    "translating": "Translating…",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "clear": "Clear",
+    "placeholder": "Type your text here…",
+    "emptyResult": "The translation will appear here…",
+    "detected": "Detected: {lang}",
+    "poweredBy": "Powered by Azure",
+    "error": "Translation failed. Check your Azure key configuration.",
+    "swap": "Swap languages",
+    "quickPairs": "Common pairs",
+    "configTitle": "Configuration required",
+    "configDesc": "Add your Azure Translator keys in the .env.local file at the root of web/:",
+    "maxChars": "{count} / {max} characters"
+  },
+  "offers": {
+    "title": "Premium",
+    "buttonLabel": "Premium",
+    "modalTitle": "Choose the support that fits you",
+    "modalDesc": "Start for free, and move to professional follow-up whenever you need it.",
+    "modalFoot": "Anonymous · No commitment · Cancel anytime",
+    "premiumLabel": "Premium",
+    "freeLabel": "Free offer",
+    "inLabel": "Included",
+    "perMonth": "per month",
+    "popular": "Most popular",
+    "bookingTitle": "Confirm your choice",
+    "bookingDesc": "You will be redirected to book a session with a mental health professional.",
+    "back": "Back",
+    "bookNow": "Continue",
+    "freeText": "Free",
+    "free": {
+      "name": "Free Offer",
+      "subtitle": "Discovery & Autonomy",
+      "stat": "Unlimited access",
+      "priceNote": "No credit card · No commitment",
+      "feature1": "Unlimited access to the Personal Assessment",
+      "feature2": "Exchange Spaces — Peer Support Forum",
+      "feature3": "Chat with the AI Assistant 24/7",
+      "note": "No professional follow-up.",
+      "cta": "Start for free"
+    },
+    "essential": {
+      "name": "Essential Support",
+      "subtitle": "Moderate Follow-up",
+      "stat": "2 h per week",
+      "priceNote": "Monthly billing · cancel anytime",
+      "feature1": "All the benefits of the free offer",
+      "feature2": "1 personalised 2-hour session per week",
+      "feature3": "With a trained listening professional",
+      "cta": "Choose this support"
+    },
+    "intensive": {
+      "name": "Intensive Support",
+      "subtitle": "Enhanced Follow-up",
+      "stat": "4 h per week",
+      "priceNote": "Monthly billing · cancel anytime",
+      "feature1": "All the benefits of the free offer",
+      "feature2": "2 personalised 2-hour sessions per week",
+      "feature3": "With a dedicated professional",
+      "cta": "Opt for intensive support"
+    }
+  },
+  "footer": {
+    "tagline": "A listening and mental health support platform, built for Madagascar.",
+    "explore": "Explore",
+    "support": "Support",
+    "tools": "Tools",
+    "disclaimer": "Mythenena is an information and listening tool. It does not diagnose and does not replace a medical consultation.",
+    "privacy": "Privacy",
+    "legal": "Legal notice",
+    "crisis": "Emergency",
+    "rights": "All rights reserved.",
+    "emergency": "In an emergency, call +261 20 22 XXX XX."
+  },
+  "settings": {
+    "title": "Settings",
+    "privacy": "Privacy Policy",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "help": "Help & Usage"
+  },
+  "confidentialite": {
+    "title": "Privacy Policy",
+    "intro": "Last updated: September 2026. Mythenena is committed to protecting your privacy. This policy explains what data we collect, how we use it, and your rights.",
+    "importantTitle": "Important Note",
+    "importantContent": "Mythenena is a listening and information tool, not a medical service. In case of emergency, contact emergency services (+261 20 22 XXX XX) or go to the nearest emergency room.",
+    "sections": {
+      "dataProtection": {
+        "title": "Data Protection",
+        "content": "We only collect strictly necessary data: display name, email/phone (for login), and your assessment responses (anonymized). No sensitive data is stored without your explicit consent."
+      },
+      "anonymity": {
+        "title": "Guaranteed Anonymity",
+        "content": "On the forum, AI chat, and support groups, you are identified only by a pseudonym. Your real identity is never visible to other users. Directory professionals only see what you choose to share when requesting an appointment."
+      },
+      "dataUsage": {
+        "title": "Data Usage",
+        "content": "Your data is used only to: authenticate you, personalize your experience, improve our services (anonymous statistics), and contact you if you request it (appointments). We never sell your data."
+      },
+      "sharing": {
+        "title": "Third-Party Sharing",
+        "content": "No commercial sharing. Only cases: 1) You request an appointment (sent to chosen professional), 2) Legal obligation (imminent danger reporting), 3) Technical providers (hosting, AI) under strict confidentiality agreements."
+      },
+      "rights": {
+        "title": "Your Rights",
+        "content": "Per GDPR and Malagasy law: right of access, rectification, erasure, portability, restriction, objection. To exercise rights: contact us via the Privacy page. Account deletion available in settings (coming soon)."
+      },
+      "limits": {
+        "title": "Limits of Liability",
+        "content": "Mythenena is not an emergency medical service. AI can make mistakes. Support groups are moderated but not monitored 24/7. In crisis, contact emergency services immediately."
+      },
+      "contact": {
+        "title": "Contact Us",
+        "content": "For any questions about your data: confidentialite@mythenena.mg or via contact form. Data Protection Officer: DPO Mythenena."
+      }
+    }
+  },
+  "connexion": {
+    "title": "Log In",
+    "subtitle": "Sign in to access your personal space",
+    "identifierLabel": "Email or phone number",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "••••••••",
+    "submit": "Log In",
+    "noAccount": "Don't have an account yet?",
+    "signupLink": "Sign Up",
+    "demoNote": "Demo mode: any identifier/password works",
+    "successMessage": "Login successful! Redirecting...",
+    "errors": {
+      "required": "Please fill in all fields",
+      "invalidIdentifier": "Enter a valid email or phone number",
+      "invalidCredentials": "Invalid credentials"
+    }
+  },
+  "inscription": {
+    "title": "Create Account",
+    "subtitle": "Join Mythenena to access your personal space",
+    "nameLabel": "Display Name",
+    "namePlaceholder": "Your first name or nickname",
+    "identifierLabel": "Email or phone number",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "At least 6 characters",
+    "confirmPasswordLabel": "Confirm Password",
+    "confirmPasswordPlaceholder": "Repeat the password",
+    "submit": "Create Account",
+    "hasAccount": "Already have an account?",
+    "loginLink": "Log In",
+    "termsNote": "By creating an account, you accept our ",
+    "termsLink": "Privacy Policy",
+    "demoNote": "Demo mode: registration is simulated",
+    "successMessage": "Account created successfully! Redirecting to login...",
+    "errors": {
+      "required": "Please fill in all fields",
+      "nameTooShort": "Name must be at least 2 characters",
+      "invalidIdentifier": "Enter a valid email or phone number",
+      "passwordTooShort": "Password must be at least 6 characters",
+      "passwordMismatch": "Passwords do not match"
+    }
+  },
+  "aide": {
+    "title": "Help & Usage Guide",
+    "searchPlaceholder": "Search a question...",
+    "quickLinksTitle": "Quick Access",
+    "faqTitle": "Frequently Asked Questions",
+    "noResults": "No results for your search",
+    "contactTitle": "Need More Help?",
+    "contactSubtitle": "Contact our support team",
+    "contactDesc": "Our team is here to help. Response within 24 business hours.",
+    "contactEmail": "Contact us by email",
+    "contactForum": "Ask on the forum",
+    "emergencyTitle": "⚠️ Emergency Situation",
+    "emergencyDesc": "If you are in immediate danger or someone else is, don't wait: call +261 20 22 XXX XX (Madagascar listening line) or go to the nearest emergency room. You are not alone.",
+    "emergencyLink": "View all emergency contacts",
+    "categories": {
+      "gettingStarted": "Getting Started with Mythenena",
+      "evaluation": "Your Personal Assessment",
+      "forum": "Support Forum & Groups",
+      "chat": "Instant AI Help",
+      "premium": "Premium Offers & Follow-up",
+      "account": "My Account & Privacy"
+    },
+    "quickLinks": {
+      "evaluation": "Take Assessment",
+      "forum": "Join Forum",
+      "chat": "Talk to AI Assistant",
+      "resources": "Exercises & Resources",
+      "annuaire": "Find a Professional",
+      "premium": "View Premium Offers"
+    },
+    "faq": {
+      "q1": "How do I get started with Mythenena?",
+      "a1": "Simple: no signup required to start. Click \"Start Assessment\" on the homepage, answer 5 questions, and discover personalized resources. You can create an account later to save your history.",
+      "q2": "Is the app really free?",
+      "a2": "Yes, assessment, forum, AI chat, breathing exercises, and directory are 100% free. Premium offers (Essential Follow-up at 115,000 Ar/month and Intensive Follow-up at 207,000 Ar/month) add professional sessions.",
+      "q3": "Is my data secure?",
+      "a3": "Absolutely. We use TLS encryption, store only the minimum necessary, and never sell your data. See our Privacy Policy for all details.",
+      "q4": "Can I use Mythenena without creating an account?",
+      "a4": "Yes! All core features (assessment, anonymous forum, AI chat, exercises, directory) work without an account. The account only syncs your history across devices.",
+      "q5": "What is the Personal Assessment for?",
+      "a5": "It's a 5-question exploratory check (mood, sleep, stress, relationships, motivation) giving you a visual snapshot of your well-being and guiding you to appropriate resources. Not a medical diagnosis.",
+      "q6": "Can I retake the assessment?",
+      "a6": "As many times as you want. Each assessment is dated, track your progress in \"My Summary\" (Synthesis page).",
+      "q7": "What if my score is low?",
+      "a7": "A low score indicates distress. The app automatically suggests: breathing exercises, AI chat, forum, or booking a professional. In emergency, call +261 20 22 XXX XX.",
+      "q8": "How do I join a support group?",
+      "a8": "Go to \"Support Forum\", choose a group (Depression, Self-Esteem, Sobriety), click it. You enter the anonymous group chat directly. ~15 participants per group.",
+      "q9": "Are groups moderated?",
+      "a9": "Yes, by a moderation team and automated filters. But not 24/7 monitoring. Report concerning content. In crisis, contact emergency services.",
+      "q10": "Can I create my own group?",
+      "a10": "\"Create New Group\" feature coming soon. For now, the 3 main groups cover the most common needs.",
+      "q11": "Does the AI assistant replace a psychologist?",
+      "a11": "No. It's a 24/7 listening and guidance tool. It detects crisis signs and directs you to emergency services or professionals. It does not diagnose.",
+      "q12": "Are my AI conversations private?",
+      "a12": "Yes, they are encrypted and anonymized. Not read by humans except for imminent danger reports (legal duty to protect).",
+      "q13": "Does the AI speak Malagasy?",
+      "a13": "Yes! The assistant understands and responds in French, Malagasy, and English. Change language in the menu (globe icon top right).",
+      "q14": "What does Essential Follow-up (115,000 Ar/month) include?",
+      "a14": "Everything free + 1 weekly 2-hour session with a verified listening professional (psychologist/psychiatrist), personalized confidential follow-up, cancelable anytime.",
+      "q15": "How do I book an appointment with a professional?",
+      "a15": "From the \"Directory\" tab or after choosing a Premium offer, click \"Book Appointment\", indicate availability and reason. The professional contacts you via the platform.",
+      "q16": "How do I delete my account?",
+      "a16": "Account deletion coming soon in settings. Meanwhile, contact us via Privacy page to request deletion (processed within 30 days).",
+      "q17": "I forgot my password, what now?",
+      "a17": "On the Login page, click \"Forgot Password\" (coming soon). You'll receive a reset link by email or SMS based on your identifier.",
+      "q18": "Can I change my email/phone?",
+      "a18": "Yes, from your account settings (gear icon top right > Login > edit)."
+    }
+  }
+}
