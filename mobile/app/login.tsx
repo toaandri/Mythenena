@@ -13,6 +13,7 @@ export default function LoginScreen() {
   const { ensureSession } = useSession();
 
   const [pseudonym, setPseudonym] = useState('');
+  const [showHint, setShowHint] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,7 @@ export default function LoginScreen() {
 
     const name = pseudonym.trim();
     if (!name || name.length < 3) {
-      setError('Le pseudonyme doit contenir au moins 3 caractères.');
+      setError(t('login.error.required'));
       return;
     }
 
@@ -33,7 +34,7 @@ export default function LoginScreen() {
       setSuccess(true);
       setTimeout(() => router.replace('/(tabs)'), 800);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Connexion impossible. Vérifiez votre connexion.');
+      setError(e instanceof Error ? e.message : t('common.networkError'));
     } finally {
       setLoading(false);
     }
@@ -59,26 +60,26 @@ export default function LoginScreen() {
       >
         <View style={styles.heroCard}>
           <View style={styles.iconWrap}>
-            <Ionicons name="leaf-outline" size={22} color="#2d9c86" />
+            <Ionicons name="log-in-outline" size={20} color="#2d9c86" />
           </View>
           <Text style={styles.title}>{t('login.title')}</Text>
-          <Text style={styles.subtitle}>Choisissez un pseudonyme pour accéder à votre espace. Votre identité reste anonyme.</Text>
+          <Text style={styles.subtitle}>{t('login.subtitle')}</Text>
 
           {success && (
             <View style={styles.successBanner}>
               <Ionicons name="checkmark-circle" size={18} color="#2d9c86" />
-              <Text style={styles.successText}>Bienvenue ! Redirection en cours...</Text>
+              <Text style={styles.successText}>{t('login.success')}</Text>
             </View>
           )}
 
-          {error !== '' && (
+          {!!error && (
             <View style={styles.errorBanner}>
               <Ionicons name="alert-circle" size={18} color="#d65b5b" />
               <Text style={styles.errorText}>{error}</Text>
             </View>
           )}
 
-          <Text style={styles.sectionLabel}>Votre pseudonyme</Text>
+          <Text style={styles.sectionLabel}>{t('login.identifierLabel')}</Text>
           <View style={styles.inputWrap}>
             <Ionicons name="person-outline" size={18} color="#7a8a85" />
             <TextInput
@@ -87,7 +88,7 @@ export default function LoginScreen() {
                 setPseudonym(value);
                 if (error) setError('');
               }}
-              placeholder="Ex: Lotus, Nuage, Horizon..."
+              placeholder={t('login.identifierPlaceholder')}
               placeholderTextColor="#7a8a85"
               autoCapitalize="none"
               autoCorrect={false}
@@ -95,10 +96,15 @@ export default function LoginScreen() {
               editable={!success}
               maxLength={32}
             />
+            <TouchableOpacity onPress={() => setShowHint((v) => !v)} activeOpacity={0.8}>
+              <Ionicons
+                name={showHint ? 'eye-off-outline' : 'eye-outline'}
+                size={18}
+                color="#6b7a76"
+              />
+            </TouchableOpacity>
           </View>
-          <Text style={styles.helperText}>
-            3 à 32 caractères. Aucune information personnelle requise.
-          </Text>
+          <Text style={styles.helperText}>{t('login.identifierHelper')}</Text>
         </View>
 
         <TouchableOpacity
@@ -108,7 +114,7 @@ export default function LoginScreen() {
           disabled={loading || success}
         >
           <Text style={styles.primaryButtonText}>
-            {loading ? 'Connexion...' : "Accéder à l'application"}
+            {loading ? t('common.loading') : t('login.submit')}
           </Text>
           {!loading && <Ionicons name="arrow-forward" size={18} color="#ffffff" />}
         </TouchableOpacity>
@@ -158,8 +164,7 @@ const styles = StyleSheet.create({
   topBarTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#183e36',
-    letterSpacing: -0.4,
+    color: '#1a2320',
   },
   content: {
     paddingHorizontal: 18,
@@ -178,19 +183,19 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   iconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
+    width: 38,
+    height: 38,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#e7f6f0',
-    marginBottom: 14,
+    marginBottom: 12,
   },
   title: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#183e36',
-    letterSpacing: -0.5,
+    color: '#1a2320',
+    letterSpacing: -0.3,
   },
   subtitle: {
     marginTop: 6,
@@ -232,7 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '800',
     color: '#2d9c86',
-    marginTop: 18,
+    marginTop: 16,
     marginBottom: 8,
     textTransform: 'uppercase',
     letterSpacing: 0.8,
@@ -251,7 +256,7 @@ const styles = StyleSheet.create({
   input: {
     flex: 1,
     fontSize: 15,
-    color: '#183e36',
+    color: '#1a2320',
     fontWeight: '600',
   },
   helperText: {
@@ -262,18 +267,18 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     flexDirection: 'row',
-    marginTop: 20,
-    backgroundColor: '#276653',
+    marginTop: 18,
+    backgroundColor: '#2d9c86',
     borderRadius: 16,
     paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
-    shadowColor: '#276653',
+    shadowColor: '#2d9c86',
     shadowOffset: { width: 0, height: 7 },
-    shadowOpacity: 0.22,
-    shadowRadius: 14,
-    elevation: 4,
+    shadowOpacity: 0.2,
+    shadowRadius: 12,
+    elevation: 3,
   },
   primaryButtonDisabled: {
     opacity: 0.6,
@@ -284,7 +289,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
   footerRow: {
-    marginTop: 20,
+    marginTop: 18,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -297,6 +302,6 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#276653',
+    color: '#2d9c86',
   },
 });

@@ -5,8 +5,11 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
-  Leaf,
+  LogIn,
   User,
+  Lock,
+  Eye,
+  EyeOff,
   AlertCircle,
   CheckCircle,
 } from "lucide-react";
@@ -22,6 +25,7 @@ export default function ConnexionPage() {
   const { t, lang } = useLang();
   const { ensureSession } = useSession();
   const [pseudonym, setPseudonym] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,7 +37,7 @@ export default function ConnexionPage() {
 
     const name = pseudonym.trim();
     if (!name || name.length < 3) {
-      setError("Le pseudonyme doit contenir au moins 3 caractères.");
+      setError(t.connexion?.errors?.nameTooShort || "Le pseudonyme doit contenir au moins 3 caractères.");
       return;
     }
 
@@ -72,11 +76,11 @@ export default function ConnexionPage() {
             <Card className="p-6 sm:p-8">
               <div className="mb-7 text-center">
                 <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                  <Leaf size={22} aria-hidden />
+                  <LogIn size={22} aria-hidden />
                 </span>
                 <h2 className="text-h3 text-ink">{t.connexion?.title || "Connexion"}</h2>
                 <p className="mt-2 text-sm text-ink-muted">
-                  Choisissez un pseudonyme pour accéder à votre espace. Votre identité reste anonyme.
+                  {t.connexion?.subtitle || "Choisissez un pseudonyme pour accéder à votre espace. Votre identité reste anonyme."}
                 </p>
               </div>
 
@@ -97,7 +101,7 @@ export default function ConnexionPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <Field label="Votre pseudonyme" htmlFor="pseudonym">
+                <Field label={t.connexion?.pseudonymLabel || "Votre pseudonyme"} htmlFor="pseudonym">
                   <div className="relative">
                     <User size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
                     <Input
@@ -108,18 +112,28 @@ export default function ConnexionPage() {
                         setPseudonym(e.target.value);
                         if (error) setError("");
                       }}
-                      placeholder="Ex: Lotus, Nuage, Horizon..."
-                      className="pl-11"
+                      placeholder={t.connexion?.pseudonymPlaceholder || "Ex: Lotus, Nuage, Horizon..."}
+                      className="pl-11 pr-11"
                       autoComplete="username"
                       maxLength={32}
                       disabled={success}
                     />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword((v) => !v)}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 text-ink-muted transition-colors hover:text-ink"
+                      aria-label={showPassword ? "Masquer" : "Afficher"}
+                    >
+                      {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
                   </div>
-                  <p className="mt-1.5 text-xs text-ink-subtle">3 à 32 caractères. Aucune information personnelle requise.</p>
+                  <p className="mt-1.5 text-xs text-ink-subtle">
+                    {t.connexion?.pseudonymHelper || "3 à 32 caractères. Aucune information personnelle requise."}
+                  </p>
                 </Field>
 
                 <Button type="submit" size="lg" className="w-full" disabled={loading || success} loading={loading}>
-                  Accéder à l'application
+                  {t.connexion?.submit || "Accéder à l'application"}
                 </Button>
               </form>
 

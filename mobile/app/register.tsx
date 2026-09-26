@@ -4,20 +4,21 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/lib/i18n';
+import { useSession } from '@/lib/session';
+
+const GENDERS = ['male', 'female'] as const;
 
 export default function RegisterScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { t } = useI18n();
+  const { t, language } = useI18n();
+  const { ensureSession } = useSession();
 
-  const [form, setForm] = useState({ name: '', identifier: '', password: '', confirmPassword: '' });
+  const [form, setForm] = useState({ pseudo: '', gender: '', password: '', confirmPassword: '' });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  const isEmail = form.identifier.includes('@');
-  const isPhone = /^[\d\s+\-]{8,}$/.test(form.identifier);
 
   const handleChange = (field: keyof typeof form, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -28,26 +29,19 @@ export default function RegisterScreen() {
     setError('');
     setSuccess(false);
 
-    if (!form.name.trim() || !form.identifier.trim() || !form.password || !form.confirmPassword) {
-      setError(t('register.error.required'));
-      return;
-    }
-
-    if (form.name.trim().length < 2) {
+    const name = form.pseudo.trim();
+    if (!name || name.length < 3) {
       setError(t('register.error.nameTooShort'));
       return;
     }
-
-    if (!isEmail && !isPhone) {
-      setError(t('register.error.invalidIdentifier'));
+    if (!form.gender) {
+      setError(t('register.error.genderRequired'));
       return;
     }
-
     if (form.password.length < 6) {
       setError(t('register.error.passwordTooShort'));
       return;
     }
-
     if (form.password !== form.confirmPassword) {
       setError(t('register.error.passwordMismatch'));
       return;
@@ -55,19 +49,11 @@ export default function RegisterScreen() {
 
     setLoading(true);
     try {
-      // Le register crée directement une session anonyme avec le pseudonyme comme nom
-      const { apiFetch: fetch } = await import('@/lib/api');
-      const { setSessionToken } = await import('@/lib/api');
-      const resp = await fetch<{ token: string; session: { id: string } }>('/api/session/start', {
-        method: 'POST',
-        auth: false,
-        body: JSON.stringify({ language: 'fr', retainHistory: true, pseudonym: form.name.trim() }),
-      });
-      await setSessionToken(resp.token);
+      await ensureSession(language === 'mg' ? 'mg' : 'fr', name);
       setSuccess(true);
-      setTimeout(() => router.replace('/(tabs)'), 800);
+      setTimeout(() => router.replace('/login'), 1500);
     } catch (e) {
-      setError(e instanceof Error ? e.message : 'Inscription impossible. Réessayez.');
+      setError(e instanceof Error ? e.message : t('common.networkError'));
     } finally {
       setLoading(false);
     }
@@ -105,7 +91,7 @@ export default function RegisterScreen() {
             </View>
           )}
 
-          {error && (
+          {!!error && (
             <View style={styles.errorBanner}>
               <Ionicons name="alert-circle" size={18} color="#d65b5b" />
               <Text style={styles.errorText}>{error}</Text>
@@ -116,30 +102,32 @@ export default function RegisterScreen() {
           <View style={styles.inputWrap}>
             <Ionicons name="person-outline" size={18} color="#7a8a85" />
             <TextInput
-              value={form.name}
-              onChangeText={(value) => handleChange('name', value)}
+              value={form.pseudo}
+              onChangeText={(value) => handleChange('pseudo', value)}
               placeholder={t('register.namePlaceholder')}
               placeholderTextColor="#7a8a85"
               autoCapitalize="none"
               style={styles.input}
               editable={!success}
+              maxLength={32}
             />
           </View>
+          <Text style={styles.helperText}>{t('register.nameHelper')}</Text>
 
-          <Text style={styles.sectionLabel}>{t('register.identifierLabel')}</Text>
-          <View style={styles.inputWrap}>
-            <Ionicons name={isEmail ? 'mail-outline' : 'call-outline'} size={18} color="#7a8a85" />
-            <TextInput
-              value={form.identifier}
-              onChangeText={(value) => handleChange('identifier', value)}
-              placeholder={isEmail ? 'vous@exemple.com' : '+261 3X XX XX XX'}
-              placeholderTextColor="#7a8a85"
-              autoCapitalize="none"
-              autoCorrect={false}
-              keyboardType={isEmail ? 'email-address' : 'phone-pad'}
-              style={styles.input}
-              editable={!success}
-            />
+          <Text style={styles.sectionLabel}>{t('register.genderLabel')}</Text>
+          <View style={styles.genderRow}>
+            {GENDERS.map((value) => (
+              <TouchableOpacity
+                key={value}
+                style={[styles.genderButton, form.gender === value && styles.genderButtonSelected]}
+                onPress={() => handleChange('gender', value)}
+                activeOpacity={0.85}
+              >
+                <Text style={[styles.genderButtonText, form.gender === value && styles.genderButtonTextSelected]}>
+                  {value === 'male' ? t('register.genderMale') : t('register.genderFemale')}
+                </Text>
+              </TouchableOpacity>
+            ))}
           </View>
 
           <Text style={styles.sectionLabel}>{t('register.passwordLabel')}</Text>
@@ -155,7 +143,7 @@ export default function RegisterScreen() {
               style={[styles.input, styles.inputWithAction]}
               editable={!success}
             />
-            <TouchableOpacity onPress={() => setShowPassword((value) => !value)} activeOpacity={0.8}>
+            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
               <Ionicons
                 name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={18}
@@ -177,7 +165,7 @@ export default function RegisterScreen() {
               style={[styles.input, styles.inputWithAction]}
               editable={!success}
             />
-            <TouchableOpacity onPress={() => setShowPassword((value) => !value)} activeOpacity={0.8}>
+            <TouchableOpacity onPress={() => setShowPassword((v) => !v)} activeOpacity={0.8}>
               <Ionicons
                 name={showPassword ? 'eye-off-outline' : 'eye-outline'}
                 size={18}
@@ -206,9 +194,7 @@ export default function RegisterScreen() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.termsNote} activeOpacity={0.85} onPress={() => router.push('/settings/privacy')}>
-          <Text style={styles.termsText}>{t('register.termsNote')}</Text>
-        </TouchableOpacity>
+        <Text style={styles.demoNote}>{t('register.demoNote')}</Text>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -346,6 +332,38 @@ const styles = StyleSheet.create({
   inputWithAction: {
     paddingRight: 4,
   },
+  helperText: {
+    marginTop: 8,
+    fontSize: 11,
+    color: '#7a8a85',
+    lineHeight: 16,
+  },
+  genderRow: {
+    flexDirection: 'row',
+    gap: 10,
+  },
+  genderButton: {
+    flex: 1,
+    height: 44,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#dfe9e5',
+    backgroundColor: '#f4f8f6',
+  },
+  genderButtonSelected: {
+    borderColor: '#2d9c86',
+    backgroundColor: '#e7f6f0',
+  },
+  genderButtonText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#7a8a85',
+  },
+  genderButtonTextSelected: {
+    color: '#2d9c86',
+  },
   primaryButton: {
     flexDirection: 'row',
     marginTop: 18,
@@ -385,18 +403,8 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#2d9c86',
   },
-  termsNote: {
-    marginTop: 14,
-    alignSelf: 'center',
-  },
-  termsText: {
-    fontSize: 11,
-    textAlign: 'center',
-    color: '#2d9c86',
-    fontWeight: '600',
-  },
   demoNote: {
-    marginTop: 10,
+    marginTop: 14,
     textAlign: 'center',
     fontSize: 11,
     color: '#7a8a85',
