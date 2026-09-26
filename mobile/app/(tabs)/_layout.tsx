@@ -16,7 +16,9 @@ export default function TabLayout() {
   const isInMessageThread = typeof params.thread === 'string' && params.thread.length > 0;
   const hideLanguageSwitcher = activeTab === 'chat' || activeTab === 'annuaire';
   const hideAppName = activeTab === 'chat' || (activeTab === 'annuaire' && isInMessageThread);
-  const showPremiumTrigger = activeTab === '(tabs)';
+  const showHomeTopControls = activeTab === '(tabs)';
+  const showPremiumTrigger = showHomeTopControls;
+  const showSettingsTrigger = showHomeTopControls;
 
   return (
     <View style={styles.root}>
@@ -152,7 +154,13 @@ export default function TabLayout() {
           <Text style={styles.brandText}>MYTHENENA</Text>
         </View>
       )}
-      {!hideLanguageSwitcher && <LanguageSwitcher showPremiumTrigger={showPremiumTrigger} topOffset={hideAppName ? 8 : 38} />}
+      {!hideLanguageSwitcher && (
+        <LanguageSwitcher
+          showPremiumTrigger={showPremiumTrigger}
+          showSettingsTrigger={showSettingsTrigger}
+          topOffset={hideAppName ? 8 : 38}
+        />
+      )}
     </View>
   );
 }

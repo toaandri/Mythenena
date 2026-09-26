@@ -1,10 +1,20 @@
 {
   "private": true,
   "name": "mythenena",
-  "workspaces": ["mobile", "web", "backend", "shared"],
+  "workspaces": [
+    "mobile",
+    "web",
+    "backend",
+    "shared"
+  ],
   "scripts": {
+    "start": "npm run dev:mobile",
     "dev:backend": "npm run dev --workspace=backend",
     "dev:web": "npm run dev --workspace=web",
     "dev:mobile": "npm run start --workspace=mobile"
+  },
+  "dependencies": {
+    "expo-device": "~57.0.2",
+    "expo-notifications": "~57.0.21"
   }
 }

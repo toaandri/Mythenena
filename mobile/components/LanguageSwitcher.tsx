@@ -9,10 +9,11 @@ const languages: Language[] = ['fr', 'en', 'mg'];
 
 type LanguageSwitcherProps = {
   showPremiumTrigger?: boolean;
+  showSettingsTrigger?: boolean;
   topOffset?: number;
 };
 
-export default function LanguageSwitcher({ showPremiumTrigger = false, topOffset = 8 }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({ showPremiumTrigger = false, showSettingsTrigger = false, topOffset = 8 }: LanguageSwitcherProps) {
   const { language, setLanguage, t } = useI18n();
   const insets = useSafeAreaInsets();
   const router = useRouter();
@@ -29,6 +30,16 @@ export default function LanguageSwitcher({ showPremiumTrigger = false, topOffset
           >
             <Ionicons name="diamond-outline" size={15} color="#7a4a10" />
             <Text style={styles.premiumTriggerText}>{t('premium.trigger')}</Text>
+          </TouchableOpacity>
+        )}
+
+        {showSettingsTrigger && (
+          <TouchableOpacity
+            style={styles.settingsTrigger}
+            onPress={() => router.push('/settings')}
+            activeOpacity={0.85}
+          >
+            <Ionicons name="settings-outline" size={16} color="#203a36" />
           </TouchableOpacity>
         )}
 
@@ -97,6 +108,16 @@ const styles = StyleSheet.create({
     borderRadius: 999,
     paddingHorizontal: 10,
     paddingVertical: 6,
+  },
+  settingsTrigger: {
+    width: 32,
+    height: 32,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ecf7f2',
+    borderWidth: 1,
+    borderColor: '#d5e8e2',
+    borderRadius: 999,
   },
   triggerText: {
     color: '#1f5e52',
