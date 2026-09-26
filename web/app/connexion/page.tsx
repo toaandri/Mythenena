@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
-  LogIn,
+  Leaf,
   Mail,
   Phone,
   Lock,
@@ -41,12 +41,12 @@ export default function ConnexionPage() {
     setSuccess(false);
 
     if (!identifier.trim() || !password) {
-      setError(t.connexion?.errors?.required || "Veuillez remplir tous les champs");
+      setError("Veuillez remplir tous les champs");
       return;
     }
 
     if (!isEmail && !isPhone) {
-      setError(t.connexion?.errors?.invalidIdentifier || "Entrez un email ou un numéro de téléphone valide");
+      setError("Entrez un email ou un numéro de téléphone valide");
       return;
     }
 
@@ -85,11 +85,11 @@ export default function ConnexionPage() {
             <Card className="p-6 sm:p-8">
               <div className="mb-7 text-center">
                 <span className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-brand-soft text-brand">
-                  <LogIn size={22} aria-hidden />
+                  <Leaf size={22} aria-hidden />
                 </span>
                 <h2 className="text-h3 text-ink">{t.connexion?.title || "Connexion"}</h2>
                 <p className="mt-2 text-sm text-ink-muted">
-                  {t.connexion?.subtitle || "Connectez-vous pour accéder à votre espace personnel"}
+                  Connectez-vous pour accéder à votre espace personnel.
                 </p>
               </div>
 
@@ -110,7 +110,7 @@ export default function ConnexionPage() {
               )}
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                <Field label={t.connexion?.identifierLabel || "Email ou numéro de téléphone"} htmlFor="identifier">
+                <Field label="Email ou numéro de téléphone" htmlFor="identifier">
                   <div className="relative">
                     {isEmail ? (
                       <Mail size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
@@ -133,7 +133,7 @@ export default function ConnexionPage() {
                   </div>
                 </Field>
 
-                <Field label={t.connexion?.passwordLabel || "Mot de passe"} htmlFor="password">
+                <Field label="Mot de passe" htmlFor="password">
                   <div className="relative">
                     <Lock size={18} className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-ink-subtle" />
                     <Input
@@ -144,7 +144,7 @@ export default function ConnexionPage() {
                         setPassword(e.target.value);
                         if (error) setError("");
                       }}
-                      placeholder={t.connexion?.passwordPlaceholder || "••••••••"}
+                      placeholder="••••••••"
                       className="pl-11 pr-11"
                       autoComplete="current-password"
                       disabled={success}
@@ -170,7 +170,7 @@ export default function ConnexionPage() {
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={loading || success} loading={loading}>
-                  {t.connexion?.submit || "Se connecter"}
+                  Accéder à l'application
                 </Button>
               </form>
 

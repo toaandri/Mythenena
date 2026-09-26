@@ -59,9 +59,9 @@ export default function RegisterScreen() {
     try {
       await ensureSession(language === 'mg' ? 'mg' : 'fr', form.name.trim());
       setSuccess(true);
-      setTimeout(() => router.replace('/login'), 2000);
+      setTimeout(() => router.replace('/(tabs)'), 800);
     } catch (e) {
-      setError(e instanceof Error ? e.message : t('common.networkError'));
+      setError(e instanceof Error ? e.message : 'Inscription impossible. Réessayez.');
     } finally {
       setLoading(false);
     }
@@ -99,7 +99,7 @@ export default function RegisterScreen() {
             </View>
           )}
 
-          {!!error && (
+          {error !== '' && (
             <View style={styles.errorBanner}>
               <Ionicons name="alert-circle" size={18} color="#d65b5b" />
               <Text style={styles.errorText}>{error}</Text>
@@ -203,8 +203,6 @@ export default function RegisterScreen() {
         <TouchableOpacity style={styles.termsNote} activeOpacity={0.85} onPress={() => router.push('/settings/privacy')}>
           <Text style={styles.termsText}>{t('register.termsNote')}</Text>
         </TouchableOpacity>
-
-        <Text style={styles.demoNote}>{t('register.demoNote')}</Text>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -345,17 +343,17 @@ const styles = StyleSheet.create({
   primaryButton: {
     flexDirection: 'row',
     marginTop: 18,
-    backgroundColor: '#2d9c86',
+    backgroundColor: '#276653',
     borderRadius: 16,
     paddingVertical: 16,
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
-    shadowColor: '#2d9c86',
+    shadowColor: '#276653',
     shadowOffset: { width: 0, height: 7 },
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    elevation: 3,
+    shadowOpacity: 0.22,
+    shadowRadius: 14,
+    elevation: 4,
   },
   primaryButtonDisabled: {
     opacity: 0.6,
@@ -379,7 +377,7 @@ const styles = StyleSheet.create({
   footerLink: {
     fontSize: 13,
     fontWeight: '800',
-    color: '#2d9c86',
+    color: '#276653',
   },
   termsNote: {
     marginTop: 14,
@@ -390,11 +388,5 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#2d9c86',
     fontWeight: '600',
-  },
-  demoNote: {
-    marginTop: 10,
-    textAlign: 'center',
-    fontSize: 11,
-    color: '#7a8a85',
   },
 });
