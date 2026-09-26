@@ -7,7 +7,7 @@
   },
   "nav": {
     "evaluation": "Évaluation",
-    "forum": "Forum",
+    "forum": "Forum d'entraide",
     "chat": "Aide IA",
     "psychologues": "Psychologues",
     "commencer": "Commencer",
@@ -62,7 +62,11 @@
   },
   "forum": {
     "title": "Espace Communautaire Bienveillant",
-    "topics": ["Vaincre la dépression", "Renforcer l'estime de soi", "Chemin vers la sobriété"],
+    "topics": {
+      "depression": "Vaincre la dépression",
+      "esteem": "Renforcer l'estime de soi",
+      "sobriety": "Chemin vers la sobriété (addictions)"
+    },
     "members": "membres",
     "cta": "Créer un nouveau sujet",
     "categories": ["Tous", "Dépression", "Anxiété", "Estime de soi", "Relations", "Sobriété"],
@@ -74,21 +78,24 @@
     "publish": "Publier",
     "replies": "réponses",
     "found": "professionnel(s) trouvé(s)",
-    "pageTitle": "Forum",
-    "pageSubtitle": "Un espace de parole anonyme, modéré et bienveillant. Lisez les témoignages, répondez, ou lancez un sujet.",
-    "empty": "Aucun sujet dans cette catégorie pour le moment.",
-    "emptyDesc": "Soyez la première personne à en ouvrir un.",
-    "emptyCta": "Créer le premier sujet",
+    "pageTitle": "Forum d'entraide",
+    "pageSubtitle": "Un espace bienveillant pour échanger",
+    "topicsTitle": "Groupes de parole",
+    "participants": "participants",
+    "createTopic": "Créer un nouveau sujet",
+    "empty": "Aucun groupe pour le moment.",
+    "emptyDesc": "Soyez le premier à créer un groupe de parole.",
+    "emptyCta": "Créer le premier groupe",
     "like": "J'aime",
     "anonymous": "Anonyme",
-    "searchPlaceholder": "Rechercher un sujet…",
-    "allCategories": "Toutes les catégories",
+    "searchPlaceholder": "Rechercher un groupe…",
+    "allCategories": "Tous les groupes",
     "sortRecent": "Plus récents",
-    "sortPopular": "Plus appréciés",
-    "category": "Catégorie",
-    "postedBy": "Publié par",
-    "resultsCount": "sujets",
-    "noResults": "Aucun sujet ne correspond à votre recherche."
+    "sortPopular": "Plus actifs",
+    "category": "Groupe",
+    "postedBy": "Créé par",
+    "resultsCount": "groupes",
+    "noResults": "Aucun groupe ne correspond à votre recherche."
   },
   "chat": {
     "title": "Aide Instantanée par IA",
@@ -402,6 +409,13 @@
       "feature3": "Avec un professionnel dédié",
       "cta": "Opter pour le suivi intensif"
     }
+  },
+  "settings": {
+    "title": "Paramètres",
+    "privacy": "Conditions de confidentialité",
+    "login": "Connexion",
+    "signup": "Inscription",
+    "help": "Aide à l'utilisation"
   },
   "footer": {
     "tagline": "Une plateforme d'écoute et de soutien en santé mentale, pensée pour Madagascar.",

@@ -7,7 +7,7 @@
   },
   "nav": {
     "evaluation": "Fanombanana",
-    "forum": "Fihaonambe",
+    "forum": "Fihaonambe Fiarahamonina",
     "chat": "Fanampiana IA",
     "psychologues": "Psikolojia",
     "commencer": "Manomboka",
@@ -57,15 +57,31 @@
   "evaluation": {
     "title": "Ny Fanombanana Anao",
     "question": "Ahoana ny fihetsikao androany ?",
-    "symptoms": ["Faharerahan-tsaina", "Hevitra fandringanana tena", "Tsy matoky tena", "Fitandroana (toaka, zava-mahadomelina)"],
+    "symptoms": [
+      "Faharerahan-tsaina",
+      "Hevitra fandringanana tena",
+      "Tsy matoky tena",
+      "Fitandroana (toaka, zava-mahadomelina)"
+    ],
     "cta": "Tohizo ny fanombanana"
   },
   "forum": {
     "title": "Fiarahamonina Mifanohana",
-    "topics": ["Menatra ny faharerahan-tsaina", "Manampy ny fitokisana tena", "Lalana mankany amin'ny fahadiovana"],
+    "topics": {
+      "depression": "Menatra ny faharerahan-tsaina",
+      "esteem": "Manampy ny fitokisana tena",
+      "sobriety": "Lalana mankany amin'ny fahadiovana (fitandroana)"
+    },
     "members": "mpikambana",
     "cta": "Mamorona lohahevitra vaovao",
-    "categories": ["Rehetra", "Faharerahan-tsaina", "Ahiahy", "Fitokisana tena", "Fifandraisana", "Fahadiovana"],
+    "categories": [
+      "Rehetra",
+      "Faharerahan-tsaina",
+      "Ahiahy",
+      "Fitokisana tena",
+      "Fifandraisana",
+      "Fahadiovana"
+    ],
     "newTopic": "Lohahevitra vaovao",
     "titlePlaceholder": "Lohateny ny lohahevitrao",
     "bodyPlaceholder": "Lazao ny toetranao...",
@@ -74,21 +90,24 @@
     "publish": "Mamoaka",
     "replies": "valiny",
     "found": "matihanina hita",
-    "pageTitle": "Fihaonambe",
-    "pageSubtitle": "Toerana miresaka tsy fantatra, voazava ary mifanohana. Vakio, mamaly, na manorona lohahevitra.",
-    "empty": "Tsy misy lohahevitra amin'ity sokajy ity.",
-    "emptyDesc": "Ianao no voalohany hanokatra.",
-    "emptyCta": "Hamorona ny voalohany",
+    "pageTitle": "Fihaonambe Fiarahamonina",
+    "pageSubtitle": "Toerana mifanohana mba hifanakalozana",
+    "topicsTitle": "Vondrona miresaka",
+    "participants": "mpikambana",
+    "createTopic": "Mamorona lohahevitra vaovao",
+    "empty": "Tsy misy vondrona eo ankehitriny.",
+    "emptyDesc": "Ianao no voalohany hamorona vondrona miresaka.",
+    "emptyCta": "Mamorona ny voalohany",
     "like": "Tiana",
     "anonymous": "Tsy fantatra",
-    "searchPlaceholder": "Hikaroka lohahevitra…",
-    "allCategories": "Sokajy rehetra",
+    "searchPlaceholder": "Hikaroka vondrona…",
+    "allCategories": "Vondrona rehetra",
     "sortRecent": "Vaovao indrindra",
-    "sortPopular": "Tiana indrindra",
-    "category": "Sokajy",
+    "sortPopular": "Mihatsara indrindra",
+    "category": "Vondrona",
     "postedBy": "Nandefa",
-    "resultsCount": "lohahevitra",
-    "noResults": "Tsy misy lohahevitra mitovy amin'ny karazanao."
+    "resultsCount": "vondrona",
+    "noResults": "Tsy misy vondrona mitovy amin'ny karazanao."
   },
   "chat": {
     "title": "Fanampiana Avy Hatrany amin'ny IA",
@@ -144,11 +163,51 @@
     "of": "amin'ny",
     "stepOf": "Fanontaniana {current} amin'ny {total}",
     "questions": [
-      { "q": "Ahoana ny fihetsikao tamin'ireo andro farany ?", "choices": ["Tsara", "Tsy misy heviny", "Malahelo na foana", "Sarotra be"] },
-      { "q": "Ahoana ny torimasonao ankehitriny ?", "choices": ["Tsara", "Fahasarotana kely", "Ratsy, matetika mifoha", "Kely be na be loatra"] },
-      { "q": "Inona ny haavon'ny tebitebinao isan'andro ?", "choices": ["Kely", "Antonony", "Avo", "Avo be"] },
-      { "q": "Ahoana ny fihetsikao amin'ny fifandraisanao amin'ny hafa ?", "choices": ["Tsara ny manodidina", "Indraindray irery", "Matetika irery", "Amin'ny ady"] },
-      { "q": "Misy finiavana ve ianao amin'ny asa mahazatra ?", "choices": ["Eny, toy ny taloha", "Kely kokoa", "Latsaka be", "Tsy misy intsony"] }
+      {
+        "q": "Ahoana ny fihetsikao tamin'ireo andro farany ?",
+        "choices": [
+          "Tsara",
+          "Tsy misy heviny",
+          "Malahelo na foana",
+          "Sarotra be"
+        ]
+      },
+      {
+        "q": "Ahoana ny torimasonao ankehitriny ?",
+        "choices": [
+          "Tsara",
+          "Fahasarotana kely",
+          "Ratsy, matetika mifoha",
+          "Kely be na be loatra"
+        ]
+      },
+      {
+        "q": "Inona ny haavon'ny tebitebinao isan'andro ?",
+        "choices": [
+          "Kely",
+          "Antonony",
+          "Avo",
+          "Avo be"
+        ]
+      },
+      {
+        "q": "Ahoana ny fihetsikao amin'ny fifandraisanao amin'ny hafa ?",
+        "choices": [
+          "Tsara ny manodidina",
+          "Indraindray irery",
+          "Matetika irery",
+          "Amin'ny ady"
+        ]
+      },
+      {
+        "q": "Misy finiavana ve ianao amin'ny asa mahazatra ?",
+        "choices": [
+          "Eny, toy ny taloha",
+          "Kely kokoa",
+          "Latsaka be",
+          "Tsy misy intsony"
+        ]
+      }
     ]
   },
   "questionnaire": {
@@ -170,7 +229,13 @@
     "title": "Ny famintinana anao",
     "subtitle": "Fijery fandinihana, tsy diagnosis ara-pitsaboana.",
     "disclaimer": "Ity fitaovana ity tsy mamerina ny matihanina ara-pahasalamana. Raha mijaly ianao, angataho ny mpitsabo.",
-    "dimensions": ["Fihetseham-po", "Torimaso", "Tebiteby", "Fifandraisana", "Finiavana"],
+    "dimensions": [
+      "Fihetseham-po",
+      "Torimaso",
+      "Tebiteby",
+      "Fifandraisana",
+      "Finiavana"
+    ],
     "wellbeing": "Fahasalamana ankapobeny",
     "seeProf": "Hangataka matihanina",
     "retry": "Manao fanombanana indray",
@@ -263,39 +328,39 @@
     "articles": "Lahatsoratra & Torolalana",
     "readMore": "Vakio",
     "articleList": [
-      { 
-        "title": "Fahatakarana ny faharerahan-tsaina", 
-        "desc": "Famantarana, antony ary dingana voalohany.", 
+      {
+        "title": "Fahatakarana ny faharerahan-tsaina",
+        "desc": "Famantarana, antony ary dingana voalohany.",
         "tag": "Faharerahan-tsaina",
         "content": "Ny faharerahan-tsaina dia tsy faharerana foana fa ampahibemaso momba ny toe-po. Izany dia mampihemotra ny fomba fiteketezan'ny olona, ny fomba fisaintsainana, ary ny fomba fifandraisana amin'ny asa androany.\n\n**Famantarana ara-potoana**\nFaharerana miaraka, fanapahan-kevitra amin'ny asa dia mahazatra, tebiteby, fahoriana torimaso, fahoriana fisaintsainana, hevitra manam-pahotana na fahafahana tsy mahaliana.\n\n**Anjara azony atao**\nSehatra ara-biologika (fahadiovana kimika amin'ny avo), loharanom-pirenena mahorina (tahotra, fisarahana, tsy misy asa), loharanom-pianakaviana, aretina chronika.\n\n**Dingana voalohany**\nMiresaka amin'izay tokony ho tianao. Mba atao fanafahana amin'ny dokotera na mpanoratra fahasalamana ara-tsaina. Manohy fomba androany na dia kely aza. Aoka tsy mandeha ho irery."
       },
-      { 
-        "title": "Mifehy ny ahiahy isan'andro", 
-        "desc": "Teknika tsotra hamenoana ny tebiteby.", 
+      {
+        "title": "Mifehy ny ahiahy isan'andro",
+        "desc": "Teknika tsotra hamenoana ny tebiteby.",
         "tag": "Ahiahy",
         "content": "Ny ahiahy dia valiny ara-biologika amin'ny tebiteby, fa raha mihoatra lavitra dia mety hampadika ny fiainana androany.\n\n**Mahafantatra ny ahiahy**\nFifindrikafo tena, tezitra vatana, hevitra mampanonoka, fanao akelezana amin'ny toe-anjara, fifaninana.\n\n**Teknika mahomby**\nFanidiana lalina (teknika 4-7-8), fitsapana fahazatra, fanaovana vatana isan'andro, famenoana kafeiny na skiraina hariva.\n\n**Raha tokony hanao fanafahana**\nRaha ny ahiahy dia mihoatra 6 volana, mampadika ny asa na fifandraisana, na mifaninana amin'ny fanaovana maika (panic attack), aoka hanao fanafahana amin'ny mpanazatra."
       },
-      { 
-        "title": "Mahafantatra fifandraisana manimba", 
-        "desc": "Famantarana ny fanandevozana ara-tsaina.", 
+      {
+        "title": "Mahafantatra fifandraisana manimba",
+        "desc": "Famantarana ny fanandevozana ara-tsaina.",
         "tag": "Fifandraisana",
         "content": "Ny fifandraisana manimba dia sarotra ho fantatra amin'ny anatiny, na dia tia ny olona izay antoka aza.\n\n**Famantaran'ny avela**\nEo amin'ny fon'ny fananakalana na fanorenana anao. Mandehana amin'ny tena tahaka ny kikonona. Miaraka amin'ny namanao irery. Matahotra ny valiny amin'ny hafa.\n\n**Ny fanandevozana ara-tsaina**\nNy fifandraisana, ny famitahana be, ny famaly ny fandaharana sy fifandraisan'ny hafa dia endrika fahotana ara-tsaina.\n\n**Mameno azy**\nMiresaka amin'ny namana tokony ho tianao na mpanazatra. Manomboka faritra marina. Fantaro fa tokony ho anao ny fifandraisana fanantenana."
       },
-      { 
-        "title": "Manampy ny fitokisana tena", 
-        "desc": "Fanaovana hamerenana ny fahatokisana.", 
+      {
+        "title": "Manampy ny fitokisana tena",
+        "desc": "Fanaovana hamerenana ny fahatokisana.",
         "tag": "Fitokisana tena",
         "content": "Ny fitokisana tena dia ny tombony manan-kao amaninao. Izany dia miasa sy mihaona amin'ny fotoana sy ny fanaovana.\n\n**Fanaovana isan'andro**\nSoraty isaky ny hariva telo zava mahafinaritra nataonao na naharesanao. Soloy ny hevitra raty miaraka amin'ny teny tsy mitaky na manam-pitiavana.\n\n**Manomboka faritra kely**\nIsaky ny valiny voataona, na dia kely aza, dia manam-pahaizana ny fitokisana. Manomboka amin'ny asa kely ary ampahaizany haingana.\n\n**Fiangonana**\nAoka tsy hiaraka amin'izay manorenanao. Aoka hiaraka amin'izay manampy sy manampy anao."
       },
-      { 
-        "title": "Torimaso sy fahasalamana ara-tsaina", 
-        "desc": "Nahoana ny torimaso tsara no zava-dehibe.", 
+      {
+        "title": "Torimaso sy fahasalamana ara-tsaina",
+        "desc": "Nahoana ny torimaso tsara no zava-dehibe.",
         "tag": "Torimaso",
         "content": "Ny torimaso dia satrana fototra amin'ny fahasalamana ara-tsaina. Ny tsy torimaso mahasamihafa dia mampitombo ny antsy faharerahan-tsaina sy ahiahy.\n\n**Fomba ara-torimaso**\nMandry ary mitsangana amin'ny orana mitovy. Aoka tsy mijery skiraina 1 ora aloha mandry. Aoka ny trano mandry mafana sy maizina. Aoka tsy misotro kafeiny aorian'ny 14h.\n\n**Fomba mahafinaritra**\nTisan, vakiteny lelaka, minitra vitsy fanidiana lalina na fitsapana mety mampahalala ny avo an-tranao fa efa fotoana mandry.\n\n**Raha tokony hanao fanafahana**\nRaha mandry kely noho 6 ora isan'andro hatramin'ny 3 herinandro, na raha mifoha vizaka na dia torimaso ela aza, miresaka amin'ny dokotera."
       },
-      { 
-        "title": "Miteny momba ny fijaliana", 
-        "desc": "Ahoana ny fanakanana ny fanginana sy fangatahana fanampiana.", 
+      {
+        "title": "Miteny momba ny fijaliana",
+        "desc": "Ahoana ny fanakanana ny fanginana sy fangatahana fanampiana.",
         "tag": "Vavolombelona",
         "content": "Ny miteny momba izay tena tianao dia vao dingana voalohany mahorina, fa aoka ho mahafinaritra indrindra.\n\n**Nahoana ny fanginana dia mavoha**\nNy mitantara ny fijaliana mampitombo azy. Ny fandeferana ara-tsaina mampahery ny hevitra ratsy ary mampandroaka tsy hahita valiny.\n\n**Ahoana no hampitombo**\nSafidio olona tokony ho tianao. Manomboka amin'ny teny tsotra: 'Tsy mety soa aho ankehitriny.' Tsy maintsy mampiseho zavatra rehetra amin'ny fotoana iray.\n\n**Raha tsy misy olona**\nNy mpampiasa IA eto Mythenena dia eo foana 24/24, tsy misy fitsarana. Ny forum dia mety hampiasaina koa hahatonga teny amim-paherehana amin'ny olona mitovy hevitra."
       }
@@ -413,5 +478,12 @@
     "crisis": "Maika",
     "rights": "Zo rehetra voatokana.",
     "emergency": "Raha maika, antso ny +261 20 22 XXX XX."
+  },
+  "settings": {
+    "title": "Fikirakirana",
+    "privacy": "Lalam-bavaiky fiaraha-miasa",
+    "login": "Fidirana",
+    "signup": "Fanoratana anaran",
+    "help": "Fanohana amin ny fampiasana"
   }
 }

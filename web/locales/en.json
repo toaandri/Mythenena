@@ -7,7 +7,7 @@
   },
   "nav": {
     "evaluation": "Assessment",
-    "forum": "Forum",
+    "forum": "Support Forum",
     "chat": "AI Help",
     "psychologues": "Psychologists",
     "commencer": "Get Started",
@@ -57,15 +57,31 @@
   "evaluation": {
     "title": "Your Personal Assessment",
     "question": "How are you feeling today?",
-    "symptoms": ["Depression", "Suicidal thoughts", "Lack of self-confidence", "Addiction (alcohol, drugs)"],
+    "symptoms": [
+      "Depression",
+      "Suicidal thoughts",
+      "Lack of self-confidence",
+      "Addiction (alcohol, drugs)"
+    ],
     "cta": "Continue my assessment"
   },
   "forum": {
     "title": "Caring Community Space",
-    "topics": ["Overcoming depression", "Building self-esteem", "Path to sobriety"],
+    "topics": {
+      "depression": "Overcoming depression",
+      "esteem": "Building self-esteem",
+      "sobriety": "Path to sobriety (addictions)"
+    },
     "members": "members",
     "cta": "Create a new topic",
-    "categories": ["All", "Depression", "Anxiety", "Self-esteem", "Relationships", "Sobriety"],
+    "categories": [
+      "All",
+      "Depression",
+      "Anxiety",
+      "Self-esteem",
+      "Relationships",
+      "Sobriety"
+    ],
     "newTopic": "New topic",
     "titlePlaceholder": "Title of your topic",
     "bodyPlaceholder": "Describe your situation...",
@@ -74,21 +90,24 @@
     "publish": "Publish",
     "replies": "replies",
     "found": "professional(s) found",
-    "pageTitle": "Forum",
-    "pageSubtitle": "An anonymous, moderated and caring space. Read testimonies, reply, or start a topic.",
-    "empty": "No topic in this category yet.",
-    "emptyDesc": "Be the first person to open one.",
-    "emptyCta": "Create the first topic",
+    "pageTitle": "Support Forum",
+    "pageSubtitle": "A caring space to share and connect",
+    "topicsTitle": "Support Groups",
+    "participants": "participants",
+    "createTopic": "Create a new group",
+    "empty": "No groups yet.",
+    "emptyDesc": "Be the first to create a support group.",
+    "emptyCta": "Create the first group",
     "like": "Like",
     "anonymous": "Anonymous",
-    "searchPlaceholder": "Search a topic…",
-    "allCategories": "All categories",
+    "searchPlaceholder": "Search a group…",
+    "allCategories": "All groups",
     "sortRecent": "Most recent",
-    "sortPopular": "Most appreciated",
-    "category": "Category",
-    "postedBy": "Posted by",
-    "resultsCount": "topics",
-    "noResults": "No topic matches your search."
+    "sortPopular": "Most active",
+    "category": "Group",
+    "postedBy": "Created by",
+    "resultsCount": "groups",
+    "noResults": "No group matches your search."
   },
   "chat": {
     "title": "Instant AI Help",
@@ -144,11 +163,51 @@
     "of": "of",
     "stepOf": "Question {current} of {total}",
     "questions": [
-      { "q": "How would you describe your mood over the past few days?", "choices": ["Pretty good", "Neutral", "Sad or empty", "Very difficult"] },
-      { "q": "How are you sleeping right now?", "choices": ["Well", "Some difficulties", "Poorly, often waking up", "Very little or too much"] },
-      { "q": "What is your daily stress level?", "choices": ["Low", "Moderate", "High", "Very high"] },
-      { "q": "How do you feel in your relationships with others?", "choices": ["Well surrounded", "Sometimes alone", "Often isolated", "In conflict"] },
-      { "q": "Do you feel motivated for your usual activities?", "choices": ["Yes, as before", "A little less", "Much less", "Not at all"] }
+      {
+        "q": "How would you describe your mood over the past few days?",
+        "choices": [
+          "Pretty good",
+          "Neutral",
+          "Sad or empty",
+          "Very difficult"
+        ]
+      },
+      {
+        "q": "How are you sleeping right now?",
+        "choices": [
+          "Well",
+          "Some difficulties",
+          "Poorly, often waking up",
+          "Very little or too much"
+        ]
+      },
+      {
+        "q": "What is your daily stress level?",
+        "choices": [
+          "Low",
+          "Moderate",
+          "High",
+          "Very high"
+        ]
+      },
+      {
+        "q": "How do you feel in your relationships with others?",
+        "choices": [
+          "Well surrounded",
+          "Sometimes alone",
+          "Often isolated",
+          "In conflict"
+        ]
+      },
+      {
+        "q": "Do you feel motivated for your usual activities?",
+        "choices": [
+          "Yes, as before",
+          "A little less",
+          "Much less",
+          "Not at all"
+        ]
+      }
     ]
   },
   "questionnaire": {
@@ -170,7 +229,13 @@
     "title": "Your Summary",
     "subtitle": "This is an exploratory overview, not a medical diagnosis.",
     "disclaimer": "This tool does not replace a mental health professional. If you are suffering, please consult a specialist.",
-    "dimensions": ["Mood", "Sleep", "Stress", "Relationships", "Motivation"],
+    "dimensions": [
+      "Mood",
+      "Sleep",
+      "Stress",
+      "Relationships",
+      "Motivation"
+    ],
     "wellbeing": "Overall well-being",
     "seeProf": "Consult a professional",
     "retry": "Redo the assessment",
@@ -413,5 +478,12 @@
     "crisis": "Emergency",
     "rights": "All rights reserved.",
     "emergency": "In an emergency, call +261 20 22 XXX XX."
+  },
+  "settings": {
+    "title": "Settings",
+    "privacy": "Privacy Policy",
+    "login": "Log In",
+    "signup": "Sign Up",
+    "help": "Help & Usage"
   }
 }
